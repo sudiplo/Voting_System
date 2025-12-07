@@ -40,7 +40,7 @@
         </ul>
 
     <!-- Logout Form -->
-        <div class="flex md:flex-row space-x-2">
+        {{-- <div class="flex md:flex-row space-x-2">
             <a href="/profile">profile</a>
             <form method="POST" action="{{ route('logout') }}">
             @csrf
@@ -49,7 +49,55 @@
                 Logout
             </buttontype=>
         </form>
+        </div> --}}
+
+        <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation" class="inline-flex items-center justify-center bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none" type="button">
+        Profile
+        <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
+        </button>
+        <!-- Dropdown menu -->
+        <div id="dropdownInformation" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-72">
+            <div class="p-2">
+            <div class="flex items-center px-2.5 p-2 space-x-1.5 text-sm bg-neutral-secondary-strong rounded">
+                <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="Rounded avatar">
+                <div class="text-sm">
+                <div class="font-medium text-heading">Sudip</div>
+                <div class="truncate text-body">name@flowbite.com</div>
+                </div>
+                <span class="bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded ms-auto">PRO</span>
+            </div>
+            </div>
+            <ul class="px-2 pb-2 text-sm text-body font-medium" aria-labelledby="dropdownInformationButton">
+            <li class="hover:text-blue-600">
+                <a href="" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">
+                <svg class="w-4 h-4 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
+                Account
+                </a>
+            </li>
+            <li class="hover:text-blue-600">
+                <a href="/profile" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">
+                <svg class="w-4 h-4 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M20 6H10m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4m16 6h-2m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4m16 6H10m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4"/></svg>
+                Modify
+                </a>
+            </li>
+            <li class="hover:text-blue-600">
+                <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">
+                <svg class="w-4 h-4 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                Help center
+                </a>
+            </li>
+            <li class="p-2">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <buttontype="submit"
+                        class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition w-full">
+                        Logout
+                    </buttontype=>
+                </form>
+            </li>
+            </ul>
         </div>
+
     </nav>
 
   <!-- Hero Section -->
