@@ -1,6 +1,6 @@
 <x-front>
     <div class="bg-[#efeff1] hover:bg-white p-10 shadow-xl rounded ">
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
             @csrf
             <div class="mb-5">
                 <label for="name" :value="__('Name')" class="block mb-2.5 text-xl font-medium text-heading">Name</label>
@@ -10,6 +10,17 @@
             <div class="mb-5">
                 <label for="email" :value="__('Email')" class="block mb-2.5 text-xl font-medium text-heading">Email</label>
                 <input type="email" id="email" name="email" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="name@flowbite.com" required />
+                <x-error class="mt-2" :messages="$errors->get('email')" />
+            </div>
+
+            <div class="mb-5">
+                <label for="phone" :value="__('phone')" class="block mb-2.5 text-xl font-medium text-heading">Phone</label>
+                <input type="phone" id="phone" name="phone" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
+            </div>
+
+            <div>
+                <label for="photo" class="block mb-1 font-medium">Photo</label>
+                <input type="file" id="photo" name="photo" class="w-full border border-gray-300 rounded px-3 py-2">
             </div>
 
             <div class="mb-5">
@@ -32,5 +43,4 @@
             </div>
         </form>
     </div>
-
 </x-front>

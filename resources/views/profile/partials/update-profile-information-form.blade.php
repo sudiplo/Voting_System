@@ -20,7 +20,7 @@
 
         <div>
             <label for="email" :value="__('Email')" >Email</label>
-            <input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
+            <input id="email" name="email" type="email" class="mt-1 block w-full" required autocomplete="username" placeholder="{{ Auth::user()->email }}"/>
             <x-error class="mt-2" :messages="$errors->get('email')" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
@@ -41,7 +41,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <button>{{ __('Save') }}</button>
+            <button class="bg-blue-500 hover:bg-blue-600 text-white p-2 py-2 px-4 rounded">Save</button>
 
             @if (session('status') === 'profile-updated')
                 <p

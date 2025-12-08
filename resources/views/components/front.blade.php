@@ -25,6 +25,8 @@
   </style>
 </head>
 <body class="bg-[#F7F9FC] font-sans">
+    @include('sweetalert::alert')
+
   <!-- Navbar -->
     {{-- <nav class="flex justify-between items-center px-10 py-6">
         <div class="flex items-center space-x-2">

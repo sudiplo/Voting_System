@@ -7,9 +7,7 @@
 
     <!-- Right Card -->
     <div class="absolute right-10 bottom-10 bg-white/80 backdrop-blur p-4 rounded-xl shadow w-60">
-      <h3 class="text-gray-700 font-semibold">Avg. Adherence</h3>
-      <p class="text-3xl font-bold text-gray-900">75%</p>
-      <div class="content-center">
+      <div class="content-center flex md:flex-row space-x-3">
         <img src="https://cdn-icons-png.flaticon.com/512/169/169773.png" class="mt-2 w-20 " />
       </div>
     </div>

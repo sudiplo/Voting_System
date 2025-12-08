@@ -1,3 +1,6 @@
+<?php
+    use App\Models\User;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +28,8 @@
   </style>
 </head>
 <body class="bg-[#F7F9FC] font-sans">
+    @include('sweetalert::alert')
+
   <!-- Navbar -->
     <nav class="flex justify-between items-center px-10 py-6 bg-[#e9edf4]">
         <div class="flex items-center space-x-2">
@@ -39,17 +44,7 @@
             <a href=""><li class="cursor-pointer hover:text-blue-600">Blog</li></a>
         </ul>
 
-    <!-- Logout Form -->
-        {{-- <div class="flex md:flex-row space-x-2">
-            <a href="/profile">profile</a>
-            <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <buttontype="submit"
-                class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">
-                Logout
-            </buttontype=>
-        </form>
-        </div> --}}
+
 
         <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation" class="inline-flex items-center justify-center bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none" type="button">
         Profile
@@ -59,12 +54,11 @@
         <div id="dropdownInformation" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-72">
             <div class="p-2">
             <div class="flex items-center px-2.5 p-2 space-x-1.5 text-sm bg-neutral-secondary-strong rounded">
-                <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="Rounded avatar">
+                <img class="h-8 r-5" src="{{ Auth::user()->photo }}" alt="Rounded avatar">
                 <div class="text-sm">
-                <div class="font-medium text-heading">Sudip</div>
-                <div class="truncate text-body">name@flowbite.com</div>
+                <div class="font-medium text-heading">{{ Auth::user()->name }}</div>
+                <div class="truncate text-body">{{ Auth::user()->email }}</div>
                 </div>
-                <span class="bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded ms-auto">PRO</span>
             </div>
             </div>
             <ul class="px-2 pb-2 text-sm text-body font-medium" aria-labelledby="dropdownInformationButton">
@@ -89,10 +83,10 @@
             <li class="p-2">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <buttontype="submit"
+                    <button type="submit"
                         class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition w-full">
                         Logout
-                    </buttontype=>
+                    </button>
                 </form>
             </li>
             </ul>
@@ -107,9 +101,6 @@
     </h1>
 
 
-    <!-- Floating Icons -->
-    {{-- <div class="absolute left-20 top-64 w-14 h-14 bg-white rounded-full shadow flex items-center justify-center float"><img src="https://png.pngtree.com/png-clipart/20220404/original/pngtree-online-vote-illustration-with-transparent-background-png-image_7511225.png" class="rounded-xl w-40" />
-</div> --}}
   </section>
 
 
