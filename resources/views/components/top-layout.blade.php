@@ -31,27 +31,24 @@
     @include('sweetalert::alert')
 
   <!-- Navbar -->
-    <nav class="flex justify-between items-center px-10 py-6 bg-[#e9edf4]">
+    <nav class="flex justify-between items-center px-10 py-6 bg-[#e9edf4] w-full">
         <div class="flex items-center space-x-2">
-        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white"><b>V</b></div>
-        <h1 class="text-2xl font-semibold text-gray-800">Voting</h1>
+            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white"><b>V</b></div>
         </div>
 
-        <ul class="flex space-x-10 text-gray-700 font-medium fade-in">
+        <ul class="flex space-x-10 text-gray-700 font-medium fade-in p-5">
             <a href="\dashboard"><li class="cursor-pointer hover:text-blue-600 ">Home</li></a>
-            <a href=""><li class="cursor-pointer hover:text-blue-600">About</li></a>
+            <a href="{{ route('about') }}"><li class="cursor-pointer hover:text-blue-600">About</li></a>
             <a href=""> <li class="cursor-pointer hover:text-blue-600">Service</li></a>
-            <a href=""><li class="cursor-pointer hover:text-blue-600">Blog</li></a>
         </ul>
 
-
-
-        <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation" class="inline-flex items-center justify-center bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none" type="button">
-        Profile
+        <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation"
+            class="inline-flex items-center  focus:ring-2 font-medium text-white text-sm px-2 py-2 focus:outline-none shadow-xl rounded bg-green-600" type="button">
+                {{ Auth::user()->name }}
         <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
         </button>
         <!-- Dropdown menu -->
-        <div id="dropdownInformation" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-72">
+        <div id="dropdownInformation" class="z-10 hidden bg-[#F7F9FC] bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-72">
             <div class="p-2">
             <div class="flex items-center px-2.5 p-2 space-x-1.5 text-sm bg-neutral-secondary-strong rounded">
                 <img class="h-8 r-5" src="{{ Auth::user()->photo }}" alt="Rounded avatar">

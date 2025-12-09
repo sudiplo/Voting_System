@@ -1,5 +1,5 @@
 <x-front>
-    <div class="bg-[#efeff1] hover:bg-white p-10 shadow-xl rounded ">
+    <div class="bg-[#efeff1] hover:bg-white p-10 shadow-xl rounded">
         <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
             @csrf
             <div class="mb-5">
