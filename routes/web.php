@@ -7,7 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\viewController;
 use Illuminate\Support\Facades\Route;
 use App\Models\palika;
-
+use App\Http\Controllers\DistrictController;
 
 Route::get('/', [viewController::class,'welcome'])->name('welcome');
 
@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [viewController::class,'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
     Route::post("/distric",[AddController::class,'distric'])->name('distric');
     Route::post("/palika",[AddController::class,"palika"])->name('palika');
+    Route::get('/districts', [DistrictController::class, 'index'])->name('districts.index');
 });
 
 require __DIR__.'/auth.php';

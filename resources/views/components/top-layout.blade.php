@@ -37,9 +37,32 @@
         </div>
 
         <ul class="flex space-x-10 text-gray-700 font-medium fade-in p-5">
-            <a href="\dashboard"><li class="cursor-pointer hover:text-blue-600 ">Home</li></a>
+            <a href="{{ Route('dashboard') }}"><li class="cursor-pointer hover:text-blue-600 ">Home</li></a>
             <a href="{{ route('about') }}"><li class="cursor-pointer hover:text-blue-600">About</li></a>
-            <a href=""> <li class="cursor-pointer hover:text-blue-600">Service</li></a>
+            {{-- <a href=""> <li class="cursor-pointer hover:text-blue-600">Service</li></a> --}}
+
+            <button id="dropdownDividerButton" data-dropdown-toggle="dropdownDivider" class="cursor-pointer hover:text-blue-600"type="button">
+            Register
+            </button>
+            <!-- Dropdown menu -->
+            <div id="dropdownDivider" class="z-10 hidden bg-[#F7F9FC] bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-50 rounded">
+                <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownDividerButton">
+                    <li class="hover:text-blue-600">
+                        <a href="" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">
+                        <svg class="w-4 h-4 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
+                        Voter
+                        </a>
+                    </li>
+
+                    <li class="hover:text-blue-600">
+                        <a href="{{ Route('districts.index') }}" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">
+                        <svg class="w-4 h-4 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" d="M12 2C7.58 2 4 5.58 4 9c0 3.87 4 7.5 8 11 4-3.5 8-7.13 8-11 0-3.42-3.58-7-8-7zm0 10c-1.1 0-2-1.01-2-2s.9-2 2-2 2 1.01 2 2-.9 2-2 2z"/></svg>
+                            Distric
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
         </ul>
 
         <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation"
