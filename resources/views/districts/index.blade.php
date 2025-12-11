@@ -1,31 +1,4 @@
 <x-top-layout>
-    <div>
-        {{-- <button id="add" data-dropdown-toggle="dropdown"
-            class="inline-flex items-center  focus:ring-2 font-medium text-white text-sm px-2 py-2 focus:outline-none shadow-xl rounded bg-green-600" type="button">
-            Add
-        </button>
-        <!-- Dropdown menu -->
-        <div id="dropdown" class="z-10 hidden bg-[#F7F9FC] bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-72 p-2">
-            <form method="POST" action="{{ route('distric') }}" class="max-w-sm mx-auto">
-                @csrf
-                <div class="mb-2">
-                    <label for="name" :value="__('Name')" class="block mb-2.5 text-sm font-medium text-heading">Name</label>
-                    <input type="text" id="name" name="name" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
-                </div>
-
-                <div class="mb-2">
-                    <label for="name" :value="__('Name')" class="block mb-2.5 text-sm font-medium text-heading">Name in nepali</label>
-                    <input type="text" id="name_nepali" name="name_nepali" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
-                </div>
-                <div class="flex items-center justify-end mt-4">
-                    <div class="p-4">
-                        <button class="bg-blue-500 text-white text-sm px-8 py-3 rounded shadow hover:bg-blue-600 transition flex items-center space-x-2">Login</button>
-                    </div>
-                </div>
-            </form>
-        </div> --}}
-    </div>
-
     <div class="mb-10 bg-white/70 backdrop-blur-lg shadow-xl rounded-2xl border border-gray-200 overflow-hidden p-10">
         <div>
             {{-- Header --}}
@@ -79,15 +52,34 @@
     <!-- DISTRICTS LIST -->
     @foreach ($districts as $district)
     <div class="mb-10 bg-white/70 backdrop-blur-lg shadow-xl rounded-2xl border border-gray-200 overflow-hidden p-10">
-
         <!-- District Header -->
-        <div class="bg-green-600 px-6 py-4">
-            <h3 class="text-xl font-semibold text-white">
-                {{ $district->name_nepali ?? '—' }}
-            </h3>
-            <p class="text-white text-sm">
-                {{ $district->name }}
-            </p>
+        <div class="bg-green-600 px-6 py-4 flex md:flex-row space-x-96">
+                <div>
+                    <h3 class="text-xl font-semibold text-white">
+                        {{ $district->name_nepali ?? '—' }}
+                    </h3>
+                    <p class="text-white text-sm">
+                        {{ $district->name }}
+                    </p>
+                    </div>
+                <div class="flex md:flex-row">
+                    <form action="{{route('palika')}} " method="post" id="deleteCompany">
+                        @csrf
+                        <div class="flex md:flex-row space-x-3">
+                            <div class="mb-5">
+                            {{-- <label for="name" class="hidden mb-2.5 text-xl font-medium text-heading">District Id:{{ $district->id }}</label> --}}
+                            <input type="text" id="district_id" name="district_id" value="{{ $district->id }}" class="hidden bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
+                        </div>
+                        <div class="mb-5">
+                            {{-- <label for="name" :value="__('Name')" class="block mb-2.5 text-xl font-medium text-heading">Name</label> --}}
+                            <input type="text" id="name" name="name" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-30 px-2 py-1 shadow-xs placeholder:text-body" placeholder="Add Palika" required />
+                        </div>
+                        <div>
+                            <button type="submit" class="submitButton bg-indigo-600 hover:bg-indigo-700 text-white px-2 py-1 rounded cursor-pointer">Add</button>
+                        </div>
+                        </div>
+                    </form>
+                </div>
         </div>
 
         <!-- Palikas Table -->

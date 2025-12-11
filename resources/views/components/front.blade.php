@@ -26,17 +26,8 @@
 </head>
 <body class="bg-[#F7F9FC] font-sans">
     @include('sweetalert::alert')
-
-  <!-- Navbar -->
-    {{-- <nav class="flex justify-between items-center px-10 py-6">
-        <div class="flex items-center space-x-2">
-            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white"><b>V</b></div>
-            <h1 class="text-2xl font-semibold text-gray-800">Voting</h1>
-        </div>
-    </nav> --}}
-
   <!-- Hero Section -->
-    <div class="px-10 mt-20 flex flex-col items-center text-center fade-in">
+    <div class="px-5 mt-2 flex flex-col items-center text-center fade-in">
         <a href="{{ route('welcome') }}">
             <h1 class="text-5xl font-bold text-gray-800 leading-tight">
         Digital <span class="text-blue-600">Voting</span> System
