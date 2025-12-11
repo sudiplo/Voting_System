@@ -10,7 +10,7 @@ class viewController extends Controller
 {
     //
     public function welcome(){
-        return view('/');
+        return view('welcome');
     }
     //about page view
     public function about(){
