@@ -1,9 +1,62 @@
 <x-top-layout>
+    <div>
+        {{-- <button id="add" data-dropdown-toggle="dropdown"
+            class="inline-flex items-center  focus:ring-2 font-medium text-white text-sm px-2 py-2 focus:outline-none shadow-xl rounded bg-green-600" type="button">
+            Add
+        </button>
+        <!-- Dropdown menu -->
+        <div id="dropdown" class="z-10 hidden bg-[#F7F9FC] bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-72 p-2">
+            <form method="POST" action="{{ route('distric') }}" class="max-w-sm mx-auto">
+                @csrf
+                <div class="mb-2">
+                    <label for="name" :value="__('Name')" class="block mb-2.5 text-sm font-medium text-heading">Name</label>
+                    <input type="text" id="name" name="name" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
+                </div>
+
+                <div class="mb-2">
+                    <label for="name" :value="__('Name')" class="block mb-2.5 text-sm font-medium text-heading">Name in nepali</label>
+                    <input type="text" id="name_nepali" name="name_nepali" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
+                </div>
+                <div class="flex items-center justify-end mt-4">
+                    <div class="p-4">
+                        <button class="bg-blue-500 text-white text-sm px-8 py-3 rounded shadow hover:bg-blue-600 transition flex items-center space-x-2">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div> --}}
+    </div>
 
     <div class="mb-10 bg-white/70 backdrop-blur-lg shadow-xl rounded-2xl border border-gray-200 overflow-hidden p-10">
         <div>
             {{-- Header --}}
-            <h2 class="text-2xl font-bold text-gray-800">Districts & Palikas</h2>
+            <h2 class="text-2xl font-bold text-gray-800">Districts
+                {{-- add distric button --}}
+                <button id="add" data-dropdown-toggle="dropdown"
+                class="inline-flex items-center  focus:ring-2 font-medium text-white text-sm px-2 py-0.5 focus:outline-none shadow-xl rounded bg-green-600" type="button">
+                    Add
+                </button>
+                <!-- Dropdown menu -->
+                <div id="dropdown" class="z-10 hidden bg-[#e6ecf5] bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-72 p-2">
+                    <form method="POST" action="{{ route('distric') }}" class="max-w-sm mx-auto">
+                        @csrf
+                        <div class="mb-2">
+                            <label for="name" :value="__('Name')" class="block mb-2.5 text-sm font-medium text-heading">Name</label>
+                            <input type="text" id="name" name="name"  class="w-full px-1 py-1 rounded-xl border border-gray-300 shadow-md focus:ring-2 focus:ring-indigo-400 focus:outline-none transition" required />
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="name" :value="__('Name')" class="block mb-2.5 text-sm font-medium text-heading">Name in nepali</label>
+                            <input type="text" id="name_nepali" name="name_nepali" class="w-full px-1 py-1 rounded-xl border border-gray-300 shadow-md focus:ring-2 focus:ring-indigo-400 focus:outline-none transition" required />
+                        </div>
+                        <div class="flex items-center justify-end mt-4">
+                            <div class="p-1">
+                                <button class="bg-blue-500 text-white text-sm px-8 py-3 rounded shadow hover:bg-blue-600 transition flex items-center space-x-2">Register</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </h2>
+
             <p class="text-gray-600 mb-8">Search and explore districts with their respective palikas.</p>
 
 
