@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
+use App\Models\User;
 
 class PasswordResetLinkController extends Controller
 {
@@ -35,6 +36,12 @@ class PasswordResetLinkController extends Controller
         $status = Password::sendResetLink(
             $request->only('email')
         );
+
+        // if email exist in user db table this toast run
+        if (User::where('email', $request->email)->exists()) {
+            toast("Password reset link is send successfully please check your email.","success");
+            return back();
+        }
 
         return $status == Password::RESET_LINK_SENT
                     ? back()->with('status', __($status))
