@@ -32,28 +32,43 @@
 
             <p class="text-gray-600 mb-8">Search and explore districts with their respective palikas.</p>
 
-
             {{-- Search Bar--}}
-            <form method="GET" action="" class="max-w-md mb-10">
+            <form method="GET" action="{{ route('districts.index') }}" class="max-w-md mb-10">
+
+                <!-- Search Input -->
                 <input
                     type="text"
                     name="search"
-                    placeholder="Search district or palika..."
-                    value="{{ request()->search }}"
+                    list="districts"
+                    value="{{ $search }}"
+                    placeholder="Search district..."
                     class="w-full px-5 py-3 rounded-xl border border-gray-300 shadow-md focus:ring-2 focus:ring-indigo-400 focus:outline-none transition"
                 >
-                <button class="mt-3 bg-indigo-600 text-white px-5 py-2 rounded-xl shadow hover:bg-indigo-700 transition">
+
+                <!-- Datalist Suggestions -->
+                <datalist id="districts">
+                    @foreach ($suggestions as $suggestion)
+                        <option value="{{ $suggestion }}">
+                    @endforeach
+                </datalist>
+
+                <!-- Search Button -->
+                <button
+                    type="submit"
+                    class="mt-3 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+                >
                     Search
                 </button>
             </form>
         </div>
     </div>
 
+
     <!-- DISTRICTS LIST -->
     @foreach ($districts as $district)
     <div class="mb-10 bg-white/70 backdrop-blur-lg shadow-xl rounded-2xl border border-gray-200 overflow-hidden p-10">
         <!-- District Header -->
-        <div class="bg-green-600 px-6 py-4 flex md:flex-row space-x-96">
+        <div class="bg-green-600 px-6 py-4 flex md:flex-row space-x-96 rounded">
                 <div>
                     <h3 class="text-xl font-semibold text-white">
                         {{ $district->name_nepali ?? '—' }}
@@ -72,7 +87,7 @@
                         </div>
                         <div class="mb-5">
                             {{-- <label for="name" :value="__('Name')" class="block mb-2.5 text-xl font-medium text-heading">Name</label> --}}
-                            <input type="text" id="name" name="name" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-30 px-2 py-1 shadow-xs placeholder:text-body" placeholder="Add Palika" required />
+                            <input type="text" id="name" name="name" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded focus:ring-brand focus:border-brand block w-30 px-2 py-1 shadow-md placeholder:text-body" placeholder="Add Palika" required />
                         </div>
                         <div>
                             <button type="submit" class="submitButton bg-indigo-600 hover:bg-indigo-700 text-white px-2 py-1 rounded cursor-pointer">Add</button>
