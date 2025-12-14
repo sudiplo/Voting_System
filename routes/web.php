@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\citizenshipController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\viewController;
@@ -19,10 +20,13 @@ Route::middleware('auth')->group(function () {
     //
     Route::get('/about',[viewController::class,'about'])->name('about');
     Route::get('/dashboard', [viewController::class,'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+
     Route::post("/distric",[AddController::class,'distric'])->name('distric.add');
     Route::post("/palika",[AddController::class,"palika"])->name('palika.add');
     Route::post("/ward",[AddController::class,'ward'])->name('ward.add');
     Route::get('/districts', [DistrictController::class, 'index'])->name('districts.index');
+
+    Route::get('/citizenship',[citizenshipController::class,'view'])->name('citizen.view');
 });
 
 require __DIR__.'/auth.php';

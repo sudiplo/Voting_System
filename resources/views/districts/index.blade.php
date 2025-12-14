@@ -6,26 +6,27 @@
         <div>
             <h2 class="text-2xl font-bold text-gray-800">District Management</h2>
             <p class="text-gray-600 mt-1">Manage districts, palikas and wards</p>
+            <!-- Search Bar -->
+            <form method="GET" action="{{ route('districts.index') }}"class="max-w-md mb-10 p-2">
+                <input type="text" name="search" list="districts" value="{{ $search }}" placeholder="Search district..."class="w-50 px-5 py-3 rounded-xl border border-gray-300 shadow-md focus:ring-2 focus:ring-indigo-400 focus:outline-none transition" >
+
+                <datalist id="districts">
+                    @foreach ($suggestions as $suggestion)
+                    <option value="{{ $suggestion }}">
+                    @endforeach
+                </datalist>
+
+                <button type="submit" class="mt-3 w-50 px-2 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700" > Search </button>
+            </form>
         </div>
 
-        <!-- Search Bar -->
-        <form method="GET" action="{{ route('districts.index') }}"class="max-w-md mb-10">
-            <input type="text" name="search" list="districts" value="{{ $search }}" placeholder="Search district..."class="w-full px-5 py-3 rounded-xl border border-gray-300 shadow-md focus:ring-2 focus:ring-indigo-400 focus:outline-none transition" >
 
-            <datalist id="districts">
-                @foreach ($suggestions as $suggestion)
-                <option value="{{ $suggestion }}">
-                @endforeach
-            </datalist>
-
-            <button type="submit" class="mt-3 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700" > Search </button>
-        </form>
 
         <!-- ADD DISTRICT -->
         <button
             id="add"
             data-dropdown-toggle="dropdown"
-            class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg shadow transition"
+            class="bg-green-600 hover:bg-green-700 text-white px-2 py-2 rounded-lg shadow transition"
         >
             + Add District
         </button>
@@ -157,6 +158,8 @@
                                     <tr class="border-t hover:bg-indigo-100">
                                         <td class="px-4 py-2">{{ $ward->number }}</td>
                                         <td class="px-4 py-2">{{ $ward->name }}</td>
+                                        <td class="px-4 py-2">{{ $ward->name }}</td>
+
                                         <td class="p-4 text-right space-x-2">
                                             <a href=""
                                                 class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded text-xs">

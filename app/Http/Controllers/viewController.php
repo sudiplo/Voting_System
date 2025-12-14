@@ -23,4 +23,5 @@ class viewController extends Controller
     public function dashboard(){
         return view('dashboard');
     }
+
 }
