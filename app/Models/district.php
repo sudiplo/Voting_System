@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class district extends Model
 {
+        // relation between district and palika
     public function palika(): HasMany
     {
         return $this->hasMany(palika::class);

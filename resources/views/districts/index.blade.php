@@ -10,7 +10,7 @@
                 </button>
                 <!-- Dropdown menu -->
                 <div id="dropdown" class="z-10 hidden bg-[#e6ecf5] bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-72 p-2">
-                    <form method="POST" action="{{ route('distric') }}" class="max-w-sm mx-auto">
+                    <form method="POST" action="{{ route('distric.add') }}" class="max-w-sm mx-auto">
                         @csrf
                         <div class="mb-2">
                             <label for="name" :value="__('Name')" class="block mb-2.5 text-sm font-medium text-heading">Name</label>
@@ -78,7 +78,7 @@
                     </p>
                     </div>
                 <div class="flex md:flex-row">
-                    <form action="{{route('palika')}} " method="post" id="deleteCompany">
+                    <form action="{{route('palika.add')}} " method="post">
                         @csrf
                         <div class="flex md:flex-row space-x-3">
                             <div class="mb-5">
@@ -102,29 +102,85 @@
             <table class="w-full border-collapse">
                 <thead>
                     <tr class="bg-gray-100 text-gray-700 text-sm">
-                        <th class="p-3 text-left font-semibold">Palika ID</th>
                         <th class="p-3 text-left font-semibold">Palika Name</th>
+                        <th class="p-3 text-left font-semibold">Action</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     @forelse ($district->palika as $p)
                         <tr class="border-b group hover:bg-indigo-50 transition cursor-pointer">
-                            <td class="p-3 text-gray-700">{{ $p->id }}</td>
+
                             <td class="p-3 font-medium text-gray-800 group-hover:text-indigo-700">
                                 {{ $p->name }}
+
+                                {{--  --}}
                             </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="2" class="p-4 text-gray-500 italic text-center">
-                                No Palikas Available
-                            </td>
-                        </tr>
+                            <td>
+                    <td>
+                        <!-- Toggle checkbox to show ward list -->
+                        <label for="toggle-ward-{{ $p->id }}" class="cursor-pointer text-indigo-600 hover:text-indigo-800">View ward</label>
+                        <input type="checkbox" id="toggle-ward-{{ $p->id }}" class="hidden peer" />
+                        <div class="peer-checked:block hidden mt-2 p-4 bg-indigo-50 rounded-lg">
+                            <h3 class="text-sm font-semibold">Wards of {{ $p->name }}
+                                {{-- add ward --}}
+                                <div class="flex md:flex-row">
+                                    <form action="{{route('ward.add')}} " method="post">
+                                        @csrf
+                                        <div class="flex md:flex-row space-x-3">
+                                            <div class="mb-5">
+                                            <input type="text" id="palika_id" name="palika_id" value="{{ $p->id  }}" class="hidden bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
+                                        </div>
+                                        <div class="mb-5">
+                                            <input type="number" id="number" name="number" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded focus:ring-brand focus:border-brand block w-30 px-2 py-1 shadow-md placeholder:text-body" placeholder="ward number" min="1" required />
+                                        </div>
+                                        <div class="mb-5">
+                                            <input type="text" id="name" name="name" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded focus:ring-brand focus:border-brand block w-30 px-2 py-1 shadow-md placeholder:text-body" placeholder="Add ward" required />
+                                        </div>
+                                        <div>
+                                            <button type="submit" class="submitButton bg-indigo-600 hover:bg-indigo-700 text-white px-2 py-1 rounded cursor-pointer">Add</button>
+                                        </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </h3>
+                            {{-- list of ward --}}
+                        <table class="min-w-full table-auto border-collapse mt-2">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="px-4 py-2 text-left text-gray-700">Ward ID</th>
+                                    <th class="px-4 py-2 text-left text-gray-700">Ward Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($p->wards as $ward)
+                                    <tr class="border-t">
+                                        <td class="px-4 py-2 text-gray-700">{{ $ward->id }}</td>
+                                        <td class="px-4 py-2 text-gray-700">{{ $ward->name }}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="2" class="px-4 py-2 text-center text-gray-500">No wards available for this Palika.</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="3" class="p-4 text-gray-500 italic text-center">
+                        No Palikas Available
+                    </td>
+                </tr>
+
                     @endforelse
                 </tbody>
             </table>
         </div>
+
+
     </div>
     @endforeach
 

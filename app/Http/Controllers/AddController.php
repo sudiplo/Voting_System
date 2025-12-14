@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\district;
 use App\Models\palika;
+use App\Models\ward;
 use Illuminate\Http\RedirectResponse;
 
 class AddController extends Controller
 {
     //
-    
+
     // district register-------------------------------------------------------------------------------------------------
     public function distric(Request $request): RedirectResponse
     {
@@ -56,6 +57,32 @@ class AddController extends Controller
 
     $palika->save();
     toast("new palika add successfully","success");
+
+    return redirect()->back();
+    }
+
+
+    // ward register save---------------------------------------------------------------
+    public function ward(Request $request){
+    $request->validate([
+        'number'=>['required','numeric','min:1'],
+        'name' => ['required', 'string', 'max:255'],
+        'palika_id'=>['required', 'string', 'max:255'],
+    ]);
+
+
+    if (ward::where('name', $request->name)->exists()) {
+        toast("Name already exist","error");
+        return back();
+    }
+
+    $ward = new ward();
+    $ward ->number = $request->number;
+    $ward->name = $request->name;
+    $ward->palika_id= $request->palika_id;
+
+    $ward->save();
+    toast("new ward add successfully","success");
 
     return redirect()->back();
     }
