@@ -5,7 +5,7 @@
             <h2 class="text-2xl font-bold text-gray-800">Districts
                 {{-- add distric button --}}
                 <button id="add" data-dropdown-toggle="dropdown"
-                class="inline-flex items-center  focus:ring-2 font-medium text-white text-sm px-2 py-0.5 focus:outline-none shadow-xl rounded bg-green-600" type="button">
+                class="inline-flex items-center  focus:ring-2 font-medium text-white text-sm px-2 py-0.5 focus:outline-none shadow-xl rounded bg-green-600 hover:bg-green-700" type="button">
                     Add
                 </button>
                 <!-- Dropdown menu -->
