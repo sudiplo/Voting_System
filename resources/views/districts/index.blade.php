@@ -1,187 +1,203 @@
 <x-top-layout>
-    <div class="mb-10 bg-white/70 backdrop-blur-lg shadow-xl rounded-2xl border border-gray-200 overflow-hidden p-10">
+
+<!-- ===================== PAGE HEADER ===================== -->
+<div class="mb-10 bg-white shadow-xl rounded-2xl p-8 border border-gray-200">
+    <div class="flex items-center justify-between">
         <div>
-            {{-- Header --}}
-            <h2 class="text-2xl font-bold text-gray-800">Districts
-                {{-- add distric button --}}
-                <button id="add" data-dropdown-toggle="dropdown"
-                class="inline-flex items-center  focus:ring-2 font-medium text-white text-sm px-2 py-0.5 focus:outline-none shadow-xl rounded bg-green-600 hover:bg-green-700" type="button">
-                    Add
-                </button>
-                <!-- Dropdown menu -->
-                <div id="dropdown" class="z-10 hidden bg-[#e6ecf5] bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-72 p-2">
-                    <form method="POST" action="{{ route('distric.add') }}" class="max-w-sm mx-auto">
-                        @csrf
-                        <div class="mb-2">
-                            <label for="name" :value="__('Name')" class="block mb-2.5 text-sm font-medium text-heading">Name</label>
-                            <input type="text" id="name" name="name"  class="w-full px-1 py-1 rounded-xl border border-gray-300 shadow-md focus:ring-2 focus:ring-indigo-400 focus:outline-none transition" required />
-                        </div>
-
-                        <div class="mb-2">
-                            <label for="name" :value="__('Name')" class="block mb-2.5 text-sm font-medium text-heading">Name in nepali</label>
-                            <input type="text" id="name_nepali" name="name_nepali" class="w-full px-1 py-1 rounded-xl border border-gray-300 shadow-md focus:ring-2 focus:ring-indigo-400 focus:outline-none transition" required />
-                        </div>
-                        <div class="flex items-center justify-end mt-4">
-                            <div class="p-1">
-                                <button class="bg-blue-500 text-white text-sm px-8 py-3 rounded shadow hover:bg-blue-600 transition flex items-center space-x-2">Register</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </h2>
-
-            <p class="text-gray-600 mb-8">Search and explore districts with their respective palikas.</p>
-
-            {{-- Search Bar--}}
-            <form method="GET" action="{{ route('districts.index') }}" class="max-w-md mb-10">
-
-                <!-- Search Input -->
-                <input
-                    type="text"
-                    name="search"
-                    list="districts"
-                    value="{{ $search }}"
-                    placeholder="Search district..."
-                    class="w-full px-5 py-3 rounded-xl border border-gray-300 shadow-md focus:ring-2 focus:ring-indigo-400 focus:outline-none transition"
-                >
-
-                <!-- Datalist Suggestions -->
-                <datalist id="districts">
-                    @foreach ($suggestions as $suggestion)
-                        <option value="{{ $suggestion }}">
-                    @endforeach
-                </datalist>
-
-                <!-- Search Button -->
-                <button
-                    type="submit"
-                    class="mt-3 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
-                >
-                    Search
-                </button>
-            </form>
+            <h2 class="text-2xl font-bold text-gray-800">District Management</h2>
+            <p class="text-gray-600 mt-1">Manage districts, palikas and wards</p>
         </div>
+
+        <!-- Search Bar -->
+        <form method="GET" action="{{ route('districts.index') }}"class="max-w-md mb-10">
+            <input type="text" name="search" list="districts" value="{{ $search }}" placeholder="Search district..."class="w-full px-5 py-3 rounded-xl border border-gray-300 shadow-md focus:ring-2 focus:ring-indigo-400 focus:outline-none transition" >
+
+            <datalist id="districts">
+                @foreach ($suggestions as $suggestion)
+                <option value="{{ $suggestion }}">
+                @endforeach
+            </datalist>
+
+            <button type="submit" class="mt-3 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700" > Search </button>
+        </form>
+
+        <!-- ADD DISTRICT -->
+        <button
+            id="add"
+            data-dropdown-toggle="dropdown"
+            class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg shadow transition"
+        >
+            + Add District
+        </button>
     </div>
 
+    <!-- ADD DISTRICT DROPDOWN -->
+    <div id="dropdown" class="hidden mt-4 bg-gray-50 border rounded-xl p-4 w-96 shadow">
+        <form method="POST" action="{{ route('distric.add') }}">
+            @csrf
+            <div class="space-y-3">
+                <input type="text" name="name" placeholder="District name"
+                    class="w-full px-3 py-2 rounded-lg border focus:ring-2 focus:ring-indigo-400" required>
 
-    <!-- DISTRICTS LIST -->
-    @foreach ($districts as $district)
-    <div class="mb-10 bg-white/70 backdrop-blur-lg shadow-xl rounded-2xl border border-gray-200 overflow-hidden p-10">
-        <!-- District Header -->
-        <div class="bg-green-600 px-6 py-4 flex md:flex-row space-x-96 rounded">
-                <div>
-                    <h3 class="text-xl font-semibold text-white">
-                        {{ $district->name_nepali ?? '—' }}
-                    </h3>
-                    <p class="text-white text-sm">
-                        {{ $district->name }}
-                    </p>
-                    </div>
-                <div class="flex md:flex-row">
-                    <form action="{{route('palika.add')}} " method="post">
-                        @csrf
-                        <div class="flex md:flex-row space-x-3">
-                            <div class="mb-5">
-                            {{-- <label for="name" class="hidden mb-2.5 text-xl font-medium text-heading">District Id:{{ $district->id }}</label> --}}
-                            <input type="text" id="district_id" name="district_id" value="{{ $district->id }}" class="hidden bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
-                        </div>
-                        <div class="mb-5">
-                            {{-- <label for="name" :value="__('Name')" class="block mb-2.5 text-xl font-medium text-heading">Name</label> --}}
-                            <input type="text" id="name" name="name" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded focus:ring-brand focus:border-brand block w-30 px-2 py-1 shadow-md placeholder:text-body" placeholder="Add Palika" required />
-                        </div>
-                        <div>
-                            <button type="submit" class="submitButton bg-indigo-600 hover:bg-indigo-700 text-white px-2 py-1 rounded cursor-pointer">Add</button>
-                        </div>
-                        </div>
-                    </form>
-                </div>
+                <input type="text" name="name_nepali" placeholder="District name (Nepali)"
+                    class="w-full px-3 py-2 rounded-lg border focus:ring-2 focus:ring-indigo-400" required>
+
+                <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg">
+                    Save District
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ===================== DISTRICT LIST ===================== -->
+@foreach ($districts as $district)
+<div class="mb-12 bg-white shadow-2xl rounded-2xl border border-gray-200 overflow-hidden">
+
+    <!-- DISTRICT HEADER -->
+    <div class="bg-gradient-to-r from-green-600 to-emerald-500 px-8 py-6 flex justify-between items-center">
+        <div>
+            <h3 class="text-xl font-bold text-white">{{ $district->name_nepali }}</h3>
+            <p class="text-sm text-white/90">{{ $district->name }}</p>
         </div>
 
-        <!-- Palikas Table -->
-        <div class="p-6">
-            <table class="w-full border-collapse">
-                <thead>
-                    <tr class="bg-gray-100 text-gray-700 text-sm">
-                        <th class="p-3 text-left font-semibold">Palika Name</th>
-                        <th class="p-3 text-left font-semibold">Action</th>
-                    </tr>
-                </thead>
+        <!-- ADD PALIKA -->
+        <form action="{{ route('palika.add') }}" method="POST" class="flex gap-2">
+            @csrf
+            <input type="hidden" name="district_id" value="{{ $district->id }}">
+            <input
+                type="text"
+                name="name"
+                placeholder="Add Palika"
+                class="px-3 py-2 rounded-lg text-sm border"
+                required
+            >
+            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-lg">
+                Add
+            </button>
+        </form>
+    </div>
 
-                <tbody>
-                    @forelse ($district->palika as $p)
-                        <tr class="border-b group hover:bg-indigo-50 transition cursor-pointer">
+    <!-- ===================== PALIKA TABLE ===================== -->
+    <div class="p-8">
+        <table class="w-full text-sm border-collapse">
+            <thead>
+                <tr class="bg-gray-100 text-gray-700">
+                    <th class="p-4 text-left">Palika Name</th>
+                    <th class="p-4 text-right w-40">Action</th>
+                </tr>
+            </thead>
 
-                            <td class="p-3 font-medium text-gray-800 group-hover:text-indigo-700">
-                                {{ $p->name }}
+            <tbody>
+                @forelse ($district->palika as $p)
+                <!-- PALIKA ROW -->
+                <tr class="border-b hover:bg-indigo-50 transition text-xl">
+                    <td class="p-4 font-medium text-indigo-700 cursor-pointer">
+                        <label for="palika-{{ $p->id }}" class="cursor-pointer">
+                            {{ $p->name }}
+                        </label>
+                    </td>
 
-                                {{--  --}}
-                            </td>
-                            <td>
-                    <td>
-                        <!-- Toggle checkbox to show ward list -->
-                        <label for="toggle-ward-{{ $p->id }}" class="cursor-pointer text-indigo-600 hover:text-indigo-800">View ward</label>
-                        <input type="checkbox" id="toggle-ward-{{ $p->id }}" class="hidden peer" />
-                        <div class="peer-checked:block hidden mt-2 p-4 bg-indigo-50 rounded-lg">
-                            <h3 class="text-sm font-semibold">Wards of {{ $p->name }}
-                                {{-- add ward --}}
-                                <div class="flex md:flex-row">
-                                    <form action="{{route('ward.add')}} " method="post">
-                                        @csrf
-                                        <div class="flex md:flex-row space-x-3">
-                                            <div class="mb-5">
-                                            <input type="text" id="palika_id" name="palika_id" value="{{ $p->id  }}" class="hidden bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
-                                        </div>
-                                        <div class="mb-5">
-                                            <input type="number" id="number" name="number" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded focus:ring-brand focus:border-brand block w-30 px-2 py-1 shadow-md placeholder:text-body" placeholder="ward number" min="1" required />
-                                        </div>
-                                        <div class="mb-5">
-                                            <input type="text" id="name" name="name" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded focus:ring-brand focus:border-brand block w-30 px-2 py-1 shadow-md placeholder:text-body" placeholder="Add ward" required />
-                                        </div>
-                                        <div>
-                                            <button type="submit" class="submitButton bg-indigo-600 hover:bg-indigo-700 text-white px-2 py-1 rounded cursor-pointer">Add</button>
-                                        </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </h3>
-                            {{-- list of ward --}}
-                        <table class="min-w-full table-auto border-collapse mt-2">
-                            <thead>
-                                <tr class="bg-gray-100">
-                                    <th class="px-4 py-2 text-left text-gray-700">Ward ID</th>
-                                    <th class="px-4 py-2 text-left text-gray-700">Ward Name</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($p->wards as $ward)
-                                    <tr class="border-t">
-                                        <td class="px-4 py-2 text-gray-700">{{ $ward->id }}</td>
-                                        <td class="px-4 py-2 text-gray-700">{{ $ward->name }}</td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="2" class="px-4 py-2 text-center text-gray-500">No wards available for this Palika.</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
+                    <!-- ACTIONS -->
+                    <td class="p-4 text-right space-x-2">
+                        <a href=""
+                            class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded text-xs">
+                            Edit
+                        </a>
 
+                        <form action="" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button
+                                class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded text-xs"
+                                onclick="return confirm('Delete this palika?')"
+                            >
+                                Delete
+                            </button>
+                        </form>
                     </td>
                 </tr>
-            @empty
+
+                <!-- ===================== WARD SECTION ===================== -->
                 <tr>
-                    <td colspan="3" class="p-4 text-gray-500 italic text-center">
-                        No Palikas Available
+                    <td colspan="2" class="p-0">
+                        <input type="checkbox" id="palika-{{ $p->id }}" class="peer hidden">
+
+                        <div class="peer-checked:block hidden bg-indigo-50 border-t border-indigo-200 p-6 space-y-4">
+                            <label for="palika-{{ $p->id }}" class="cursor-pointer">
+                                {{ $p->name }}
+                            </label>
+                            <!-- ADD WARD -->
+                            <form action="{{ route('ward.add') }}" method="POST" class="flex flex-wrap gap-2">
+                                @csrf
+                                <input type="hidden" name="palika_id" value="{{ $p->id }}">
+
+                                <input type="number" name="number" placeholder="Ward No"
+                                    class="w-24 px-3 py-2 rounded border" required>
+
+                                <input type="text" name="name" placeholder="Ward Name"
+                                    class="px-3 py-2 rounded border" required>
+
+                                <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 rounded">
+                                    + Add Ward
+                                </button>
+                            </form>
+
+                            <!-- WARD TABLE -->
+                            <table class="w-full border border-indigo-200 rounded-lg overflow-hidden">
+                                <thead>
+                                    <tr class="bg-indigo-100 text-indigo-800">
+                                        <th class="px-4 py-2 text-left">Number</th>
+                                        <th class="px-4 py-2 text-left">Ward Name</th>
+                                        <th class="px-4 py-2 text-left">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($p->wards as $ward)
+                                    <tr class="border-t hover:bg-indigo-100">
+                                        <td class="px-4 py-2">{{ $ward->number }}</td>
+                                        <td class="px-4 py-2">{{ $ward->name }}</td>
+                                        <td class="p-4 text-right space-x-2">
+                                            <a href=""
+                                                class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded text-xs">
+                                                Edit
+                                            </a>
+
+                                            <form action="" method="POST" class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button
+                                                    class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded text-xs"
+                                                    onclick="return confirm('Delete this palika?')"
+                                                >
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @empty
+                                    <tr>
+                                        <td colspan="2" class="px-4 py-3 text-center text-gray-500">
+                                            No wards available
+                                        </td>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
                     </td>
                 </tr>
-
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-
-
+                @empty
+                <tr>
+                    <td colspan="2" class="p-6 text-center text-gray-500 italic">
+                        No Palikas Found
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
-    @endforeach
+</div>
+@endforeach
 
 </x-top-layout>
