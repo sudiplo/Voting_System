@@ -5,107 +5,196 @@
     </h1>
 
     <form action="#" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Full Name -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700">नाम थर: </label>
+            <input type="text" name="nepaliName"
+            class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition" placeholder="नेपाली मा "
+            required>
+        </div>
 
-      <!-- Full Name -->
-      <div>
-        <label class="block text-sm font-semibold text-gray-700">Full Name in Nepali</label>
-        <input type="text" name="nepaliName"
-          class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition" placeholder="नेपाली मा "
-          required>
-      </div>
+        <!-- Full Name -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700">Full Name in English:</label>
+            <input type="text" name="nameEnglish"
+            class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition" placeholder="In English"
+            required>
+        </div>
 
-      <!-- Full Name -->
-      <div>
-        <label class="block text-sm font-semibold text-gray-700">Full Name in English</label>
-        <input type="text" name="nameEnglish"
-          class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition" placeholder="In English"
-          required>
-      </div>
+        <!-- Citizenship Number -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700">ना॰प्र॰नं॰:</label>
+            <input type="number" name="citizenshipNumber"
+            class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition" placeholder="नागरिकताको नं."
+            required>
+        </div>
 
-      <!-- Citizenship Number -->
-      <div>
-        <label class="block text-sm font-semibold text-gray-700">Citizenship Number</label>
-        <input type="text" name="citizenshipNumber"
-          class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
-          required>
-      </div>
+        <!-- Father Name -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700">बाबुको नाम थर :</label>
+            <input type="text" name="fatherName"
+            class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
+            required>
+        </div>
 
-      <!-- Father Name -->
-      <div>
-        <label class="block text-sm font-semibold text-gray-700">Father's Name</label>
-        <input type="text" name="fatherName"
-          class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
-          required>
-      </div>
+        <!-- Mother Name -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700">आमाको नाम थर:</label>
+            <input type="text" name="motherName"
+            class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
+            required>
+        </div>
 
-      <!-- Mother Name -->
-      <div>
-        <label class="block text-sm font-semibold text-gray-700">Mother's Name</label>
-        <input type="text" name="motherName"
-          class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
-          required>
-      </div>
+        <!-- Date of Birth -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700">जन्म मितिः</label>
+            <input type="date" name="dob"
+            class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
+            required>
+        </div>
 
-      <!-- Date of Birth -->
-      <div>
-        <label class="block text-sm font-semibold text-gray-700">Date of Birth</label>
-        <input type="date" name="dob"
-          class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
-          required>
-      </div>
+        <!-- Gender -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700">लिङ्ग:</label>
+            <select name="gender"
+            class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
+            required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
 
-      <!-- Gender -->
-      <div>
-        <label class="block text-sm font-semibold text-gray-700">Gender</label>
-        <select name="gender"
-          class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
-          required>
-          <option value="">Select Gender</option>
-          <option>Male</option>
-          <option>Female</option>
-          <option>Other</option>
-        </select>
-      </div>
+        <!-- Card Type -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700">नागरिकताको किसिम: </label>
+            <select name="cardType"
+            class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
+            required>
+                <option value="">Select Card Type</option>
+                <option value="वंशज">वंशज</option>
+                <option value="अंगीकृत">अंगीकृत</option>
+                <option value="गैर आवासीय">गैर आवासीय</option>
+                <option value="सम्मानार्थ">सम्मानार्थ </option>
+            </select>
+        </div>
 
-      <!-- Card Type -->
-      <div>
-        <label class="block text-sm font-semibold text-gray-700">Citizenship Card Type</label>
-        <select name="cardType"
-          class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
-          required>
-          <option value="">Select Card Type</option>
-          <option>Citizenship by Birth</option>
-          <option>Citizenship by Descent</option>
-          <option>Naturalized Citizenship</option>
-          <option>Honorary Citizenship</option>
-        </select>
-      </div>
+        <!-- Address -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700">स्थायी बासस्थानः</label>
+            <div class="mt-2 p-3">
+                <div class="p-2">
+                <!-- district -->
+                    <label class="block text-sm font-semibold text-gray-600">जिल्ला</label>
+                    <select id="districtSelect"
+                        class="w-full border rounded px-4 py-2" required>
+                        <option value="">Select District</option>
 
-      <!-- Address -->
-      <div>
-        <label class="block text-sm font-semibold text-gray-700">Permanent Address</label>
-        <textarea name="address" rows="3"
-          class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
-          required></textarea>
-      </div>
+                        @foreach ($districts as $district)
+                            <option value="{{ $district->id }}" name="district">
+                                {{ $district->name_nepali }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
-      <!-- Photo Upload -->
-      <div>
-        <label class="block text-sm font-semibold text-gray-700">Photo Upload</label>
-        <input type="file" name="photo"
-          class="w-full mt-2 p-3 border rounded-lg hover:border-blue-500 transition"
-          required>
-      </div>
+                <div class="p-2">
+                    <!-- palika -->
+                    <label class="block text-sm font-semibold text-gray-700">गा॰पा॰/ न॰पा॰</label>
+                    <select id="palikaSelect"
+                        class="w-full border rounded px-4 py-2"
+                        disabled required>
+                        <option value="" name="palika">Select Palika</option>
+                    </select>
+                </div>
 
-      <!-- Submit Button -->
-      <div class="md:col-span-2 text-center mt-4">
-        <button type="submit"
-          class="w-full md:w-1/3 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-          Save Citizenship Record
-        </button>
-      </div>
+                <div class="p-2">
+                    <!-- ward -->
+                    <label class="block text-sm font-semibold text-gray-700">वडा नं.</label>
+                    <select id="wardSelect"
+                        class="w-full border rounded px-4 py-2"
+                        disabled required>
+                        <option value="" name="ward">Select Ward</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <script>
+            const districts = @json($districts);
+
+            const districtSelect = document.getElementById('districtSelect');
+            const palikaSelect = document.getElementById('palikaSelect');
+            const wardSelect = document.getElementById('wardSelect');
+
+            districtSelect.addEventListener('change', function () {
+                palikaSelect.innerHTML = '<option value="">Select Palika</option>';
+                wardSelect.innerHTML = '<option value="">Select Ward</option>';
+                wardSelect.disabled = true;
+
+                const district = districts.find(d => d.id == this.value);
+
+                if (district) {
+                    palikaSelect.disabled = false;
+
+                    district.palika.forEach(p => {
+                        palikaSelect.innerHTML += `
+                            <option value="${p.id}">${p.name}</option>
+                        `;
+                    });
+                } else {
+                    palikaSelect.disabled = true;
+                }
+            });
+
+            palikaSelect.addEventListener('change', function () {
+                wardSelect.innerHTML = '<option value="">Select Ward</option>';
+
+                const district = districts.find(d => d.id == districtSelect.value);
+                const palika = district?.palika.find(p => p.id == this.value);
+
+                if (palika) {
+                    wardSelect.disabled = false;
+
+                    palika.wards.forEach(w => {
+                        wardSelect.innerHTML += `
+                            <option value="${w.id}">
+                                Ward ${w.number} - ${w.name}
+                            </option>
+                        `;
+                    });
+                } else {
+                    wardSelect.disabled = true;
+                }
+            });
+        </script>
+
+        <!-- partner Name -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700">पती पत्नीको नामथर: </label>
+            <input type="text" name="partner"
+            class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
+            required>
+        </div>
+
+        <!-- Photo Upload -->
+        <div>
+            <label class="block text-sm font-semibold text-gray-700">Photo Upload</label>
+            <input type="file" name="photo"
+            class="w-full mt-2 p-3 border rounded-lg hover:border-blue-500 transition"
+            required>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="md:col-span-2 text-center mt-4">
+            <button type="submit"
+            class="w-full md:w-1/3 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+            Save Citizenship Record
+            </button>
+        </div>
 
     </form>
   </div>
+
 
 </x-top-layout>
