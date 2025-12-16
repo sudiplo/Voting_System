@@ -21,12 +21,14 @@ return new class extends Migration
             $table->date('dob');
             $table->enum('gender', ['Male', 'Female', 'Other']);
             $table->enum('type', ['वंशज', 'अंगीकृत', 'गैर आवासीय','सम्मानार्थ']);
-            $table->date('district');
-            $table->date('palika');
-            $table->date('ward');
-            $table->date('partner')->nullable;
+            $table->string('district');
+            $table->string('palika');
+            $table->string('ward');
+            $table->string('partner')->nullable();
+            $table->string('photo');
             $table->timestamps();
-        });
+    });
+
     }
 
     /**

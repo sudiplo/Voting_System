@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/districts', [DistrictController::class, 'index'])->name('districts.index');
 
     Route::get('/citizenship',[citizenshipController::class,'view'])->name('citizen.view');
+    Route::post('citizenship',[citizenshipController::class,'create'])->name('citizen.create');
 });
 
 require __DIR__.'/auth.php';

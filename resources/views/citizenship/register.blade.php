@@ -4,7 +4,8 @@
       Nepal Citizenship Card – Admin Entry
     </h1>
 
-    <form action="#" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <form action="{{ Route('citizen.create') }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6" enctype="multipart/form-data">
+        @csrf
         <!-- Full Name -->
         <div>
             <label class="block text-sm font-semibold text-gray-700">नाम थर: </label>
@@ -58,7 +59,7 @@
             <label class="block text-sm font-semibold text-gray-700">लिङ्ग:</label>
             <select name="gender"
             class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
-            required>
+            >
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -71,7 +72,7 @@
             <label class="block text-sm font-semibold text-gray-700">नागरिकताको किसिम: </label>
             <select name="cardType"
             class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
-            required>
+            >
                 <option value="">Select Card Type</option>
                 <option value="वंशज">वंशज</option>
                 <option value="अंगीकृत">अंगीकृत</option>
@@ -87,8 +88,8 @@
                 <div class="p-2">
                 <!-- district -->
                     <label class="block text-sm font-semibold text-gray-600">जिल्ला</label>
-                    <select id="districtSelect"
-                        class="w-full border rounded px-4 py-2" required>
+                    <select id="districtSelect" name="district"
+                        class="w-full border rounded px-4 py-2">
                         <option value="">Select District</option>
 
                         @foreach ($districts as $district)
@@ -102,9 +103,9 @@
                 <div class="p-2">
                     <!-- palika -->
                     <label class="block text-sm font-semibold text-gray-700">गा॰पा॰/ न॰पा॰</label>
-                    <select id="palikaSelect"
+                    <select id="palikaSelect" name="palika"
                         class="w-full border rounded px-4 py-2"
-                        disabled required>
+                        disabled>
                         <option value="" name="palika">Select Palika</option>
                     </select>
                 </div>
@@ -112,9 +113,9 @@
                 <div class="p-2">
                     <!-- ward -->
                     <label class="block text-sm font-semibold text-gray-700">वडा नं.</label>
-                    <select id="wardSelect"
+                    <select id="wardSelect" name="ward"
                         class="w-full border rounded px-4 py-2"
-                        disabled required>
+                        disabled>
                         <option value="" name="ward">Select Ward</option>
                     </select>
                 </div>
@@ -173,8 +174,7 @@
         <div>
             <label class="block text-sm font-semibold text-gray-700">पती पत्नीको नामथर: </label>
             <input type="text" name="partner"
-            class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
-            required>
+            class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition">
         </div>
 
         <!-- Photo Upload -->
