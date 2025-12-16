@@ -12,4 +12,9 @@ class district extends Model
     {
         return $this->hasMany(palika::class);
     }
+    // relation between district and citizen
+    public function citizens(): HasMany
+    {
+        return $this->hasMany(citizenship::class);
+    }
 }

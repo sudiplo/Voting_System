@@ -29,16 +29,10 @@ class citizenshipController extends Controller
             'dob' => ['required', 'date'],
             'gender' => ['required', 'string', 'max:255'],
             'cardType' => ['required', 'string', 'max:255'],
-            // 'district' => ['required', 'string', 'max:255'],
-            // 'palika' => ['required', 'string', 'max:255'],
-            // 'ward' => ['required', 'string', 'max:255'],
-            'district' => ['required', 'integer'],
-            'palika' => ['required', 'integer'],
-            'ward' => ['required', 'integer'],
-
-            // 'partner' => ['string', 'max:255'],
+            'district_id' => ['required', 'string', 'max:255'],
+            'palika_id' => ['required', 'string', 'max:255'],
+            'ward_id' => ['required', 'string', 'max:255'],
             'partner' => ['nullable', 'string', 'max:255'],
-
             'photo' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -61,9 +55,9 @@ class citizenshipController extends Controller
         $citizen->dob = $request->dob;
         $citizen->gender = $request->gender;
         $citizen->type = $request->cardType;
-        $citizen->district = $request->district;
-        $citizen->palika = $request->palika;
-        $citizen->ward = $request->ward;
+        $citizen->district_id = $request->district_id;
+        $citizen->palika_id = $request->palika_id;
+        $citizen->ward_id = $request->ward_id;
         $citizen->partner = $request->partner;
         $citizen->photo = "images/".$filename;
         // save the data

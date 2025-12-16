@@ -21,9 +21,9 @@ return new class extends Migration
             $table->date('dob');
             $table->enum('gender', ['Male', 'Female', 'Other']);
             $table->enum('type', ['वंशज', 'अंगीकृत', 'गैर आवासीय','सम्मानार्थ']);
-            $table->string('district');
-            $table->string('palika');
-            $table->string('ward');
+            $table->foreignId("district_id")->constrained();
+            $table->foreignId("palika_id")->constrained();
+            $table->foreignId("ward_id")->constrained();
             $table->string('partner')->nullable();
             $table->string('photo');
             $table->timestamps();

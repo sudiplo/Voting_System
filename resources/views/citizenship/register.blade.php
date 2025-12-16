@@ -56,9 +56,13 @@
 
         <!-- Gender -->
         <div>
-            <label class="block text-sm font-semibold text-gray-700">लिङ्ग:</label>
-            <select name="gender"
-            class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
+            <label class="block text-sm font-semibold text-gray-700">
+                लिङ्ग:
+            </label>
+
+            <select
+                name="gender"
+                class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
             >
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
@@ -67,61 +71,83 @@
             </select>
         </div>
 
+
         <!-- Card Type -->
         <div>
-            <label class="block text-sm font-semibold text-gray-700">नागरिकताको किसिम: </label>
-            <select name="cardType"
-            class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
+            <label class="block text-sm font-semibold text-gray-700">
+                नागरिकताको किसिम:
+            </label>
+
+            <select
+                name="cardType"
+                class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
             >
                 <option value="">Select Card Type</option>
                 <option value="वंशज">वंशज</option>
                 <option value="अंगीकृत">अंगीकृत</option>
                 <option value="गैर आवासीय">गैर आवासीय</option>
-                <option value="सम्मानार्थ">सम्मानार्थ </option>
+                <option value="सम्मानार्थ">सम्मानार्थ</option>
             </select>
         </div>
 
         <!-- Address -->
         <div>
-            <label class="block text-sm font-semibold text-gray-700">स्थायी बासस्थानः</label>
+            <label class="block text-sm font-semibold text-gray-700">
+                स्थायी बासस्थानः
+            </label>
+
             <div class="mt-2 p-3">
+                <!-- District -->
                 <div class="p-2">
-                <!-- district -->
                     <label class="block text-sm font-semibold text-gray-600">जिल्ला</label>
-                    <select id="districtSelect" name="district"
-                        class="w-full border rounded px-4 py-2">
+                    <select
+                        id="districtSelect"
+                        name="district_id"
+                        class="w-full border rounded px-4 py-2"
+                    >
                         <option value="">Select District</option>
 
                         @foreach ($districts as $district)
-                            <option value="{{ $district->id }}" name="district">
+                            <option value="{{ $district->id }}">
                                 {{ $district->name_nepali }}
                             </option>
                         @endforeach
                     </select>
                 </div>
 
+                <!-- Palika -->
                 <div class="p-2">
-                    <!-- palika -->
-                    <label class="block text-sm font-semibold text-gray-700">गा॰पा॰/ न॰पा॰</label>
-                    <select id="palikaSelect" name="palika"
+                    <label class="block text-sm font-semibold text-gray-700">
+                        गा॰पा॰/ न॰पा॰
+                    </label>
+                    <select
+                        id="palikaSelect"
+                        name="palika_id"
                         class="w-full border rounded px-4 py-2"
-                        disabled>
-                        <option value="" name="palika">Select Palika</option>
+                        disabled
+                    >
+                        <option value="">Select Palika</option>
                     </select>
                 </div>
 
+                <!-- Ward -->
                 <div class="p-2">
-                    <!-- ward -->
-                    <label class="block text-sm font-semibold text-gray-700">वडा नं.</label>
-                    <select id="wardSelect" name="ward"
+                    <label class="block text-sm font-semibold text-gray-700">
+                        वडा नं.
+                    </label>
+                    <select
+                        id="wardSelect"
+                        name="ward_id"
                         class="w-full border rounded px-4 py-2"
-                        disabled>
-                        <option value="" name="ward">Select Ward</option>
+                        disabled
+                    >
+                        <option value="">Select Ward</option>
                     </select>
                 </div>
             </div>
         </div>
-        <script>
+
+                <script>
             const districts = @json($districts);
 
             const districtSelect = document.getElementById('districtSelect');
@@ -169,6 +195,7 @@
                 }
             });
         </script>
+
 
         <!-- partner Name -->
         <div>

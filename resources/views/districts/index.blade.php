@@ -134,7 +134,7 @@
                                 <input type="hidden" name="palika_id" value="{{ $p->id }}">
 
                                 <input type="number" name="number" placeholder="Ward No"
-                                    class="w-24 px-3 py-2 rounded border" required>
+                                    class="w-24 px-3 py-2 rounded border" required min="1">
 
                                 <input type="text" name="name" placeholder="Ward Name"
                                     class="px-3 py-2 rounded border" required>
