@@ -1,7 +1,7 @@
 <x-top-layout>
     <div class="mb-12 bg-white shadow-2xl rounded-2xl border border-gray-200 overflow-hidden">
 
-        <!-- ward HEADER -->
+        <!-- WARD HEADER -->
         <div class="bg-gradient-to-r from-green-600 to-emerald-500 px-8 py-6 flex justify-between items-center">
             <div>
                 <h3 class="text-xl font-bold text-white">{{ $ward->name }}</h3>
@@ -9,7 +9,7 @@
             </div>
 
         </div>
-        <!-- ADD WARD -->
+        <!-- UPDATE WARD -->
         <div class="p-8">
             <form action="{{ Route('ward.update',$ward->id) }}" method="POST" class="space-y-6">
                 @csrf

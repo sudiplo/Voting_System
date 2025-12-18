@@ -101,7 +101,7 @@
 
                     <!-- ACTIONS -->
                     <td class="p-4 text-right space-x-2">
-                        <a href=""
+                        <a href="{{ Route('districts.palikaEdit',$p->id) }}"
                             class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded text-xs">
                             Edit
                         </a>

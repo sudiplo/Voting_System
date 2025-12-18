@@ -35,6 +35,13 @@ class DistrictController extends Controller
         return view('districts.wardedit', compact('ward'));
     }
 
+    // edit palika redirect
+    public function palikaEdit($id) {
+        $districts= district::all();
+        $palika = palika::find($id);
+        return view('districts.palikaedit', compact('palika', 'districts'));
+    }
+
     // delete district
     public function districtDelete($id) {
         $district = district::find($id);

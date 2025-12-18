@@ -60,6 +60,21 @@ class AddController extends Controller
 
     return redirect()->back();
     }
+    // palika update
+    public function palikaUpdate(Request $request, $id){
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'district_id'=>['required', 'string', 'max:255'],
+        ]);
+
+        $palika = palika::find($id);
+        $palika->name = $request->name;
+        $palika->district_id= $request->district_id;
+        $palika->save();
+        toast("Palika updated successfully","success");
+        return redirect()->route('districts.index');
+    }
+
 
 
     // ward register save---------------------------------------------------------------
@@ -86,7 +101,6 @@ class AddController extends Controller
 
         return redirect()->back();
     }
-
     // ward update
     public function wardUpdate(Request $request, $id){
         $request->validate([
