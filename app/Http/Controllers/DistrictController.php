@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\district;
 use App\Models\ward;
+use App\Models\palika;
 use Illuminate\Http\Request;
 
 class DistrictController extends Controller
@@ -29,11 +30,27 @@ class DistrictController extends Controller
         return view('districts.index', compact('districts', 'suggestions', 'search'));
     }
 
+        // delete district
+    public function districtDelete($id) {
+        $district = district::find($id);
+        $district->delete();
+        toast("$district->name District Delete successfully","success");
+        return redirect()->back();
+    }
+
+    // delete district palika
+    public function palikaDelete($id) {
+        $palika = palika::find($id);
+        $palika->delete();
+        toast("$palika->name Palika Delete successfully","success");
+        return redirect()->back();
+    }
+
     // delete district ward
     public function wardDelete($id) {
         $ward = ward::find($id);
         $ward->delete();
-        toast("ward Delete","success");
+        toast("$ward->name Ward Delete successfully","success");
         return redirect()->back();
     }
 }

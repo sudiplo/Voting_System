@@ -106,7 +106,7 @@
                             Edit
                         </a>
 
-                        <form action="" method="POST" class="inline">
+                        <form action="{{ Route('districts.palikaDelete',$p->id) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
                             <button
