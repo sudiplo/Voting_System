@@ -24,7 +24,9 @@ Route::middleware('auth')->group(function () {
     Route::post("/distric",[AddController::class,'distric'])->name('distric.add');
     Route::post("/palika",[AddController::class,"palika"])->name('palika.add');
     Route::post("/ward",[AddController::class,'ward'])->name('ward.add');
+
     Route::get('/districts', [DistrictController::class, 'index'])->name('districts.index');
+    Route::delete('/districts{id}', [DistrictController::class, 'wardDelete'])->name('districts.wardDelete');
 
     Route::get('/citizenship',[citizenshipController::class,'view'])->name('citizen.view');
     Route::post('citizenship',[citizenshipController::class,'create'])->name('citizen.create');

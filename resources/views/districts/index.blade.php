@@ -43,7 +43,7 @@
                 <input type="text" name="name_nepali" placeholder="District name (Nepali)"
                     class="w-full px-3 py-2 rounded-lg border focus:ring-2 focus:ring-indigo-400" required>
 
-                <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg">
+                <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg" onclick="return confirm('Add this district?')">
                     Save District
                 </button>
             </div>
@@ -73,7 +73,7 @@
                 class="px-3 py-2 rounded-lg text-sm border"
                 required
             >
-            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-lg">
+            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-lg" onclick="return confirm('Add this palika?')">
                 Add
             </button>
         </form>
@@ -139,7 +139,7 @@
                                 <input type="text" name="name" placeholder="Ward Name"
                                     class="px-3 py-2 rounded border" required>
 
-                                <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 rounded">
+                                <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 rounded" onclick="return confirm('Add this ward?')">
                                     + Add Ward
                                 </button>
                             </form>
@@ -166,7 +166,7 @@
                                                 Edit
                                             </a>
 
-                                            <form action="" method="POST" class="inline">
+                                            <form action="{{ Route('districts.wardDelete',$ward->id) }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button

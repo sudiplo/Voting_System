@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\district;
+use App\Models\ward;
 use Illuminate\Http\Request;
 
 class DistrictController extends Controller
@@ -26,5 +27,13 @@ class DistrictController extends Controller
             ->pluck('name');
 
         return view('districts.index', compact('districts', 'suggestions', 'search'));
+    }
+
+    // delete district ward
+    public function wardDelete($id) {
+        $ward = ward::find($id);
+        $ward->delete();
+        toast("ward Delete","success");
+        return redirect()->back();
     }
 }
