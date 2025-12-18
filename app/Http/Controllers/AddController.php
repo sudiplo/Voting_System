@@ -96,7 +96,7 @@ class AddController extends Controller
         ]);
 
         $ward = ward::find($id);
-       $ward ->number = $request->number;
+        $ward ->number = $request->number;
         $ward->name = $request->name;
         $ward->palika_id= $request->palika_id;
         $ward->save();
