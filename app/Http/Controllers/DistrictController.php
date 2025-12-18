@@ -29,8 +29,13 @@ class DistrictController extends Controller
 
         return view('districts.index', compact('districts', 'suggestions', 'search'));
     }
+    // edit ward redirect
+    public function wardEdit($id) {
+        $ward = ward::find($id);
+        return view('districts.wardedit', compact('ward'));
+    }
 
-        // delete district
+    // delete district
     public function districtDelete($id) {
         $district = district::find($id);
         $district->delete();

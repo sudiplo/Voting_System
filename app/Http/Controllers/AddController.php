@@ -64,27 +64,44 @@ class AddController extends Controller
 
     // ward register save---------------------------------------------------------------
     public function ward(Request $request){
-    $request->validate([
-        'number'=>['required','numeric','min:1'],
-        'name' => ['required', 'string', 'max:255'],
-        'palika_id'=>['required', 'string', 'max:255'],
-    ]);
+        $request->validate([
+            'number'=>['required','numeric','min:1'],
+            'name' => ['required', 'string', 'max:255'],
+            'palika_id'=>['required', 'string', 'max:255'],
+        ]);
 
 
-    if (ward::where('name', $request->name)->exists()) {
-        toast("Name already exist","error");
-        return back();
+        if (ward::where('name', $request->name)->exists()) {
+            toast("Name already exist","error");
+            return back();
+        }
+
+        $ward = new ward();
+        $ward ->number = $request->number;
+        $ward->name = $request->name;
+        $ward->palika_id= $request->palika_id;
+
+        $ward->save();
+        toast("new ward add successfully","success");
+
+        return redirect()->back();
     }
 
-    $ward = new ward();
-    $ward ->number = $request->number;
-    $ward->name = $request->name;
-    $ward->palika_id= $request->palika_id;
+    // ward update
+    public function wardUpdate(Request $request, $id){
+        $request->validate([
+            'number'=>['required','numeric','min:1'],
+            'name' => ['required', 'string', 'max:255'],
+            'palika_id'=>['required', 'string', 'max:255'],
+        ]);
 
-    $ward->save();
-    toast("new ward add successfully","success");
-
-    return redirect()->back();
+        $ward = ward::find($id);
+       $ward ->number = $request->number;
+        $ward->name = $request->name;
+        $ward->palika_id= $request->palika_id;
+        $ward->save();
+        toast("Ward updated successfully","success");
+        return redirect()->route('districts.index');
     }
 
 }
