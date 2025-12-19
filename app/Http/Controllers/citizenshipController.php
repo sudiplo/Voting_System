@@ -13,7 +13,13 @@ class citizenshipController extends Controller
 {
     //
     public function view(){
-        $districts = district::with('palika.wards')->get();
+        $citizenships = citizenship::all();
+        return view('citizenship.index',compact('citizenships'));
+    }
+
+    // to show registration form
+    public function registerView(){
+        $districts = district::all();
         return view('citizenship.register',compact('districts'));
     }
 
@@ -66,4 +72,23 @@ class citizenshipController extends Controller
 
         return redirect()->back();
     }
+
+    // Citizen search view
+    public function index(Request $request)
+    {
+        $search = $request->get('search');
+
+        $citizenships = collect(); // empty by default
+
+        if ($search) {
+            $citizenships = Citizenship::where('name_english', 'like', "%{$search}%")
+                ->orWhere('name_nepali', 'like', "%{$search}%")
+                ->orWhere('citizenship_number', 'like', "%{$search}%")
+                ->latest()
+                ->get();
+        }
+
+        return view('citizenship.index', compact('citizenships', 'search'));
+    }
+
 }

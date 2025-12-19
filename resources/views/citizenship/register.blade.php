@@ -1,7 +1,7 @@
 <x-top-layout>
     <div class="max-w-5xl mx-auto my-10 p-8 bg-white rounded-xl shadow-lg">
     <h1 class="text-3xl font-bold text-center text-blue-600 mb-8">
-      Nepal Citizenship Card – Admin Entry
+      <a href="{{ Route('citizen.view') }}">Nepal Citizenship Card – Admin Entry</a>
     </h1>
 
     <form action="{{ Route('citizen.create') }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6" enctype="multipart/form-data">

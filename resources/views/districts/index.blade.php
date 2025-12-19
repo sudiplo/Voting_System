@@ -1,7 +1,13 @@
 <x-top-layout>
+    <!-- Hero Section -->
+    <section class="px-10 flex flex-col items-center text-center fade-in">
+        <h1 class="text-5xl font-bold text-gray-800 leading-tight">
+            District <span class="text-blue-600">Management</span>
+        </h1>
+    </section>
 
 <!-- ===================== PAGE HEADER ===================== -->
-<div class="mb-10 bg-white shadow-xl rounded-2xl p-8 border border-gray-200">
+<div class="mt-5 mb-10 bg-white shadow-xl rounded-2xl p-8 border border-gray-200">
     <div class="flex items-center justify-between">
         <div>
             <h2 class="text-2xl font-bold text-gray-800">District Management</h2>

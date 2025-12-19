@@ -37,7 +37,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/palikaupdate{id}', [AddController::class, 'palikaUpdate'])->name('palika.update');
 
     Route::get('/citizenship',[citizenshipController::class,'view'])->name('citizen.view');
+    Route::get('/citizenship/register',[citizenshipController::class,'registerView'])->name('citizen.registerView');
     Route::post('citizenship',[citizenshipController::class,'create'])->name('citizen.create');
+    Route::get('/citizens', [citizenshipController::class, 'index'])->name('citizens.index');
 });
 
 require __DIR__.'/auth.php';

@@ -110,17 +110,15 @@
 
     </nav>
 
-  <!-- Hero Section -->
+  {{-- <!-- Hero Section -->
   <section class="px-10 mt-10 flex flex-col items-center text-center fade-in">
     <h1 class="text-5xl font-bold text-gray-800 leading-tight">
       Digital <span class="text-blue-600">Voting</span> System
     </h1>
+  </section> --}}
 
 
-  </section>
-
-
-<div class="px-10 mt-20  fade-in">
+<div class="px-10 mt-10  fade-in">
     {{ $slot }}
 </div>
 
