@@ -1,30 +1,37 @@
 <x-front>
-        <div class="bg-[#efeff1] hover:bg-white p-10 rounded shadow-xl">
-        <form method="POST" action="{{ route('login') }}" class="max-w-sm mx-auto">
-            @csrf
-            <div class="mb-5">
-                <label for="email" class="block mb-2.5 text-xl font-medium text-heading">Email</label>
-                <input type="email" id="email" name="email" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="name@gmail.com" required />
-                <x-error class="mt-2" :messages="$errors->get('email')" />
-            </div>
-            <div class="mb-5">
-                <label for="password" class="block mb-2.5 text-xl font-medium text-heading">Password</label>
-                <input type="password" id="password" name="password" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="••••••••" required />
-            </div>
-            <label for="remember" class="flex items-center mb-5">
-                <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft" required />
-                <p class="ms-2 text-sm font-medium text-heading select-none">I agree with the <a href="#" class="text-fg-brand hover:underline">terms and conditions</a>.</p>
-            </label>
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class=" text-black hover:text-blue-600 dark:hover:text-blue-600 rounded" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-                <div class="p-4">
-                    <button class="bg-blue-500 text-white text-xl px-8 py-3 rounded shadow hover:bg-blue-600 transition flex items-center space-x-2">Login</button>
-                </div>
-            </div>
-        </form>
-    </div>
+    <form method="POST" action="{{ route('login') }}" class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full mx-auto space-y-6 transform transition-all duration-300 ease-in-out hover:scale-105">
+        @csrf
+
+        <h2 class="text-3xl font-semibold text-center text-gray-800">Welcome Back!</h2>
+        <p class="text-center text-gray-600 text-sm">Please log in to your account</p>
+
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input type="email" id="email" name="email" class="w-full px-4 py-3 mt-2 bg-neutral-100 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 transition-all" placeholder="name@example.com" required autofocus />
+            <x-error class="mt-2 text-red-500 text-sm" :messages="$errors->get('email')" />
+        </div>
+
+        <div>
+            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+            <input type="password" id="password" name="password" class="w-full px-4 py-3 mt-2 bg-neutral-100 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 transition-all" placeholder="••••••••" required />
+            <x-error class="mt-2 text-red-500 text-sm" :messages="$errors->get('password')" />
+        </div>
+
+        <div class="flex items-center">
+            <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded-sm bg-neutral-100 focus:ring-2 focus:ring-blue-300" required/>
+            <label for="remember" class="ml-2 text-sm text-gray-600">Remember me</label>
+        </div>
+
+        <div class="flex items-center justify-between mt-6">
+            @if (Route::has('password.request'))
+                <a class="text-sm text-blue-600 hover:text-blue-800 transition" href="{{ route('password.request') }}">
+                    Forgot your password?
+                </a>
+            @endif
+            <button type="submit" class="w-20 bg-blue-600 text-white py-3 rounded-md shadow-md hover:bg-blue-700 focus:outline-none transition transform hover:scale-105">
+                Login
+            </button>
+        </div>
+    </form>
+
 </x-front>
