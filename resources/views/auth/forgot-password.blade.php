@@ -1,20 +1,22 @@
 <x-front>
-    <div class="bg-[#efeff1] hover:bg-white p-10 rounded shadow-xl">
-        <form method="POST" action="{{ route('password.email') }}">
-        @csrf
+    <div class="bg-white shadow-2xl rounded-lg max-w-md mx-auto mt-16 p-10 transform transition-all duration-300 ease-in-out hover:scale-105">
+        <p class="text-2xl font-semibold text-center text-gray-800 mb-6">Forgot Password?</p>
+        <p class="text-center text-gray-600 mb-8">No worries, we'll send you reset instructions shortly.</p>
 
-        <!-- Email Address -->
-        <div>
-            <label for="email" class="block mb-2.5 text-xl font-medium text-heading">Enter your email</label>
-            <input type="email" id="email" name="email" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="name@gmail.com" required autofocus />
-            <x-error class="mt-2" :messages="$errors->get('email')" />
-        </div>
+        <form method="POST" action="{{ route('password.email') }}" class="space-y-6">
+            @csrf
 
-        <div class="flex items-center justify-end mt-4">
-            <div class="p-4">
-                    <button class="bg-blue-500 text-white px-8 py-3 rounded shadow hover:bg-blue-600 transition flex items-center space-x-2">Email Password Reset Link</button>
-                </div>
-        </div>
-    </form>
+            <!-- Email Address -->
+            <div class="relative">
+                <label for="email" class="text-sm font-medium text-gray-700 block mb-2">Email</label>
+                <input type="email" id="email" name="email" class="w-full p-3 bg-neutral-100 border border-gray-300 rounded-md text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 transition-all" placeholder="Enter your email" required autofocus />
+                <x-error class="mt-2 text-red-500 text-sm" :messages="$errors->get('email')" />
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex justify-center">
+                <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded-md shadow-md hover:bg-blue-600 transition transform hover:scale-105">Email Password Reset Link</button>
+            </div>
+        </form>
     </div>
 </x-front>
