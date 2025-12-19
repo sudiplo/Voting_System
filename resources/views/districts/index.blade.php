@@ -14,7 +14,7 @@
             <p class="text-gray-600 mt-1">Manage districts, palikas and wards</p>
             <!-- Search Bar -->
             <form method="GET" action="{{ route('districts.index') }}"class="max-w-md mb-10 p-2">
-                <input type="text" name="search" list="districts" value="{{ $search }}" placeholder="Search district..."class="w-50 px-5 py-3 rounded-xl border border-gray-300 shadow-md focus:ring-2 focus:ring-indigo-400 focus:outline-none transition" >
+                <input type="text" name="search" list="districts" value="{{ $search }}" placeholder="Search district..." class="w-50 px-5 py-3 rounded-xl border border-gray-300 shadow-md focus:ring-2 focus:ring-indigo-400 focus:outline-none transition" >
 
                 <datalist id="districts">
                     @foreach ($suggestions as $suggestion)
@@ -32,7 +32,7 @@
         <button
             id="add"
             data-dropdown-toggle="dropdown"
-            class="bg-green-600 hover:bg-green-700 text-white px-2 py-2 rounded-lg shadow transition"
+            class=" bg-yellow-500 text-white rounded-md shadow hover:bg-yellow-600  px-2 py-2 transition"
         >
             + Add District
         </button>
