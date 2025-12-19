@@ -17,6 +17,9 @@
             <div class="flex justify-center">
                 <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded-md shadow-md hover:bg-blue-600 transition transform hover:scale-105">Email Password Reset Link</button>
             </div>
+            <div class="mt-4 text-end">
+                <a href="{{ Route('login') }}" class="text-sm text-blue-600 hover:text-blue-800 transition text-end">back to login page</a>
+            </div>
         </form>
     </div>
 </x-front>

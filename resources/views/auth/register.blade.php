@@ -1,45 +1,61 @@
 <x-front>
-    <div class="bg-[#efeff1] hover:bg-white p-10 shadow-xl rounded">
-        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+    <div class="bg-white shadow-2xl rounded-lg max-w-4xl mx-auto p-8 transform transition-all duration-300 ease-in-out hover:scale-105">
+        <h2 class="text-3xl font-semibold text-center text-gray-800 mb-6">Create Your Account</h2>
+        <p class="text-center text-gray-600 mb-8">Fill out the form to register and join us.</p>
+
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" class="space-y-6">
             @csrf
-            <div class="mb-2">
-                <label for="name" :value="__('Name')" class="block mb-2.5 text-xl font-medium text-heading">Name</label>
-                <input type="text" id="name" name="name" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
-            </div>
 
-            <div class="mb-2">
-                <label for="email" :value="__('Email')" class="block mb-2.5 text-xl font-medium text-heading">Email</label>
-                <input type="email" id="email" name="email" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="name@flowbite.com" required />
-                <x-error class="mt-2" :messages="$errors->get('email')" />
-            </div>
-
-            <div class="mb-2">
-                <label for="phone" :value="__('phone')" class="block mb-2.5 text-xl font-medium text-heading">Phone</label>
-                <input type="phone" id="phone" name="phone" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
-            </div>
-
-            <div class="mb-2">
-                <label for="photo" class="block mb-2.5 text-xl font-medium text-heading">Photo</label>
-                <input type="file" id="photo" name="photo" class="w-full border border-gray-300 rounded px-3 py-2">
-            </div>
-
-            <div class="mb-2">
-                <label for="password" :value="__('password')" class="block mb-2.5 text-xl font-medium text-heading">Password</label>
-                <input type="password" id="password" name="password" required autocomplete="new-password" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
-            </div>
-
-            <div class="mb-2">
-                <label for="password_confirmation" :value="__('Confirm Password')" class="block mb-2.5 text-xl font-medium text-heading">Confirm Password</label>
-                <input type="password" id="password_confirmation" name="password_confirmation" required autocomplete="new-password" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" required />
-            </div>
-
-            <div class="flex items-center justify-end mt-2">
-                <a class=" text-black hover:text-blue-600 dark:hover:text-blue-600 rounded" href="{{ route('login') }}">
-                    Already registered?
-                </a>
-                <div class="p-2">
-                    <button class="bg-blue-500 text-white text-xl px-5 py-2 rounded shadow hover:bg-blue-600 transition flex items-center space-x-2">Register</button>
+            <!-- 2-Column Grid Layout for Inputs -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Name Input -->
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                    <input type="text" id="name" name="name" class="w-full px-4 py-3 mt-2 bg-neutral-100 border border-gray-300 rounded-md text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" required />
                 </div>
+
+                <!-- Email Input -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" class="w-full px-4 py-3 mt-2 bg-neutral-100 border border-gray-300 rounded-md text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" placeholder="name@flowbite.com" required />
+                    <x-error class="mt-2 text-red-500 text-sm" :messages="$errors->get('email')" />
+                </div>
+
+                <!-- Phone Input -->
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+                    <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 mt-2 bg-neutral-100 border border-gray-300 rounded-md text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" required />
+                </div>
+
+                <!-- Photo Input -->
+                <div>
+                    <label for="photo" class="block text-sm font-medium text-gray-700">Profile Photo</label>
+                    <input type="file" id="photo" name="photo" class="w-full border border-gray-300 rounded-md px-4 py-3 mt-2 bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+                </div>
+            </div>
+
+            <!-- Password Section -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Password Input -->
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="password" name="password" class="w-full px-4 py-3 mt-2 bg-neutral-100 border border-gray-300 rounded-md text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" required />
+                </div>
+
+                <!-- Confirm Password Input -->
+                <div>
+                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                    <input type="password" id="password_confirmation" name="password_confirmation" class="w-full px-4 py-3 mt-2 bg-neutral-100 border border-gray-300 rounded-md text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" required />
+                    <x-error class="mt-2 text-red-500 text-sm" :messages="$errors->get('password')" />
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center justify-between mt-6">
+                <a href="{{ route('login') }}" class="text-sm text-blue-600 hover:text-blue-800 transition">Already have an account? Login</a>
+                <button type="submit" class="bg-blue-600 text-white py-3 px-6 rounded-md shadow-md hover:bg-blue-700 focus:outline-none transition transform hover:scale-105">
+                    Register
+                </button>
             </div>
         </form>
     </div>
