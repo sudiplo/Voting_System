@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/citizenship/register',[citizenshipController::class,'registerView'])->name('citizen.registerView');
     Route::post('citizenship',[citizenshipController::class,'create'])->name('citizen.create');
     Route::get('/citizens', [citizenshipController::class, 'index'])->name('citizens.index');
+    Route::get('/citizen/profile/{id}', [citizenshipController::class, 'profile'])->name('citizen.profile');
 });
 
 require __DIR__.'/auth.php';

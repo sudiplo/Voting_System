@@ -164,9 +164,9 @@
                                     <tr class="border-t hover:bg-indigo-100">
                                         <td class="px-4 py-2">{{ $ward->number }}</td>
                                         <td class="px-4 py-2">{{ $ward->name }}</td>
-                                        <td class="px-4 py-2">{{ $ward->name }}</td>
+                                        {{-- <td class="px-4 py-2">{{ $ward->name }}</td> --}}
 
-                                        <td class="p-4 text-right space-x-2">
+                                        <td class="p-4 text-center space-x-2">
                                             <a href="{{ Route('districts.wardEdit',$ward->id) }}"
                                                 class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded text-xs">
                                                 Edit

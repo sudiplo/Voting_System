@@ -91,4 +91,9 @@ class citizenshipController extends Controller
         return view('citizenship.index', compact('citizenships', 'search'));
     }
 
+    // citizen profile view
+    public function profile($id){
+        $citizen = citizenship::find($id);
+        return view('citizenship.view',compact('citizen'));
+    }
 }

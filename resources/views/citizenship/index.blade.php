@@ -15,7 +15,7 @@
             <form method="GET"
                 action="{{ route('citizens.index') }}"
                 class="flex items-center gap-3 mb-6">
-                <div class="relative w-96 mt-2">
+                <div class="relative w-96">
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by name or citizenship number"
                         class="w-full px-5 py-3 rounded-xl border border-gray-300 shadow-md focus:ring-2 focus:ring-indigo-400 focus:outline-none transition" >
                 </div>
@@ -69,7 +69,7 @@
                                class="inline-flex items-center px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded text-xs">
                                 ✏ Edit
                             </a>
-                            <a href="{{ route('citizen.view', $c->id) }}"
+                            <a href="{{ route('citizen.profile', $c->id) }}"
                                class="inline-flex items-center px-3 py-1 bg-indigo-500 hover:bg-indigo-600 text-white rounded text-xs">
                                 👁 View
                             </a>
@@ -85,5 +85,5 @@
             </tbody>
         </table>
     </div>
-
+    
 </x-top-layout>
