@@ -156,7 +156,9 @@
                                     <tr class="bg-indigo-100 text-indigo-800">
                                         <th class="px-4 py-2 text-left">Number</th>
                                         <th class="px-4 py-2 text-left">Ward Name</th>
+                                        <th class="px-4 py-2 text-left">Voting Center</th>
                                         <th class="px-4 py-2 text-left">Action</th>
+                                        <th class="px-4 py-2 text-left">+ Add Center</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -164,7 +166,23 @@
                                     <tr class="border-t hover:bg-indigo-100">
                                         <td class="px-4 py-2">{{ $ward->number }}</td>
                                         <td class="px-4 py-2">{{ $ward->name }}</td>
-                                        {{-- <td class="px-4 py-2">{{ $ward->name }}</td> --}}
+
+                                        {{-- voting center view --}}
+                                        <td class="px-4 py-2">
+                                            <table>
+                                                <tbody>
+                                                    @forelse ($ward->votingCenters as $center)
+                                                        <tr>
+                                                            <td>- {{ $center->name }}</td>
+                                                        </tr>
+                                                    @empty
+                                                        <tr>
+                                                            <td class="text-gray-500 italic">No voting centers</td>
+                                                        </tr>
+                                                    @endforelse
+                                                </tbody>
+                                            </table>
+                                        </td>
 
                                         <td class="p-4 text-center space-x-2">
                                             <a href="{{ Route('districts.wardEdit',$ward->id) }}"
@@ -183,6 +201,21 @@
                                                 </button>
                                             </form>
                                         </td>
+
+                                        {{-- voting center add --}}
+                                        <td class="px-4 py-2">
+                                            <form action="{{ Route('center.add') }}" method="POST" class="flex gap-2">
+                                                @csrf
+                                                <input type="hidden" name="ward_id" value="{{ $ward->id }}">
+
+                                                <input type="text" name="name" placeholder="Center Name" class="px-2 py-1 rounded border border-gray-300 shadow-md focus:ring-2 focus:ring-indigo-400 focus:outline-none transition" required>
+
+                                                <button class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded" onclick="return confirm('Add this voting center?')">
+                                                    Add
+                                                </button>
+                                            </form>
+                                        </td>
+
                                     </tr>
                                     @empty
                                     <tr>

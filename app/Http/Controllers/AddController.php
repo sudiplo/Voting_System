@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\district;
 use App\Models\palika;
+use App\Models\votingCenter;
 use App\Models\ward;
 use Illuminate\Http\RedirectResponse;
 
@@ -116,6 +117,21 @@ class AddController extends Controller
         $ward->save();
         toast("Ward updated successfully","success");
         return redirect()->route('districts.index');
+    }
+
+    // voting center register
+    public function center(Request $request){
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'ward_id'=>['required', 'string', 'max:255'],
+        ]);
+
+        $center = new votingCenter();
+        $center->name = $request->name;
+        $center->ward_id= $request->ward_id;
+        $center->save();
+        toast("voting center add successfully","success");
+        return redirect()->back();
     }
 
 }
