@@ -16,7 +16,7 @@ class citizenship extends Model
     //relation between citizen and palika
     public function palika(): BelongsTo
     {
-        return $this->belongsTo(district::class);
+        return $this->belongsTo(palika::class);
     }
 
     //relation between citizen and ward

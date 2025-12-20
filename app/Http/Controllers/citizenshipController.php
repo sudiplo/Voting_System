@@ -96,4 +96,11 @@ class citizenshipController extends Controller
         $citizen = citizenship::find($id);
         return view('citizenship.view',compact('citizen'));
     }
+
+    // citizen edit view
+    public function edit($id){
+        $citizen = citizenship::find($id);
+        $districts = district::all();
+        return view('citizenship.edit',compact('citizen','districts'));
+    }
 }

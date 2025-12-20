@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::post('citizenship',[citizenshipController::class,'create'])->name('citizen.create');
     Route::get('/citizens', [citizenshipController::class, 'index'])->name('citizens.index');
     Route::get('/citizen/profile/{id}', [citizenshipController::class, 'profile'])->name('citizen.profile');
+    Route::get('/citizen/edit/{id}', [citizenshipController::class, 'edit'])->name('citizen.edit');
 });
 
 require __DIR__.'/auth.php';

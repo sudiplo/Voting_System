@@ -65,7 +65,7 @@
                             {{ $c->gender }}
                         </td>
                         <td class="px-6 py-4 text-right space-x-2">
-                            <a href="{{ route('citizen.view', $c->id) }}"
+                            <a href="{{ route('citizen.edit', $c->id) }}"
                                class="inline-flex items-center px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded text-xs">
                                 ✏ Edit
                             </a>
@@ -85,5 +85,5 @@
             </tbody>
         </table>
     </div>
-    
+
 </x-top-layout>

@@ -6,7 +6,7 @@
         </h1>
     </section>
 
-    
+
     <div class="max-w-3xl mx-auto bg-white border border-gray-300 rounded-xl shadow-lg p-6 mt-5">
     <!-- Header -->
     <div class="flex items-center justify-between border-b pb-4 mb-4">
@@ -82,7 +82,7 @@
             <p class="text-gray-500">Address</p>
             <p class="font-semibold">
                 {{ $citizen->district->name }},
-                {{ $citizen->ward->palika->name }}-
+                {{ $citizen->palika->name }}-
                 {{ $citizen->ward->number }}
                 {{ $citizen->ward->name}}
             </p>
