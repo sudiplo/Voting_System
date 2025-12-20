@@ -147,7 +147,7 @@
             </div>
         </div>
 
-                <script>
+        <script>
             const districts = @json($districts);
 
             const districtSelect = document.getElementById('districtSelect');

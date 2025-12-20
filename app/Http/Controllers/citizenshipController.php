@@ -19,7 +19,7 @@ class citizenshipController extends Controller
 
     // to show registration form
     public function registerView(){
-        $districts = district::all();
+        $districts = district::with('palika.wards')->get();
         return view('citizenship.register',compact('districts'));
     }
 
@@ -100,7 +100,7 @@ class citizenshipController extends Controller
     // citizen edit view
     public function edit($id){
         $citizen = citizenship::find($id);
-        $districts = district::all();
+        $districts = district::with('palika.wards')->get();
         return view('citizenship.edit',compact('citizen','districts'));
     }
 }
