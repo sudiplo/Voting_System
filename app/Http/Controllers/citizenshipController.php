@@ -105,10 +105,55 @@ class citizenshipController extends Controller
     }
 
     // citizen update
-    public function citizenUpdate(Request $request, $id){
+    public function citizenUpdate(Request $request, $id)
+    {
+        $request->validate([
+            'nepaliName' => ['required', 'string', 'max:255'],
+            'nameEnglish' => ['required', 'string', 'max:255'],
+            'citizenshipNumber' => ['required', 'string', 'max:255', 'unique:citizenships,citizenship_number,' . $id],
+            'fatherName' => ['required', 'string', 'max:255'],
+            'motherName' => ['required', 'string', 'max:255'],
+            'dob' => ['required', 'date'],
+            'gender' => ['required', 'string', 'max:255'],
+            'cardType' => ['required', 'string', 'max:255'],
+            'district_id' => ['required', 'integer', 'exists:districts,id'],
+            'palika_id' => ['required', 'integer', 'exists:palikas,id'],
+            'ward_id' => ['required', 'integer', 'exists:wards,id'],
+            'partner' => ['nullable', 'string', 'max:255'],
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
 
+         // Handle the uploaded photo file
+        if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
+            $photo = $request->file('photo');
+            $filename = time() . '_' . $photo->getClientOriginalName();
+            $photo->move(public_path('images'), $filename);
+        } else {
+            return back()->withErrors(['photo' => 'Photo upload failed or is invalid']);
+        }
 
+        // Find the citizen record and update it
+        $citizen = Citizenship::find($id);
+        $citizen->name_nepali = $request->nepaliName;
+        $citizen->name_english = $request->nameEnglish;
+        $citizen->citizenship_number = $request->citizenshipNumber;
+        $citizen->father = $request->fatherName;
+        $citizen->mother = $request->motherName;
+        $citizen->dob = $request->dob;
+        $citizen->gender = $request->gender;
+        $citizen->type = $request->cardType;
+        $citizen->district_id = $request->district_id;
+        $citizen->palika_id = $request->palika_id;
+        $citizen->ward_id = $request->ward_id;
+        $citizen->partner = $request->partner;
+        $citizen->photo = 'images/' . $filename;
+
+        $citizen->save();
+
+        toast("Profile updated successfully", "success");
+        return redirect()->back();
     }
+
 
 
 }
