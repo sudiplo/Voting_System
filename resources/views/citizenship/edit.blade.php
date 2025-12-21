@@ -4,57 +4,51 @@
       <a href="{{ Route('citizen.view') }}">Nepal Citizenship Card – Admin Entry</a>
     </h1>
 
-    <form action="{{ Route('citizen.create') }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6" enctype="multipart/form-data">
+    <form action="{{ Route('citizen.update',$citizen->id) }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6" enctype="multipart/form-data">
         @csrf
-        <!-- Full Name -->
+        @method('patch')
         <div>
             <label class="block text-sm font-semibold text-gray-700">नाम थर: </label>
-            <input type="text" name="nepaliName"
-            class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition" placeholder="नेपाली मा "
+            <input type="text" name="nepaliName" value="{{ $citizen->name_nepali }}"
+            class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
             required>
         </div>
 
-        <!-- Full Name -->
         <div>
             <label class="block text-sm font-semibold text-gray-700">Full Name in English:</label>
-            <input type="text" name="nameEnglish"
-            class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition" placeholder="In English"
+            <input type="text" name="nameEnglish" value="{{ $citizen->name_english }}"
+            class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
             required>
         </div>
 
-        <!-- Citizenship Number -->
         <div>
             <label class="block text-sm font-semibold text-gray-700">ना॰प्र॰नं॰:</label>
-            <input type="number" name="citizenshipNumber"
+            <input type="number" name="citizenshipNumber" value="{{ $citizen->citizenship_number }}"
             class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition" placeholder="नागरिकताको नं."
             required>
         </div>
 
-        <!-- Father Name -->
         <div>
             <label class="block text-sm font-semibold text-gray-700">बाबुको नाम थर :</label>
-            <input type="text" name="fatherName"
+            <input type="text" name="fatherName" value="{{ $citizen->father }}"
             class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
             required>
         </div>
 
-        <!-- Mother Name -->
         <div>
             <label class="block text-sm font-semibold text-gray-700">आमाको नाम थर:</label>
-            <input type="text" name="motherName"
+            <input type="text" name="motherName" value="{{ $citizen->mother }}"
             class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
             required>
         </div>
 
-        <!-- Date of Birth -->
         <div>
             <label class="block text-sm font-semibold text-gray-700">जन्म मितिः</label>
-            <input type="date" name="dob"
+            <input type="date" name="dob" value="{{ $citizen->dob }}"
             class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
             required>
         </div>
 
-        <!-- Gender -->
         <div>
             <label class="block text-sm font-semibold text-gray-700">
                 लिङ्ग:
@@ -64,7 +58,7 @@
                 name="gender"
                 class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
             >
-                <option value="">Select Gender</option>
+                <option value="{{ $citizen->gender }}">{{ $citizen->gender }}</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
@@ -72,7 +66,6 @@
         </div>
 
 
-        <!-- Card Type -->
         <div>
             <label class="block text-sm font-semibold text-gray-700">
                 नागरिकताको किसिम:
@@ -82,7 +75,7 @@
                 name="cardType"
                 class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition"
             >
-                <option value="">Select Card Type</option>
+                <option value="{{ $citizen->type }}">{{ $citizen->type }}</option>
                 <option value="वंशज">वंशज</option>
                 <option value="अंगीकृत">अंगीकृत</option>
                 <option value="गैर आवासीय">गैर आवासीय</option>
@@ -90,14 +83,12 @@
             </select>
         </div>
 
-        <!-- Address -->
         <div>
             <label class="block text-sm font-semibold text-gray-700">
                 स्थायी बासस्थानः
             </label>
 
             <div class="mt-2 p-3">
-                <!-- District -->
                 <div class="p-2">
                     <label class="block text-sm font-semibold text-gray-600">जिल्ला</label>
                     <select
@@ -105,7 +96,7 @@
                         name="district_id"
                         class="w-full border rounded px-4 py-2"
                     >
-                        <option value="">Select District</option>
+                        <option value="{{ $citizen->district->id }}">{{ $citizen->district->name_nepali }}</option>
 
                         @foreach ($districts as $district)
                             <option value="{{ $district->id }}">
@@ -115,7 +106,6 @@
                     </select>
                 </div>
 
-                <!-- Palika -->
                 <div class="p-2">
                     <label class="block text-sm font-semibold text-gray-700">
                         गा॰पा॰/ न॰पा॰
@@ -126,11 +116,10 @@
                         class="w-full border rounded px-4 py-2"
                         disabled
                     >
-                        <option value="">Select Palika</option>
+                        <option value="{{ $citizen->palika->id }}">{{ $citizen->palika->name }}</option>
                     </select>
                 </div>
 
-                <!-- Ward -->
                 <div class="p-2">
                     <label class="block text-sm font-semibold text-gray-700">
                         वडा नं.
@@ -141,7 +130,7 @@
                         class="w-full border rounded px-4 py-2"
                         disabled
                     >
-                        <option value="">Select Ward</option>
+                        <option value="{{ $citizen->ward->id }}">{{ $citizen->ward->name }}</option>
                     </select>
                 </div>
             </div>
@@ -196,27 +185,23 @@
             });
         </script>
 
-
-        <!-- partner Name -->
         <div>
             <label class="block text-sm font-semibold text-gray-700">पती पत्नीको नामथर: </label>
-            <input type="text" name="partner"
+            <input type="text" name="partner" value="{{ $citizen->partner }}"
             class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition">
         </div>
 
-        <!-- Photo Upload -->
         <div>
             <label class="block text-sm font-semibold text-gray-700">Photo Upload</label>
-            <input type="file" name="photo"
+            <input type="file" name="photo" value="{{ $citizen->photo }}"
             class="w-full mt-2 p-3 border rounded-lg hover:border-blue-500 transition"
-            required>
+            >
         </div>
 
-        <!-- Submit Button -->
         <div class="md:col-span-2 text-center mt-4">
             <button type="submit"
-            class="w-full md:w-1/3 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-            Save Citizenship Record
+            class="w-full md:w-1/3 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition" onclick="Do you want to change the user data?">
+            Update Citizenship Record
             </button>
         </div>
 

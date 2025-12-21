@@ -24,35 +24,35 @@ class citizenshipController extends Controller
     }
 
     // to register new citizenship data
-    public function create(Request $request){
-        // event(new Registered($user));
+    public function create(Request $request)
+    {
         $request->validate([
             'nepaliName' => ['required', 'string', 'max:255'],
             'nameEnglish' => ['required', 'string', 'max:255'],
-            'citizenshipNumber' => ['required', 'string', 'max:255'],
+            'citizenshipNumber' => ['required', 'string', 'max:255', 'unique:citizenships,citizenship_number'],
             'fatherName' => ['required', 'string', 'max:255'],
             'motherName' => ['required', 'string', 'max:255'],
             'dob' => ['required', 'date'],
             'gender' => ['required', 'string', 'max:255'],
             'cardType' => ['required', 'string', 'max:255'],
-            'district_id' => ['required', 'string', 'max:255'],
-            'palika_id' => ['required', 'string', 'max:255'],
-            'ward_id' => ['required', 'string', 'max:255'],
+            'district_id' => ['required', 'integer', 'exists:districts,id'],
+            'palika_id' => ['required', 'integer', 'exists:palikas,id'],
+            'ward_id' => ['required', 'integer', 'exists:wards,id'],
             'partner' => ['nullable', 'string', 'max:255'],
             'photo' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-         if (citizenship::where('citizenship_number', $request->citizenshipNumber)->exists()) {
-            toast("Citizenship Number already exist","error");
-            return back();
+        // Handle the uploaded photo file
+        if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
+            $photo = $request->file('photo');
+            $filename = time() . '_' . $photo->getClientOriginalName();
+            $photo->move(public_path('images'), $filename);
+        } else {
+            return back()->withErrors(['photo' => 'Photo upload failed or is invalid']);
         }
 
-        //
-        $photo = $request->file('photo');
-        $filename = time().'_'.$photo->getClientOriginalName();
-        $photo->move("images/",$filename);
-
-        $citizen = New citizenship();
+        // Create new citizen record
+        $citizen = new Citizenship();
         $citizen->name_nepali = $request->nepaliName;
         $citizen->name_english = $request->nameEnglish;
         $citizen->citizenship_number = $request->citizenshipNumber;
@@ -65,11 +65,11 @@ class citizenshipController extends Controller
         $citizen->palika_id = $request->palika_id;
         $citizen->ward_id = $request->ward_id;
         $citizen->partner = $request->partner;
-        $citizen->photo = "images/".$filename;
-        // save the data
-        $citizen->save();
-        toast("Data Save successfully","success");
+        $citizen->photo = 'images/' . $filename;
 
+        $citizen->save();
+
+        toast("Data saved successfully", "success");
         return redirect()->back();
     }
 
@@ -103,4 +103,12 @@ class citizenshipController extends Controller
         $districts = district::with('palika.wards')->get();
         return view('citizenship.edit',compact('citizen','districts'));
     }
+
+    // citizen update
+    public function citizenUpdate(Request $request, $id){
+
+
+    }
+
+
 }

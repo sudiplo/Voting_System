@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/citizens', [citizenshipController::class, 'index'])->name('citizens.index');
     Route::get('/citizen/profile/{id}', [citizenshipController::class, 'profile'])->name('citizen.profile');
     Route::get('/citizen/edit/{id}', [citizenshipController::class, 'edit'])->name('citizen.edit');
+    Route::patch('/citizen/update/{id}', [citizenshipController::class, 'citizenUpdate'])->name('citizen.update');
 });
 
 require __DIR__.'/auth.php';
