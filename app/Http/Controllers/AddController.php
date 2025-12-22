@@ -13,7 +13,7 @@ class AddController extends Controller
 {
     //
 
-    // district register-------------------------------------------------------------------------------------------------
+    //==========================district register-------------------------------------------------------------------------------------------------
     public function distric(Request $request): RedirectResponse
     {
         $request->validate([
@@ -39,7 +39,7 @@ class AddController extends Controller
     return redirect()->back();
     }
 
-    // palika register save---------------------------------------------------------------
+    //==========================palika register save---------------------------------------------------------------
     public function palika(Request $request){
     $request->validate([
         'name' => ['required', 'string', 'max:255'],
@@ -61,7 +61,8 @@ class AddController extends Controller
 
     return redirect()->back();
     }
-    // palika update
+
+    //==========================palika update
     public function palikaUpdate(Request $request, $id){
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -78,7 +79,7 @@ class AddController extends Controller
 
 
 
-    // ward register save---------------------------------------------------------------
+    //==========================ward register save---------------------------------------------------------------
     public function ward(Request $request){
         $request->validate([
             'number'=>['required','numeric','min:1'],
@@ -102,7 +103,7 @@ class AddController extends Controller
 
         return redirect()->back();
     }
-    // ward update
+    //==========================ward update
     public function wardUpdate(Request $request, $id){
         $request->validate([
             'number'=>['required','numeric','min:1'],
@@ -119,7 +120,7 @@ class AddController extends Controller
         return redirect()->route('districts.index');
     }
 
-    // voting center register
+    //==========================voting center register
     public function center(Request $request){
         $request->validate([
             'name' => ['required', 'string', 'max:255'],

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class DistrictController extends Controller
 {
+    //==========================district view page======================================================================
     public function index(Request $request)
     {
         $search = $request->get('search');
@@ -29,20 +30,21 @@ class DistrictController extends Controller
 
         return view('districts.index', compact('districts', 'suggestions', 'search'));
     }
-    // edit ward redirect
+
+    //==========================edit ward redirect======================================================================
     public function wardEdit($id) {
         $ward = ward::find($id);
         return view('districts.wardedit', compact('ward'));
     }
 
-    // edit palika redirect
+    //==========================edit palika redirect======================================================================
     public function palikaEdit($id) {
         $districts= district::all();
         $palika = palika::find($id);
         return view('districts.palikaedit', compact('palika', 'districts'));
     }
 
-    // delete district
+    //==========================delete district==========================================================================
     public function districtDelete($id) {
         $district = district::find($id);
         $district->delete();
@@ -50,7 +52,7 @@ class DistrictController extends Controller
         return redirect()->back();
     }
 
-    // delete district palika
+    //==========================delete district palika=====================================================================
     public function palikaDelete($id) {
         $palika = palika::find($id);
         $palika->delete();
@@ -58,7 +60,7 @@ class DistrictController extends Controller
         return redirect()->back();
     }
 
-    // delete district ward
+    //==========================delete district ward======================================================================
     public function wardDelete($id) {
         $ward = ward::find($id);
         $ward->delete();

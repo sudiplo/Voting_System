@@ -17,13 +17,14 @@ class citizenshipController extends Controller
         return view('citizenship.index',compact('citizenships'));
     }
 
-    // to show registration form
+
+    //==========================to show registration form==============================================================================
     public function registerView(){
         $districts = district::with('palika.wards')->get();
         return view('citizenship.register',compact('districts'));
     }
 
-    // to register new citizenship data
+    //==========================to register new citizenship data=========================================================================
     public function create(Request $request)
     {
         $request->validate([
@@ -42,7 +43,7 @@ class citizenshipController extends Controller
             'photo' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        // Handle the uploaded photo file
+        //==========================Handle the uploaded photo file=====================================================================
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
             $photo = $request->file('photo');
             $filename = time() . '_' . $photo->getClientOriginalName();
@@ -52,7 +53,7 @@ class citizenshipController extends Controller
             return back();
         }
 
-        // Create new citizen record
+        //==========================Create new citizen record==============================================================================
         $citizen = new Citizenship();
         $citizen->name_nepali = $request->nepaliName;
         $citizen->name_english = $request->nameEnglish;
@@ -74,12 +75,12 @@ class citizenshipController extends Controller
         return redirect()->back();
     }
 
-    // Citizen search view
+    //==========================Citizen search view==============================================================================
     public function index(Request $request)
     {
         $search = $request->get('search');
 
-        $citizenships = collect(); // empty by default
+        $citizenships = collect();
 
         if ($search) {
             $citizenships = Citizenship::where('name_english', 'like', "%{$search}%")
@@ -92,20 +93,20 @@ class citizenshipController extends Controller
         return view('citizenship.index', compact('citizenships', 'search'));
     }
 
-    // citizen profile view
+    //==========================citizen profile view==============================================================================
     public function profile($id){
         $citizen = citizenship::find($id);
         return view('citizenship.view',compact('citizen'));
     }
 
-    // citizen edit view
+    //==========================citizen edit view==================================================================================
     public function edit($id){
         $citizen = citizenship::find($id);
         $districts = district::with('palika.wards')->get();
         return view('citizenship.edit',compact('citizen','districts'));
     }
 
-    // citizen update
+    //==========================citizen update========================================================================================
     public function citizenUpdate(Request $request, $id)
     {
         $request->validate([
@@ -129,9 +130,6 @@ class citizenshipController extends Controller
             return back();
         }
 
-
-
-        // Find the citizen record and update it
         $citizen = Citizenship::find($id);
         $citizen->name_nepali = $request->nepaliName;
         $citizen->name_english = $request->nameEnglish;
@@ -146,14 +144,12 @@ class citizenshipController extends Controller
         $citizen->ward_id = $request->ward_id;
         $citizen->partner = $request->partner;
 
-         // Handle the uploaded photo file
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
             $photo = $request->file('photo');
             $filename = time() . '_' . $photo->getClientOriginalName();
             $photo->move(public_path('images'), $filename);
             $citizen->photo = 'images/' . $filename;
         } else {
-            // If no new photo is uploaded, keep the existing photo
             $citizen->photo = $citizen->photo;
         }
 
@@ -164,6 +160,14 @@ class citizenshipController extends Controller
         return redirect()->back();
     }
 
+
+    //==========================delete citizen record====================================================================================
+    public function districtDelete($id) {
+        $district = district::find($id);
+        $district->delete();
+        toast("$district->name District Delete successfully","success");
+        return redirect()->back();
+    }
 
 
 }

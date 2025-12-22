@@ -8,18 +8,18 @@ use App\Models\palika;
 
 class viewController extends Controller
 {
-    //
+    //==========================welcome page view======================================================================
     public function welcome(){
         return view('welcome');
     }
-    //about page view
+    //==========================about page view======================================================================
     public function about(){
          $district = district::all();
         $palika=palika::all();
         return view('about',compact('district','palika'));
     }
 
-    // dashboard view
+    //==========================dashboard view=========================================================================
     public function dashboard(){
         return view('dashboard');
     }
