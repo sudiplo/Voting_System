@@ -205,7 +205,7 @@
         <!-- Submit Button -->
         <div class="md:col-span-2 text-center mt-4">
             <button type="submit"
-            class="w-full md:w-1/3 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+            class="w-full md:w-1/3 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition" onclick="return confirm('Are you sure you want to update this record?');">
             Save Citizenship Record
             </button>
         </div>

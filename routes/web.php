@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/citizen/profile/{id}', [citizenshipController::class, 'profile'])->name('citizen.profile');
     Route::get('/citizen/edit/{id}', [citizenshipController::class, 'edit'])->name('citizen.edit');
     Route::patch('/citizen/update/{id}', [citizenshipController::class, 'citizenUpdate'])->name('citizen.update');
+    Route::delete('/citizen/delete/{id}', [citizenshipController::class, 'citizenDelete'])->name('citizen.delete');
 });
 
 require __DIR__.'/auth.php';

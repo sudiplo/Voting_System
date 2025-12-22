@@ -65,14 +65,24 @@
                             {{ $c->gender }}
                         </td>
                         <td class="px-6 py-4 text-right space-x-2">
-                            <a href="{{ route('citizen.edit', $c->id) }}"
-                               class="inline-flex items-center px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded text-xs">
-                                ✏ Edit
-                            </a>
-                            <a href="{{ route('citizen.profile', $c->id) }}"
+                             <a href="{{ route('citizen.profile', $c->id) }}"
                                class="inline-flex items-center px-3 py-1 bg-indigo-500 hover:bg-indigo-600 text-white rounded text-xs">
-                                👁 View
+                                View
                             </a>
+
+                            <a href="{{ route('citizen.edit', $c->id) }}"
+                               class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded text-xs">
+                                Edit
+                            </a>
+
+                            <form action="{{ route('citizen.delete', $c->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded text-xs"
+                                    onclick="return confirm('Are you sure you want to delete this record? citizenship number[{{ $c->citizenship_number }}]');">
+                                    Delete
+                                </button>
                         </td>
                     </tr>
                 @empty

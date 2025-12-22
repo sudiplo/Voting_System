@@ -162,10 +162,10 @@ class citizenshipController extends Controller
 
 
     //==========================delete citizen record====================================================================================
-    public function districtDelete($id) {
-        $district = district::find($id);
-        $district->delete();
-        toast("$district->name District Delete successfully","success");
+    public function citizenDelete($id) {
+        $citizen = citizenship::find($id);
+        $citizen->delete();
+        toast("$citizen->name Record Delete successfully","success");
         return redirect()->back();
     }
 
