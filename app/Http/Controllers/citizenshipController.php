@@ -48,7 +48,8 @@ class citizenshipController extends Controller
             $filename = time() . '_' . $photo->getClientOriginalName();
             $photo->move(public_path('images'), $filename);
         } else {
-            return back()->withErrors(['photo' => 'Photo upload failed or is invalid']);
+            toast("Photo size should be less than 2MB","error");
+            return back();
         }
 
         // Create new citizen record
@@ -123,14 +124,12 @@ class citizenshipController extends Controller
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-         // Handle the uploaded photo file
-        if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
-            $photo = $request->file('photo');
-            $filename = time() . '_' . $photo->getClientOriginalName();
-            $photo->move(public_path('images'), $filename);
-        } else {
-            return back()->withErrors(['photo' => 'Photo upload failed or is invalid']);
+        if($request->hasFile('photo') && $request->file('photo')->getSize() > 2048 * 1024){
+            toast("Photo size should be less than 2MB","error");
+            return back();
         }
+
+
 
         // Find the citizen record and update it
         $citizen = Citizenship::find($id);
@@ -146,11 +145,22 @@ class citizenshipController extends Controller
         $citizen->palika_id = $request->palika_id;
         $citizen->ward_id = $request->ward_id;
         $citizen->partner = $request->partner;
-        $citizen->photo = 'images/' . $filename;
+
+         // Handle the uploaded photo file
+        if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
+            $photo = $request->file('photo');
+            $filename = time() . '_' . $photo->getClientOriginalName();
+            $photo->move(public_path('images'), $filename);
+            $citizen->photo = 'images/' . $filename;
+        } else {
+            // If no new photo is uploaded, keep the existing photo
+            $citizen->photo = $citizen->photo;
+        }
+
 
         $citizen->save();
 
-        toast("Profile updated successfully", "success");
+        toast("Profile updated successfully", type: "success");
         return redirect()->back();
     }
 
