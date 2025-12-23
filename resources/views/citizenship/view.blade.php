@@ -1,6 +1,14 @@
 <x-defult_layout>
+    <!-- ================= current location ================= -->
+    <header class="w-full glass px-6 py-4 flex justify-between items-center shadow-xl">
+        <div class="flex items-center gap-4">
+            <a href="{{ Route('citizen.view') }}" class="text-2xs text-gray-500 hover:text-blue-500">⌘ Citizen List</a>
+            <p class="text-2xs text-gray-500">|</p>
+            <a href="" class="text-2xs text-gray-500 hover:text-blue-500">{{ $citizen->name_nepali }} Profile</a>
+        </div>
+    </header>
 <!-- ===================== PAGE HEADER ===================== -->
-    <section class="px-10 flex flex-col items-center text-center fade-in">
+    <section class="px-10 flex flex-col items-center text-center fade-in mt-5">
         <h1 class="text-5xl font-bold text-gray-800 leading-tight">
              <span class="text-blue-600">{{ $citizen->name_nepali }}</span> Profile
         </h1>

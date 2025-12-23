@@ -1,4 +1,13 @@
 <x-defult_layout>
+    <!-- ================= current location ================= -->
+    <header class="w-full glass px-6 py-4 flex justify-between items-center shadow-xl">
+        <div class="flex items-center gap-4">
+            <a href="{{ Route('citizen.view') }}" class="text-2xs text-gray-500 hover:text-blue-500">⌘ Citizen List</a>
+            <p class="text-2xs text-gray-500">|</p>
+            <a href="" class="text-2xs text-gray-500 hover:text-blue-500">Update Data</a>
+        </div>
+    </header>
+    <!-- ================= main content ================= -->
     <div class="max-w-5xl mx-auto my-10 p-8 bg-white rounded-xl shadow-lg">
     <h1 class="text-3xl font-bold text-center text-blue-600 mb-8">
       <a href="{{ Route('citizen.view') }}">Profile Update</a>
@@ -86,12 +95,12 @@
         </div>
 
         <!-- Address -->
-        <div>
+        <div class="md:col-span-2 mt-4">
             <label class="block text-sm font-semibold text-gray-700">
                 स्थायी बासस्थानः
             </label>
 
-            <div class="mt-2 p-3">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-gray-50 p-4 rounded-xl border">
                 <!-- District -->
                 <div class="p-2">
                     <label class="block text-sm font-semibold text-gray-600">जिल्ला</label>

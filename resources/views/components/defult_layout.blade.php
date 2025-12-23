@@ -38,7 +38,7 @@
                 📊 System Dashboard
             </a>
 
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
+            <a href="" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
                 🗳️ Elections Management
             </a>
 
@@ -46,7 +46,7 @@
                 👥 Citizen Registry
             </a>
 
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
+            <a href="" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
                 🧾 Vote Monitoring
             </a>
 
@@ -56,17 +56,17 @@
                 🏛️ Districts & Regions
             </a>
 
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
+            <a href="" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
                 👮 Officials & Roles
             </a>
 
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
+            <a href="" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
                 📑 Reports & Exports
             </a>
 
             <p class="px-3 mt-6 text-xs font-semibold text-gray-400 uppercase">System</p>
 
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
+            <a href="" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
                 ⚙️ Configuration
             </a>
 
@@ -74,8 +74,8 @@
                 🔐 Security & Permissions
             </a>
 
-            <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
-                📜 Audit Logs
+            <a href="{{ Route('about') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
+                📜 About
             </a>
         </nav>
 
