@@ -41,10 +41,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/citizenship/register',[citizenshipController::class,'registerView'])->name('citizen.registerView');
     Route::post('citizenship',[citizenshipController::class,'create'])->name('citizen.create');
     Route::get('/citizens', [citizenshipController::class, 'index'])->name('citizens.index');
-    Route::get('/citizen/profile/{id}', [citizenshipController::class, 'profile'])->name('citizen.profile');
-    Route::get('/citizen/edit/{id}', [citizenshipController::class, 'edit'])->name('citizen.edit');
-    Route::patch('/citizen/update/{id}', [citizenshipController::class, 'citizenUpdate'])->name('citizen.update');
-    Route::delete('/citizen/delete/{id}', [citizenshipController::class, 'citizenDelete'])->name('citizen.delete');
+    Route::get('/citizen_profile{id}', [citizenshipController::class, 'profile'])->name('citizen.profile');
+    Route::get('/citizen_edit{id}', [citizenshipController::class, 'edit'])->name('citizen.edit');
+    Route::patch('/citizen_update{id}', [citizenshipController::class, 'citizenUpdate'])->name('citizen.update');
+    Route::delete('/citizen_delete{id}', [citizenshipController::class, 'citizenDelete'])->name('citizen.delete');
 
 });
 
