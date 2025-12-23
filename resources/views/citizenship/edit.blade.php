@@ -1,4 +1,4 @@
-<x-top-layout>
+<x-defult_layout>
     <div class="max-w-5xl mx-auto my-10 p-8 bg-white rounded-xl shadow-lg">
     <h1 class="text-3xl font-bold text-center text-blue-600 mb-8">
       <a href="{{ Route('citizen.view') }}">Profile Update</a>
@@ -213,5 +213,4 @@
     </form>
   </div>
 
-
-</x-top-layout>
+</x-defult_layout>

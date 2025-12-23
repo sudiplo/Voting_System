@@ -1,4 +1,4 @@
-<x-top-layout>
+<x-defult_layout>
 
     <!-- ===================== PAGE HEADER ===================== -->
     <section class="px-10 flex flex-col items-center text-center fade-in">
@@ -96,4 +96,4 @@
         </table>
     </div>
 
-</x-top-layout>
+</x-defult_layout>

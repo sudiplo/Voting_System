@@ -1,4 +1,4 @@
-<x-top-layout>
+<x-defult_layout>
     <div class="mb-12 bg-white shadow-2xl rounded-2xl border border-gray-200 overflow-hidden">
 
         <!-- PALIKA HEADER -->
@@ -44,5 +44,7 @@
                     </button>
                 </div>
             </form>
+        </div>
     </div>
-</x-top-layout>
+</x-defult_layout>
+

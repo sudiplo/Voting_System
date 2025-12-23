@@ -1,4 +1,4 @@
-<x-top-layout>
+<x-defult_layout>
     <!-- Hero Section -->
     <section class="px-10 flex flex-col items-center text-center fade-in">
         <h1 class="text-5xl font-bold text-gray-800 leading-tight">
@@ -19,4 +19,4 @@
     </div>
   </section>
 
-</x-top-layout>
+</x-defult_layout>
