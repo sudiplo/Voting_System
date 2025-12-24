@@ -14,10 +14,12 @@ Route::get('/', [viewController::class,'welcome'])->name('welcome');
 
 // only registered user can route this route's
 Route::middleware('auth')->group(function () {
+    //==========================ProfileController======================================================================
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    //
+
+    //==========================viewController======================================================================
     Route::get('/about',[viewController::class,'about'])->name('about');
     Route::get('/dashboard', [viewController::class,'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -26,17 +28,22 @@ Route::middleware('auth')->group(function () {
     Route::post("/ward",[AddController::class,'ward'])->name('ward.add');
     Route::post('/center', [AddController::class,'center'])->name('center.add');
 
+    //==========================DistrictController======================================================================
     Route::get('/districts', [DistrictController::class, 'index'])->name('districts.index');
     // delete
+    Route::delete('/district{id}',[DistrictController::class,'districtDelete'])->name('districts.Delete');
     Route::delete('/ward{id}', [DistrictController::class, 'wardDelete'])->name('districts.wardDelete');
     Route::delete('/palika{id}', [DistrictController::class, 'palikaDelete'])->name('districts.palikaDelete');
     // edit page view
+    Route::get('/districedit{id}', [DistrictController::class, 'districEdit'])->name('districts.editView');
     Route::get('/wardedit{id}', [DistrictController::class, 'wardEdit'])->name('districts.wardEdit');
     Route::get('/palikaedit{id}', [DistrictController::class, 'palikaEdit'])->name('districts.palikaEdit');
     // update
+    Route::patch('/districtupdate{id}',[AddController::class,'districtUpdate'])->name('district.update');
     Route::patch('/wardupdate{id}', [AddController::class, 'wardUpdate'])->name('ward.update');
     Route::patch('/palikaupdate{id}', [AddController::class, 'palikaUpdate'])->name('palika.update');
 
+    //==========================citizenshipController======================================================================
     Route::get('/citizenship',[citizenshipController::class,'view'])->name('citizen.view');
     Route::get('/citizenship/register',[citizenshipController::class,'registerView'])->name('citizen.registerView');
     Route::post('citizenship',[citizenshipController::class,'create'])->name('citizen.create');

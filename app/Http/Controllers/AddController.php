@@ -19,47 +19,63 @@ class AddController extends Controller
         $request->validate([
         'name' => ['required', 'string', 'max:255'],
         'name_nepali' => ['required','string','max:255'],
-    ]);
+        ]);
 
-    if (district::where('name_nepali', $request->name_nepali)->exists()) {
-        toast("Nepali Name already exist","error");
-        return back();
+        if (district::where('name_nepali', $request->name_nepali)->exists()) {
+            toast("Nepali Name already exist","error");
+            return back();
+        }
+        if (district::where('name', $request->name)->exists()) {
+            toast("Name already exist","error");
+            return back();
+        }
+
+        $district = new district();
+        $district->name_nepali = $request->name_nepali;
+        $district->name = $request->name;
+
+        $district->save();
+        toast("Add successfully","success");
+        return redirect()->back();
     }
-    if (district::where('name', $request->name)->exists()) {
-        toast("Name already exist","error");
-        return back();
-    }
 
-    $district = new district();
-    $district->name_nepali = $request->name_nepali;
-    $district->name = $request->name;
+    //==========================district update
+    public function districtUpdate(Request $request, $id){
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'name_nepali' => ['required','string','max:255'],
+        ]);
 
-    $district->save();
-    toast("Add successfully","success");
-    return redirect()->back();
+        $district = district::find($id);
+        $district->name_nepali = $request->name_nepali;
+        $district->name = $request->name;
+
+        $district->save();
+        toast("District updated successfully","success");
+        return redirect()->route('districts.index');
     }
 
     //==========================palika register save---------------------------------------------------------------
     public function palika(Request $request){
-    $request->validate([
-        'name' => ['required', 'string', 'max:255'],
-        'district_id'=>['required', 'string', 'max:255'],
-    ]);
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'district_id'=>['required', 'string', 'max:255'],
+        ]);
 
 
-    if (palika::where('name', $request->name)->exists()) {
-        toast("Name already exist","error");
-        return back();
-    }
+        if (palika::where('name', $request->name)->exists()) {
+            toast("Name already exist","error");
+            return back();
+        }
 
-    $palika = new palika();
-    $palika->name = $request->name;
-    $palika->district_id= $request->district_id;
+        $palika = new palika();
+        $palika->name = $request->name;
+        $palika->district_id= $request->district_id;
 
-    $palika->save();
-    toast("new palika add successfully","success");
+        $palika->save();
+        toast("new palika add successfully","success");
 
-    return redirect()->back();
+        return redirect()->back();
     }
 
     //==========================palika update
@@ -69,6 +85,10 @@ class AddController extends Controller
             'district_id'=>['required', 'string', 'max:255'],
         ]);
 
+        if (palika::where('name', $request->name)->exists()) {
+            toast("Name already exist","error");
+            return back();
+        }
         $palika = palika::find($id);
         $palika->name = $request->name;
         $palika->district_id= $request->district_id;
@@ -120,7 +140,7 @@ class AddController extends Controller
         return redirect()->route('districts.index');
     }
 
-    //==========================voting center register
+    //==========================voting center register-----------------------------------------------------------------
     public function center(Request $request){
         $request->validate([
             'name' => ['required', 'string', 'max:255'],

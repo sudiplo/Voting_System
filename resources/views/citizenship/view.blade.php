@@ -7,15 +7,8 @@
             <a href="" class="text-2xs text-gray-500 hover:text-blue-500">{{ $citizen->name_nepali }} Profile</a>
         </div>
     </header>
-<!-- ===================== PAGE HEADER ===================== -->
-    <section class="px-10 flex flex-col items-center text-center fade-in mt-5">
-        <h1 class="text-5xl font-bold text-gray-800 leading-tight">
-             <span class="text-blue-600">{{ $citizen->name_nepali }}</span> Profile
-        </h1>
-    </section>
-
-
-    <div class="max-w-3xl mx-auto bg-white border border-gray-300 rounded-xl shadow-lg p-6 mt-5">
+<!-- ===================== PAGE ===================== -->
+    <div class="max-w-3xl mx-auto bg-white border border-gray-300 rounded-xl shadow-lg p-6 mt-10">
         <!-- Header -->
         <div class="flex items-center justify-between border-b pb-4 mb-4">
             <div>

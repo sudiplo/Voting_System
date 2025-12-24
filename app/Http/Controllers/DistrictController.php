@@ -30,6 +30,11 @@ class DistrictController extends Controller
 
         return view('districts.index', compact('districts', 'suggestions', 'search'));
     }
+    //==========================edit district redirect======================================================================
+    public function districEdit($id) {
+        $district = district::find($id);
+        return view('districts.districedit', compact('district'));
+    }
 
     //==========================edit ward redirect======================================================================
     public function wardEdit($id) {
@@ -47,22 +52,38 @@ class DistrictController extends Controller
     //==========================delete district==========================================================================
     public function districtDelete($id) {
         $district = district::find($id);
+        if ($district->palika()->exists()) {
+            toast('Cannot delete district with existing palikas', 'error');
+            return redirect()->back();
+        }
+
         $district->delete();
         toast("$district->name District Delete successfully","success");
         return redirect()->back();
     }
 
-    //==========================delete district palika=====================================================================
+
+    //==========================delete palika=====================================================================
     public function palikaDelete($id) {
         $palika = palika::find($id);
+        if ($palika->wards()->exists()) {
+            toast('Cannot delete palika with existing wards', 'error');
+            return redirect()->back();
+        }
+
         $palika->delete();
         toast("$palika->name Palika Delete successfully","success");
         return redirect()->back();
     }
 
-    //==========================delete district ward======================================================================
+    //==========================delete ward======================================================================
     public function wardDelete($id) {
         $ward = ward::find($id);
+if ($ward->votingCenters()->exists()) {
+    toast('Cannot delete ward with existing voting centers', 'error');
+    return redirect()->back();
+}
+
         $ward->delete();
         toast("$ward->name Ward Delete successfully","success");
         return redirect()->back();

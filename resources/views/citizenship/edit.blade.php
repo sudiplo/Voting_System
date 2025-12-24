@@ -200,7 +200,7 @@
         <!-- partner Name -->
         <div>
             <label class="block text-sm font-semibold text-gray-700">पती पत्नीको नामथर: </label>
-            <input type="text" name="partner"
+            <input type="text" name="partner" value="{{ old('partner', $citizen->partner) }}"
             class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition">
         </div>
 
