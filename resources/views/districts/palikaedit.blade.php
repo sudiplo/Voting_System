@@ -14,10 +14,10 @@
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div>
             <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight">
-                <span class="text-indigo-600">{{ $palika->name }}</span> District
+                <span class="text-indigo-600">{{ $palika->name }}</span>, {{ $palika->district->name }} District
             </h1>
             <p class="mt-2 text-gray-500">
-                Click ➕ Add Palika button to add new palika
+                Click ➕ Add Palika button to add new ward
             </p>
         </div>
 

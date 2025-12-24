@@ -14,13 +14,13 @@
 
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div>
-            <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight">
-                <span class="text-indigo-600">{{ $ward->name }}</span> District
-            </h1>
-            <p class="mt-2 text-gray-500">
-                Click ➕ Add Palika button to add new palika
-            </p>
-        </div>
+                <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight">
+                    <span class="text-indigo-600">{{ $ward->name }}</span>
+                </h1>
+                <p class="mt-2 text-gray-500">
+                    Click ➕ Add Palika button to add new voting center
+                </p>
+            </div>
 
             <!-- ADD DISTRICT BUTTON -->
             <button id="add" data-dropdown-toggle="dropdown" class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 text-white rounded-xl shadow-md hover:bg-emerald-600 transition">

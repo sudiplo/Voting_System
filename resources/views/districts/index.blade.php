@@ -20,7 +20,7 @@
            <!-- Search Bar -->
                 <form method="GET" action="{{ route('districts.index') }}" class="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 max-w-md">
                     <input type="text" name="search" list="districts" value="{{ $search }}" placeholder="Search district..."
-                        class="w-full flex-1 px-4 py-2 rounded-xl border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none transition w-full">
+                        class="flex-1 px-4 py-2 rounded-xl border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none transition w-full">
 
                     <datalist id="districts">
                         @foreach ($suggestions as $suggestion)
@@ -171,7 +171,9 @@
                                                     <tbody>
                                                         @forelse ($ward->votingCenters as $center)
                                                         <tr>
-                                                            <td> <a href="" class="text-blue-400 hover:text-blue-600"> - {{ $center->name }}</a></td>
+                                                            <td>
+                                                                <a href="{{ Route('districts.centerEdit',$center->id) }}" class="text-blue-400 hover:text-blue-600"> - {{ $center->name }}</a>
+                                                            </td>
                                                         </tr>
                                                         @empty
                                                         <tr><td class="text-gray-500 italic">No voting centers</td></tr>

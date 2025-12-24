@@ -154,5 +154,18 @@ class AddController extends Controller
         toast("voting center add successfully","success");
         return redirect()->back();
     }
+    //==========================voting center update
+    public function centerUpdate(Request $request, $id){
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'ward_id'=>['required', 'string', 'max:255'],
+        ]);
+        $center = votingCenter::find($id);
+        $center->name = $request->name;
+        $center->ward_id= $request->ward_id;
+        $center->save();
+        toast("voting center updated successfully","success");
+        return redirect()->back();
+    }
 
 }

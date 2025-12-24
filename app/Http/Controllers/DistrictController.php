@@ -6,6 +6,7 @@ use App\Models\district;
 use App\Models\ward;
 use App\Models\palika;
 use Illuminate\Http\Request;
+use App\Models\votingCenter;
 
 class DistrictController extends Controller
 {
@@ -49,6 +50,11 @@ class DistrictController extends Controller
         return view('districts.palikaedit', compact('palika', 'districts'));
     }
 
+    //==========================edit center redirect======================================================================
+    public function centerEdit($id) {
+        $center = votingCenter::find($id);
+        return view('districts.centeredit', compact('center'));
+    }
     //==========================delete district==========================================================================
     public function districtDelete($id) {
         $district = district::find($id);
@@ -79,13 +85,21 @@ class DistrictController extends Controller
     //==========================delete ward======================================================================
     public function wardDelete($id) {
         $ward = ward::find($id);
-if ($ward->votingCenters()->exists()) {
-    toast('Cannot delete ward with existing voting centers', 'error');
-    return redirect()->back();
-}
+    if ($ward->votingCenters()->exists()) {
+        toast('Cannot delete ward with existing voting centers', 'error');
+        return redirect()->back();
+    }
 
         $ward->delete();
         toast("$ward->name Ward Delete successfully","success");
         return redirect()->back();
+    }
+
+    //==========================delete center======================================================================
+    public function centerDelete($id) {
+        $center = votingCenter::find($id);
+        $center->delete();
+        toast("$center->name Voting Center Delete successfully","success");
+        return redirect()->Route('districts.index');
     }
 }

@@ -34,14 +34,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/district{id}',[DistrictController::class,'districtDelete'])->name('districts.Delete');
     Route::delete('/ward{id}', [DistrictController::class, 'wardDelete'])->name('districts.wardDelete');
     Route::delete('/palika{id}', [DistrictController::class, 'palikaDelete'])->name('districts.palikaDelete');
+    Route::delete('/center{id}', [DistrictController::class, 'centerDelete'])->name('districts.centerDelete');
     // edit page view
     Route::get('/districedit{id}', [DistrictController::class, 'districEdit'])->name('districts.editView');
     Route::get('/wardedit{id}', [DistrictController::class, 'wardEdit'])->name('districts.wardEdit');
     Route::get('/palikaedit{id}', [DistrictController::class, 'palikaEdit'])->name('districts.palikaEdit');
+    Route::get('/centeredit{id}', [DistrictController::class, 'centerEdit'])->name('districts.centerEdit');
     // update
     Route::patch('/districtupdate{id}',[AddController::class,'districtUpdate'])->name('district.update');
     Route::patch('/wardupdate{id}', [AddController::class, 'wardUpdate'])->name('ward.update');
     Route::patch('/palikaupdate{id}', [AddController::class, 'palikaUpdate'])->name('palika.update');
+    Route::patch('/centerupdate{id}', [AddController::class, 'centerUpdate'])->name('center.update');
 
     //==========================citizenshipController======================================================================
     Route::get('/citizenship',[citizenshipController::class,'view'])->name('citizen.view');
