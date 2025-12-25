@@ -60,6 +60,7 @@ Route::middleware('auth')->group(function () {
     // ==========================ElectionController======================================================================
     // Route::resource('elections', ElectionController::class);
     Route::get('/elections', [ElectionController::class, 'index'])->name('elections.index');
+    Route::post('/elections/create', [ElectionController::class, 'create'])->name('elections.create');
 
 });
 
