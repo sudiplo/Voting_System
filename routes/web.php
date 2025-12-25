@@ -6,6 +6,7 @@ use App\Http\Controllers\citizenshipController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\viewController;
+use App\Http\Controllers\ElectionController;
 use Illuminate\Support\Facades\Route;
 use App\Models\palika;
 use App\Http\Controllers\DistrictController;
@@ -55,6 +56,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/citizen_edit{id}', [citizenshipController::class, 'edit'])->name('citizen.edit');
     Route::patch('/citizen_update{id}', [citizenshipController::class, 'citizenUpdate'])->name('citizen.update');
     Route::delete('/citizen_delete{id}', [citizenshipController::class, 'citizenDelete'])->name('citizen.delete');
+
+    // ==========================ElectionController======================================================================
+    // Route::resource('elections', ElectionController::class);
+    Route::get('/elections', [ElectionController::class, 'index'])->name('elections.index');
 
 });
 
