@@ -63,6 +63,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/elections/create', [ElectionController::class, 'create'])->name('elections.create');
     Route::get('/election_edit{id}',[ElectionController::class,'electionEdit'])->name('election.editView');
     Route::patch('election_update{id}',[ElectionController::class,'electionUpdate'])->name('election.update');
+    Route::delete('/election_delete{id}',[ElectionController::class,'electionDelete'])->name('election.delete');
 
 });
 

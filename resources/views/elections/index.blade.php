@@ -121,9 +121,7 @@
                                     Edit
                                 </a>
 
-                                <form action=""
-                                      method="POST"
-                                      class="inline">
+                                <form action="{{ Route('election.delete',$election->id) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')
                                     <button

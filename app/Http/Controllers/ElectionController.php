@@ -51,7 +51,7 @@ class ElectionController extends Controller
 
         if (Election::where('title', $request->name)->exists()) {
             toast("Election Title already exist","error");
-            return back();
+            return redirect()->back();
         }
 
         $election = Election::find($id);
@@ -60,8 +60,15 @@ class ElectionController extends Controller
 
         $election->save();
         toast("Election created successfully","success");
-        return back();
+        return redirect()->back();
+    }
 
+    //
+    public function electionDelete($id){
+        $election = Election::find($id);
+        $election->delete();
+        toast("Election Record Delete successfully","success");
+        return redirect()->back();
     }
 
 }
