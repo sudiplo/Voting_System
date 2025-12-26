@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class citizenship extends Model
 {
@@ -23,5 +24,11 @@ class citizenship extends Model
     public function ward(): BelongsTo
     {
         return $this->belongsTo(ward::class);
+    }
+
+    //relation between citizen and c_mayor
+    public function Cmayor(): HasMany
+    {
+        return $this->hasMany(c_mayor::class);
     }
 }

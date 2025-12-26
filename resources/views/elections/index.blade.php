@@ -9,7 +9,6 @@
     </header>
 
     <!-- PAGE HEADER -->
-    <!-- 🔧 added `relative` -->
     <div class="relative mt-5 mb-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200">
 
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
@@ -30,7 +29,6 @@
         </div>
 
         <!-- ADD DROPDOWN -->
-        <!-- 🔧 made floating -->
         <div id="dropdown"
              class="hidden absolute right-8 top-full mt-4
                     w-full sm:w-[28rem]
@@ -46,7 +44,6 @@
                 </p>
             </div>
 
-            <!-- ❗ route NOT changed -->
             <form method="POST"
                   action="{{ Route('elections.create') }}"
                   class="p-5 space-y-4"
@@ -107,7 +104,7 @@
                             </td>
 
                             <td class="px-6 py-4 text-right space-x-2 opacity-90 group-hover:opacity-100">
-                                <a href=""
+                                <a href="{{ Route('elections.view',$election->id) }}"
                                    class="inline-flex items-center px-3 py-1.5
                                           bg-indigo-500 hover:bg-indigo-600
                                           text-white rounded-lg text-xs transition">
