@@ -111,13 +111,15 @@
         </div>
 
 
-        <form action="" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3">
+        <form action="{{ Route('mayor.register') }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3">
             @csrf
             <input type="number" name="citizen_id" value="{{ $citizen->id }}" class="hidden w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 hover:border-indigo-500 transition" required>
 
             <input type="number" name="district_id" value="{{ $citizen->district_id }}"  class="hidden w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 hover:border-indigo-500 transition" required>
 
             <input type="number" name="palika_id" value="{{ $citizen->palika_id }}" class="hidden w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 hover:border-indigo-500 transition" required>
+
+            <input type="number" name="election_id" value="{{ $election->id }}" class="hidden w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 hover:border-indigo-500 transition" required>
 
             <div>
                 <label class="block text-sm font-semibold text-gray-700">Post</label>
@@ -126,18 +128,17 @@
                     required>
                     <option value="">Select Post</option>
                     <option value="Mayor">Mayor</option>
-                    <option value="Deputy Mayor">Deputy Mayor</option>
+                    <option value="Depaty Mayor">Deputy Mayor</option>
                 </select>
             </div>
 
             <div>
                 <label class="block text-sm font-semibold text-gray-700">Political Party</label>
-                <input type="text" name="party" 
+                <input type="text" name="party"
                     class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 hover:border-indigo-500 transition"
                     required>
             </div>
 
-            <!-- Goal -->
             <div class="">
                 <label class="block text-sm font-semibold text-gray-700">
                     Vision / Goals
@@ -148,14 +149,12 @@
                     required></textarea>
             </div>
 
-            <!-- Submit Button -->
             <div class="md:col-span-2 text-center mt-6">
                 <button type="submit"
-                    class="w-full md:w-1/3 bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition">
-                    Save Mayor Record
+                    class="w-full md:w-1/3 bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition" onclick="return confirm('Are you sure you want to Register this record?');">
+                    Save Record
                 </button>
             </div>
-
         </form>
     </div>
 

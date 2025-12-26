@@ -82,7 +82,7 @@ class ElectionController extends Controller
         return view('elections.register',compact('mayor','districts','election'));
     }
 
-
+    //==========================Register Mayor/Depaty Mayor view==============================================================================
     public function registerMayorView(Request $request,$id)
     {
 
@@ -104,6 +104,33 @@ class ElectionController extends Controller
 
         $election = Election::find($id);
         return view('elections.register_mayor', compact('citizen', 'citizenships', 'search','election'));
+    }
+
+//==========================Register Mayor/Depaty Mayor==============================================================================
+    public function mayorRegister(Request $request){
+        $request->validate([
+            'citizen_id' => ['required', 'string', 'max:255'],
+            'district_id' => ['required', 'string', 'max:255'],
+            'palika_id' => ['required', 'string', 'max:255'],
+            'election_id' => ['required', 'string', 'max:255'],
+            'post' => ['required', 'string', 'max:255'],
+            'party' => ['required', 'string', 'max:255'],
+            'goal' => ['required', 'string', 'max:255'],
+
+        ]);
+
+        $mayor = new c_mayor();
+        $mayor->citizen_id = $request->citizen_id;
+        $mayor->district_id = $request->district_id;
+        $mayor->palika_id = $request->palika_id;
+        $mayor->election = $request->election_id;
+        $mayor->post = $request->post;
+        $mayor->party = $request->party;
+        $mayor->goal = $request->goal;
+
+        $mayor->save();
+        toast("Data saved successfully", "success");
+        return redirect()->back();
     }
 
 }

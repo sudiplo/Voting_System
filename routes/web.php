@@ -65,7 +65,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('election_update{id}',[ElectionController::class,'electionUpdate'])->name('election.update');
     Route::delete('/election_delete{id}',[ElectionController::class,'electionDelete'])->name('election.delete');
     Route::get('/elections_view_{id}',[ElectionController::class,'view'])->name('elections.view');
-    Route::get('/register_mayour{id}',[ElectionController::class,'registerMayorView'])->name('register_mayor.index');
+    Route::get('/register_mayor{id}',[ElectionController::class,'registerMayorView'])->name('register_mayor.index');
+    Route::post('/register_mayour',[ElectionController::class,'mayorRegister'])->name('mayor.register');
 
 });
 
