@@ -71,4 +71,121 @@
             </form>
         </div>
     </div>
+
+    {{-- table to show the Candidate data --}}
+    {{-- <h3>Mayoral Candidates</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Citizen ID</th>
+            <th>District</th>
+            <th>Palika</th>
+            <th>Post</th>
+            <th>Party</th>
+            <th>Goal</th>
+            <th>Vote</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($mayor as $candidate)
+            <tr>
+                <td>{{ $candidate->citizen_id }}</td>
+                <td>{{ $candidate->citizen->district->name_nepali }}</td>
+                <td>{{ $candidate->citizen->palika->name }}</td>
+                <td>{{ $candidate->post }}</td>
+                <td>{{ $candidate->party }}</td>
+                <td>{{ $candidate->goal }}</td>
+                <td>{{ $candidate->vote }}</td>
+            </tr>
+        @endforeach
+    </tbody>
+</table> --}}
+
+
+    <!-- DISTRICT LIST -->
+    @foreach ($districts as $district)
+    <div class="mb-12 bg-white shadow-lg rounded-xl border border-gray-200 overflow-hidden">
+
+        <!-- DISTRICT HEADER -->
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-500 px-8 py-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 rounded-t-xl">
+            <div>
+                <h3 class="text-xl font-bold text-white">{{ $district->name_nepali }}</h3>
+                <p class="text-sm text-white/90">{{ $district->name }}</p>
+            </div>
+
+        </div>
+
+        <!-- PALIKA TABLE -->
+        <div class="p-8 overflow-x-auto">
+            <table class="w-full text-sm border-collapse mt-2">
+                <thead>
+                    <tr class="bg-gray-100 text-gray-700">
+                        <th class="p-4 text-left">Palika Name</th>
+                        <th class="p-4 text-right w-40">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @forelse ($district->palika as $p)
+                    <tr class="border-b hover:bg-blue-50 transition text-lg">
+                        <td class="p-4 font-medium text-blue-700 cursor-pointer">
+                            <label for="palika-{{ $p->id }}" class="cursor-pointer">
+                                {{ $p->name }}
+                            </label>
+                        </td>
+                        <td class="p-4 text-right space-x-2">
+
+                            <a href="{{ Route('districts.palikaEdit',$p->id) }}"
+                                class="px-3 py-1 bg-blue-400 hover:bg-blue-500 text-white rounded text-xs">
+                                View Candidates
+                            </a>
+                        </td>
+                    </tr>
+
+                    <!-- WARD SECTION -->
+                    <tr>
+                        <td colspan="2" class="p-0">
+                            <input type="checkbox" id="palika-{{ $p->id }}" class="peer hidden">
+                            <div class="peer-checked:block hidden bg-blue-50 border-t border-blue-200 p-6 space-y-4">
+                                <!-- WARD TABLE -->
+                                <table class="w-full border border-blue-200 rounded-lg overflow-hidden">
+                                    <thead>
+                                        <tr class="bg-blue-100 text-blue-800">
+                                            <th class="px-4 py-2 text-left">Number</th>
+                                            <th class="px-4 py-2 text-left">Ward Name</th>
+                                            <th class="px-4 py-2 text-left">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($p->wards as $ward)
+                                        <tr class="border-t hover:bg-blue-50">
+                                            <td class="px-4 py-2">{{ $ward->number }}</td>
+                                            <td class="px-4 py-2">{{ $ward->name }}</td>
+                                            <td class="p-4  space-x-2">
+                                                <a href="{{ Route('districts.wardEdit',$ward->id) }}" class="px-3 py-1 bg-blue-400 hover:bg-blue-500 text-white rounded text-xs">
+                                                    View Candidates
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        @empty
+                                        <tr>
+                                            <td colspan="5" class="px-4 py-3 text-center text-gray-500 italic">No wards available</td>
+                                        </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="2" class="p-6 text-center text-gray-500 italic">No Palikas Found</td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @endforeach
+
 </x-defult_layout>
