@@ -128,7 +128,7 @@
                     required>
                     <option value="">Select Post</option>
                     <option value="Mayor">Mayor</option>
-                    <option value="Depaty Mayor">Deputy Mayor</option>
+                    <option value="Deputy Mayor">Deputy Mayor</option>
                 </select>
             </div>
 

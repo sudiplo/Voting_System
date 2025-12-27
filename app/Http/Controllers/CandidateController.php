@@ -74,4 +74,10 @@ class CandidateController extends Controller
         $mayor = c_mayor::where('palika_id',$id)->where('post', 'Mayor')->get();
         return view('elections.candidats.mayor',compact('mayor','palika'));
     }
+
+    public function deputyMayorView($id){
+        $palika = palika::find($id);
+        $mayor = c_mayor::where('palika_id',$id)->where('post', 'Deputy Mayor')->get();
+        return view('elections.candidats.Depaty_mayor',compact('mayor','palika'));
+    }
 }

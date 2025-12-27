@@ -21,11 +21,11 @@
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
             <div>
                 <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight">
-                    <span class="text-indigo-600">Mayor</span> Candidates
+                    <span class="text-indigo-600">Depaty Mayor</span> Candidates
                 </h1>
 
                 <p class="mt-3 text-gray-500 text-sm md:text-base max-w-xl">
-                    Registered Mayor candidates of
+                    Registered Depaty Mayor candidates of
                     <span class="font-medium text-gray-700">
                         {{ $palika->district->name_nepali }}, {{ $palika->name }}
                     </span>
@@ -35,14 +35,15 @@
             <div class="flex items-center gap-3 bg-gray-100 p-2 rounded-xl shadow-inner">
                 <a href="{{ Route('mayor.view', $palika->id) }}"
                 class="px-5 py-2 rounded-lg text-sm font-semibold transition-all
-                        bg-indigo-600 text-white shadow
-                        hover:bg-indigo-700">
+                        text-gray-600 hover:text-indigo-600 hover:bg-white hover:shadow">
                     Mayor
                 </a>
 
                 <a href="{{ Route('Deputy_mayor.view', $palika->id) }}"
-                class="px-5 py-2 rounded-lg text-sm font-semibold transition-all
-                        text-gray-600 hover:text-indigo-600 hover:bg-white hover:shadow">
+                    class="px-5 py-2 rounded-lg text-sm font-semibold transition-all
+                        bg-indigo-600 text-white shadow
+                        hover:bg-indigo-700"
+                >
                     Deputy Mayor
                 </a>
             </div>

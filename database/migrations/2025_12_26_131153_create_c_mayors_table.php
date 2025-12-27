@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('district_id')->constrained();
             $table->foreignId('palika_id')->constrained();
             $table->foreignId('election')->constrained();
-            $table->enum('post', ['Mayor', 'Depaty Mayor']);
+            $table->enum('post', ['Mayor', 'Deputy Mayor']);
             $table->text('party');
             $table->text('goal');
             $table->text('vote');
