@@ -72,6 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/register_mayor',[CandidateController::class,'mayorRegister'])->name('mayor.register');
     Route::get('/mayor_view{id}',[CandidateController::class,'mayorView'])->name('mayor.view');
     Route::get('/Deputy_mayor_view{id}',[CandidateController::class,'deputyMayorView'])->name('Deputy_mayor.view');
+    Route::get('/mayor_profile{id}',[CandidateController::class,'mayorProfile'])->name('mayorProfile');
 
 });
 

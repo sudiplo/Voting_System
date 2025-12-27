@@ -68,16 +68,23 @@ class CandidateController extends Controller
         return redirect()->back();
     }
 
-//==========================Register Mayor view==============================================================================
+//==========================Register Mayors view==============================================================================
     public function mayorView($id){
         $palika = palika::find($id);
         $mayor = c_mayor::where('palika_id',$id)->where('post', 'Mayor')->get();
         return view('elections.candidats.mayor',compact('mayor','palika'));
     }
 
+    //==========================Register Deputy Mayors view==============================================================================
     public function deputyMayorView($id){
         $palika = palika::find($id);
         $mayor = c_mayor::where('palika_id',$id)->where('post', 'Deputy Mayor')->get();
         return view('elections.candidats.Depaty_mayor',compact('mayor','palika'));
+    }
+
+//==========================Register Mayor Profile==============================================================================
+    public function mayorProfile($id){
+        $mayor = c_mayor::find($id);
+        return view('elections.candidats.profile',compact('mayor'));
     }
 }

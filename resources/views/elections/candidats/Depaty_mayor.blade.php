@@ -51,7 +51,7 @@
         </div>
     </div>
 
-
+    <!-- ================= show data ================= -->
     @foreach ($mayor as $mayor)
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <div class=" w-full max-w-md mx-auto bg-white border border-gray-200 rounded-2xl shadow-lg p-5">
@@ -59,6 +59,9 @@
                 <div>
                     <h2 class="text-xl font-bold text-gray-800">{{ $mayor->post }} Candidate</h2>
                 </div>
+                <a href="" class="inline-flex items-center px-3 py-1.5 bg-yellow-400 hover:bg-yellow-500 text-white rounded-lg text-xs transition">
+                    Edit
+                </a>
             </div>
             <div class="flex gap-4">
                 <div class="flex-shrink-0">
@@ -99,9 +102,7 @@
 
             <div class="border-t border-gray-200 my-4"></div>
 
-            <a href="#"
-                class="block w-full text-center px-4 py-2 text-sm font-semibold
-                 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+            <a href="{{ Route('mayorProfile',$mayor->id) }}" class="block w-full text-center px-4 py-2 text-sm font-semibold bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
                     View Full Profile
             </a>
         </div>
