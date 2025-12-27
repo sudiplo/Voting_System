@@ -6,8 +6,8 @@
                 🗳️ Elections Management
             </a>
             <p class="text-2xs text-gray-500">|</p>
-            <a href="" class="text-2xs text-gray-500 hover:text-blue-500">
-                Elections Candidates
+            <a href="{{ Route('elections.view',$election->id) }}" class="text-2xs text-gray-500 hover:text-blue-500">
+                Elections Regions
             </a>
         </div>
     </header>
@@ -72,36 +72,6 @@
         </div>
     </div>
 
-    {{-- table to show the Candidate data --}}
-    {{-- <h3>Mayoral Candidates</h3>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Citizen ID</th>
-            <th>District</th>
-            <th>Palika</th>
-            <th>Post</th>
-            <th>Party</th>
-            <th>Goal</th>
-            <th>Vote</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($mayor as $candidate)
-            <tr>
-                <td>{{ $candidate->citizen_id }}</td>
-                <td>{{ $candidate->citizen->district->name_nepali }}</td>
-                <td>{{ $candidate->citizen->palika->name }}</td>
-                <td>{{ $candidate->post }}</td>
-                <td>{{ $candidate->party }}</td>
-                <td>{{ $candidate->goal }}</td>
-                <td>{{ $candidate->vote }}</td>
-            </tr>
-        @endforeach
-    </tbody>
-</table> --}}
-
-
     <!-- DISTRICT LIST -->
     @foreach ($districts as $district)
     <div class="mb-12 bg-white shadow-lg rounded-xl border border-gray-200 overflow-hidden">
@@ -135,7 +105,7 @@
                         </td>
                         <td class="p-4 text-right space-x-2">
 
-                            <a href="{{ Route('districts.palikaEdit',$p->id) }}"
+                            <a href="{{ Route('mayor.view',$p->id) }}"
                                 class="px-3 py-1 bg-blue-400 hover:bg-blue-500 text-white rounded text-xs">
                                 View Candidates
                             </a>

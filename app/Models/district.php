@@ -17,4 +17,10 @@ class district extends Model
     {
         return $this->hasMany(citizenship::class);
     }
+
+    // relation between district and c_mayor
+    public function mayor(): HasMany
+    {
+        return $this->hasMany(c_mayor::class);
+    }
 }

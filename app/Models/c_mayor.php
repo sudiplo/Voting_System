@@ -31,4 +31,16 @@ class c_mayor extends Model
     {
         return $this->belongsTo(Election::class);
     }
+
+    // relation between c_mayor and district
+    public function district(): BelongsTo
+    {
+        return $this->belongsTo(district::class);
+    }
+
+        // relation between c_mayor and palika
+    public function palika(): BelongsTo
+    {
+        return $this->belongsTo(palika::class);
+    }
 }

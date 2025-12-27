@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\viewController;
 use App\Http\Controllers\ElectionController;
+use App\Http\Controllers\CandidateController;
 use Illuminate\Support\Facades\Route;
 use App\Models\palika;
 use App\Http\Controllers\DistrictController;
@@ -65,8 +66,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('election_update{id}',[ElectionController::class,'electionUpdate'])->name('election.update');
     Route::delete('/election_delete{id}',[ElectionController::class,'electionDelete'])->name('election.delete');
     Route::get('/elections_view_{id}',[ElectionController::class,'view'])->name('elections.view');
-    Route::get('/register_mayor{id}',[ElectionController::class,'registerMayorView'])->name('register_mayor.index');
-    Route::post('/register_mayour',[ElectionController::class,'mayorRegister'])->name('mayor.register');
+
+    // ==========================CandidateController======================================================================
+    Route::get('/register_mayor{id}',[CandidateController::class,'registerMayorView'])->name('register_mayor.index');
+    Route::post('/register_mayor',[CandidateController::class,'mayorRegister'])->name('mayor.register');
+    Route::get('/mayor_view{id}',[CandidateController::class,'mayorView'])->name('mayor.view');
 
 });
 
