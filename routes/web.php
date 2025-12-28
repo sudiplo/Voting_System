@@ -73,6 +73,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/mayor_view{id}',[CandidateController::class,'mayorView'])->name('mayor.view');
     Route::get('/Deputy_mayor_view{id}',[CandidateController::class,'deputyMayorView'])->name('Deputy_mayor.view');
     Route::get('/mayor_profile{id}',[CandidateController::class,'mayorProfile'])->name('mayorProfile');
+    Route::get('/edit_mayor{id}',[CandidateController::class,'mayorEditView'])->name('edit_mayor');
+    Route::patch('/mayor_update{id}',[CandidateController::class,'mayorUpdate'])->name('mayor.update');
 
 });
 

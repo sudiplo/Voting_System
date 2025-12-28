@@ -58,7 +58,7 @@
                 <div>
                     <h2 class="text-xl font-bold text-gray-800">{{ $mayor->post }} Candidate</h2>
                 </div>
-                <a href="" class="inline-flex items-center px-3 py-1.5 bg-yellow-400 hover:bg-yellow-500 text-white rounded-lg text-xs transition">
+                <a href="{{ Route('edit_mayor',$mayor->id) }}" class="inline-flex items-center px-3 py-1.5 bg-yellow-400 hover:bg-yellow-500 text-white rounded-lg text-xs transition">
                     Edit
                 </a>
             </div>

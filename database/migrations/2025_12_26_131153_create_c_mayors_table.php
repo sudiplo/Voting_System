@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('election')->constrained();
             $table->enum('post', ['Mayor', 'Deputy Mayor']);
             $table->text('party');
-            $table->text('goal');
+            $table->longText('goal');
             $table->text('vote')->nullable();
             $table->string('photo');
             $table->timestamps();

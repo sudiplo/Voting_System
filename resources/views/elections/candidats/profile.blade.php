@@ -41,8 +41,9 @@
 
             <div class="pt-28">
                 <h1 class="text-4xl font-black text-gray-900 tracking-tight leading-tight">{{$mayor->citizen->name_nepali}}</h1>
+                    {{-- <span class="text-blue-600 text-xl">🏛️</span> --}}
+                    <span class="mt-2 text-lg font-semibold text-gray-700">{{$mayor->district->name_nepali}}, {{$mayor->palika->name}}</span>
 
-                <p class="mt-2 text-lg font-semibold text-gray-700">{{$mayor->post}} Candidate</p>
 
                 <div class="flex items-center gap-2 mt-4 text-sm text-gray-600">
                     <span class="font-medium">Political Party</span>
@@ -50,15 +51,15 @@
                 </div>
 
                 <div class="flex items-center gap-3 mt-4 text-gray-600 text-sm">
-                    <span class="text-blue-600 text-xl">🏛️</span>
-                    <span class="font-medium">{{$mayor->district->name_nepali}}, {{$mayor->palika->name}}</span>
+                    <p class="mt-2 text-lg font-semibold text-gray-700">{{$mayor->post}} Candidate</p>
+
                 </div>
 
                 <div class="mt-8 mb-6 h-[2px] w-32 bg-gradient-to-r from-blue-600 to-green-500 rounded-full"></div>
 
                 <div class="bg-gray-50/70 border border-gray-200 rounded-2xl p-6 shadow-inner">
                     <h2 class="text-lg font-bold text-gray-900 mb-3"> Vision & Commitment</h2>
-                    <p class="text-gray-700 text-sm leading-relaxed">{{ $mayor->goal }}</p>
+                    <p class="text-gray-700 text-sm leading-relaxed">{!! nl2br(e($mayor->goal)) !!}</p>
                 </div>
             </div>
         </div>
