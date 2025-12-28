@@ -75,6 +75,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/mayor_profile{id}',[CandidateController::class,'mayorProfile'])->name('mayorProfile');
     Route::get('/edit_mayor{id}',[CandidateController::class,'mayorEditView'])->name('edit_mayor');
     Route::patch('/mayor_update{id}',[CandidateController::class,'mayorUpdate'])->name('mayor.update');
+    Route::delete('/delete_mayor{id}',[CandidateController::class,'mayorDelete'])->name('delete_mayor');
 
 });
 

@@ -135,9 +135,15 @@ class CandidateController extends Controller
             $mayor->photo = $mayor->photo;
         }
 
-
         $mayor->save();
         toast("Data saved successfully", "success");
         return redirect()->back();
+    }
+
+    public function mayorDelete($id){
+        $mayor = c_mayor::find($id);
+        $mayor->delete();
+        toast("Candidate Data Delete successfully","success");
+        return redirect()->Route('elections.index');
     }
 }

@@ -67,7 +67,7 @@
                 <div class="flex-shrink-0">
                     <div class="p-1 rounded-xl bg-indigo-500">
                         <img
-                            src="{{ $mayor->citizen->photo }}"
+                            src="{{ $mayor->photo }}"
                             alt="Profile Photo"
                             class="w-28 h-36 rounded-lg object-cover bg-white"
                         >

@@ -41,7 +41,6 @@
 
             <div class="pt-28">
                 <h1 class="text-4xl font-black text-gray-900 tracking-tight leading-tight">{{$mayor->citizen->name_nepali}}</h1>
-                    {{-- <span class="text-blue-600 text-xl">🏛️</span> --}}
                     <span class="mt-2 text-lg font-semibold text-gray-700">{{$mayor->district->name_nepali}}, {{$mayor->palika->name}}</span>
 
 
@@ -62,7 +61,25 @@
                     <p class="text-gray-700 text-sm leading-relaxed">{!! nl2br(e($mayor->goal)) !!}</p>
                 </div>
             </div>
+
+            <div class="mt-2">
+                <a href="{{ Route('edit_mayor', $mayor->id) }}" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-green-500 hover:bg-gradient-to-r
+                     hover:from-blue-700 hover:to-green-600 text-white rounded-lg text-xs font-semibold">
+                    Edit Profile
+                </a>
+
+                <form action="{{ Route('delete_mayor', $mayor->id) }}" method="POST" class="mt-2 inline-block">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-red-600 to-yellow-500 hover:bg-gradient-to-r hover:from-red-700 hover:to-yellow-600
+                     text-white rounded-lg text-xs font-semibold" onclick="return confirm('Do you want to delete the data?')">
+                        Delete Profile
+                    </button>
+                </form>
+            </div>
+
         </div>
     </div>
+
 
 </x-defult_layout>
