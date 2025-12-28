@@ -111,7 +111,7 @@
         </div>
 
 
-        <form action="{{ Route('mayor.register') }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3">
+        <form action="{{ Route('mayor.register') }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3" enctype="multipart/form-data">
             @csrf
             <input type="number" name="citizen_id" value="{{ $citizen->id }}" class="hidden w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 hover:border-indigo-500 transition" required>
 
@@ -147,6 +147,13 @@
                     class="w-full mt-2 p-4 border rounded-xl focus:ring-2 focus:ring-indigo-400 hover:border-indigo-500 transition"
                     placeholder="Write detailed vision, plans, and goals (paragraphs or pages)..."
                     required></textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-gray-700">Photo Upload</label>
+                <input type="file" name="photo"
+                class="w-full mt-2 p-3 border rounded-lg hover:border-blue-500 transition"
+                required>
             </div>
 
             <div class="md:col-span-2 text-center mt-6">

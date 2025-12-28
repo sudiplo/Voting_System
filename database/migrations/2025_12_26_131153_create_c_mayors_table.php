@@ -20,7 +20,8 @@ return new class extends Migration
             $table->enum('post', ['Mayor', 'Deputy Mayor']);
             $table->text('party');
             $table->text('goal');
-            $table->text('vote');
+            $table->text('vote')->nullable();
+            $table->string('photo');
             $table->timestamps();
         });
     }

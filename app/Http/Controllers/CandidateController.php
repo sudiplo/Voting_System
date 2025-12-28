@@ -45,9 +45,18 @@ class CandidateController extends Controller
             'election_id' => ['required', 'string', 'max:255'],
             'post' => ['required', 'string', 'max:255'],
             'party' => ['required', 'string', 'max:255'],
-            'goal' => ['required', 'string', 'max:255'],
-
+            'goal' => ['required', 'string', 'max:10000'],
+            'photo' => 'required|image|mimes:jpg,jpeg,png|max:6144',
         ]);
+        //==========================Handle the uploaded photo file=====================================================================
+        if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
+            $photo = $request->file('photo');
+            $filename = time() . '_' . $photo->getClientOriginalName();
+            $photo->move(public_path('images'), $filename);
+        } else {
+            toast("Photo size should be less than 6MB","error");
+            return back();
+        }
 
         if (c_mayor::where('citizen_id', $request->citizen_id)->exists()) {
             toast("Candidates already Register.","error");
@@ -62,6 +71,7 @@ class CandidateController extends Controller
         $mayor->post = $request->post;
         $mayor->party = $request->party;
         $mayor->goal = $request->goal;
+        $mayor->photo = 'images/' . $filename;
 
         $mayor->save();
         toast("Data saved successfully", "success");
