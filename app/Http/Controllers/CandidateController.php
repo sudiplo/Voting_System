@@ -139,11 +139,43 @@ class CandidateController extends Controller
         toast("Data saved successfully", "success");
         return redirect()->back();
     }
-
+//==========================Mayors Delete==============================================================================
     public function mayorDelete($id){
         $mayor = c_mayor::find($id);
         $mayor->delete();
         toast("Candidate Data Delete successfully","success");
         return redirect()->Route('elections.index');
+    }
+//==========================Mayors search==============================================================================
+    public function mayorSearch(Request $request,$id)
+    {
+        $palika = palika::find($id);
+        $search = $request->get('search');
+
+        $mayor = c_mayor::with('citizen')
+            ->where('post', 'Mayor')
+            ->whereHas('citizen', function ($query) use ($search) {
+                $query->where('name_english', 'like', "%{$search}%")
+                    ->orWhere('name_nepali', 'like', "%{$search}%");
+            })
+            ->get();
+
+        return view('elections.candidats.mayor', compact('mayor', 'search','palika'));
+    }
+//==========================Depaty Mayors search==============================================================================
+    public function depatyMayorSearch(Request $request,$id)
+    {
+        $palika = palika::find($id);
+        $search = $request->get('search');
+
+        $mayor = c_mayor::with('citizen')
+            ->where('post', 'Deputy Mayor')
+            ->whereHas('citizen', function ($query) use ($search) {
+                $query->where('name_english', 'like', "%{$search}%")
+                    ->orWhere('name_nepali', 'like', "%{$search}%");
+            })
+            ->get();
+
+        return view('elections.candidats.Depaty_mayor', compact('mayor', 'search','palika'));
     }
 }
