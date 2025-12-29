@@ -6,6 +6,7 @@ use App\Models\Election;
 use App\Models\district;
 use App\Models\citizenship;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ElectionController extends Controller
 {
@@ -24,8 +25,16 @@ class ElectionController extends Controller
         ]);
 
         if (Election::where('title', $request->name)->exists()) {
-            toast("Election Title already exist","error");
+            toast("Election Title already Register","error");
             return back();
+        }
+        if (Election::whereDate('election_date', $request->date)->exists()) {
+            toast('Election schedule is full for this date. Please choose another date.', 'error');
+            return redirect()->back()->withInput();
+        }
+        if (Carbon::parse($request->date)->lessThanOrEqualTo(Carbon::today())) {
+            toast("Election date must be a future date", "error");
+            return redirect()->back();
         }
 
         $election = new Election();
@@ -52,8 +61,16 @@ class ElectionController extends Controller
             'date' => 'required|date',
         ]);
 
-        if (Election::where('title', $request->name)->exists()) {
-            toast("Election Title already exist","error");
+        // if (Election::where('title', $request->name)->exists()) {
+        //     toast("Election Title already Register","error");
+        //     return redirect()->back();
+        // }
+        // if (Election::whereDate('election_date', $request->date)->exists()) {
+        //     toast('Election schedule is full for this date. Please choose another date.', 'error');
+        //     return redirect()->back()->withInput();
+        // }
+        if (Carbon::parse($request->date)->lessThanOrEqualTo(Carbon::today())) {
+            toast("Election date must be a future date", "error");
             return redirect()->back();
         }
 
@@ -62,7 +79,7 @@ class ElectionController extends Controller
         $election->election_date = $request->input('date');
 
         $election->save();
-        toast("Election created successfully","success");
+        toast("Election update successfully","success");
         return redirect()->back();
     }
 
