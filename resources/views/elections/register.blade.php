@@ -104,8 +104,7 @@
                             </label>
                         </td>
                         <td class="p-4 text-right space-x-2">
-
-                            <a href="{{ Route('mayor.view',$p->id) }}"
+                            <a href="{{ Route('mayor.view', ['id' => $p->id, 'e_id' => $election->id]) }}"
                                 class="px-3 py-1 bg-blue-400 hover:bg-blue-500 text-white rounded text-xs">
                                 View Candidates
                             </a>

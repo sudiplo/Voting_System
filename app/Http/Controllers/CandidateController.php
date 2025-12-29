@@ -79,17 +79,20 @@ class CandidateController extends Controller
     }
 
 //==========================Register Mayors view==============================================================================
-    public function mayorView($id){
+    public function mayorView($id, $e_id){
+        $e = Election::find($e_id);
         $palika = palika::find($id);
-        $mayor = c_mayor::where('palika_id',$id)->where('post', 'Mayor')->get();
-        return view('elections.candidats.mayor',compact('mayor','palika'));
+        $mayor = c_mayor::where('election',$e_id)->where('post', 'Mayor')->get();
+        return view('elections.candidats.mayor',compact('mayor','palika','e'));
     }
 
+
 //==========================Register Deputy Mayors view==============================================================================
-    public function deputyMayorView($id){
+    public function deputyMayorView($id, $e_id){
+        $e = Election::find($e_id);
         $palika = palika::find($id);
-        $mayor = c_mayor::where('palika_id',$id)->where('post', 'Deputy Mayor')->get();
-        return view('elections.candidats.Depaty_mayor',compact('mayor','palika'));
+        $mayor = c_mayor::where('election',$e_id)->where('post', 'Deputy Mayor')->get();
+        return view('elections.candidats.Depaty_mayor',compact('mayor','palika','e'));
     }
 
 //==========================Register Mayor Profile==============================================================================
@@ -147,8 +150,9 @@ class CandidateController extends Controller
         return redirect()->Route('elections.index');
     }
 //==========================Mayors search==============================================================================
-    public function mayorSearch(Request $request,$id)
+    public function mayorSearch(Request $request,$id,$e_id)
     {
+        $e = Election::find($e_id);
         $palika = palika::find($id);
         $search = $request->get('search');
 
@@ -160,11 +164,12 @@ class CandidateController extends Controller
             })
             ->get();
 
-        return view('elections.candidats.mayor', compact('mayor', 'search','palika'));
+        return view('elections.candidats.mayor', compact('mayor', 'search','palika','e'));
     }
 //==========================Depaty Mayors search==============================================================================
-    public function depatyMayorSearch(Request $request,$id)
+    public function depatyMayorSearch(Request $request,$id,$e_id)
     {
+        $e = Election::find($e_id);
         $palika = palika::find($id);
         $search = $request->get('search');
 
@@ -176,6 +181,6 @@ class CandidateController extends Controller
             })
             ->get();
 
-        return view('elections.candidats.Depaty_mayor', compact('mayor', 'search','palika'));
+        return view('elections.candidats.Depaty_mayor', compact('mayor', 'search','palika','e'));
     }
 }
