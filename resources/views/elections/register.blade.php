@@ -19,7 +19,7 @@
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div>
                 <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight">
-                    Elections <span class="text-indigo-600">Candidates</span>
+                    <span class="text-indigo-600">{{ $election->title }}, </span> Elections Regions
                 </h1>
                 <p class="mt-2 text-gray-500">
                     Election Candidats records details overview and Register new Candidates.

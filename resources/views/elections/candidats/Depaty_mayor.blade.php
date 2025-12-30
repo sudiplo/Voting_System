@@ -6,11 +6,11 @@
                 🗳️ Elections Management
             </a>
             <p class="text-2xs text-gray-500">|</p>
-            <a href="" class="text-2xs text-gray-500 hover:text-blue-500">
+            <a href="{{ Route('elections.view',$e->id) }}" class="text-2xs text-gray-500 hover:text-blue-500">
                 Elections Regions
             </a>
             <p class="text-2xs text-gray-500">|</p>
-            <a href="{{ Route('mayor.view',['id' => $palika->id, 'e_id' => $e->id]) }}" class="text-2xs text-gray-500 hover:text-blue-500">
+            <a href="{{ Route('Deputy_mayor.view',['id' => $palika->id, 'e_id' => $e->id]) }}" class="text-2xs text-gray-500 hover:text-blue-500">
                 Register Candidates
             </a>
         </div>
