@@ -168,11 +168,6 @@ class CandidateController extends Controller
             toast("Candidates already Register.","error");
             return redirect()-> back();
         }
-        if (wardCandidate::where('citizen_id', $request->citizen_id)->
-        where('election',$request->election_id)->where('goal',$request->goal)->exists()) {
-            toast("Candidates already Register.","error");
-            return redirect()-> back();
-        }
 
         // if candidate is deputy mayor or mayor
         if ($request->post == 'Deputy Mayor' || $request->post == 'Mayor') {
@@ -202,33 +197,11 @@ class CandidateController extends Controller
         else
             {
             $mayor = c_mayor::find($id);
-            if ($mayor) {
-                $mayor->delete();
-                $oldPhoto = $mayor ? $mayor->photo : null;
-                $candidate = new wardCandidate();
-                $candidate->citizen_id = $request->citizen_id;
-                $candidate->district_id = $request->district_id;
-                $candidate->palika_id = $request->palika_id;
-                $candidate->ward_id = $request->ward_id;
-                $candidate->election = $request->election_id;
-                $candidate->post = $request->post;
-                $candidate->party = $request->party;
-                $candidate->goal = $request->goal;
-                // $mayor->photo = 'images/' . $filename;
-                if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
-                    $photo = $request->file('photo');
-                    $filename = time() . '_' . $photo->getClientOriginalName();
-                    $photo->move(public_path('images'), $filename);
-                    $candidate->photo = 'images/' . $filename;
-                } else {
-                    $candidate->photo = $oldPhoto ?? 'images/default.png';
-                }
-                $mayor->delete();
-                $candidate->save();
-                toast("Data saved successfully", "success");
-                return redirect()->back();
-            }
+            // if ($mayor) {
+            //     $mayor->delete();
+            // }
             $oldPhoto = $mayor ? $mayor->photo : null;
+
             $candidate = wardCandidate::find($id);
             $photo = $candidate->photo;
             $candidate->citizen_id = $request->citizen_id;
@@ -246,9 +219,12 @@ class CandidateController extends Controller
                 $photo->move(public_path('images'), $filename);
                 $candidate->photo = 'images/' . $filename;
             } else {
-
+                if(!$mayor){
+                    $candidate->photo = $oldPhoto ?? 'images/default.png';
+                }
                 $candidate->photo = $photo ?? 'images/default.png';
             }
+
             $candidate->save();
             toast("Data saved successfully", "success");
             return redirect()->back();
