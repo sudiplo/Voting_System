@@ -68,14 +68,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/elections_view_{id}',[ElectionController::class,'view'])->name('elections.view');
 
     // ==========================CandidateController======================================================================
-    Route::get('/register_mayor{id}',[CandidateController::class,'registerMayorView'])->name('register_candidate.index');
+    Route::get('/register_mayor{id}',[CandidateController::class,'registerCandidateView'])->name('register_candidate.index');
     Route::post('/register_candidate',[CandidateController::class,'candidateRegister'])->name('candidate.register');
     Route::get('/mayor_view{id}{e_id}',[CandidateController::class,'mayorView'])->name('mayor.view');
     Route::get('/Deputy_mayor_view{id}{e_id}',[CandidateController::class,'deputyMayorView'])->name('Deputy_mayor.view');
+    Route::get('/candidate_view{id}{e_id}',[CandidateController::class,'candidateView'])->name('candidate.view');
     Route::get('/mayor_profile{id}',[CandidateController::class,'mayorProfile'])->name('mayorProfile');
     Route::get('/edit_mayor{id}',[CandidateController::class,'mayorEditView'])->name('edit_mayor');
+
     Route::patch('/mayor_update{id}',[CandidateController::class,'mayorUpdate'])->name('mayor.update');
     Route::delete('/delete_mayor{id}',[CandidateController::class,'mayorDelete'])->name('delete_mayor');
+
     Route::get('/mayor_search{id}{e_id}',[CandidateController::class,'mayorSearch'])->name('mayor_search');
     Route::get('/depatyMayor_search{id}{e_id}',[CandidateController::class,'depatyMayorSearch'])->name('Depatymayor_search');
 

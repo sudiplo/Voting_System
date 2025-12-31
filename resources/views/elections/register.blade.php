@@ -131,8 +131,7 @@
                                             <td class="px-4 py-2">{{ $ward->number }}</td>
                                             <td class="px-4 py-2">{{ $ward->name }}</td>
                                             <td class="p-4  space-x-2">
-                                                {{-- {{ Route('candidate.view', ['id' =>$ward->id, 'e_id' => $election->id]) }} --}}
-                                                <a href="" class="px-3 py-1 bg-blue-400 hover:bg-blue-500 text-white rounded text-xs">
+                                                <a href="{{ Route('candidate.view', ['id' =>$ward->id, 'e_id' => $election->id]) }}" class="px-3 py-1 bg-blue-400 hover:bg-blue-500 text-white rounded text-xs">
                                                     View Candidates
                                                 </a>
                                             </td>

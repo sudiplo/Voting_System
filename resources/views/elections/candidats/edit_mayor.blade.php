@@ -1,4 +1,5 @@
 <x-defult_layout>
+    @if($mayor)
     <!-- ================= current location ================= -->
     <header class="w-full glass px-6 py-4 flex justify-between items-center shadow-xl">
         <div class="flex items-center gap-4">
@@ -20,6 +21,7 @@
         </div>
     </header>
 {{--  --}}
+
     <div class="max-w-5xl mx-auto my-10 p-8 bg-white rounded-xl shadow-lg">
         <div class="relative h-56 group">
             <img src="{{$mayor->citizen->photo}}" alt="Cover" class="w-full h-full object-cover brightness-90 group-hover:brightness-100 transition-all duration-500"/>
@@ -53,6 +55,8 @@
 
             <input type="number" name="palika_id" value="{{ $mayor->palika_id }}" class="hidden w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 hover:border-indigo-500 transition" required>
 
+            <input type="number" name="ward_id" value="{{ $mayor->citizen->ward_id}}" class="hidden w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 hover:border-indigo-500 transition" required>
+
             <input type="number" name="election_id" value="{{ $mayor->election }}" class="hidden w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 hover:border-indigo-500 transition" required>
             <div>
                 <label class="block text-sm font-semibold text-gray-700">Post</label>
@@ -62,6 +66,10 @@
                     <option value="{{ $mayor->post }}">{{ $mayor->post }}</option>
                     <option value="Mayor">Mayor</option>
                     <option value="Deputy Mayor">Deputy Mayor</option>
+                    <option value="Ward Chairperson">Ward Chairperson</option>
+                    <option value="Ward Member">Ward Member</option>
+                    <option value="Ward Member(Women)">Ward Member(Women)</option>
+                    <option value="Ward Member(Dalit)">Ward Member(Dalit)</option>
                 </select>
             </div>
 
@@ -95,4 +103,10 @@
             </div>
         </form>
     </div>
+    @else
+    {{-- If no mayor data is found, show this message --}}
+    <div class="text-center text-xl font-semibold text-gray-700 mt-10">
+        No Data Found
+    </div>
+@endif
 </x-defult_layout>

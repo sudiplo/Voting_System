@@ -74,7 +74,7 @@
 
     <!-- ================= show data ================= -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-    @foreach ($mayor as $mayor)
+    @foreach ($candidate as $mayor)
         <div class=" w-full max-w-md mx-auto bg-white border border-gray-200 rounded-2xl shadow-lg p-5">
             <div class="flex justify-between items-center mb-4">
                 <div>
