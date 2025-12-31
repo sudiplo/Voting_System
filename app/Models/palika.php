@@ -32,4 +32,10 @@ class palika extends Model
     {
         return $this->hasMany(c_mayor::class);
     }
+
+    //relation between palika and wardCandidate
+    public function wardCandidate(): HasMany
+    {
+        return $this->hasMany(wardCandidate::class);
+    }
 }

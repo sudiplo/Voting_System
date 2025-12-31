@@ -25,4 +25,10 @@ class ward extends Model
     {
         return $this->hasMany(votingCenter::class);
     }
+
+    //relation between ward and wardCandidate
+    public function wardCandidate(): HasMany
+    {
+        return $this->hasMany(wardCandidate::class);
+    }
 }

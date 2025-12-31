@@ -6,11 +6,11 @@
                 🗳️ Elections Management
             </a>
             <p class="text-2xs text-gray-500">|</p>
-            <a href="{{ Route('elections.index') }}" class="text-2xs text-gray-500 hover:text-blue-500">
-                Elections Candidates
+            <a href="{{ Route('elections.view',$election->id) }}" class="text-2xs text-gray-500 hover:text-blue-500">
+                Elections Regions
             </a>
             <p class="text-2xs text-gray-500">|</p>
-            <a href="{{ Route('elections.index') }}" class="text-2xs text-gray-500 hover:text-blue-500">
+            <a href="" class="text-2xs text-gray-500 hover:text-blue-500">
                 Register Mayor/Depty Mayor
             </a>
         </div>
@@ -111,13 +111,15 @@
         </div>
 
 
-        <form action="{{ Route('mayor.register') }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3" enctype="multipart/form-data">
+        <form action="{{ Route('candidate.register') }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3" enctype="multipart/form-data">
             @csrf
             <input type="number" name="citizen_id" value="{{ $citizen->id }}" class="hidden w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 hover:border-indigo-500 transition" required>
 
             <input type="number" name="district_id" value="{{ $citizen->district_id }}"  class="hidden w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 hover:border-indigo-500 transition" required>
 
             <input type="number" name="palika_id" value="{{ $citizen->palika_id }}" class="hidden w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 hover:border-indigo-500 transition" required>
+
+            <input type="number" name="ward_id" value="{{ $citizen->ward_id }}" class="hidden w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 hover:border-indigo-500 transition" required>
 
             <input type="number" name="election_id" value="{{ $election->id }}" class="hidden w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 hover:border-indigo-500 transition" required>
 
@@ -129,6 +131,10 @@
                     <option value="">Select Post</option>
                     <option value="Mayor">Mayor</option>
                     <option value="Deputy Mayor">Deputy Mayor</option>
+                    <option value="Ward Chairperson">Ward Chairperson</option>
+                    <option value="Ward Member">Ward Member</option>
+                    <option value="Ward Member(Women)">Ward Member(Women)</option>
+                    <option value="Ward Member(Dalit)">Ward Member(Dalit)</option>
                 </select>
             </div>
 

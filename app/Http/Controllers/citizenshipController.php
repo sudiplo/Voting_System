@@ -40,7 +40,7 @@ class citizenshipController extends Controller
             'palika_id' => ['required', 'integer', 'exists:palikas,id'],
             'ward_id' => ['required', 'integer', 'exists:wards,id'],
             'partner' => ['nullable', 'string', 'max:255'],
-            'photo' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'photo' => 'required|image|mimes:jpg,jpeg,png|max:6144',
         ]);
 
         //==========================Handle the uploaded photo file=====================================================================
@@ -49,7 +49,7 @@ class citizenshipController extends Controller
             $filename = time() . '_' . $photo->getClientOriginalName();
             $photo->move(public_path('images'), $filename);
         } else {
-            toast("Photo size should be less than 2MB","error");
+            toast("Photo size should be less than 6MB","error");
             return back();
         }
 
@@ -122,13 +122,13 @@ class citizenshipController extends Controller
             'palika_id' => ['required', 'integer', 'exists:palikas,id'],
             'ward_id' => ['required', 'integer', 'exists:wards,id'],
             'partner' => ['nullable', 'string', 'max:255'],
-            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'photo' => 'required|image|mimes:jpg,jpeg,png|max:6144',
         ]);
 
-        if($request->hasFile('photo') && $request->file('photo')->getSize() > 2048 * 1024){
-            toast("Photo size should be less than 2MB","error");
-            return back();
-        }
+        // if($request->hasFile('photo') && $request->file('photo')->getSize() > 2048 * 1024){
+        //     toast("Photo size should be less than 6MB","error");
+        //     return back();
+        // }
 
         $citizen = Citizenship::find($id);
         $citizen->name_nepali = $request->nepaliName;

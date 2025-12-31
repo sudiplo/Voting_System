@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function () {
 
     //==========================citizenshipController======================================================================
     Route::get('/citizenship',[citizenshipController::class,'view'])->name('citizen.view');
-    Route::get('/citizenship/register',[citizenshipController::class,'registerView'])->name('citizen.registerView');
+    Route::get('/citizenship_register',[citizenshipController::class,'registerView'])->name('citizen.registerView');
     Route::post('citizenship',[citizenshipController::class,'create'])->name('citizen.create');
     Route::get('/citizens', [citizenshipController::class, 'index'])->name('citizens.index');
     Route::get('/citizen_profile{id}', [citizenshipController::class, 'profile'])->name('citizen.profile');
@@ -68,8 +68,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/elections_view_{id}',[ElectionController::class,'view'])->name('elections.view');
 
     // ==========================CandidateController======================================================================
-    Route::get('/register_mayor{id}',[CandidateController::class,'registerMayorView'])->name('register_mayor.index');
-    Route::post('/register_mayor',[CandidateController::class,'mayorRegister'])->name('mayor.register');
+    Route::get('/register_mayor{id}',[CandidateController::class,'registerMayorView'])->name('register_candidate.index');
+    Route::post('/register_candidate',[CandidateController::class,'candidateRegister'])->name('candidate.register');
     Route::get('/mayor_view{id}{e_id}',[CandidateController::class,'mayorView'])->name('mayor.view');
     Route::get('/Deputy_mayor_view{id}{e_id}',[CandidateController::class,'deputyMayorView'])->name('Deputy_mayor.view');
     Route::get('/mayor_profile{id}',[CandidateController::class,'mayorProfile'])->name('mayorProfile');

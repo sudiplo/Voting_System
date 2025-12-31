@@ -7,6 +7,7 @@ use App\Models\c_mayor;
 use App\Models\citizenship;
 use App\Models\Election;
 use App\Models\palika;
+use App\Models\wardCandidate;
 
 class CandidateController extends Controller
 {
@@ -36,12 +37,13 @@ class CandidateController extends Controller
         return view('elections.register_mayor', compact('citizen', 'citizenships', 'search','election'));
     }
 
-//==========================Register Mayor/Depaty Mayor==============================================================================
-    public function mayorRegister(Request $request){
+//==========================Register Candidate==============================================================================
+    public function candidateRegister(Request $request){
         $request->validate([
             'citizen_id' => ['required', 'string', 'max:255'],
             'district_id' => ['required', 'string', 'max:255'],
             'palika_id' => ['required', 'string', 'max:255'],
+            'ward_id' => ['required', 'string', 'max:255'],
             'election_id' => ['required', 'string', 'max:255'],
             'post' => ['required', 'string', 'max:255'],
             'party' => ['required', 'string', 'max:255'],
@@ -58,11 +60,12 @@ class CandidateController extends Controller
             return back();
         }
 
-        if (c_mayor::where('citizen_id', $request->citizen_id)->exists()) {
+        if (c_mayor::where('citizen_id', $request->citizen_id)->where('election',$request->election_id)->exists()) {
             toast("Candidates already Register.","error");
             return redirect()-> back();
         }
-
+        // if candidate is deputy mayor or mayor
+        if ($request->post == 'Deputy Mayor' || $request->post == 'Mayor') {
         $mayor = new c_mayor();
         $mayor->citizen_id = $request->citizen_id;
         $mayor->district_id = $request->district_id;
@@ -76,13 +79,29 @@ class CandidateController extends Controller
         $mayor->save();
         toast("Data saved successfully", "success");
         return redirect()->back();
+        }else{
+            $candidate = new wardCandidate();
+            $candidate->citizen_id = $request->citizen_id;
+            $candidate->district_id = $request->district_id;
+            $candidate->palika_id = $request->palika_id;
+            $candidate->ward_id = $request->ward_id;
+            $candidate->election = $request->election_id;
+            $candidate->post = $request->post;
+            $candidate->party = $request->party;
+            $candidate->goal = $request->goal;
+            $candidate->photo = 'images/' . $filename;
+
+            $candidate->save();
+            toast("Data saved successfully", "success");
+            return redirect()->back();
+        }
     }
 
 //==========================Register Mayors view==============================================================================
     public function mayorView($id, $e_id){
         $e = Election::find($e_id);
         $palika = palika::find($id);
-        $mayor = c_mayor::where('election',$e_id)->where('post', 'Mayor')->get();
+        $mayor = c_mayor::where('election',$e_id)->where('post', 'Mayor')->where('palika_id',$id)->get();
         return view('elections.candidats.mayor',compact('mayor','palika','e'));
     }
 
@@ -91,7 +110,7 @@ class CandidateController extends Controller
     public function deputyMayorView($id, $e_id){
         $e = Election::find($e_id);
         $palika = palika::find($id);
-        $mayor = c_mayor::where('election',$e_id)->where('post', 'Deputy Mayor')->get();
+        $mayor = c_mayor::where('election',$e_id)->where('post', 'Deputy Mayor')->where('palika_id',$id)->get();
         return view('elections.candidats.Depaty_mayor',compact('mayor','palika','e'));
     }
 

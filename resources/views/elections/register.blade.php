@@ -29,7 +29,7 @@
             <button id="add" data-dropdown-toggle="dropdown"
                 class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500
                        text-white rounded-xl shadow-md hover:bg-emerald-600 transition">
-                ➕ Register New Mayor/Depty Mayor
+                ➕ Register New Candidate
             </button>
         </div>
 
@@ -42,7 +42,7 @@
 
             <div class="p-5 border-b">
                 <h3 class="text-lg font-semibold text-gray-800">
-                    Register New  Mayor/ Depty Mayor Candidate
+                    Register New Candidate
                 </h3>
                 <p class="text-sm text-gray-500">
                     Enter Citizenship Number to Serch the Candidate details and Register.
@@ -50,7 +50,7 @@
             </div>
 
             <form method="GET"
-                  action="{{ route('register_mayor.index',$election->id) }}" class="p-5 space-y-4">
+                  action="{{ route('register_candidate.index',$election->id) }}" class="p-5 space-y-4">
                 @csrf
 
                 <div>
@@ -131,7 +131,8 @@
                                             <td class="px-4 py-2">{{ $ward->number }}</td>
                                             <td class="px-4 py-2">{{ $ward->name }}</td>
                                             <td class="p-4  space-x-2">
-                                                <a href="{{ Route('districts.wardEdit',$ward->id) }}" class="px-3 py-1 bg-blue-400 hover:bg-blue-500 text-white rounded text-xs">
+                                                {{-- {{ Route('candidate.view', ['id' =>$ward->id, 'e_id' => $election->id]) }} --}}
+                                                <a href="" class="px-3 py-1 bg-blue-400 hover:bg-blue-500 text-white rounded text-xs">
                                                     View Candidates
                                                 </a>
                                             </td>
