@@ -176,6 +176,33 @@ class CandidateController extends Controller
 
         // if candidate is deputy mayor or mayor
         if ($request->post == 'Deputy Mayor' || $request->post == 'Mayor') {
+            $candidate = wardCandidate::find($id);
+            //if data is not come from the c_mayor table
+            if ($candidate) {
+                $oldPhoto = $candidate ? $candidate->photo : null;
+                $mayor = new c_mayor();
+                $mayor->citizen_id = $request->citizen_id;
+                $mayor->district_id = $request->district_id;
+                $mayor->palika_id = $request->palika_id;
+                // $mayor->ward_id = $request->ward_id;
+                $mayor->election = $request->election_id;
+                $mayor->post = $request->post;
+                $mayor->party = $request->party;
+                $mayor->goal = $request->goal;
+                // $mayor->photo = 'images/' . $filename;
+                if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
+                    $photo = $request->file('photo');
+                    $filename = time() . '_' . $photo->getClientOriginalName();
+                    $photo->move(public_path('images'), $filename);
+                    $mayor->photo = 'images/' . $filename;
+                } else {
+                    $mayor->photo = $oldPhoto ?? 'images/default.png';
+                }
+                $candidate->delete();
+                $mayor->save();
+                toast("Data saved successfully", "success");
+                return redirect()->back();
+            }
             $mayor = c_mayor::find($id);
             $mayor->citizen_id = $request->citizen_id;
             $mayor->district_id = $request->district_id;
@@ -199,9 +226,10 @@ class CandidateController extends Controller
             toast("Data saved successfully", "success");
             return redirect()->back();
         }
-        else
+        else  // if candidate is  not deputy mayor or mayor
             {
             $mayor = c_mayor::find($id);
+            //if data come from the c_mayor table
             if ($mayor) {
                 $mayor->delete();
                 $oldPhoto = $mayor ? $mayor->photo : null;
