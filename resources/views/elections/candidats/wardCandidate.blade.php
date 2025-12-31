@@ -55,17 +55,29 @@
             </div>
 
             <div class="flex items-center gap-3 bg-gray-100 p-2 rounded-xl shadow-inner">
-                <a href="{{ Route('mayor.view', ['id' => $ward->palika->id, 'e_id' => $e->id]) }}"
+                <a href="{{ Route('candidate.view', ['id' =>$ward->id, 'e_id' => $e->id]) }}"
                 class="px-5 py-2 rounded-lg text-sm font-semibold transition-all
                         bg-indigo-600 text-white shadow
                         hover:bg-indigo-700">
-                    Mayor
+                    Chairperson
                 </a>
 
-                <a href="{{ Route('Deputy_mayor.view', ['id' => $ward->palika->id, 'e_id' => $e->id]) }}"
+                <a href="{{ Route('candidate.view', ['id' =>$ward->id, 'e_id' => $e->id]) }}"
                 class="px-5 py-2 rounded-lg text-sm font-semibold transition-all
                         text-gray-600 hover:text-indigo-600 hover:bg-white hover:shadow">
-                    Deputy Mayor
+                    Ward Member
+                </a>
+
+                <a href="{{ Route('candidateWonen.view', ['id' =>$ward->id, 'e_id' => $e->id]) }}"
+                class="px-5 py-2 rounded-lg text-sm font-semibold transition-all
+                        text-gray-600 hover:text-indigo-600 hover:bg-white hover:shadow">
+                    Women
+                </a>
+
+                <a href="{{ Route('candidate.view', ['id' =>$ward->id, 'e_id' => $e->id]) }}"
+                class="px-5 py-2 rounded-lg text-sm font-semibold transition-all
+                        text-gray-600 hover:text-indigo-600 hover:bg-white hover:shadow">
+                    Dalit
                 </a>
             </div>
 
