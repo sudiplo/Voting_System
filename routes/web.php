@@ -83,7 +83,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/delete_candidate{id}',[CandidateController::class,'candidateDelete'])->name('delete_candidate');
 
     Route::get('/mayor_search{id}{e_id}',[CandidateController::class,'mayorSearch'])->name('mayor_search');
-    Route::get('/depatyMayor_search{id}{e_id}',[CandidateController::class,'depatyMayorSearch'])->name('Depatymayor_search');
+    Route::get('/depatyMayor_search{id}{e_id}',[CandidateController::class,'depatyMayorSearch'])->name('depatymayor_search');
+    Route::get('/chairperson_search{id}{e_id}',[CandidateController::class,'wardChairpersonSearch'])->name('chairperson_search');
+    Route::get('/candidateWomen_search{id}{e_id}',[CandidateController::class,'candidateWomenSearch'])->name('candidateWomen_search');
+    Route::get('/candidateMember_search{id}{e_id}',[CandidateController::class,'candidateMemberSearch'])->name('candidateMember_search');
+    Route::get('/candidateDalit_search{id}{e_id}',[CandidateController::class,'candidateDalitSearch'])->name('candidateDalit_search');
+
 
 });
 

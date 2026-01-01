@@ -31,7 +31,7 @@
                     </span>
                 </p>
                 <!-- Search -->
-                <form method="GET" action="{{ Route('mayor_search', ['id' => $ward->palika->id, 'e_id' => $e->id]) }}" class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto mt-2">
+                <form method="GET" action="{{ Route('candidateDalit_search', ['id' => $ward->palika->id, 'e_id' => $e->id]) }}" class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto mt-2">
                     <div class="relative w-full sm:w-96">
                         <input
                             type="text"

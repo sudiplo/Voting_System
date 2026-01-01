@@ -13,7 +13,7 @@ use App\Models\ward;
 class CandidateController extends Controller
 {
     //
-
+//<--===================================================REGISTER PAGE===========================================================-->
     //==========================Register Mayor/Depaty Mayor view==============================================================================
     public function registerCandidateView(Request $request,$id)
     {
@@ -38,7 +38,10 @@ class CandidateController extends Controller
         return view('elections.register_candidate', compact('citizen', 'citizenships', 'search','election'));
     }
 
-//==========================Register Candidate==============================================================================
+
+
+//<--===================================================REGISTRATION SECTION===========================================================-->
+    //==========================Register Candidate==============================================================================
     public function candidateRegister(Request $request){
         $request->validate([
             'citizen_id' => ['required', 'string', 'max:255'],
@@ -103,7 +106,10 @@ class CandidateController extends Controller
         }
     }
 
-//==========================Mayors view==============================================================================
+
+
+//<--===================================================PAGE VISIT SECTION===========================================================-->
+    //==========================Mayors view==============================================================================
     public function mayorView($id, $e_id){
         $e = Election::find($e_id);
         $palika = palika::find($id);
@@ -112,7 +118,7 @@ class CandidateController extends Controller
     }
 
 
-//==========================Deputy Mayors view==============================================================================
+    //==========================Deputy Mayors view==============================================================================
     public function deputyMayorView($id, $e_id){
         $e = Election::find($e_id);
         $palika = palika::find($id);
@@ -121,7 +127,7 @@ class CandidateController extends Controller
     }
 
 
-//==========================Ward candidate Ward Chairperson view==============================================================================
+    //==========================Ward candidate Ward Chairperson view==============================================================================
     public function candidateView($id,$e_id){
         $e = Election::find($e_id);
         $ward = ward::find($id);
@@ -129,7 +135,7 @@ class CandidateController extends Controller
         return view('elections.candidats.wardCandidate',compact('candidate','ward','e'));
     }
 
-//==========================ward candidate ward Member(Women) view==============================================================================
+    //==========================ward candidate ward Member(Women) view==============================================================================
     public function candidateWomenView($id,$e_id){
         $e = Election::find($e_id);
         $ward = ward::find($id);
@@ -137,7 +143,7 @@ class CandidateController extends Controller
         return view('elections.candidats.candidateWomen',compact('candidate','ward','e'));
     }
 
-//==========================ward candidate ward Member view==============================================================================
+    //==========================ward candidate ward Member view==============================================================================
     public function candidateMemberView($id,$e_id){
         $e = Election::find($e_id);
         $ward = ward::find($id);
@@ -152,7 +158,7 @@ class CandidateController extends Controller
         return view('elections.candidats.dalit',compact('candidate','ward','e'));
     }
 
-//==========================Candidate Profile==============================================================================
+    //==========================Candidate Profile==============================================================================
     public function candidateProfile($id,$e_id){
         $candidate = c_mayor::find($id);
         if(!$candidate){
@@ -166,7 +172,7 @@ class CandidateController extends Controller
         return view('elections.candidats.profile',compact('candidate','e','id'));
     }
 
-//==========================Edit Candidate view==============================================================================
+    //==========================Edit Candidate view==============================================================================
     public function candidateEditView($id,$e_id){
         $candidate = c_mayor::find($id);
         if (!$candidate) {
@@ -186,7 +192,9 @@ class CandidateController extends Controller
     }
 
 
-//==========================Update Candidate data==============================================================================
+
+//<--===================================================UPDATE SECTION===========================================================-->
+    //==========================Update Candidate data==============================================================================
     public function candidateUpdate(Request $request,$id){
         $request->validate([
             'citizen_id' => ['required', 'string', 'max:255'],
@@ -315,7 +323,11 @@ class CandidateController extends Controller
             return redirect()->back();
         }
     }
-//==========================Candidate Delete==============================================================================
+
+
+
+//<--===================================================DELETE SECTION===========================================================-->
+    //==========================Candidate Delete==============================================================================
     public function candidateDelete($id){
         $candidate = c_mayor::find($id);
         if(!$candidate){
@@ -328,7 +340,11 @@ class CandidateController extends Controller
         toast("Candidate Data Delete successfully","success");
         return redirect()->Route('elections.index');
     }
-//==========================Mayors search==============================================================================
+
+
+
+//<--===================================================SEARCH SECTION===========================================================-->
+    //==========================Mayors search==============================================================================
     public function mayorSearch(Request $request,$id,$e_id)
     {
         $e = Election::find($e_id);
@@ -345,7 +361,8 @@ class CandidateController extends Controller
 
         return view('elections.candidats.mayor', compact('candidate', 'search','palika','e'));
     }
-//==========================Depaty Mayors search==============================================================================
+
+    //==========================Depaty Mayors search==============================================================================
     public function depatyMayorSearch(Request $request,$id,$e_id)
     {
         $e = Election::find($e_id);
@@ -361,5 +378,77 @@ class CandidateController extends Controller
             ->get();
 
         return view('elections.candidats.Depaty_mayor', compact('candidate', 'search','palika','e'));
+    }
+
+    //==========================Ward Chairperson search==============================================================================
+    public function wardChairpersonSearch(Request $request,$id,$e_id)
+    {
+        $e = Election::find($e_id);
+        $ward = ward::find($id);
+        $search = $request->get('search');
+
+        $candidate = wardCandidate::with('citizen')
+            ->where('post', 'Ward Chairperson')
+            ->whereHas('citizen', function ($query) use ($search) {
+                $query->where('name_english', 'like', "%{$search}%")
+                    ->orWhere('name_nepali', 'like', "%{$search}%");
+            })
+            ->get();
+
+        return view('elections.candidats.wardCandidate', compact('candidate', 'search','ward','e'));
+    }
+
+    //==========================Ward Member Women search==============================================================================
+    public function candidateWomenSearch(Request $request,$id,$e_id)
+    {
+        $e = Election::find($e_id);
+        $ward = ward::find($id);
+        $search = $request->get('search');
+
+        $candidate = wardCandidate::with('citizen')
+            ->where('post', 'Ward Member(Women)')
+            ->whereHas('citizen', function ($query) use ($search) {
+                $query->where('name_english', 'like', "%{$search}%")
+                    ->orWhere('name_nepali', 'like', "%{$search}%");
+            })
+            ->get();
+
+        return view('elections.candidats.candidateWomen', compact('candidate', 'search','ward','e'));
+    }
+
+    //==========================Ward Member search==============================================================================
+    public function candidateMemberSearch(Request $request,$id,$e_id)
+    {
+        $e = Election::find($e_id);
+        $ward = ward::find($id);
+        $search = $request->get('search');
+
+        $candidate = wardCandidate::with('citizen')
+            ->where('post', 'Ward Member')
+            ->whereHas('citizen', function ($query) use ($search) {
+                $query->where('name_english', 'like', "%{$search}%")
+                    ->orWhere('name_nepali', 'like', "%{$search}%");
+            })
+            ->get();
+
+        return view('elections.candidats.member', compact('candidate', 'search','ward','e'));
+    }
+
+    //==========================Ward Member search==============================================================================
+    public function candidateDalitSearch(Request $request,$id,$e_id)
+    {
+        $e = Election::find($e_id);
+        $ward = ward::find($id);
+        $search = $request->get('search');
+
+        $candidate = wardCandidate::with('citizen')
+            ->where('post', 'Ward Member(Dalit)')
+            ->whereHas('citizen', function ($query) use ($search) {
+                $query->where('name_english', 'like', "%{$search}%")
+                    ->orWhere('name_nepali', 'like', "%{$search}%");
+            })
+            ->get();
+
+        return view('elections.candidats.dalit', compact('candidate', 'search','ward','e'));
     }
 }
