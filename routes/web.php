@@ -73,12 +73,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/mayor_view{id}{e_id}',[CandidateController::class,'mayorView'])->name('mayor.view');
     Route::get('/Deputy_mayor_view{id}{e_id}',[CandidateController::class,'deputyMayorView'])->name('Deputy_mayor.view');
     Route::get('/candidate_view{id}{e_id}',[CandidateController::class,'candidateView'])->name('candidate.view');
-    Route::get('/candidatewemen_view{id}{e_id}',[CandidateController::class,'candidateWomenView'])->name('candidateWonen.view');
-    Route::get('/mayor_profile{id}{e_id}',[CandidateController::class,'mayorProfile'])->name('mayorProfile');
-    Route::get('/edit_mayor{id}{e_id}',[CandidateController::class,'mayorEditView'])->name('edit_mayor');
+    Route::get('/candidateWomen_view{id}{e_id}',[CandidateController::class,'candidateWomenView'])->name('candidateWonen.view');
+    Route::get('/candidateMember_view{id}{e_id}',[CandidateController::class,'candidateMemberView'])->name('candidateMember.view');
+    Route::get('/candidate_profile{id}{e_id}',[CandidateController::class,'candidateProfile'])->name('candidateProfile');
+    Route::get('/edit_candidate{id}{e_id}',[CandidateController::class,'candidateEditView'])->name('edit_candidate');
 
-    Route::patch('/mayor_update{id}',[CandidateController::class,'mayorUpdate'])->name('mayor.update');
-    Route::delete('/delete_mayor{id}',[CandidateController::class,'mayorDelete'])->name('delete_mayor');
+    Route::patch('/candidate_update{id}',[CandidateController::class,'candidateUpdate'])->name('candidate.update');
+    Route::delete('/delete_candidate{id}',[CandidateController::class,'candidateDelete'])->name('delete_candidate');
 
     Route::get('/mayor_search{id}{e_id}',[CandidateController::class,'mayorSearch'])->name('mayor_search');
     Route::get('/depatyMayor_search{id}{e_id}',[CandidateController::class,'depatyMayorSearch'])->name('Depatymayor_search');

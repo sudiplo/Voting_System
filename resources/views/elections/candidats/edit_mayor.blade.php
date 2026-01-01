@@ -46,7 +46,7 @@
 
         <div class="mt-8 mb-6 h-[2px] w-32 bg-gradient-to-r from-blue-600 to-green-500 rounded-full"></div>
 
-        <form action="{{ Route('mayor.update',$candidate->id) }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3" enctype="multipart/form-data">
+        <form action="{{ Route('candidate.update',$candidate->id) }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3" enctype="multipart/form-data">
             @csrf
             @method('patch')
             <input type="number" name="citizen_id" value="{{ $candidate->citizen_id }}" class="hidden w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 hover:border-indigo-500 transition" required>

@@ -63,7 +63,7 @@
             </div>
 
             <div class="mt-2">
-                <form action="{{ Route('delete_mayor', $candidate->id) }}" method="POST" class="mt-2 inline-block">
+                <form action="{{ Route('delete_candidate', $candidate->id) }}" method="POST" class="mt-2 inline-block">
                     @csrf
                     @method('delete')
                     <button type="submit" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-red-600 to-yellow-500 hover:bg-gradient-to-r hover:from-red-700 hover:to-yellow-600

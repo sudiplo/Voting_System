@@ -103,7 +103,7 @@ class CandidateController extends Controller
         }
     }
 
-//==========================Register Mayors view==============================================================================
+//==========================Mayors view==============================================================================
     public function mayorView($id, $e_id){
         $e = Election::find($e_id);
         $palika = palika::find($id);
@@ -112,7 +112,7 @@ class CandidateController extends Controller
     }
 
 
-//==========================Register Deputy Mayors view==============================================================================
+//==========================Deputy Mayors view==============================================================================
     public function deputyMayorView($id, $e_id){
         $e = Election::find($e_id);
         $palika = palika::find($id);
@@ -121,7 +121,7 @@ class CandidateController extends Controller
     }
 
 
-//==========================Register ward candidate Ward Chairperson view==============================================================================
+//==========================Ward candidate Ward Chairperson view==============================================================================
     public function candidateView($id,$e_id){
         $e = Election::find($e_id);
         $ward = ward::find($id);
@@ -129,15 +129,24 @@ class CandidateController extends Controller
         return view('elections.candidats.wardCandidate',compact('candidate','ward','e'));
     }
 
-//==========================Register ward candidate ward Member(Women) view==============================================================================
+//==========================ward candidate ward Member(Women) view==============================================================================
     public function candidateWomenView($id,$e_id){
         $e = Election::find($e_id);
         $ward = ward::find($id);
         $candidate = wardCandidate::where('election',$e_id)->where('post', 'Ward Member(Women)')->where('ward_id',$id)->get();
         return view('elections.candidats.candidateWomen',compact('candidate','ward','e'));
     }
-//==========================Register Mayor Profile==============================================================================
-    public function mayorProfile($id,$e_id){
+
+//==========================ward candidate ward Member view==============================================================================
+    public function candidateMemberView($id,$e_id){
+        $e = Election::find($e_id);
+        $ward = ward::find($id);
+        $candidate = wardCandidate::where('election',$e_id)->where('post', 'Ward Member')->where('ward_id',$id)->get();
+        return view('elections.candidats.member',compact('candidate','ward','e'));
+    }
+
+//==========================Candidate Profile==============================================================================
+    public function candidateProfile($id,$e_id){
         $candidate = c_mayor::find($id);
         if(!$candidate){
             $candidate = wardCandidate::find($id);
@@ -150,8 +159,8 @@ class CandidateController extends Controller
         return view('elections.candidats.profile',compact('candidate','e','id'));
     }
 
-//==========================Edit Mayors view==============================================================================
-    public function mayorEditView($id,$e_id){
+//==========================Edit Candidate view==============================================================================
+    public function candidateEditView($id,$e_id){
         $candidate = c_mayor::find($id);
         if (!$candidate) {
             $candidate = wardCandidate::find($id);
@@ -170,8 +179,8 @@ class CandidateController extends Controller
     }
 
 
-//==========================Update Mayors data==============================================================================
-    public function mayorUpdate(Request $request,$id){
+//==========================Update Candidate data==============================================================================
+    public function candidateUpdate(Request $request,$id){
         $request->validate([
             'citizen_id' => ['required', 'string', 'max:255'],
             'district_id' => ['required', 'string', 'max:255'],
@@ -299,8 +308,8 @@ class CandidateController extends Controller
             return redirect()->back();
         }
     }
-//==========================Mayors Delete==============================================================================
-    public function mayorDelete($id){
+//==========================Candidate Delete==============================================================================
+    public function candidateDelete($id){
         $candidate = c_mayor::find($id);
         if(!$candidate){
             $candidate = wardCandidate::find($id);

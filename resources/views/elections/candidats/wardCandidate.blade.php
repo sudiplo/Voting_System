@@ -67,7 +67,7 @@
                     Chairperson
                 </a>
 
-                <a href="{{ Route('candidate.view', ['id' =>$ward->id, 'e_id' => $e->id]) }}"
+                <a href="{{ Route('candidateMember.view', ['id' =>$ward->id, 'e_id' => $e->id]) }}"
                 class="px-5 py-2 rounded-lg text-sm font-semibold transition-all
                         text-gray-600 hover:text-indigo-600 hover:bg-white hover:shadow">
                     Ward Member
@@ -97,7 +97,7 @@
                 <div>
                     <h2 class="text-xl font-bold text-gray-800">{{ $c->post }} Candidate</h2>
                 </div>
-                <a href="{{ Route('edit_mayor',['id' => $c->id, 'e_id' => $e->id]) }}" class="inline-flex items-center px-3 py-1.5 bg-yellow-400 hover:bg-yellow-500 text-white rounded-lg text-xs transition">
+                <a href="{{ Route('edit_candidate',['id' => $c->id, 'e_id' => $e->id]) }}" class="inline-flex items-center px-3 py-1.5 bg-yellow-400 hover:bg-yellow-500 text-white rounded-lg text-xs transition">
                     Edit
                 </a>
             </div>
@@ -140,7 +140,7 @@
 
             <div class="border-t border-gray-200 my-4"></div>
 
-            <a href="{{ Route('mayorProfile',['id' => $c->id, 'e_id' => $e->id]) }}" class="block w-full text-center px-4 py-2 text-sm font-semibold bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+            <a href="{{ Route('candidateProfile',['id' => $c->id, 'e_id' => $e->id]) }}" class="block w-full text-center px-4 py-2 text-sm font-semibold bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
                     View Full Profile
             </a>
         </div>
