@@ -146,27 +146,27 @@ class CandidateController extends Controller
             return view('elections.candidats.profile',compact('candidate','id','e'));
         }
         $e = $candidate->election;
-        $id = $candidate->ward_id;
+        $id = $candidate->palika_id;
         return view('elections.candidats.profile',compact('candidate','e','id'));
     }
 
 //==========================Edit Mayors view==============================================================================
     public function mayorEditView($id,$e_id){
-        $mayor = c_mayor::find($id);
-        if (!$mayor) {
-            $mayor = wardCandidate::find($id);
-            if ($mayor) {
-                $e  = $mayor->election;
-                $id = $mayor->ward_id;
-                return view('elections.candidats.edit_mayor', compact('mayor', 'e', 'id'));
+        $candidate = c_mayor::find($id);
+        if (!$candidate) {
+            $candidate = wardCandidate::find($id);
+            if ($candidate) {
+                $e  = $candidate->election;
+                $id = $candidate->ward_id;
+                return view('elections.candidats.edit_mayor', compact('candidate', 'e', 'id'));
             }else{
                 $e = $e_id;
-                return view('elections.candidats.edit_mayor',compact('mayor','e'));
+                return view('elections.candidats.edit_mayor',compact('candidate','e'));
             }
         }
-        $e  = $mayor->election;
-        $id = $mayor->palika_id;
-        return view('elections.candidats.edit_mayor', compact('mayor', 'e', 'id'));
+        $e  = $candidate->election;
+        $id = $candidate->palika_id;
+        return view('elections.candidats.edit_mayor', compact('candidate', 'e', 'id'));
     }
 
 
