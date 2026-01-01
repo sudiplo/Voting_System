@@ -145,6 +145,13 @@ class CandidateController extends Controller
         return view('elections.candidats.member',compact('candidate','ward','e'));
     }
 
+    public function candidateDalitView($id,$e_id){
+        $e = Election::find($e_id);
+        $ward = ward::find($id);
+        $candidate = wardCandidate::where('election',$e_id)->where('post', 'Ward Member(Dalit)')->where('ward_id',$id)->get();
+        return view('elections.candidats.dalit',compact('candidate','ward','e'));
+    }
+
 //==========================Candidate Profile==============================================================================
     public function candidateProfile($id,$e_id){
         $candidate = c_mayor::find($id);

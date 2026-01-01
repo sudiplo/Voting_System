@@ -75,6 +75,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/candidate_view{id}{e_id}',[CandidateController::class,'candidateView'])->name('candidate.view');
     Route::get('/candidateWomen_view{id}{e_id}',[CandidateController::class,'candidateWomenView'])->name('candidateWonen.view');
     Route::get('/candidateMember_view{id}{e_id}',[CandidateController::class,'candidateMemberView'])->name('candidateMember.view');
+    Route::get('/candidateDalit_view{id}{e_id}',[CandidateController::class,'candidateDalitView'])->name('candidateDalit.view');
     Route::get('/candidate_profile{id}{e_id}',[CandidateController::class,'candidateProfile'])->name('candidateProfile');
     Route::get('/edit_candidate{id}{e_id}',[CandidateController::class,'candidateEditView'])->name('edit_candidate');
 

@@ -63,7 +63,7 @@
 
                 <a href="{{ Route('candidate.view', ['id' =>$ward->id, 'e_id' => $e->id]) }}"
                 class="px-5 py-2 rounded-lg text-sm font-semibold transition-all
-                        bg-indigo-600 text-white shadow hover:bg-indigo-700">
+                        text-gray-600 hover:text-indigo-600 hover:bg-white hover:shadow">
                     Chairperson
                 </a>
 
@@ -81,7 +81,7 @@
 
                 <a href="{{ Route('candidateDalit.view', ['id' =>$ward->id, 'e_id' => $e->id]) }}"
                 class="px-5 py-2 rounded-lg text-sm font-semibold transition-all
-                        text-gray-600 hover:text-indigo-600 hover:bg-white hover:shadow">
+                        bg-indigo-600 text-white shadow hover:bg-indigo-700">
                     Dalit
                 </a>
             </div>
