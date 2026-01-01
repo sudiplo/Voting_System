@@ -54,7 +54,7 @@
 
                 </div>
 
-                <div class="mt-8 mb-6 h-[2px] w-32 bg-gradient-to-r from-blue-600 to-green-500 rounded-full"></div>
+                <div class="mt-8 mb-6 h-[2px] w-32 bgserve-gradient-to-r from-blue-600 to-green-500 rounded-full"></div>
 
                 <div class="bg-gray-50/70 border border-gray-200 rounded-2xl p-6 shadow-inner">
                     <h2 class="text-lg font-bold text-gray-900 mb-3"> Vision & Commitment</h2>
@@ -63,10 +63,10 @@
             </div>
 
             <div class="mt-2">
-                <a href="{{ Route('edit_mayor', $mayor->id) }}" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-green-500 hover:bg-gradient-to-r
+                {{-- <a href="{{ Route('edit_mayor', $mayor->id) }}" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-green-500 hover:bg-gradient-to-r
                      hover:from-blue-700 hover:to-green-600 text-white rounded-lg text-xs font-semibold">
                     Edit Profile
-                </a>
+                </a> --}}
 
                 <form action="{{ Route('delete_mayor', $mayor->id) }}" method="POST" class="mt-2 inline-block">
                     @csrf

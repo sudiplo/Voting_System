@@ -148,14 +148,24 @@ class CandidateController extends Controller
     }
 
 //==========================Edit Mayors view==============================================================================
-    public function mayorEditView($id){
+    public function mayorEditView($id,$e_id){
         $mayor = c_mayor::find($id);
         if (!$mayor) {
             $mayor = wardCandidate::find($id);
-            return view('elections.candidats.edit_mayor',compact('mayor'));
+            if ($mayor) {
+                $e  = $mayor->election;
+                $id = $mayor->ward_id;
+                return view('elections.candidats.edit_mayor', compact('mayor', 'e', 'id'));
+            }else{
+                $e = $e_id;
+                return view('elections.candidats.edit_mayor',compact('mayor','e'));
+            }
         }
-        return view('elections.candidats.edit_mayor',compact('mayor'));
+        $e  = $mayor->election;
+        $id = $mayor->palika_id;
+        return view('elections.candidats.edit_mayor', compact('mayor', 'e', 'id'));
     }
+
 
 //==========================Update Mayors data==============================================================================
     public function mayorUpdate(Request $request,$id){
