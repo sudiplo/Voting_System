@@ -140,7 +140,7 @@
 
             <div class="border-t border-gray-200 my-4"></div>
 
-            <a href="{{ Route('mayorProfile',$c->id) }}" class="block w-full text-center px-4 py-2 text-sm font-semibold bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+            <a href="{{ Route('mayorProfile',['id' => $c->id, 'e_id' => $e->id]) }}" class="block w-full text-center px-4 py-2 text-sm font-semibold bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
                     View Full Profile
             </a>
         </div>

@@ -15,7 +15,7 @@
                 Register Candidates
             </a>
             <p class="text-2xs text-gray-500">|</p>
-            <a href="{{ Route('mayorProfile',$mayor->id) }}" class="text-2xs text-gray-500 hover:text-blue-500">
+            <a href="" class="text-2xs text-gray-500 hover:text-blue-500">
                 {{ $mayor->citizen->name_nepali }} Data edit
             </a>
         </div>

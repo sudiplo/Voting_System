@@ -137,14 +137,17 @@ class CandidateController extends Controller
         return view('elections.candidats.candidateWomen',compact('candidate','ward','e'));
     }
 //==========================Register Mayor Profile==============================================================================
-    public function mayorProfile($id){
-        $mayor = c_mayor::find($id);
-        if(!$mayor){
-            $mayor = wardCandidate::find($id);
-            return view('elections.candidats.profile',compact('mayor'));
+    public function mayorProfile($id,$e_id){
+        $candidate = c_mayor::find($id);
+        if(!$candidate){
+            $candidate = wardCandidate::find($id);
+            $e = $candidate->election;
+            $id = $candidate->ward_id;
+            return view('elections.candidats.profile',compact('candidate','id','e'));
         }
-
-        return view('elections.candidats.profile',compact('mayor'));
+        $e = $candidate->election;
+        $id = $candidate->ward_id;
+        return view('elections.candidats.profile',compact('candidate','e','id'));
     }
 
 //==========================Edit Mayors view==============================================================================
