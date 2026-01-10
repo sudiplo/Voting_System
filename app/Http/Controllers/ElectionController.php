@@ -11,11 +11,11 @@ use Carbon\Carbon;
 class ElectionController extends Controller
 {
     //==========================index view==============================================================================
-    public function index(){
-        $elections = Election::all();
+    public function indexSearch(Request $request){
+        $search = $request->get('search');
+        $elections = Election::where('title','like',"%$search%")->get();
         return view('elections.index', compact('elections'));
     }
-
 
     //==========================Register new Election==============================================================================
     public function create(Request $request){
