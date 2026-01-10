@@ -24,6 +24,28 @@
                 <p class="mt-2 text-gray-500">
                     Election Candidats records details overview and Register new Candidates.
                 </p>
+                <!-- Search -->
+                <form method="GET" action="{{ Route('elections.district',$election->id) }}" class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto mt-2">
+                    <div class="relative w-full sm:w-96">
+                        <input
+                            type="text"
+                            name="search"
+                            value="{{ request('search') }}"
+                            placeholder="Search District"
+                            class="w-full pl-5 pr-10 py-3 rounded-xl border border-gray-300
+                                shadow-sm focus:ring-2 focus:ring-indigo-500
+                                focus:border-indigo-500 outline-none transition"
+                        />
+                        <span class="absolute right-4 top-3 text-gray-400">🔍</span>
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="px-6 py-3 bg-indigo-600 text-white rounded-xl
+                            hover:bg-indigo-700 shadow-md transition">
+                        Search
+                    </button>
+                </form>
             </div>
 
             <button id="add" data-dropdown-toggle="dropdown"

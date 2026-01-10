@@ -98,4 +98,27 @@ class ElectionController extends Controller
         return view('elections.register',compact('districts','election'));
     }
 
+    //==========================search districh inside Election==============================================================================
+    public function district(Request $request,$id){
+        $election = Election::find($id);
+        $districts = district::with('palika.wards')->get();
+        $search = $request->get('search');
+
+        $districts = district::with('palika')
+            ->when($search, function ($query) use ($search) {
+                $query->where('name', 'like', "%$search%")
+                      ->orWhere('name_nepali', 'like', "%$search%")
+                      ->orWhereHas('palika', function ($q) use ($search) {
+                          $q->where('name', 'like', "%$search%");
+                      });
+            })
+            ->get();
+
+        // For autocomplete suggestions
+        $suggestions = district::where('name', 'like', "%$search%")
+            ->pluck('name');
+
+        return view('elections.register', compact('districts', 'suggestions', 'search','districts','election'));
+    }
+
 }
