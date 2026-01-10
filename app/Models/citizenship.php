@@ -8,6 +8,35 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class citizenship extends Model
 {
+    // protected $table = 'c';
+    //  protected $fillable = [
+    //     'name_nepali',
+    //     'name_english',
+    //     'citizenship_number',
+    //     'father',
+    //     'mother',
+    //     'dob',
+    //     'gender',
+    //     'type',
+    //     'district_id',
+    //     'palika_id',
+    //     'ward_id',
+    //     'partner',
+    //     'photo',
+    // ];
+
+    // protected $casts = [
+    //     'name_nepali'        => 'encrypted',
+    //     'name_english'       => 'encrypted',
+    //     'citizenship_number' => 'encrypted',
+    //     'father'             => 'encrypted',
+    //     'mother'             => 'encrypted',
+    //     'dob'                => 'encrypted:date',
+    //     'gender'             => 'encrypted:enum',
+    //     'type'               => 'encrypted:enum',
+    //     'partner'            => 'encrypted',
+    //     'photo'              => 'encrypted',
+    // ];
     //relation between citizen and district
     public function district(): BelongsTo
     {

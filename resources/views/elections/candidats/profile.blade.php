@@ -49,6 +49,11 @@
                     <span class="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium"> {{$candidate->party}}</span>
                 </div>
 
+                <div class="flex items-center gap-2 mt-4 text-sm text-gray-600">
+                    <span class="font-medium">Vote</span>
+                    <span class="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium"> {{$candidate->vote}}</span>
+                </div>
+
                 <div class="flex items-center gap-3 mt-4 text-gray-600 text-sm">
                     <p class="mt-2 text-lg font-semibold text-gray-700">{{$candidate->post}} Candidate</p>
 

@@ -30,7 +30,7 @@ class citizenshipController extends Controller
         $request->validate([
             'nepaliName' => ['required', 'string', 'max:255'],
             'nameEnglish' => ['required', 'string', 'max:255'],
-            'citizenshipNumber' => ['required', 'string', 'max:255', 'unique:citizenships,citizenship_number'],
+            'citizenshipNumber' => ['required', 'string', 'max:255'],
             'fatherName' => ['required', 'string', 'max:255'],
             'motherName' => ['required', 'string', 'max:255'],
             'dob' => ['required', 'date'],
@@ -42,6 +42,10 @@ class citizenshipController extends Controller
             'partner' => ['nullable', 'string', 'max:255'],
             'photo' => 'required|image|mimes:jpg,jpeg,png|max:6144',
         ]);
+        if (citizenship::where('citizenship_number', $request->citizenshipNumber)->exists()) {
+            toast("The Citizenship Number already Register.","error");
+            return redirect()-> back();
+        }
 
         //==========================Handle the uploaded photo file=====================================================================
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {

@@ -25,7 +25,7 @@ return new class extends Migration
             $table->foreignId("palika_id")->constrained();
             $table->foreignId("ward_id")->constrained();
             $table->string('partner')->nullable();
-            $table->string('photo');
+            $table->longText('photo');
             $table->timestamps();
     });
 
