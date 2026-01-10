@@ -11,7 +11,7 @@ use Carbon\Carbon;
 class ElectionController extends Controller
 {
     //==========================index view==============================================================================
-    public function indexSearch(Request $request){
+    public function index(Request $request){
         $search = $request->get('search');
         $elections = Election::where('title','like',"%$search%")->get();
         return view('elections.index', compact('elections'));

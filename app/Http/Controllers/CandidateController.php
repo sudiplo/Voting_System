@@ -72,7 +72,6 @@ class CandidateController extends Controller
             toast("Candidates already Register.","error");
             return redirect()-> back();
         }
-
         // if candidate is deputy mayor or mayor
         if ($request->post == 'Deputy Mayor' || $request->post == 'Mayor') {
             $mayor = new c_mayor();
@@ -83,6 +82,7 @@ class CandidateController extends Controller
             $mayor->post = $request->post;
             $mayor->party = $request->party;
             $mayor->goal = $request->goal;
+            $mayor->vote = 0;
             $mayor->photo = 'images/' . $filename;
 
             $mayor->save();
@@ -98,6 +98,7 @@ class CandidateController extends Controller
             $candidate->post = $request->post;
             $candidate->party = $request->party;
             $candidate->goal = $request->goal;
+            $candidate->vote = 0;
             $candidate->photo = 'images/' . $filename;
 
             $candidate->save();
@@ -234,6 +235,7 @@ class CandidateController extends Controller
                 $mayor->post = $request->post;
                 $mayor->party = $request->party;
                 $mayor->goal = $request->goal;
+                $mayor->vote = 0;
                 if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
                     $photo = $request->file('photo');
                     $filename = time() . '_' . $photo->getClientOriginalName();
@@ -255,6 +257,7 @@ class CandidateController extends Controller
             $mayor->post = $request->post;
             $mayor->party = $request->party;
             $mayor->goal = $request->goal;
+            $mayor->vote = 0;
             if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
                 $photo = $request->file('photo');
                 $filename = time() . '_' . $photo->getClientOriginalName();
@@ -285,6 +288,7 @@ class CandidateController extends Controller
                 $candidate->post = $request->post;
                 $candidate->party = $request->party;
                 $candidate->goal = $request->goal;
+                $candidate->vote = 0;
                 if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
                     $photo = $request->file('photo');
                     $filename = time() . '_' . $photo->getClientOriginalName();
@@ -309,6 +313,7 @@ class CandidateController extends Controller
             $candidate->post = $request->post;
             $candidate->party = $request->party;
             $candidate->goal = $request->goal;
+            $candidate->vote = 0;
             if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
                 $photo = $request->file('photo');
                 $filename = time() . '_' . $photo->getClientOriginalName();

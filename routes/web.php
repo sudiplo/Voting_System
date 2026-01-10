@@ -60,13 +60,12 @@ Route::middleware('auth')->group(function () {
 
     // ==========================ElectionController======================================================================
     // Route::resource('elections', ElectionController::class);
-    // Route::get('/elections', [ElectionController::class, 'index'])->name('elections.index');
+    Route::get('/elections', [ElectionController::class, 'index'])->name('elections.index');
     Route::post('/elections/create', [ElectionController::class, 'create'])->name('elections.create');
     Route::get('/election_edit{id}',[ElectionController::class,'electionEdit'])->name('election.editView');
     Route::patch('election_update{id}',[ElectionController::class,'electionUpdate'])->name('election.update');
     Route::delete('/election_delete{id}',[ElectionController::class,'electionDelete'])->name('election.delete');
     Route::get('/elections_view_{id}',[ElectionController::class,'view'])->name('elections.view');
-    Route::get('/elections_search', [ElectionController::class, 'indexSearch'])->name('elections.index');
     Route::get('/district_search{id}',[ElectionController::class,'district'])->name('elections.district');
 
     // ==========================CandidateController======================================================================

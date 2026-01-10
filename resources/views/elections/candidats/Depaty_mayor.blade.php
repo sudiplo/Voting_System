@@ -118,6 +118,12 @@
                             {{ $mayor->post }}
                         </span>
                     </div>
+                    <div>
+                        <span class="text-gray-500 text-xs">Vote:</span>
+                        <span class="inline-block mt-1 px-2 py-0.5 text-xs font-semibold text-indigo-600 bg-indigo-50 rounded-full">
+                            {{ $mayor->vote }}
+                        </span>
+                    </div>
 
                 </div>
             </div>
