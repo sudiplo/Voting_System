@@ -46,7 +46,7 @@
                 👥 Citizen Registry
             </a>
 
-            <a href="" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
+            <a href="{{ Route('elections.vote') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
                 🧾 Vote Monitoring
             </a>
 

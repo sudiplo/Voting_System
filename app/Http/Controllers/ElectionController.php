@@ -120,5 +120,12 @@ class ElectionController extends Controller
 
         return view('elections.register', compact('districts', 'suggestions', 'search','districts','election'));
     }
+//
+    public function vote(){
+        $today = Carbon::today()->toDateString();
 
+        $election = Election::orderBy('election_date', 'asc')->first();
+
+        return view('elections.voting', compact('today', 'election'));
+    }
 }
