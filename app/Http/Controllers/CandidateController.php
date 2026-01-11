@@ -223,10 +223,10 @@ class CandidateController extends Controller
         // if candidate is deputy mayor or mayor
         if ($request->post == 'Deputy Mayor' || $request->post == 'Mayor') {
             $candidate = wardCandidate::find($id);
-            $vote = $candidate ? $candidate->vote: null;
             //if data is not come from the c_mayor table
             if ($candidate) {
                 $oldPhoto = $candidate ? $candidate->photo : null;
+                $vote = $candidate ? $candidate->vote: 0;
                 $mayor = new c_mayor();
                 $mayor->citizen_id = $request->citizen_id;
                 $mayor->district_id = $request->district_id;
@@ -251,6 +251,7 @@ class CandidateController extends Controller
                 return redirect()->back();
             }
             $mayor = c_mayor::find($id);
+            $vote = $mayor ? $mayor->vote: 0;
             $mayor->citizen_id = $request->citizen_id;
             $mayor->district_id = $request->district_id;
             $mayor->palika_id = $request->palika_id;
@@ -276,7 +277,7 @@ class CandidateController extends Controller
         else  // if candidate is  not deputy mayor or mayor
             {
             $mayor = c_mayor::find($id);
-            $vote = $mayor ? $mayor->vote : null;
+            $vote = $mayor ? $mayor->vote : 0;
             //if data come from the c_mayor table
             if ($mayor) {
                 $mayor->delete();
@@ -306,6 +307,7 @@ class CandidateController extends Controller
             }
             $oldPhoto = $mayor ? $mayor->photo : null;
             $candidate = wardCandidate::find($id);
+            $vote = $candidate ? $candidate->vote: 0;
             $photo = $candidate->photo;
             $candidate->citizen_id = $request->citizen_id;
             $candidate->district_id = $request->district_id;
