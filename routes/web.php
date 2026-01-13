@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
     //==========================viewController======================================================================
     Route::get('/about',[viewController::class,'about'])->name('about');
     Route::get('/dashboard', [viewController::class,'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+     Route::get('/Userdashboard', [viewController::class,'Userdashboard'])->middleware(['auth', 'verified'])->name('User.dashboard');
 
     Route::post("/distric",[AddController::class,'distric'])->name('distric.add');
     Route::post("/palika",[AddController::class,"palika"])->name('palika.add');
