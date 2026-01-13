@@ -5,6 +5,7 @@ use App\Models\c_mayor;
 use App\Models\Election;
 use App\Models\district;
 use App\Models\citizenship;
+use App\Models\wardCandidate;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -123,9 +124,10 @@ class ElectionController extends Controller
 //
     public function vote(){
         $today = Carbon::today()->toDateString();
-
         $election = Election::orderBy('election_date', 'asc')->first();
+        $mayor = c_mayor::where('election',$election->id)->get();
+        $candidate = wardCandidate::where('election',$election->id)->get();
 
-        return view('elections.voting', compact('today', 'election'));
+        return view('elections.voting', compact('today', 'election','mayor','candidate'));
     }
 }
