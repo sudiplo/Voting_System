@@ -35,7 +35,7 @@
 
         <ul class="flex space-x-10 text-gray-700 font-medium fade-in p-5">
             <a href="{{ Route('dashboard') }}"><li class="cursor-pointer hover:text-blue-600 ">Home</li></a>
-            <a href="{{ route('about') }}"><li class="cursor-pointer hover:text-blue-600">About</li></a>
+            <a href="{{ route('elections.vote') }}"><li class="cursor-pointer hover:text-blue-600">Vote</li></a>
 
             <button id="dropdownDividerButton" data-dropdown-toggle="dropdownDivider" class="cursor-pointer hover:text-blue-600"type="button">
             Register

@@ -121,13 +121,22 @@ class ElectionController extends Controller
 
         return view('elections.register', compact('districts', 'suggestions', 'search','districts','election'));
     }
-//
+//==========================View vote page==============================================================================
+    // public function vote(){
+    //     $today = Carbon::today()->toDateString();
+    //     $election = Election::orderBy('election_date', 'asc')->first();
+    //     $mayor = c_mayor::where('election',$election->id)->get();
+    //     $candidate = wardCandidate::where('election',$election->id)->get();
+
+    //     return view('elections.voting', compact('today', 'election','mayor','candidate'));
+    // }
+
     public function vote(){
         $today = Carbon::today()->toDateString();
         $election = Election::orderBy('election_date', 'asc')->first();
         $mayor = c_mayor::where('election',$election->id)->get();
         $candidate = wardCandidate::where('election',$election->id)->get();
 
-        return view('elections.voting', compact('today', 'election','mayor','candidate'));
+        return view('User.vote', compact('today', 'election','mayor','candidate'));
     }
 }
