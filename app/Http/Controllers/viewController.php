@@ -21,11 +21,11 @@ class viewController extends Controller
 
     //==========================dashboard view=========================================================================
     public function dashboard(){
-        return view('dashboard');
+        return view('User.dashboard');
     }
     //
-    public function Userdashboard(){
-        return view('User.dashboard');
+    public function Admindashboard(){
+        return view('dashboard');
     }
 
 }

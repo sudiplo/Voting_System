@@ -34,7 +34,7 @@
         <nav class="flex-1 px-4 py-6 text-sm space-y-1">
             <p class="px-3 text-xs font-semibold text-gray-400 uppercase">Operations</p>
 
-            <a href="{{ Route('dashboard') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
+            <a href="{{ Route('Admin.dashboard') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
                 📊 System Dashboard
             </a>
 
