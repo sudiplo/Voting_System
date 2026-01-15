@@ -11,6 +11,7 @@ use Carbon\Carbon;
 
 class ElectionController extends Controller
 {
+//================================================>Admin Side<========================================================================================
     //==========================index view==============================================================================
     public function index(Request $request){
         $search = $request->get('search');
@@ -121,7 +122,11 @@ class ElectionController extends Controller
 
         return view('elections.register', compact('districts', 'suggestions', 'search','districts','election'));
     }
-//==========================View vote page==============================================================================
+
+
+
+//=======================================>User Side<=====================================================================================================================
+    //==========================View vote page==============================================================================
     // public function vote(){
     //     $today = Carbon::today()->toDateString();
     //     $election = Election::orderBy('election_date', 'asc')->first();
@@ -138,5 +143,35 @@ class ElectionController extends Controller
         $candidate = wardCandidate::where('election',$election->id)->get();
 
         return view('User.vote', compact('today', 'election','mayor','candidate'));
+    }
+
+    //=========================view the election index page==============================================
+        public function ElectionDistrict(){
+        $election = Election::where('status','process')->orderBy('election_date', 'asc')->first();
+        // $election = Election::find($id);
+        $districts = district::with('palika.wards')->get();
+        return view('User.candidate.index',compact('districts','election'));
+    }
+    //==========================search districh inside Election==============================================================================
+    public function districtSearch(Request $request,$id){
+        $election = Election::find($id);
+        $districts = district::with('palika.wards')->get();
+        $search = $request->get('search');
+
+        $districts = district::with('palika')
+            ->when($search, function ($query) use ($search) {
+                $query->where('name', 'like', "%$search%")
+                      ->orWhere('name_nepali', 'like', "%$search%")
+                      ->orWhereHas('palika', function ($q) use ($search) {
+                          $q->where('name', 'like', "%$search%");
+                      });
+            })
+            ->get();
+
+        // For autocomplete suggestions
+        $suggestions = district::where('name', 'like', "%$search%")
+            ->pluck('name');
+
+        return view('User.candidate.index', compact('districts', 'suggestions', 'search','districts','election'));
     }
 }

@@ -35,9 +35,9 @@
 
         <ul class="flex space-x-10 text-gray-700 font-medium fade-in p-5">
             <a href="{{ Route('dashboard') }}"><li class="cursor-pointer hover:text-blue-600 ">Home</li></a>
-            <a href="{{ route('elections.vote') }}"><li class="cursor-pointer hover:text-blue-600">Vote</li></a>
-
-            <button id="dropdownDividerButton" data-dropdown-toggle="dropdownDivider" class="cursor-pointer hover:text-blue-600"type="button">
+            {{-- <a href="{{ route('elections.vote') }}"><li class="cursor-pointer hover:text-blue-600">Vote</li></a> --}}
+            <a href="{{ route('elections.userIndex') }}"><li class="cursor-pointer hover:text-blue-600">Candidate</li></a>
+            {{-- <button id="dropdownDividerButton" data-dropdown-toggle="dropdownDivider" class="cursor-pointer hover:text-blue-600"type="button">
             Register
             </button>
             <!-- Dropdown menu -->
@@ -57,7 +57,7 @@
                         </a>
                     </li>
                 </ul>
-            </div>
+            </div> --}}
 
         </ul>
 
@@ -109,13 +109,6 @@
         </div>
 
     </nav>
-
-  {{-- <!-- Hero Section -->
-  <section class="px-10 mt-10 flex flex-col items-center text-center fade-in">
-    <h1 class="text-5xl font-bold text-gray-800 leading-tight">
-      Digital <span class="text-blue-600">Voting</span> System
-    </h1>
-  </section> --}}
 
 
 <div class="px-10 mt-10  fade-in">
