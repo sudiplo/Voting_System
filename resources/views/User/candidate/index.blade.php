@@ -4,7 +4,7 @@
 
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div>
-                <h2 class="text-3xl font-extrabold text-gray-800 tracking-tight">
+                <h2 class="text-2xl font-extrabold text-gray-800 tracking-tight">
                     <span class="text-indigo-600">{{ $election->title }} </span>
                 </h2>
                 <p class="mt-2 text-gray-500">
@@ -68,7 +68,7 @@
                             </label>
                         </td>
                         <td class="p-4 text-right space-x-2">
-                            <a href="{{ Route('mayor.view', ['id' => $p->id, 'e_id' => $election->id]) }}"
+                            <a href="{{ Route('Usermayor.view', ['id' => $p->id, 'e_id' => $election->id]) }}"
                                 class="px-3 py-1 bg-blue-400 hover:bg-blue-500 text-white rounded text-xs">
                                 View
                             </a>

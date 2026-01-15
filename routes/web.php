@@ -16,12 +16,12 @@ Route::get('/', [viewController::class,'welcome'])->name('welcome');
 
 // only registered user can route this route's
 Route::middleware('auth')->group(function () {
-    //==========================ProfileController======================================================================
+//==========================ProfileController======================================================================
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    //==========================viewController======================================================================
+//==========================viewController======================================================================
     Route::get('/about',[viewController::class,'about'])->name('about');
     Route::get('/dashboard', [viewController::class,'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
     Route::get('/admin_dashboard', [viewController::class,'Admindashboard'])->middleware(['auth', 'verified'])->name('Admin.dashboard');
@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::post("/ward",[AddController::class,'ward'])->name('ward.add');
     Route::post('/center', [AddController::class,'center'])->name('center.add');
 
-    //==========================DistrictController======================================================================
+//==========================DistrictController======================================================================
     Route::get('/districts', [DistrictController::class, 'index'])->name('districts.index');
     // delete
     Route::delete('/district{id}',[DistrictController::class,'districtDelete'])->name('districts.Delete');
@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/palikaupdate{id}', [AddController::class, 'palikaUpdate'])->name('palika.update');
     Route::patch('/centerupdate{id}', [AddController::class, 'centerUpdate'])->name('center.update');
 
-    //==========================citizenshipController======================================================================
+//==========================citizenshipController======================================================================
     Route::get('/citizenship',[citizenshipController::class,'view'])->name('citizen.view');
     Route::get('/citizenship_register',[citizenshipController::class,'registerView'])->name('citizen.registerView');
     Route::post('citizenship',[citizenshipController::class,'create'])->name('citizen.create');
@@ -59,7 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/citizen_update{id}', [citizenshipController::class, 'citizenUpdate'])->name('citizen.update');
     Route::delete('/citizen_delete{id}', [citizenshipController::class, 'citizenDelete'])->name('citizen.delete');
 
-    // ==========================ElectionController======================================================================
+// ==========================ElectionController======================================================================
     // Route::resource('elections', ElectionController::class);
     Route::get('/elections', [ElectionController::class, 'index'])->name('elections.index');
     Route::post('/elections/create', [ElectionController::class, 'create'])->name('elections.create');
@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/UserElection_district_search{id}',[ElectionController::class,'districtSearch'])->name('elections.userDistrict'); //search district
 
 
-    // ==========================CandidateController======================================================================
+// ==========================CandidateController======================================================================
     Route::get('/register_mayor{id}',[CandidateController::class,'registerCandidateView'])->name('register_candidate.index');
     Route::post('/register_candidate',[CandidateController::class,'candidateRegister'])->name('candidate.register');
     Route::get('/mayor_view{id}{e_id}',[CandidateController::class,'mayorView'])->name('mayor.view');
@@ -95,7 +95,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/candidateWomen_search{id}{e_id}',[CandidateController::class,'candidateWomenSearch'])->name('candidateWomen_search');
     Route::get('/candidateMember_search{id}{e_id}',[CandidateController::class,'candidateMemberSearch'])->name('candidateMember_search');
     Route::get('/candidateDalit_search{id}{e_id}',[CandidateController::class,'candidateDalitSearch'])->name('candidateDalit_search');
-
+        // ================================user side=====================================
+        Route::get('/User_mayor_view{id}{e_id}',[CandidateController::class,'UserMayor'])->name('Usermayor.view');
+        Route::get('/User_Dmayor_view{id}{e_id}',[CandidateController::class,'UserDeputyMayor'])->name('UserDeputymayor.view');
+        Route::get('/User_mayor_search{id}{e_id}',[CandidateController::class,'UserMayorSearch'])->name('UserMayor_search');
+        Route::get('/User_depatyMayor_search{id}{e_id}',[CandidateController::class,'UserDepatyMayorSearch'])->name('UserDepatymayor_search');
 
 });
 

@@ -460,4 +460,58 @@ class CandidateController extends Controller
 
         return view('elections.candidats.dalit', compact('candidate', 'search','ward','e'));
     }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+//================================>USER SIDE<===================================================================================================
+    //======================mayor view===================================================
+    public function UserMayor($id, $e_id){
+        $e = Election::find($e_id);
+        $palika = palika::find($id);
+        $candidate = c_mayor::where('election',$e_id)->where('post', 'Mayor')->where('palika_id',$id)->get();
+        return view('User.candidate.mayor',compact('candidate','palika','e'));
+    }
+
+    //==========================Deputy Mayors view==============================================================================
+    public function UserDeputyMayor($id, $e_id){
+        $e = Election::find($e_id);
+        $palika = palika::find($id);
+        $candidate = c_mayor::where('election',$e_id)->where('post', 'Deputy Mayor')->where('palika_id',$id)->get();
+        return view('User.candidate.deputy_mayor',compact('candidate','palika','e'));
+    }
+
+    //=======================mayor search=====================
+    public function UserMayorSearch(Request $request,$id,$e_id)
+    {
+        $e = Election::find($e_id);
+        $palika = palika::find($id);
+        $search = $request->get('search');
+
+        $candidate = c_mayor::with('citizen')
+            ->where('post', 'Mayor')
+            ->whereHas('citizen', function ($query) use ($search) {
+                $query->where('name_english', 'like', "%{$search}%")
+                    ->orWhere('name_nepali', 'like', "%{$search}%");
+            })
+            ->get();
+
+        return view('User.candidate.mayor', compact('candidate', 'search','palika','e'));
+    }
+
+    //==========================Depaty Mayors search==============================================================================
+    public function UserDepatyMayorSearch(Request $request,$id,$e_id)
+    {
+        $e = Election::find($e_id);
+        $palika = palika::find($id);
+        $search = $request->get('search');
+
+        $candidate = c_mayor::with('citizen')
+            ->where('post', 'Deputy Mayor')
+            ->whereHas('citizen', function ($query) use ($search) {
+                $query->where('name_english', 'like', "%{$search}%")
+                    ->orWhere('name_nepali', 'like', "%{$search}%");
+            })
+            ->get();
+
+        return view('User.candidate.deputy_mayor', compact('candidate', 'search','palika','e'));
+    }
 }
