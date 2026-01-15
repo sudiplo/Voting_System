@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->unique();
             $table->date('election_date')->unique();
+            $table->enum('status', ['process', 'end'])->default('process');;
             $table->timestamps();
         });
     }

@@ -133,7 +133,7 @@ class ElectionController extends Controller
 
     public function vote(){
         $today = Carbon::today()->toDateString();
-        $election = Election::orderBy('election_date', 'asc')->first();
+        $election = Election::where('status','process')->orderBy('election_date', 'asc')->first();
         $mayor = c_mayor::where('election',$election->id)->get();
         $candidate = wardCandidate::where('election',$election->id)->get();
 
