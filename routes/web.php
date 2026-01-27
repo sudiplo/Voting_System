@@ -101,12 +101,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/user-chairperson-view{id}{e_id}',[CandidateController::class,'UserChairperson'])->name('UserChairperson.view');
         Route::get('/user-ward-member-view{id}{e_id}',[CandidateController::class,'UserMember'])->name('UserMember.view');
         Route::get('/user-candidate-Women-view{id}{e_id}',[CandidateController::class,'UserWomenView'])->name('UserWomen.view');
+        Route::get('/user-candidate-Dalit-view{id}{e_id}',[CandidateController::class,'UserDalitView'])->name('UserDalit.view');
 
         Route::get('/user-mayor-search{id}{e_id}',[CandidateController::class,'UserMayorSearch'])->name('UserMayor_search');
         Route::get('/user-depatyMayor-search{id}{e_id}',[CandidateController::class,'UserDepatyMayorSearch'])->name('UserDepatymayor_search');
         Route::get('/user-chairperson-search{id}{e_id}',[CandidateController::class,'UserChairpersonSearch'])->name('UserChairperson_search');
         Route::get('/user-Member-search{id}{e_id}',[CandidateController::class,'UserMemberSearch'])->name('UserMember_search');
         Route::get('/user-candidate-Women-search{id}{e_id}',[CandidateController::class,'UserWomenSearch'])->name('UserWomen_search');
+        Route::get('/user-candidate-Dalit-search{id}{e_id}',[CandidateController::class,'UserDalitSearch'])->name('UsercandidateDalit_search');
         Route::get('/user-candidate-profile{id}{e_id}',[CandidateController::class,'UserCandidateProfile'])->name('UsercandidateProfile');
 });
 

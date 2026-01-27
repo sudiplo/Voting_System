@@ -152,6 +152,7 @@ class CandidateController extends Controller
         return view('elections.candidats.member',compact('candidate','ward','e'));
     }
 
+    //==========================ward candidate ward Member(dalit) view==============================================================================
     public function candidateDalitView($id,$e_id){
         $e = Election::find($e_id);
         $ward = ward::find($id);
@@ -443,7 +444,7 @@ class CandidateController extends Controller
         return view('elections.candidats.member', compact('candidate', 'search','ward','e'));
     }
 
-    //==========================Ward Member search==============================================================================
+    //==========================Ward Member dalit search==============================================================================
     public function candidateDalitSearch(Request $request,$id,$e_id)
     {
         $e = Election::find($e_id);
@@ -501,6 +502,14 @@ class CandidateController extends Controller
         $ward = ward::find($id);
         $candidate = wardCandidate::where('election',$e_id)->where('post', 'Ward Member(Women)')->where('ward_id',$id)->get();
         return view('User.candidate.women',compact('candidate','ward','e'));
+    }
+
+    //==========================ward candidate ward Member(dalit) view==============================================================================
+    public function UserDalitView($id,$e_id){
+        $e = Election::find($e_id);
+        $ward = ward::find($id);
+        $candidate = wardCandidate::where('election',$e_id)->where('post', 'Ward Member(Dalit)')->where('ward_id',$id)->get();
+        return view('User.candidate.dalit',compact('candidate','ward','e'));
     }
 
         //==========================Candidate Profile==============================================================================
@@ -606,5 +615,23 @@ class CandidateController extends Controller
             ->get();
 
         return view('User.candidate.women', compact('candidate', 'search','ward','e'));
+    }
+
+    //==========================Ward Member dalit search==============================================================================
+    public function UserDalitSearch(Request $request,$id,$e_id)
+    {
+        $e = Election::find($e_id);
+        $ward = ward::find($id);
+        $search = $request->get('search');
+
+        $candidate = wardCandidate::with('citizen')
+            ->where('post', 'Ward Member(Dalit)')
+            ->whereHas('citizen', function ($query) use ($search) {
+                $query->where('name_english', 'like', "%{$search}%")
+                    ->orWhere('name_nepali', 'like', "%{$search}%");
+            })
+            ->get();
+
+        return view('User.candidate.dalit', compact('candidate', 'search','ward','e'));
     }
 }
