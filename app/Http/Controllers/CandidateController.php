@@ -536,4 +536,22 @@ class CandidateController extends Controller
 
         return view('User.candidate.deputy_mayor', compact('candidate', 'search','palika','e'));
     }
+
+    //==========================Ward Chairperson search==============================================================================
+    public function UserChairpersonSearch(Request $request,$id,$e_id)
+    {
+        $e = Election::find($e_id);
+        $ward = ward::find($id);
+        $search = $request->get('search');
+
+        $candidate = wardCandidate::with('citizen')
+            ->where('post', 'Ward Chairperson')
+            ->whereHas('citizen', function ($query) use ($search) {
+                $query->where('name_english', 'like', "%{$search}%")
+                    ->orWhere('name_nepali', 'like', "%{$search}%");
+            })
+            ->get();
+
+        return view('User.candidate.chairperson', compact('candidate', 'search','ward','e'));
+    }
 }
