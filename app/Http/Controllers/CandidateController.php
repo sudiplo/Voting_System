@@ -478,6 +478,20 @@ class CandidateController extends Controller
         $candidate = c_mayor::where('election',$e_id)->where('post', 'Deputy Mayor')->where('palika_id',$id)->get();
         return view('User.candidate.deputy_mayor',compact('candidate','palika','e'));
     }
+        //==========================Candidate Profile==============================================================================
+    public function UserCandidateProfile($id,$e_id){
+        $candidate = c_mayor::find($id);
+        if(!$candidate){
+            $candidate = wardCandidate::find($id);
+            $e = $candidate->election;
+            $id = $candidate->ward_id;
+            return view('User.candidate.profile',compact('candidate','id','e'));
+        }
+        $e = $candidate->election;
+        $id = $candidate->palika_id;
+        return view('User.candidate.profile',compact('candidate','e','id'));
+    }
+
 
     //=======================mayor search=====================
     public function UserMayorSearch(Request $request,$id,$e_id)

@@ -23,7 +23,7 @@
                             class="px-5 py-2 rounded-lg text-sm font-semibold transition-all
                                 bg-indigo-600 text-white shadow
                                 hover:bg-indigo-700">
-                            
+
                                 Deputy Mayor
                         </a>
                     </div>
@@ -54,14 +54,14 @@
     </div>
 
     <!-- ================= show data ================= -->
-   
+
 
     <div class="mt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         @foreach ($candidate as $mayor)
         <div class="relative bg-black rounded-xl overflow-hidden shadow-lg aspect-[3/4]">
 
             <img src="{{ $mayor->photo }}" alt="Profile" class="absolute inset-0 w-full h-full object-cover">
-            
+
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
 
             <!-- Content -->
@@ -81,7 +81,7 @@
                         🗳 {{ $mayor->vote }}
                     </span>
 
-                    <a href="{{ Route('candidateProfile',['id'=>$mayor->id,'e_id'=>$e->id]) }}"
+                    <a href="{{ Route('UsercandidateProfile',['id'=>$mayor->id,'e_id'=>$e->id]) }}"
                     class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-white text-[10px] font-semibold">
                         More info
                     </a>
