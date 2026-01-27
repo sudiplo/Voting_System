@@ -68,14 +68,14 @@
             </li>
 
             <li>
-                <a href="{{ Route('candidateWonen.view', ['id' =>$ward->id, 'e_id' => $e->id]) }}"
+                <a href="{{ Route('UserWomen.view', ['id' =>$ward->id, 'e_id' => $e->id]) }}"
                 class="block px-4 py-2 rounded hover:bg-indigo-50 hover:text-indigo-600">
                     Women
                 </a>
             </li>
 
             <li>
-                <a href="{{ Route('candidateDalit.view', ['id' =>$ward->id, 'e_id' => $e->id]) }}"
+                <a href="{{ Route('UserDalit.view', ['id' =>$ward->id, 'e_id' => $e->id]) }}"
                 class="block px-4 py-2 rounded hover:bg-indigo-50 hover:text-indigo-600">
                     Dalit
                 </a>

@@ -73,7 +73,7 @@
                     Ward Member
                 </a>
 
-                <a href="{{ Route('candidateWonen.view', ['id' =>$ward->id, 'e_id' => $e->id]) }}"
+                <a href="{{ Route('candidateWomen.view', ['id' =>$ward->id, 'e_id' => $e->id]) }}"
                 class="px-5 py-2 rounded-lg text-sm font-semibold transition-all
                         text-gray-600 hover:text-indigo-600 hover:bg-white hover:shadow">
                     Women

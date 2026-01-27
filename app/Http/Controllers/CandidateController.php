@@ -494,6 +494,15 @@ class CandidateController extends Controller
         $candidate = wardCandidate::where('election',$e_id)->where('post', 'Ward Member')->where('ward_id',$id)->get();
         return view('User.candidate.member',compact('candidate','ward','e'));
     }
+
+    //========================== ward Member(Women) view==============================================================================
+    public function UserWomenView($id,$e_id){
+        $e = Election::find($e_id);
+        $ward = ward::find($id);
+        $candidate = wardCandidate::where('election',$e_id)->where('post', 'Ward Member(Women)')->where('ward_id',$id)->get();
+        return view('User.candidate.women',compact('candidate','ward','e'));
+    }
+
         //==========================Candidate Profile==============================================================================
     public function UserCandidateProfile($id,$e_id){
         $candidate = c_mayor::find($id);
@@ -579,5 +588,23 @@ class CandidateController extends Controller
             ->get();
 
         return view('User.candidate.member', compact('candidate', 'search','ward','e'));
+    }
+
+    //==========================Ward Member Women search==============================================================================
+    public function UserWomenSearch(Request $request,$id,$e_id)
+    {
+        $e = Election::find($e_id);
+        $ward = ward::find($id);
+        $search = $request->get('search');
+
+        $candidate = wardCandidate::with('citizen')
+            ->where('post', 'Ward Member(Women)')
+            ->whereHas('citizen', function ($query) use ($search) {
+                $query->where('name_english', 'like', "%{$search}%")
+                    ->orWhere('name_nepali', 'like', "%{$search}%");
+            })
+            ->get();
+
+        return view('User.candidate.women', compact('candidate', 'search','ward','e'));
     }
 }
