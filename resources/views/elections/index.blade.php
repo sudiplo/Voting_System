@@ -110,6 +110,7 @@
                     <tr>
                         <th class="px-6 py-4 text-left">Title</th>
                         <th class="px-6 py-4 text-left">Election Date</th>
+                        <th class="px-6 py-4 text-left">Status</th>
                         <th class="px-6 py-4 text-right">Actions</th>
                     </tr>
                 </thead>
@@ -124,6 +125,11 @@
                             <td class="px-6 py-4 font-medium text-indigo-600">
                                 {{ $election->election_date }}
                             </td>
+
+                            <td class="px-6 py-4 font-medium {{ $election->status == 'process' ? 'text-green-500' : 'text-red-500' }}">
+                                {{ $election->status }}
+                            </td>
+
 
                             <td class="px-6 py-4 text-right space-x-2 opacity-90 group-hover:opacity-100">
                                 <a href="{{ Route('elections.view',$election->id) }}"
