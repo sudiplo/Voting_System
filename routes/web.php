@@ -98,6 +98,7 @@ Route::middleware('auth')->group(function () {
         // ================================user side=====================================
         Route::get('/user-mayor-view{id}{e_id}',[CandidateController::class,'UserMayor'])->name('Usermayor.view');
         Route::get('/user-Dmayor-view{id}{e_id}',[CandidateController::class,'UserDeputyMayor'])->name('UserDeputymayor.view');
+        Route::get('/user-chairperson-view{id}{e_id}',[CandidateController::class,'UserChairperson'])->name('UserChairperson.view');
         Route::get('/user-mayor-search{id}{e_id}',[CandidateController::class,'UserMayorSearch'])->name('UserMayor_search');
         Route::get('/user-depatyMayor-search{id}{e_id}',[CandidateController::class,'UserDepatyMayorSearch'])->name('UserDepatymayor_search');
         Route::get('/user-candidate-profile{id}{e_id}',[CandidateController::class,'UserCandidateProfile'])->name('UsercandidateProfile');

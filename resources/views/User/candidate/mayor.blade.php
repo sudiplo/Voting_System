@@ -12,20 +12,6 @@
                         {{ $palika->district->name_nepali }}, {{ $palika->name }}
                     </span>
                 </p>
-                    <div class="mt-5 flex items-center gap-3 bg-gray-100 p-2 rounded-xl shadow-inner">
-                        <a href="{{ Route('Usermayor.view', ['id' => $palika->id, 'e_id' => $e->id]) }}"
-                            class="px-5 py-2 rounded-lg text-sm font-semibold transition-all
-                                bg-indigo-600 text-white shadow
-                                hover:bg-indigo-700">
-                                Mayor
-                        </a>
-
-                        <a href="{{ Route('UserDeputymayor.view', ['id' => $palika->id, 'e_id' => $e->id]) }}"
-                            class="px-5 py-2 rounded-lg text-sm font-semibold transition-all
-                                text-gray-600 hover:text-indigo-600 hover:bg-white hover:shadow">
-                                Deputy Mayor
-                        </a>
-                    </div>
                 <!-- Search -->
                 <form method="GET" action="{{ Route('UserMayor_search', ['id' => $palika->id, 'e_id' => $e->id]) }}" class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto mt-2">
                     <div class="relative w-full sm:w-96">
@@ -40,21 +26,43 @@
                         />
                         <span class="absolute right-4 top-3 text-gray-400">🔍</span>
                     </div>
-
-                    <button
-                        type="submit"
-                        class="px-6 py-3 bg-indigo-600 text-white rounded-xl
-                            hover:bg-indigo-700 shadow-md transition">
-                        Search
-                    </button>
                 </form>
             </div>
         </div>
     </div>
 
+
+    <!-- Dropdown Button -->
+    <button id="candidateDropdownButton" data-dropdown-toggle="candidateDropdown" data-dropdown-trigger="hover" class="inline-flex items-center justify-center text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 shadow font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none" type="button">
+        Select Position
+        <svg class="w-4 h-4 ms-1.5" aria-hidden="true" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m19 9-7 7-7-7" />
+        </svg>
+    </button>
+
+    <!-- Dropdown Menu -->
+    <div id="candidateDropdown" class="z-10 hidden bg-white border border-gray-200 rounded-lg shadow-lg w-44">
+        <ul class="p-2 text-sm font-medium text-gray-600"
+            aria-labelledby="candidateDropdownButton">
+
+            <li>
+                <a href="{{ Route('Usermayor.view', ['id' => $palika->id, 'e_id' => $e->id]) }}"
+                class="block px-4 py-2 rounded hover:bg-indigo-50 hover:text-indigo-600">
+                    Mayor
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ Route('UserDeputymayor.view', ['id' => $palika->id, 'e_id' => $e->id]) }}"
+                class="block px-4 py-2 rounded hover:bg-indigo-50 hover:text-indigo-600">
+                    Deputy Mayor
+                </a>
+            </li>
+
+        </ul>
+    </div>
     <!-- ================= show data ================= -->
-
-
     <div class="mt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         @foreach ($candidate as $mayor)
         <div class="relative bg-black rounded-xl overflow-hidden shadow-lg aspect-[3/4]">
@@ -77,12 +85,12 @@
                 <!-- Footer -->
                 <div class="mt-2 flex items-center justify-between text-[11px]">
                     <span class="flex items-center gap-1">
-                        🗳 {{ $mayor->vote }}
+                        {{ $mayor->post }}
                     </span>
 
                     <a href="{{ Route('UsercandidateProfile',['id'=>$mayor->id,'e_id'=>$e->id]) }}"
                     class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-white text-[10px] font-semibold">
-                        More info
+                        view
                     </a>
                 </div>
 

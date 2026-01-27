@@ -93,7 +93,7 @@
                                         <tr class="border-t hover:bg-blue-50">
                                             <td class="px-4 py-2">{{ $ward->number }}. {{ $ward->name }}</td>
                                             <td class="p-4  space-x-2">
-                                                <a href="{{ Route('candidate.view', ['id' =>$ward->id, 'e_id' => $election->id]) }}" class="px-3 py-1 bg-blue-400 hover:bg-blue-500 text-white rounded text-xs">
+                                                <a href="{{ Route('UserChairperson.view', ['id' =>$ward->id, 'e_id' => $election->id]) }}" class="px-3 py-1 bg-blue-400 hover:bg-blue-500 text-white rounded text-xs">
                                                     View
                                                 </a>
                                             </td>
