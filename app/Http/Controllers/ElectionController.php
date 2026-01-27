@@ -61,6 +61,7 @@ class ElectionController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'date' => 'required|date',
+            'status' => 'required|in:process,end', 
         ]);
 
         // if (Election::where('title', $request->name)->exists()) {
@@ -79,6 +80,7 @@ class ElectionController extends Controller
         $election = Election::find($id);
         $election->title = $request->input('name');
         $election->election_date = $request->input('date');
+        $election->status = $request->input('status');
 
         $election->save();
         toast("Election update successfully","success");
