@@ -5,7 +5,7 @@
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
             <div>
                 <h1 class="text-2xl font-extrabold text-gray-800 tracking-tight">
-                    <span class="text-indigo-600">वडाध्यक्ष</span> उम्मेदवारहरू
+                    <span class="text-indigo-600">वडा सदस्य</span> उम्मेदवारहरू
                 </h1>
 
                 <p class="mt-3 text-gray-500 text-sm md:text-base max-w-xl">
@@ -14,13 +14,13 @@
                     </span>
                 </p>
                 <!-- Search -->
-                <form method="GET" action="{{ Route('UserChairperson_search', ['id' => $ward->palika->id, 'e_id' => $e->id]) }}" class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto mt-2">
+                <form method="GET" action="{{ Route('UserMember_search', ['id' => $ward->palika->id, 'e_id' => $e->id]) }}" class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto mt-2">
                     <div class="relative w-full sm:w-96">
                         <input
                             type="text"
                             name="search"
                             value="{{ request('search') }}"
-                            placeholder="Search Chairperson"
+                            placeholder="Search Ward Member"
                             class="w-full pl-5 pr-10 py-3 rounded-xl border border-gray-300
                                 shadow-sm focus:ring-2 focus:ring-indigo-500
                                 focus:border-indigo-500 outline-none transition"
