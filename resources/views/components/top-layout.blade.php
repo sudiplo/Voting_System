@@ -111,9 +111,83 @@
     </nav>
 
 
-<div class="px-10 mt-10  fade-in">
-    {{ $slot }}
-</div>
+    <div class="px-10 mt-10  fade-in">
+        {{ $slot }}
+    </div>
+
+    {{-- footer --}}
+    <footer class="bg-[#e9edf4] px-10 mt-16 w-full">
+
+        <div class="px-6 sm:px-10 py-10">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-gray-700">
+
+                <!-- Logo / About -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+                            V
+                        </div>
+                        <span class="text-lg font-semibold">Digital Voting</span>
+                    </div>
+                    <p class="text-sm text-gray-600 max-w-sm">
+                        A secure and transparent digital voting system designed to ensure fair elections and easy participation.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-md font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="{{ route('dashboard') }}" class="hover:text-blue-600">Home</a></li>
+                        <li><a href="{{ route('elections.userIndex') }}" class="hover:text-blue-600">Candidates</a></li>
+                        <li><a href="/profile" class="hover:text-blue-600">Profile</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h3 class="text-md font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-blue-600">Help Center</a></li>
+                        <li><a href="#" class="hover:text-blue-600">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-blue-600">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+
+                <!-- Account -->
+                <div>
+                    <h3 class="text-md font-semibold mb-4">Account</h3>
+
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img
+                            src="{{ Auth::user()->photo }}"
+                            class="w-10 h-10 rounded-full object-cover"
+                        >
+                        <div class="text-sm">
+                            <div class="font-medium">{{ Auth::user()->name }}</div>
+                            <div class="text-gray-500 truncate">
+                                {{ Auth::user()->email }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 text-sm w-full">
+                            Logout
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="border-t border-gray-300 text-center text-sm text-gray-600 py-4">
+            © {{ date('Y') }} Digital Voting System. All rights reserved.
+        </div>
+    </footer>
 
 </body>
 </html>

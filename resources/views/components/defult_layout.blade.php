@@ -46,9 +46,9 @@
                 👥 Citizen Registry
             </a>
 
-            <a href="{{ Route('elections.vote') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
+            {{-- <a href="{{ Route('elections.vote') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
                 🧾 Vote Monitoring
-            </a>
+            </a> --}}
 
             <p class="px-3 mt-6 text-xs font-semibold text-gray-400 uppercase">Administration</p>
 
@@ -56,19 +56,19 @@
                 🏛️ Districts & Regions
             </a>
 
-            <a href="" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
+            {{-- <a href="" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
                 👮 Officials & Roles
-            </a>
+            </a> --}}
 
-            <a href="" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
+            {{-- <a href="" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
                 📑 Reports & Exports
-            </a>
+            </a> --}}
 
             <p class="px-3 mt-6 text-xs font-semibold text-gray-400 uppercase">System</p>
 
-            <a href="" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
+            {{-- <a href="" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
                 ⚙️ Configuration
-            </a>
+            </a> --}}
 
             <a href="{{ Route('profile.edit') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
                 🔐 Security & Permissions
