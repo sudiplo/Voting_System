@@ -27,47 +27,52 @@
 <body class="bg-[#F7F9FC] font-sans">
     @include('sweetalert::alert')
 
-  <!-- Navbar -->
-    <nav class="flex justify-between items-center px-10 py-6 bg-[#e9edf4] w-full">
+
+{{--  --}}
+<header class="w-full border-b">
+
+    <div class="flex items-center gap-4 px-5 py-4 bg-[#e9edf4]">
+        <!-- Logo -->
         <div class="flex items-center space-x-2">
             <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white"><b>V</b></div>
         </div>
 
-        <ul class="flex space-x-10 text-gray-700 font-medium fade-in p-5">
-            <a href="{{ Route('dashboard') }}"><li class="cursor-pointer hover:text-blue-600 ">Home</li></a>
-            {{-- <a href="{{ route('elections.vote') }}"><li class="cursor-pointer hover:text-blue-600">Vote</li></a> --}}
-            <a href="{{ route('elections.userIndex') }}"><li class="cursor-pointer hover:text-blue-600">Candidate</li></a>
-            {{-- <button id="dropdownDividerButton" data-dropdown-toggle="dropdownDivider" class="cursor-pointer hover:text-blue-600"type="button">
-            Register
-            </button>
-            <!-- Dropdown menu -->
-            <div id="dropdownDivider" class="z-10 hidden bg-[#F7F9FC] bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-50 rounded">
-                <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownDividerButton">
-                    <li class="hover:text-blue-600">
-                        <a href="{{ Route('citizen.view') }}" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">
-                        <svg class="w-4 h-4 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
-                        Citizenship
-                        </a>
-                    </li>
+        <!-- Title -->
+        <div>
+            <h1 class="text-2xl font-bold text-blue-700">
+                Digital Voting System
+            </h1>
+            <p class="text-sm text-gray-600">
+                Secure Online Election Platform
+            </p>
+        </div>
+    </div>
 
-                    <li class="hover:text-blue-600">
-                        <a href="{{ Route('districts.index') }}" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">
-                        <svg class="w-4 h-4 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" d="M12 2C7.58 2 4 5.58 4 9c0 3.87 4 7.5 8 11 4-3.5 8-7.13 8-11 0-3.42-3.58-7-8-7zm0 10c-1.1 0-2-1.01-2-2s.9-2 2-2 2 1.01 2 2-.9 2-2 2z"/></svg>
-                            Distric
-                        </a>
-                    </li>
-                </ul>
-            </div> --}}
+    <!-- NAVBAR -->
+    <nav class="flex justify-between items-center px-10 py-3 bg-blue-700 text-white">
 
+        <!-- Left Nav -->
+        <ul class="flex space-x-8 font-medium">
+            <li>
+                <a href="{{ route('dashboard') }}" class="hover:text-yellow-300 transition">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('elections.userIndex') }}" class="hover:text-yellow-300 transition">
+                    Candidate
+                </a>
+            </li>
         </ul>
 
+        <!-- Right User Dropdown -->
         <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation"
             class="inline-flex items-center  focus:ring-2 font-medium text-white text-sm px-2 py-2 focus:outline-none shadow-xl rounded bg-green-600" type="button">
                 {{ Auth::user()->name }}
         <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
         </button>
         <!-- Dropdown menu -->
-        <div id="dropdownInformation" class="z-10 hidden bg-[#F7F9FC] bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-72">
+        <div id="dropdownInformation" class="z-10 hidden bg-[#F7F9FC] text-black bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-72">
             <div class="p-2">
             <div class="flex items-center px-2.5 p-2 space-x-1.5 text-sm bg-neutral-secondary-strong rounded">
                 <img class="h-8 r-5" src="{{ Auth::user()->photo }}" alt="Rounded avatar">
@@ -109,14 +114,16 @@
         </div>
 
     </nav>
+</header>
 
+{{--  --}}
 
-    <div class="px-10 mt-10  fade-in">
+    <div class="px-10 mt-5  fade-in">
         {{ $slot }}
     </div>
 
     {{-- footer --}}
-    <footer class="bg-[#e9edf4] px-10 mt-16 w-full">
+    <footer class="bg-[#e9edf4] px-10 mt-20 w-full">
 
         <div class="px-6 sm:px-10 py-10">
 

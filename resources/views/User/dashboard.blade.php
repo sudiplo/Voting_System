@@ -1,37 +1,5 @@
 <x-top-layout>
-
-    {{-- <!-- Hero Section -->
-    <section class="px-10 flex flex-col items-center text-center fade-in">
-        <h1 class="text-3xl font-bold text-gray-800 leading-tight">
-            Digital <span class="text-blue-600">Voting</span> System
-        </h1>
-    </section>
-    <!-- Image & Stats Section -->
-    <section class="flex justify-center mt-10 relative fade-in">
-        <img src="https://t4.ftcdn.net/jpg/03/77/39/37/360_F_377393789_XvtfKRNmrGP5CQYF86hgLMjZySyUXezu.jpg" class="rounded-xl w-50" />
-    </section> --}}
-
-
-    <!-- Hero Section -->
-    <section class="relative px-6 sm:px-5 py-10 sm:py-20 flex flex-col items-center text-center overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 via-blue-500 to-purple-600"></div>
-
-        <h1 class="relative text-3xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight">
-            Digital <span class="text-yellow-300">Voting</span> System
-        </h1>
-
-        <p class="relative mt-4 text-sm sm:text-base md:text-lg text-indigo-100 max-w-xl sm:max-w-2xl">
-            Empowering Democracy Through Technology
-        </p>
-    </section>
-
-    <!-- Image Section -->
-    {{-- <section class="flex justify-center -mt-16 sm:-mt-20 px-6 relative z-10">
-        <div class="rounded-2xl overflow-hidden shadow-2xl max-w-md w-full">
-            <img src="https://t4.ftcdn.net/jpg/03/77/39/37/360_F_377393789_XvtfKRNmrGP5CQYF86hgLMjZySyUXezu.jpg"
-                class="w-full object-cover hover:scale-105 transition duration-700">
-        </div>
-    </section> --}}
+    
     <!-- ================= Election Section ================= -->
     @if ($election)
     <section >
@@ -42,7 +10,6 @@
                 {{ $election->title }}
             </h2>
             <p class="mt-1 text-sm text-gray-500">
-                {{-- {{ $ward->palika->district->name_nepali }}, {{ $ward->palika->name}}, {{ $ward->name }} --}}
                 {{ Auth::user()->citizen->ward->palika->district->name_nepali }}, {{ Auth::user()->citizen->ward->palika->name}}, {{ Auth::user()->citizen->ward->name }}
             </p>
         </div>
@@ -62,36 +29,37 @@
                 aria-labelledby="candidateDropdownButton">
 
                 <li>
-                    <a href=""
-                    class="block px-4 py-2 rounded hover:bg-indigo-50 hover:text-indigo-600">
+                    <a href="{{ Route('Usermayor.view', ['id' => Auth::user()->citizen->palika_id, 'e_id' => $election->id]) }}" class="block px-4 py-2 rounded hover:bg-indigo-50 hover:text-indigo-600">
                         Mayor
                     </a>
                 </li>
 
                 <li>
-                    <a href=""
-                    class="block px-4 py-2 rounded hover:bg-indigo-50 hover:text-indigo-600">
+                    <a href="{{ Route('UserDeputymayor.view', ['id' => Auth::user()->citizen->palika_id, 'e_id' => $election->id]) }}" class="block px-4 py-2 rounded hover:bg-indigo-50 hover:text-indigo-600">
+                         Deputy Mayor
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ Route('UserChairperson.view', ['id' => Auth::user()->citizen->palika_id, 'e_id' => $election->id]) }}" class="block px-4 py-2 rounded hover:bg-indigo-50 hover:text-indigo-600">
                         Chairperson
                     </a>
                 </li>
 
                 <li>
-                    <a href=""
-                    class="block px-4 py-2 rounded hover:bg-indigo-50 hover:text-indigo-600">
+                    <a href="{{ Route('UserMember.view', ['id' => Auth::user()->citizen->palika_id, 'e_id' => $election->id]) }}" class="block px-4 py-2 rounded hover:bg-indigo-50 hover:text-indigo-600">
                         Member
                     </a>
                 </li>
 
                 <li>
-                    <a href=""
-                    class="block px-4 py-2 rounded hover:bg-indigo-50 hover:text-indigo-600">
+                    <a href="{{ Route('UserWomen.view', ['id' => Auth::user()->citizen->palika_id, 'e_id' => $election->id]) }}" class="block px-4 py-2 rounded hover:bg-indigo-50 hover:text-indigo-600">
                         Women
                     </a>
                 </li>
 
                 <li>
-                    <a href=""
-                    class="block px-4 py-2 rounded hover:bg-indigo-50 hover:text-indigo-600">
+                    <a href="{{ Route('UserDalit.view', ['id' => Auth::user()->citizen->palika_id, 'e_id' => $election->id]) }}" class="block px-4 py-2 rounded hover:bg-indigo-50 hover:text-indigo-600">
                         Dalit
                     </a>
                 </li>
