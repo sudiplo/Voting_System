@@ -32,13 +32,6 @@
       <h1 class="text-2xl font-semibold text-gray-800">Voting</h1>
     </div>
 
-    {{-- <ul class="flex space-x-10 text-gray-700 font-medium">
-      <li class="cursor-pointer hover:text-blue-600">Home</li>
-      <li class="cursor-pointer hover:text-blue-600">About</li>
-      <li class="cursor-pointer hover:text-blue-600">Service</li>
-      <li class="cursor-pointer hover:text-blue-600">Blog</li>
-    </ul> --}}
-
     <!--login-->
     <a href="{{ route('login') }}"><button class="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition">Log In</button></a>
   </nav>

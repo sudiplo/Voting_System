@@ -25,13 +25,6 @@
                             />
                             <span class="absolute right-4 top-3 text-gray-400">🔍</span>
                         </div>
-
-                        <button
-                            type="submit"
-                            class="px-6 py-3 bg-indigo-600 text-white rounded-xl
-                                hover:bg-indigo-700 shadow-md transition">
-                            Search
-                        </button>
                     </form>
                 </div>
             </div>
