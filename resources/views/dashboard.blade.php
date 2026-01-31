@@ -168,7 +168,7 @@
                     </div>
                 </a>
 
-                <a href="" class="px-6 py-4 flex hover:bg-gray-100 transition items-start gap-3">
+                <a href="{{ Route('candidates.index') }}" class="px-6 py-4 flex hover:bg-gray-100 transition items-start gap-3">
                     <span>👤</span>
                     <div>
                         <p class="font-medium">New Candidates Register</p>

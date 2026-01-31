@@ -14,8 +14,13 @@ class CandidateController extends Controller
 {
     //
 //<--===================================================REGISTER PAGE===========================================================-->
+    public function index(){
+        $election = Election::where('status','process')->get();
+        $ActiveElections = Election::where('status','process')->count();
+        return view('elections.pre_register_candidate',compact('election','ActiveElections'));
+    }
     //==========================Register Mayor/Depaty Mayor view==============================================================================
-    public function registerCandidateView(Request $request,$id)
+    public function registerCandidateView(Request $request)
     {
 
         $search = $request->get('search');
@@ -33,7 +38,7 @@ class CandidateController extends Controller
                 return back();
             }
         }
-
+        $id = $request->input('election_id');
         $election = Election::find($id);
         return view('elections.register_candidate', compact('citizen', 'citizenships', 'search','election'));
     }
@@ -55,6 +60,11 @@ class CandidateController extends Controller
             'photo' => 'required|image|mimes:jpg,jpeg,png|max:6144',
         ]);
         //==========================Handle the uploaded photo file=====================================================================
+        if(Election::where('id',$request->election_id)->where('status','!=','process')->exists()){
+            toast("Election is not active","error");
+            return back();
+        }
+
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
             $photo = $request->file('photo');
             $filename = time() . '_' . $photo->getClientOriginalName();

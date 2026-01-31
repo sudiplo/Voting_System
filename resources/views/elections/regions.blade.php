@@ -72,13 +72,14 @@
             </div>
 
             <form method="GET"
-                  action="{{ route('register_candidate.index',$election->id) }}" class="p-5 space-y-4">
+                  action="{{ route('register_candidate.index') }}" class="p-5 space-y-4">
                 @csrf
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">
                         Citizenship Number
                     </label>
+                    <input type="text" name="election_id" value="{{ $election->id }}" hidden>
                     <input type="text" name="search" required
                            class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm
                                   focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition">

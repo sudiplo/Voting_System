@@ -76,7 +76,8 @@ Route::middleware('auth')->group(function () {
 
 
 // ==========================CandidateController======================================================================
-    Route::get('/register-mayor{id}',[CandidateController::class,'registerCandidateView'])->name('register_candidate.index');
+    Route::get('/new-candidates',[CandidateController::class,'index'])->name('candidates.index');
+    Route::get('/register-new-candidate',[CandidateController::class,'registerCandidateView'])->name('register_candidate.index');
     Route::post('/register-candidate',[CandidateController::class,'candidateRegister'])->name('candidate.register');
     Route::get('/mayor-view{id}{e_id}',[CandidateController::class,'mayorView'])->name('mayor.view');
     Route::get('/deputy-mayor-view{id}{e_id}',[CandidateController::class,'deputyMayorView'])->name('Deputy_mayor.view');

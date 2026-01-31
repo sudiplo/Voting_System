@@ -109,7 +109,7 @@ class ElectionController extends Controller
     public function view($id){
         $election = Election::find($id);
         $districts = district::with('palika.wards')->get();
-        return view('elections.register',compact('districts','election'));
+        return view('elections.regions',compact('districts','election'));
     }
 
     //==========================search districh inside Election==============================================================================
