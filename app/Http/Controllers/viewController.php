@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\c_mayor;
+use App\Models\citizenship;
 use Illuminate\Http\Request;
 use App\Models\district;
 use App\Models\palika;
 use App\Models\Election;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -36,7 +38,11 @@ class viewController extends Controller
     }
     //
     public function Admindashboard(){
-        return view('dashboard');
+        $elections = Election::where('status','process')->orderBy('election_date', 'asc')->get();
+        $ActiveElections = Election::where('status','process')->count();
+        $totalUsers = User::where('usertype','user')->count();
+        $totalCitizens = citizenship::count();
+        return view('dashboard',compact('elections','totalUsers','ActiveElections','totalCitizens'));
     }
 
 }

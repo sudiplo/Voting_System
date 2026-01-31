@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('elections', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->unique();
+            $table->string(column: 'title')->unique();
             $table->date('election_date')->unique();
             $table->enum('status', ['process', 'end'])->default('process');;
             $table->timestamps();

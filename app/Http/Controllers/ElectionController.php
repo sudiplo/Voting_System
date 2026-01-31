@@ -61,7 +61,7 @@ class ElectionController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'date' => 'required|date',
-            'status' => 'required|in:process,end', 
+            'status' => 'required|in:process,end',
         ]);
 
         // if (Election::where('title', $request->name)->exists()) {
@@ -72,10 +72,13 @@ class ElectionController extends Controller
         //     toast('Election schedule is full for this date. Please choose another date.', 'error');
         //     return redirect()->back()->withInput();
         // }
-        if (Carbon::parse($request->date)->lessThanOrEqualTo(Carbon::today())) {
-            toast("Election date must be a future date", "error");
-            return redirect()->back();
+        if($request->status=='process'){
+            if (Carbon::parse($request->date)->lessThanOrEqualTo(Carbon::today())) {
+                toast("Election date must be a future date", "error");
+                return redirect()->back();
+            }
         }
+
 
         $election = Election::find($id);
         $election->title = $request->input('name');
