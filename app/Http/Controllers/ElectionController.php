@@ -19,6 +19,13 @@ class ElectionController extends Controller
         return view('elections.index', compact('elections'));
     }
 
+    //==========================Election Register View==============================================================================
+    public function electionRegisterView(){
+        $totalElections = Election::count();
+        $ActiveElections = Election::where('status','process')->count();
+        return view('elections.election_register', compact('ActiveElections', 'totalElections'));
+    }
+
     //==========================Register new Election==============================================================================
     public function create(Request $request){
         $request->validate([

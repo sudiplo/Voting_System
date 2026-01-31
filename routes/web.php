@@ -62,6 +62,7 @@ Route::middleware('auth')->group(function () {
 // ==========================ElectionController======================================================================
     // Route::resource('elections', ElectionController::class);
     Route::get('/elections', [ElectionController::class, 'index'])->name('elections.index');
+    Route::get('/election-register', [ElectionController::class, 'electionRegisterView'])->name('election.register');
     Route::post('/elections/create', [ElectionController::class, 'create'])->name('elections.create');
     Route::get('/election-edit{id}',[ElectionController::class,'electionEdit'])->name('election.editView');
     Route::patch('election-update{id}',[ElectionController::class,'electionUpdate'])->name('election.update');

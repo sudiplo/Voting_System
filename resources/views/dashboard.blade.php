@@ -161,26 +161,26 @@
             </div>
 
             <ul class="divide-y text-sm">
-                <li class="px-6 py-4 flex hover:bg-gray-100 transition items-start gap-3">
+                <a href="{{ Route('election.register') }}" class="px-6 py-4 flex hover:bg-gray-100 transition items-start gap-3">
                     <span>🗳️</span>
                     <div>
                         <p class="font-medium">New Election Register</p>
                     </div>
-                </li>
+                </a>
 
-                <li class="px-6 py-4 flex hover:bg-gray-100 transition items-start gap-3">
+                <a href="" class="px-6 py-4 flex hover:bg-gray-100 transition items-start gap-3">
                     <span>👤</span>
                     <div>
                         <p class="font-medium">New Candidates Register</p>
                     </div>
-                </li>
+                </a>
 
-                <li class="px-6 py-4 flex hover:bg-gray-100 transition items-start gap-3">
+                <a href="{{ Route('citizen.registerView') }}" class="px-6 py-4 flex hover:bg-gray-100 transition items-start gap-3">
                     <span>👤</span>
                     <div>
                         <p class="font-medium">Citizen register</p>
                     </div>
-                </li>
+                </a>
             </ul>
         </div>
 
