@@ -20,6 +20,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        //===============================USER SIDE=====================================
+    Route::get('/user-profile', [ProfileController::class, 'userEdit'])->name('user.profile.edit');
+    Route::patch('/user-profile-update', [ProfileController::class, 'userUpdate'])->name('user.profile.update');
 
 //==========================viewController======================================================================
     Route::get('/about',[viewController::class,'about'])->name('about');

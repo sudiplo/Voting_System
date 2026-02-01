@@ -51,4 +51,12 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+
+    //==========================Display the user's profile form USER SIDE.==========================================
+    public function userEdit(){
+        return view('User.user_edit', [
+            'user' => Auth::user(),
+        ]); 
+    }
 }
