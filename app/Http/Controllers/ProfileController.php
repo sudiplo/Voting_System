@@ -54,9 +54,14 @@ class ProfileController extends Controller
 
 
     //==========================Display the user's profile form USER SIDE.==========================================
+    public function userProfile(){
+        return view('User.profile', [
+            'user' => Auth::user(),
+        ]);
+    }
     public function userEdit(){
         return view('User.user_edit', [
             'user' => Auth::user(),
-        ]); 
+        ]);
     }
 }

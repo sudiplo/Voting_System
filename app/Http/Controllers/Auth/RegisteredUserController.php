@@ -81,7 +81,9 @@ class RegisteredUserController extends Controller
         $user->save();
         toast("Account create successfully","success");
 
+        event(new Registered($user));
         Auth::login($user);
+        return redirect()->route('verification.notice');
         return redirect(route('dashboard', absolute: false));
     }
 
