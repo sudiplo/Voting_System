@@ -35,7 +35,7 @@
         </div>
 
         <div class="group bg-white rounded-2xl shadow-sm p-6 transition-all duration-300 ease-out hover:shadow-xl hover:-translate-y-1 border border-gray-100">
-            <a href="{{ Route('elections.index') }}">
+            <a href="{{ route('Admin.dashboard') }}">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-sm font-semibold text-gray-500 group-hover:text-emerald-600 transition">

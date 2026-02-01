@@ -39,10 +39,11 @@ class viewController extends Controller
     //
     public function Admindashboard(){
         $elections = Election::where('status','process')->orderBy('election_date', 'asc')->get();
+        $totalElections = Election::count();
         $ActiveElections = Election::where('status','process')->count();
         $totalUsers = User::where('usertype','user')->count();
         $totalCitizens = citizenship::count();
-        return view('dashboard',compact('elections','totalUsers','ActiveElections','totalCitizens'));
+        return view('dashboard',compact('elections','totalUsers','totalElections','ActiveElections','totalCitizens'));
     }
 
 }

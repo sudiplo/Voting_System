@@ -12,10 +12,27 @@
 
     <!-- STATS GRID -->
     <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-
-        <!-- ACTIVE ELECTIONS -->
+        <!-- TOTAL ELECTIONS -->
         <div class="group bg-white rounded-2xl shadow-sm p-6 transition-all duration-300 ease-out hover:shadow-xl hover:-translate-y-1 border border-gray-100">
             <a href="{{ Route('elections.index') }}">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-semibold text-gray-500 group-hover:text-emerald-600 transition">
+                            Total Elections
+                        </p>
+                        <p class="text-3xl font-bold text-emerald-600">
+                            {{ $totalElections }}
+                        </p>
+                    </div>
+                    <div class="text-4xl transform transition duration-300 group-hover:scale-110">
+                        ✅
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- ACTIVE ELECTIONS -->
+        <div class="group bg-white rounded-2xl shadow-sm p-6 transition-all duration-300 ease-out hover:shadow-xl hover:-translate-y-1 border border-gray-100">
+            <a href="{{ route('Admin.dashboard') }}">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-sm font-semibold text-gray-500 group-hover:text-emerald-600 transition">
