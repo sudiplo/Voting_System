@@ -16,8 +16,7 @@ Route::middleware('guest')->group(function () {
         ->middleware('throttle:5,1')
         ->name('preRegister');
 
-    Route::post('preRegister', [RegisteredUserController::class, 'check'])
-    ->middleware('throttle:5,1');
+    Route::post('preRegister', [RegisteredUserController::class, 'check'])->middleware('throttle:5,1');
 
     Route::get('/register', [RegisteredUserController::class, 'create'])
         ->middleware('throttle:5,1')

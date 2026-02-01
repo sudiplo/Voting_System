@@ -82,7 +82,7 @@ class RegisteredUserController extends Controller
         toast("Account create successfully","success");
 
         Auth::login($user);
-        return redirect(route('User.dashboard', absolute: false));
+        return redirect(route('dashboard', absolute: false));
     }
 
 }

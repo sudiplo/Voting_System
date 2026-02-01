@@ -99,6 +99,10 @@
     <main class="flex-1 overflow-y-auto">
         <div class="p-6">
             {{ $slot }}
+                <!-- FOOTER NOTE -->
+    <div class="mt-10 text-center text-xs text-gray-400">
+        Digital Voting System • Sudip Lo
+    </div>
         </div>
     </main>
 

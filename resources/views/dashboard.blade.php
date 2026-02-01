@@ -186,10 +186,10 @@
 
     </div>
 
-    <!-- FOOTER NOTE -->
+    {{-- <!-- FOOTER NOTE -->
     <div class="mt-10 text-center text-xs text-gray-400">
         Digital Voting System • Admin Console • Version 1.0
-    </div>
+    </div> --}}
 
 
 </x-defult_layout>
