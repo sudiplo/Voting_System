@@ -79,6 +79,12 @@ class ElectionController extends Controller
         //     toast('Election schedule is full for this date. Please choose another date.', 'error');
         //     return redirect()->back()->withInput();
         // }
+        if($request->date != Election::find($id)->election_date){
+                    if (Election::whereDate('election_date', $request->date)->exists()) {
+            toast('Election schedule is full for this date. Please choose another date.', 'error');
+            return redirect()->back()->withInput();
+        }
+        }
         if($request->status=='process'){
             if (Carbon::parse($request->date)->lessThanOrEqualTo(Carbon::today())) {
                 toast("Election date must be a future date", "error");
