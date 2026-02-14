@@ -1,5 +1,5 @@
 <x-top-layout>
-    
+
     <!-- ================= Election Section ================= -->
     @if ($election)
     <section >
@@ -19,7 +19,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                     <h2 class="text-xl sm:text-2xl font-semibold text-gray-800">
-                        {{ $election->title }} 
+                        {{ $election->title }}
                     </h2>
                     <p class="mt-1 text-sm text-gray-500">
                         {{ Auth::user()->citizen->ward->palika->district->name_nepali }},

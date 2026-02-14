@@ -1,16 +1,14 @@
 <?php
 
 use App\Http\Controllers\AddController;
-use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\citizenshipController;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\viewController;
 use App\Http\Controllers\ElectionController;
 use App\Http\Controllers\CandidateController;
 use Illuminate\Support\Facades\Route;
-use App\Models\palika;
 use App\Http\Controllers\DistrictController;
+use App\Http\Controllers\VotingOtpController;
 
 Route::get('/', [viewController::class,'welcome'])->name('welcome');
 
@@ -115,6 +113,24 @@ Route::middleware('auth')->group(function () {
         Route::get('/user-candidate-Women-search{id}{e_id}',[CandidateController::class,'UserWomenSearch'])->name('UserWomen_search');
         Route::get('/user-candidate-Dalit-search{id}{e_id}',[CandidateController::class,'UserDalitSearch'])->name('UsercandidateDalit_search');
         Route::get('/user-candidate-profile{id}{e_id}',[CandidateController::class,'UserCandidateProfile'])->name('UsercandidateProfile');
+
+        // ===============================Voting OTP=====================================
+        // User clicks "Cast Vote"
+        Route::get('/cast-vote', [VotingOtpController::class, 'sendOtp'])
+            ->name('vote.request');
+
+        // Show OTP form
+        Route::get('/verify-otp', [VotingOtpController::class, 'showVerifyForm'])
+            ->name('otp.verify.form');
+
+        // Verify OTP
+        Route::post('/verify-otp', [VotingOtpController::class, 'verifyOtp'])
+            ->name('otp.verify');
+
+        // Actual voting page
+        Route::get('/vote', function () {
+            return view('voting.vote-page');
+        })->name('vote.page');
 });
 
 

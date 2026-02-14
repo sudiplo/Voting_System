@@ -159,7 +159,6 @@ class ElectionController extends Controller
         $election = Election::where('status','process')->orderBy('election_date', 'asc')->first();
         $mayor = c_mayor::where('election',$election->id)->get();
         $candidate = wardCandidate::where('election',$election->id)->get();
-
         return view('User.vote', compact('today', 'election','mayor','candidate'));
     }
 
