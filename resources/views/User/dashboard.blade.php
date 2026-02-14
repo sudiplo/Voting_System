@@ -5,13 +5,37 @@
     <section >
 
         <!-- Election Info -->
-        <div class="mt-4 mb-8 border rounded-lg p-4 sm:p-6 bg-white">
+        {{-- <div class="mt-4 mb-8 border rounded-lg p-4 sm:p-6 bg-white">
             <h2 class="text-xl sm:text-2xl font-semibold text-gray-800">
                 {{ $election->title }}
             </h2>
             <p class="mt-1 text-sm text-gray-500">
                 {{ Auth::user()->citizen->ward->palika->district->name_nepali }}, {{ Auth::user()->citizen->ward->palika->name}}, {{ Auth::user()->citizen->ward->name }}
             </p>
+            <a href="{{ Route('elections.vote') }}">VOte</a>
+        </div> --}}
+        <!-- Election Info -->
+        <div class="mt-6 mb-8 bg-white border rounded-lg p-5">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-semibold text-gray-800">
+                        {{ $election->title }} 
+                    </h2>
+                    <p class="mt-1 text-sm text-gray-500">
+                        {{ Auth::user()->citizen->ward->palika->district->name_nepali }},
+                        {{ Auth::user()->citizen->ward->palika->name }},
+                        {{ Auth::user()->citizen->ward->name }}.
+                        {{ \Carbon\Carbon::parse($election->election_date)->format('F j, Y') }}
+                    </p>
+                </div>
+
+                <div>
+                    <a href="{{ Route('elections.vote') }}" class="inline-block px-5 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition duration-200">
+                        Vote Now
+                    </a>
+                </div>
+
+            </div>
         </div>
 
         <!-- Dropdown Button -->
