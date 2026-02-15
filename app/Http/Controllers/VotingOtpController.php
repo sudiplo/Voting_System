@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Election;
-use App\Models\c_mayor;
 use App\Models\wardCandidate;
+use App\Models\vote;
+
 
 class VotingOtpController extends Controller
 {
@@ -132,7 +133,6 @@ class VotingOtpController extends Controller
         // Set session flag
         session(['otp_verified' => true]);
 
-        // Redirect to actual voting page
         toast('OTP verified. You can now cast your vote.', 'success');
         return redirect()->route('vote.page');
     }
@@ -144,25 +144,27 @@ class VotingOtpController extends Controller
             'vote' => 'required|array',
         ]);
 
+        $election = Election::where('status','process')->orderBy('election_date', 'asc')->first();
+
+        $alreadyVoted = vote::where('user_id', Auth::user()->id)->where('election_id', $election->id)->exists();
+        if ($alreadyVoted) {
+            toast('You have already cast your vote for this election!', 'error');
+            return back();
+        }
+
         foreach ($request->vote as $post => $candidateId) {
-
             $candidate = wardCandidate::find($candidateId);
-            if (!$candidate) {
-                // Try Ward Candidate table
-                $candidate = WardCandidate::find($candidateId);
-            }
-
             if ($candidate) {
                 $candidate->vote = $candidate->vote ? intval($candidate->vote) + 1 : 1;
                 $candidate->save();
             }
 
-            // Optionally, store user's vote in a 'votes' table to prevent double voting
-            // Vote::create([
-            //     'user_id' => Auth::id(),
-            //     'candidate_id' => $candidateId,
-            //     'post' => $post,
-            // ]);
+            vote::create([
+                'user_id' => Auth::user()->id,
+                'candidate_id' => $candidate->id,
+                'election_id' => $candidate->election,
+                'post' => $post,
+            ]);
         }
 
         toast('Your vote has been submitted!', 'success');

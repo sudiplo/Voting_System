@@ -12,4 +12,10 @@ class Election extends Model
     {
         return $this->hasMany(wardCandidate::class);
     }
+
+    // relation between election and vote
+        public function votes(): HasMany
+    {
+        return $this->hasMany(vote::class);
+    }
 }

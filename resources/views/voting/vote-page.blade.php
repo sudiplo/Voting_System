@@ -45,26 +45,17 @@
 
         <div class="mb-16 p-6 rounded-2xl shadow-md border-l-8 border-{{ $color }}-500 bg-{{ $color }}-50">
 
-            <!-- Position Header -->
             <div class="mb-8">
                 <h2 class="text-2xl font-bold text-gray-800">{{ $post }}</h2>
                 <p class="text-sm text-gray-600 mt-1">Choose one candidate for {{ $post }}</p>
             </div>
 
-            <!-- Candidate Grid -->
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
 
                 @foreach ($postCandidates as $candidate)
                 <label class="relative bg-white rounded-2xl overflow-hidden shadow-md cursor-pointer group transition transform hover:-translate-y-2 hover:shadow-xl">
+                    <input type="radio" name="vote[{{ $post }}]" value="{{ $candidate->id }}" class="hidden peer" required>
 
-                    <!-- Hidden Radio -->
-                    <input type="radio"
-                           name="vote[{{ $post }}]"
-                           value="{{ $candidate->id }}"
-                           class="hidden peer"
-                           required>
-
-                    <!-- Candidate Image -->
                     <img src="{{ $candidate->photo }}"
                          class="w-full h-full object-cover aspect-[3/4] transition duration-300 group-hover:scale-110">
 
@@ -77,8 +68,7 @@
                         <p class="text-xs text-gray-300 truncate">{{ $candidate->party }}</p>
                         <div class="mt-3 flex justify-between items-center text-xs">
                             <span class="bg-white/20 px-2 py-1 rounded">{{ $candidate->post }}</span>
-                            <a href="{{ route('UsercandidateProfile', ['id'=>$candidate->id,'e_id'=>$candidate->election]) }}"
-                               onclick="event.stopPropagation()"
+                            <a href="{{ route('UsercandidateProfile', ['id'=>$candidate->id,'e_id'=>$candidate->election]) }}" onclick="event.stopPropagation()"
                                class="bg-{{ $color }}-600 hover:bg-{{ $color }}-700 px-2 py-1 rounded text-white">
                                 View
                             </a>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class wardCandidate extends Model
 {
@@ -22,7 +23,6 @@ class wardCandidate extends Model
     ];
 
     // relation between ward Candidate and citizen
-
     public function citizen(): BelongsTo
     {
         return $this->belongsTo(citizenship::class);
@@ -50,5 +50,11 @@ class wardCandidate extends Model
     public function ward(): BelongsTo
     {
         return $this->belongsTo(ward::class);
+    }
+
+    // relation between ward Candidate and vote
+        public function votes(): HasMany
+    {
+        return $this->hasMany(vote::class);
     }
 }

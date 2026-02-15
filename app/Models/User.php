@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -50,5 +51,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function citizen(): BelongsTo
     {
         return $this->belongsTo(citizenship::class);
+    }
+
+    // relation between user and vote
+    public function votes(): HasMany
+    {
+        return $this->hasMany(vote::class);
     }
 }
