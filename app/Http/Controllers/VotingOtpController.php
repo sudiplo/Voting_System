@@ -118,6 +118,14 @@ class VotingOtpController extends Controller
             'is_used' => true
         ]);
 
+        // Mark as used
+        $otpRecord->update([
+            'is_used' => true
+        ]);
+
+        // Set session flag
+        session(['otp_verified' => true]);
+
         // Redirect to actual voting page
         toast('OTP verified. You can now cast your vote.', 'success');
         return redirect()->route('vote.page');
