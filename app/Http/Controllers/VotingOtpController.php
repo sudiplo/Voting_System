@@ -72,9 +72,9 @@ class VotingOtpController extends Controller
     }
 
     //==========================Show OTP form==========================
-    public function showVerifyForm()
+    public function castVote()
     {
-        return view('voting.verify-otp');
+        return view('voting.vote-page');
     }
 
     //==========================Verify OTP==========================

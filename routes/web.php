@@ -128,9 +128,9 @@ Route::middleware('auth')->group(function () {
             ->name('otp.verify');
 
         // Actual voting page
-        Route::get('/vote', function () {
-            return view('voting.vote-page');
-        })->middleware('otp.verified')->name('vote.page');
+        Route::get('/vote',[VotingOtpController::class, 'castVote'])
+            ->middleware('otp.verified')->name('vote.page');
+
 });
 
 
