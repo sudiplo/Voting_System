@@ -131,6 +131,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/vote',[VotingOtpController::class, 'castVote'])
             ->middleware('otp.verified')->name('vote.page');
 
+        //==============================Submit Vote=====================================
+        Route::post('/submit-vote', [VotingOtpController::class, 'submitVote'])->name('vote.submit');
 });
 
 

@@ -1,10 +1,12 @@
 <x-top-layout>
 
-<form method="POST" action="{{ route('vote.submit') }}">
+<form method="POST"
+ {{-- action="{{ route('vote.submit') }}" --}}
+ >
     @csrf
 
     @php
-        $groupedCandidates = $candidates->groupBy('post');
+        $groupedCandidates = $wardCandidates->groupBy('post');
         $totalPosts = count($groupedCandidates);
 
         // Define colors for each post

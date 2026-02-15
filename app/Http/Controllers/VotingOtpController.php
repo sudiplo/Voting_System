@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use App\Models\Election;
+use App\Models\c_mayor;
+use App\Models\wardCandidate;
 
 class VotingOtpController extends Controller
 {
@@ -74,7 +77,12 @@ class VotingOtpController extends Controller
     //==========================Show OTP form==========================
     public function castVote()
     {
-        return view('voting.vote-page');
+        $election = Election::where('status','process')->orderBy('election_date', 'asc')->first();
+
+            $candidates = c_mayor::where('palika_id', Auth::user()->citizen->palika_id)->where('election', $election->id)->get();
+            $wardCandidates = wardCandidate::where('palika_id', Auth::user()->citizen->palika_id)->where('election', $election->id)->get();
+
+        return view('voting.vote-page', compact('candidates','wardCandidates', 'election'));
     }
 
     //==========================Verify OTP==========================
@@ -129,5 +137,39 @@ class VotingOtpController extends Controller
         // Redirect to actual voting page
         toast('OTP verified. You can now cast your vote.', 'success');
         return redirect()->route('vote.page');
+    }
+
+    // ==========================Submit Vote==========================
+    public function submitVote(Request $request)
+    {
+        $request->validate([
+            'vote' => 'required|array',
+        ]);
+
+        foreach ($request->vote as $post => $candidateId) {
+
+            $candidate = c_mayor::find($candidateId);
+            if (!$candidate) {
+                // Try Ward Candidate table
+                $candidate = WardCandidate::find($candidateId);
+            }
+
+            if ($candidate) {
+                $candidate->vote = $candidate->vote ? intval($candidate->vote) + 1 : 1;
+                $candidate->save();
+            }
+
+            // Optionally, store user's vote in a 'votes' table to prevent double voting
+            // Vote::create([
+            //     'user_id' => Auth::id(),
+            //     'candidate_id' => $candidateId,
+            //     'post' => $post,
+            // ]);
+        }
+        $election = Election::where('status','process')->orderBy('election_date', 'asc')->first();
+            $wardCandidates = wardCandidate::where('palika_id', Auth::user()->citizen->palika_id)->where('election', $election->id)->get();
+
+        toast('Your vote has been submitted!', 'success');
+        return view('voting.ward-vote', compact('wardCandidates', 'election'));
     }
 }
