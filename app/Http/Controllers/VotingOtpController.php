@@ -9,12 +9,46 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 
 class VotingOtpController extends Controller
 {
-    // 🔹 Step 1: Send OTP when user tries to cast vote
-    public function sendOtp()
+
+    //==========================Send OTP==========================
+    public function sendOtp(Request $request)
     {
+        // Rate limiting algo (sliding window)
+        $limit = 5;
+        $window = 60;
+        $blockTime = 60;
+
+        $ip = $request->ip();
+        $rateKey = 'rate_limit:otp:' . $ip;
+        $blockKey = 'rate_limit:block:' . $ip;
+
+        // Check if blocked
+        if (Cache::has($blockKey)) {
+            toast('You are blocked for 1 minute due to too many OTP requests.', 'error');
+            return redirect()->back();
+        }
+
+        //Get request count
+        $count = Cache::get($rateKey, 0);
+
+        //If limit exceeded → block
+        if ($count >= $limit) {
+
+            Cache::put($blockKey, true, $blockTime); // block user
+            Cache::forget($rateKey); // reset counter
+
+            toast('Too many OTP requests. Blocked for 1 minute.', 'error');
+            return redirect()->back();
+        }
+
+        //Increase request count
+        Cache::put($rateKey, $count + 1, $window);
+
+        //===========================OTP=====================
         $user = Auth::user();
 
         // Delete previous unused OTP
@@ -22,28 +56,28 @@ class VotingOtpController extends Controller
             ->where('is_used', false)
             ->delete();
 
-        // Generate 6 digit OTP
         $plainOtp = rand(100000, 999999);
 
         otps::create([
             'user_id' => $user->id,
-            'otp' => Hash::make($plainOtp), // hash OTP
+            'otp' => Hash::make($plainOtp),
             'expires_at' => Carbon::now()->addMinutes(5),
         ]);
 
-        // Send to logged in user's email
         Mail::to($user->email)->send(new VotingOtpMail($plainOtp));
+
         toast('OTP sent to your email.', 'success');
-        return redirect()->route('otp.verify.form');
+        return back();
+        // return redirect()->route('otp.verify.form');
     }
 
-    // 🔹 Step 2: Show OTP form
+    //==========================Show OTP form==========================
     public function showVerifyForm()
     {
         return view('voting.verify-otp');
     }
 
-    // 🔹 Step 3: Verify OTP
+    //==========================Verify OTP==========================
     public function verifyOtp(Request $request)
     {
         $request->validate([
