@@ -130,7 +130,7 @@ Route::middleware('auth')->group(function () {
         // Actual voting page
         Route::get('/vote', function () {
             return view('voting.vote-page');
-        })->name('vote.page');
+        })->middleware('otp.verified')->name('vote.page');
 });
 
 
