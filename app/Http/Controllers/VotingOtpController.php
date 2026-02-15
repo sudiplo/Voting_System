@@ -78,11 +78,9 @@ class VotingOtpController extends Controller
     public function castVote()
     {
         $election = Election::where('status','process')->orderBy('election_date', 'asc')->first();
+        $Candidates = wardCandidate::where('palika_id', Auth::user()->citizen->palika_id)->where('election', $election->id)->get();
 
-            $candidates = c_mayor::where('palika_id', Auth::user()->citizen->palika_id)->where('election', $election->id)->get();
-            $wardCandidates = wardCandidate::where('palika_id', Auth::user()->citizen->palika_id)->where('election', $election->id)->get();
-
-        return view('voting.vote-page', compact('candidates','wardCandidates', 'election'));
+        return view('voting.vote-page', compact('Candidates', 'election'));
     }
 
     //==========================Verify OTP==========================
@@ -148,7 +146,7 @@ class VotingOtpController extends Controller
 
         foreach ($request->vote as $post => $candidateId) {
 
-            $candidate = c_mayor::find($candidateId);
+            $candidate = wardCandidate::find($candidateId);
             if (!$candidate) {
                 // Try Ward Candidate table
                 $candidate = WardCandidate::find($candidateId);
@@ -166,10 +164,8 @@ class VotingOtpController extends Controller
             //     'post' => $post,
             // ]);
         }
-        $election = Election::where('status','process')->orderBy('election_date', 'asc')->first();
-            $wardCandidates = wardCandidate::where('palika_id', Auth::user()->citizen->palika_id)->where('election', $election->id)->get();
 
         toast('Your vote has been submitted!', 'success');
-        return view('voting.ward-vote', compact('wardCandidates', 'election'));
+        return back();
     }
 }

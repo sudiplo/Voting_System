@@ -157,15 +157,12 @@ class ElectionController extends Controller
     public function vote(){
         $today = Carbon::today()->toDateString();
         $election = Election::where('status','process')->orderBy('election_date', 'asc')->first();
-        $mayor = c_mayor::where('election',$election->id)->get();
-        $candidate = wardCandidate::where('election',$election->id)->get();
-        return view('User.vote', compact('today', 'election','mayor','candidate'));
+        return view('User.vote', compact('today', 'election'));
     }
 
     //=========================view the election index page==============================================
         public function ElectionDistrict(){
         $election = Election::where('status','process')->orderBy('election_date', 'asc')->first();
-        // $election = Election::find($id);
         $districts = district::with('palika.wards')->get();
         return view('User.candidate.index',compact('districts','election'));
     }

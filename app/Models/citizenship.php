@@ -56,11 +56,6 @@ class citizenship extends Model
         return $this->belongsTo(ward::class);
     }
 
-    //relation between citizen and c_mayor
-    public function Cmayor(): HasMany
-    {
-        return $this->hasMany(c_mayor::class);
-    }
 
     //relation between citizen and wardCandidate
     public function wardCandidate(): HasMany

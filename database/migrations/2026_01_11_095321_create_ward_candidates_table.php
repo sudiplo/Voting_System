@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('palika_id')->constrained();
             $table->foreignId('ward_id')->constrained();
             $table->foreignId('election')->constrained();
-            $table->enum('post', ['Ward Chairperson', 'Ward Member','Ward Member(Women)','Ward Member(Dalit)']);
+            $table->enum('post', ['Mayor', 'Deputy Mayor','Ward Chairperson', 'Ward Member','Ward Member(Women)','Ward Member(Dalit)']);
             $table->text('party');
             $table->longText('goal');
             $table->text('vote')->nullable();

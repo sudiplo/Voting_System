@@ -74,31 +74,11 @@ class CandidateController extends Controller
             return back();
         }
 
-        if (c_mayor::where('citizen_id', $request->citizen_id)->where('election',$request->election_id)->exists()) {
-            toast("Candidates already Register.","error");
-            return redirect()-> back();
-        }
         if (wardCandidate::where('citizen_id', $request->citizen_id)->where('election',$request->election_id)->exists()) {
             toast("Candidates already Register.","error");
             return redirect()-> back();
         }
-        // if candidate is deputy mayor or mayor
-        if ($request->post == 'Deputy Mayor' || $request->post == 'Mayor') {
-            $mayor = new c_mayor();
-            $mayor->citizen_id = $request->citizen_id;
-            $mayor->district_id = $request->district_id;
-            $mayor->palika_id = $request->palika_id;
-            $mayor->election = $request->election_id;
-            $mayor->post = $request->post;
-            $mayor->party = $request->party;
-            $mayor->goal = $request->goal;
-            $mayor->vote = 0;
-            $mayor->photo = 'images/' . $filename;
 
-            $mayor->save();
-        toast("Data saved successfully", "success");
-        return redirect()->back();
-        }else{
             $candidate = new wardCandidate();
             $candidate->citizen_id = $request->citizen_id;
             $candidate->district_id = $request->district_id;
@@ -114,7 +94,7 @@ class CandidateController extends Controller
             $candidate->save();
             toast("Data saved successfully", "success");
             return redirect()->back();
-        }
+        // }
     }
 
 
@@ -124,7 +104,7 @@ class CandidateController extends Controller
     public function mayorView($id, $e_id){
         $e = Election::find($e_id);
         $palika = palika::find($id);
-        $candidate = c_mayor::where('election',$e_id)->where('post', 'Mayor')->where('palika_id',$id)->get();
+        $candidate = wardCandidate::where('election',$e_id)->where('post', 'Mayor')->where('palika_id',$id)->get();
         return view('elections.candidats.mayor',compact('candidate','palika','e'));
     }
 
@@ -133,7 +113,7 @@ class CandidateController extends Controller
     public function deputyMayorView($id, $e_id){
         $e = Election::find($e_id);
         $palika = palika::find($id);
-        $candidate = c_mayor::where('election',$e_id)->where('post', 'Deputy Mayor')->where('palika_id',$id)->get();
+        $candidate = wardcandidate::where('election',$e_id)->where('post', 'Deputy Mayor')->where('palika_id',$id)->get();
         return view('elections.candidats.Depaty_mayor',compact('candidate','palika','e'));
     }
 
@@ -172,35 +152,23 @@ class CandidateController extends Controller
 
     //==========================Candidate Profile==============================================================================
     public function candidateProfile($id,$e_id){
-        $candidate = c_mayor::find($id);
-        if(!$candidate){
             $candidate = wardCandidate::find($id);
             $e = $candidate->election;
             $id = $candidate->ward_id;
             return view('elections.candidats.profile',compact('candidate','id','e'));
-        }
-        $e = $candidate->election;
-        $id = $candidate->palika_id;
-        return view('elections.candidats.profile',compact('candidate','e','id'));
     }
 
     //==========================Edit Candidate view==============================================================================
     public function candidateEditView($id,$e_id){
-        $candidate = c_mayor::find($id);
-        if (!$candidate) {
-            $candidate = wardCandidate::find($id);
-            if ($candidate) {
-                $e  = $candidate->election;
-                $id = $candidate->ward_id;
-                return view('elections.candidats.edit_mayor', compact('candidate', 'e', 'id'));
-            }else{
-                $e = $e_id;
-                return view('elections.candidats.edit_mayor',compact('candidate','e'));
-            }
+        $candidate = wardCandidate::find($id);
+        if ($candidate) {
+            $e  = $candidate->election;
+            $id = $candidate->ward_id;
+            return view('elections.candidats.edit_mayor', compact('candidate', 'e', 'id'));
+        }else{
+            $e = $e_id;
+            return view('elections.candidats.edit_mayor',compact('candidate','e'));
         }
-        $e  = $candidate->election;
-        $id = $candidate->palika_id;
-        return view('elections.candidats.edit_mayor', compact('candidate', 'e', 'id'));
     }
 
 
@@ -220,103 +188,12 @@ class CandidateController extends Controller
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:6144',
         ]);
 
-        if (c_mayor::where('citizen_id', $request->citizen_id)->
-        where('election',$request->election_id)->where('goal',$request->goal)->exists()) {
-            toast("Candidates already Register.","error");
-            return redirect()-> back();
-        }
         if (wardCandidate::where('citizen_id', $request->citizen_id)->
         where('election',$request->election_id)->where('goal',$request->goal)->exists()) {
             toast("Candidates already Register.","error");
             return redirect()-> back();
         }
 
-        // if candidate is deputy mayor or mayor
-        if ($request->post == 'Deputy Mayor' || $request->post == 'Mayor') {
-            $candidate = wardCandidate::find($id);
-            //if data is not come from the c_mayor table
-            if ($candidate) {
-                $oldPhoto = $candidate ? $candidate->photo : null;
-                $vote = $candidate ? $candidate->vote: 0;
-                $mayor = new c_mayor();
-                $mayor->citizen_id = $request->citizen_id;
-                $mayor->district_id = $request->district_id;
-                $mayor->palika_id = $request->palika_id;
-                // $mayor->ward_id = $request->ward_id;
-                $mayor->election = $request->election_id;
-                $mayor->post = $request->post;
-                $mayor->party = $request->party;
-                $mayor->goal = $request->goal;
-                $mayor->vote = $vote;
-                if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
-                    $photo = $request->file('photo');
-                    $filename = time() . '_' . $photo->getClientOriginalName();
-                    $photo->move(public_path('images'), $filename);
-                    $mayor->photo = 'images/' . $filename;
-                } else {
-                    $mayor->photo = $oldPhoto ?? 'images/default.png';
-                }
-                $candidate->delete();
-                $mayor->save();
-                toast("Data saved successfully", "success");
-                return redirect()->back();
-            }
-            $mayor = c_mayor::find($id);
-            $vote = $mayor ? $mayor->vote: 0;
-            $mayor->citizen_id = $request->citizen_id;
-            $mayor->district_id = $request->district_id;
-            $mayor->palika_id = $request->palika_id;
-            $mayor->election = $request->election_id;
-            $mayor->post = $request->post;
-            $mayor->party = $request->party;
-            $mayor->goal = $request->goal;
-            $mayor->vote = $vote;
-            if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
-                $photo = $request->file('photo');
-                $filename = time() . '_' . $photo->getClientOriginalName();
-                $photo->move(public_path('images'), $filename);
-                $mayor->photo = 'images/' . $filename;
-            }else {
-                $oldPhoto = $mayor ? $mayor->photo : null;
-                $mayor->photo = $oldPhoto ?? 'images/default.png';
-            }
-
-            $mayor->save();
-            toast("Data saved successfully", "success");
-            return redirect()->back();
-        }
-        else  // if candidate is  not deputy mayor or mayor
-            {
-            $mayor = c_mayor::find($id);
-            $vote = $mayor ? $mayor->vote : 0;
-            //if data come from the c_mayor table
-            if ($mayor) {
-                $mayor->delete();
-                $oldPhoto = $mayor ? $mayor->photo : null;
-                $candidate = new wardCandidate();
-                $candidate->citizen_id = $request->citizen_id;
-                $candidate->district_id = $request->district_id;
-                $candidate->palika_id = $request->palika_id;
-                $candidate->ward_id = $request->ward_id;
-                $candidate->election = $request->election_id;
-                $candidate->post = $request->post;
-                $candidate->party = $request->party;
-                $candidate->goal = $request->goal;
-                $candidate->vote = $vote;
-                if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
-                    $photo = $request->file('photo');
-                    $filename = time() . '_' . $photo->getClientOriginalName();
-                    $photo->move(public_path('images'), $filename);
-                    $candidate->photo = 'images/' . $filename;
-                } else {
-                    $candidate->photo = $oldPhoto ?? 'images/default.png';
-                }
-                $mayor->delete();
-                $candidate->save();
-                toast("Data saved successfully", "success");
-                return redirect()->back();
-            }
-            $oldPhoto = $mayor ? $mayor->photo : null;
             $candidate = wardCandidate::find($id);
             $vote = $candidate ? $candidate->vote: 0;
             $photo = $candidate->photo;
@@ -341,7 +218,6 @@ class CandidateController extends Controller
             $candidate->save();
             toast("Data saved successfully", "success");
             return redirect()->back();
-        }
     }
 
 
@@ -349,13 +225,7 @@ class CandidateController extends Controller
 //<--===================================================DELETE SECTION===========================================================-->
     //==========================Candidate Delete==============================================================================
     public function candidateDelete($id){
-        $candidate = c_mayor::find($id);
-        if(!$candidate){
-            $candidate = wardCandidate::find($id);
-            $candidate->delete();
-            toast("Candidate Data Delete successfully","success");
-            return redirect()->Route('elections.index');
-        }
+        $candidate = wardCandidate::find($id);
         $candidate->delete();
         toast("Candidate Data Delete successfully","success");
         return redirect()->Route('elections.index');
@@ -371,7 +241,7 @@ class CandidateController extends Controller
         $palika = palika::find($id);
         $search = $request->get('search');
 
-        $candidate = c_mayor::with('citizen')
+        $candidate = wardCandidate::with('citizen')
             ->where('post', 'Mayor')
             ->whereHas('citizen', function ($query) use ($search) {
                 $query->where('name_english', 'like', "%{$search}%")
@@ -389,7 +259,7 @@ class CandidateController extends Controller
         $palika = palika::find($id);
         $search = $request->get('search');
 
-        $candidate = c_mayor::with('citizen')
+        $candidate = wardCandidate::with('citizen')
             ->where('post', 'Deputy Mayor')
             ->whereHas('citizen', function ($query) use ($search) {
                 $query->where('name_english', 'like', "%{$search}%")
@@ -478,7 +348,7 @@ class CandidateController extends Controller
     public function UserMayor($id, $e_id){
         $e = Election::find($e_id);
         $palika = palika::find($id);
-        $candidate = c_mayor::where('election',$e_id)->where('post', 'Mayor')->where('palika_id',$id)->get();
+        $candidate = wardCandidate::where('election',$e_id)->where('post', 'Mayor')->where('palika_id',$id)->get();
         return view('User.candidate.mayor',compact('candidate','palika','e'));
     }
 
@@ -486,7 +356,7 @@ class CandidateController extends Controller
     public function UserDeputyMayor($id, $e_id){
         $e = Election::find($e_id);
         $palika = palika::find($id);
-        $candidate = c_mayor::where('election',$e_id)->where('post', 'Deputy Mayor')->where('palika_id',$id)->get();
+        $candidate = wardCandidate::where('election',$e_id)->where('post', 'Deputy Mayor')->where('palika_id',$id)->get();
         return view('User.candidate.deputy_mayor',compact('candidate','palika','e'));
     }
 
@@ -524,16 +394,11 @@ class CandidateController extends Controller
 
         //==========================Candidate Profile==============================================================================
     public function UserCandidateProfile($id,$e_id){
-        $candidate = c_mayor::find($id);
-        if(!$candidate){
-            $candidate = wardCandidate::find($id);
-            $e = $candidate->election;
-            $id = $candidate->ward_id;
-            return view('User.candidate.profile',compact('candidate','id','e'));
-        }
+        $candidate = wardCandidate::find($id);
         $e = $candidate->election;
-        $id = $candidate->palika_id;
-        return view('User.candidate.profile',compact('candidate','e','id'));
+        $id = $candidate->ward_id;
+        return view('User.candidate.profile',compact('candidate','id','e'));
+
     }
 
 
@@ -544,7 +409,7 @@ class CandidateController extends Controller
         $palika = palika::find($id);
         $search = $request->get('search');
 
-        $candidate = c_mayor::with('citizen')
+        $candidate = wardCandidate::with('citizen')
             ->where('post', 'Mayor')
             ->whereHas('citizen', function ($query) use ($search) {
                 $query->where('name_english', 'like', "%{$search}%")
@@ -562,7 +427,7 @@ class CandidateController extends Controller
         $palika = palika::find($id);
         $search = $request->get('search');
 
-        $candidate = c_mayor::with('citizen')
+        $candidate = wardCandidate::with('citizen')
             ->where('post', 'Deputy Mayor')
             ->whereHas('citizen', function ($query) use ($search) {
                 $query->where('name_english', 'like', "%{$search}%")

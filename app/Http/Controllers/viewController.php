@@ -9,6 +9,7 @@ use App\Models\district;
 use App\Models\palika;
 use App\Models\Election;
 use App\Models\User;
+use App\Models\wardCandidate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
@@ -70,7 +71,7 @@ public function about(Request $request)
     public function dashboard(){
         $election = Election::where('status','process')->orderBy('election_date', 'asc')->first();
         if ($election) {
-            $candidates = c_mayor::where('palika_id', Auth::user()->citizen->palika_id)->where('election', $election->id)->get();
+            $candidates = wardCandidate::where('palika_id', Auth::user()->citizen->palika_id)->where('election', $election->id)->get();
             return view('User.dashboard', compact('candidates','election'));
         }
         else {

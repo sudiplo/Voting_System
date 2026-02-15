@@ -51,7 +51,7 @@
                 <label class="block text-sm font-medium text-gray-700 mb-1">
                     Title of Election
                 </label>
-                <select name="election_id" class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition">
+                <select name="election_id" class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 hover:border-blue-500 transition" required>
                     <option value="">Select Election</option>
                     @foreach ($election as $elections )
                         <option value="{{ $elections->id }}">{{ $elections->title }}</option>

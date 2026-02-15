@@ -4,7 +4,7 @@
     @csrf
 
     @php
-        $groupedCandidates = $candidates->groupBy('post');
+        $groupedCandidates = $Candidates->groupBy('post');
         $totalPosts = count($groupedCandidates);
 
         // Define colors for each post
