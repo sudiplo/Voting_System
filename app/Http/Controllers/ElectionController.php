@@ -174,6 +174,20 @@ class ElectionController extends Controller
         return view('User.result',compact('election'));
     }
 
+    //==========================search election inside Election==============================================================================
+    public function userElectionSearch(Request $request){
+        // $search = $request->get('search');
+        // $election = Election::where('status','process')
+        //     ->where('title','like',"%$search%")
+        //     ->orderBy('election_date', 'asc')
+        //     ->first();
+        // $districts = district::with('palika.wards')->get();
+        // return view('User.result', compact('districts', 'search','election'));
+        $search = $request->get('search');
+        $election = Election::where('title','like',"%$search%")->where('status','end')->get();
+        return view('User.result', compact('election'));
+    }
+
     //==========================search districh inside Election==============================================================================
     public function districtSearch(Request $request,$id){
         $election = Election::find($id);

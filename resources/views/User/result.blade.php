@@ -1,76 +1,60 @@
 <x-top-layout>
 
     @if($election && $election->count())
-    {{-- <div class="flex flex-col items-center justify-center mt-10 mb-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200 text-center">
-        <h2 class="text-xl md:text-2xl font-bold text-gray-800">
-            निर्वाचन परिणाम हेर्नुहोस्।
-        </h2>
-    </div>
-        <div class="mt-5 overflow-x-auto">
-            <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
-                <thead class="sticky top-0 z-10
-                              bg-gradient-to-r from-indigo-600 to-blue-500
-                              text-white">
-                    <tr>
-                        <th class="text-left px-4 py-3 border-b">Name</th>
-                        <th class="text-left px-4 py-3 border-b">Date</th>
-                        <th class="text-left px-4 py-3 border-b">Action</th>
-                    </tr>
-                </thead>
+            <div class="relative mt-5 mb-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200">
+            <h2 class="text-2xl font-extrabold text-gray-800 tracking-tight"> निर्वाचन परिणाम हेर्नुहोस्।</h2>
+            <p class="mt-2 text-gray-500">तलको सूचीबाट निर्वाचन छनोट गरी ‘नतिजा हेर्नुहोस्’ मा क्लिक गरेर विस्तृत परिणाम हेर्न सक्नुहुन्छ।</p>
+                <!-- Search -->
+                <form method="GET" action="{{ Route('elections.search') }}" class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto mt-2">
+                    <div class="relative w-full sm:w-96">
+                        <input
+                            type="text"
+                            name="search"
+                            value="{{ request('search') }}"
+                            placeholder="Search Election"
+                            class="w-full pl-5 pr-10 py-3 rounded-xl border border-gray-300
+                                shadow-sm focus:ring-2 focus:ring-indigo-500
+                                focus:border-indigo-500 outline-none transition"
+                        />
+                        <span class="absolute right-4 top-3 text-gray-400">🔍</span>
+                    </div>
 
-                <tbody class="   bg-white shadow-lg rounded-xl p-8 border border-gray-200 ">
-                    @foreach ($election as $e)
-                        <tr class=" border-b group hover:bg-indigo-50 transition text-lg">
-                            <td class="px-4 py-3 border-b cursor-pointer">
-                                {{ $e->title }}
-                            </td>
-                            <td class="px-4 py-3 border-b cursor-pointer">
-                                {{ $e->election_date }}
-                            </td>
-                            <td class="px-4 py-3 border-b">
-                                <a href="{{ route('elections.result', $e->id) }}"
-                                   class="inline-block bg-blue-500 text-white px-3 py-1 text-sm rounded-md hover:bg-blue-600 transition">
-                                    View Result
-                                </a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div> --}}
-<div class="flex flex-col items-center justify-center mt-10 mb-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200 text-center">
-    <h2 class="text-xl md:text-2xl font-bold text-gray-800">
-        निर्वाचन परिणाम हेर्नुहोस्।
-    </h2>
-</div>
-
-<div class="mt-5 space-y-4">
-    @foreach ($election as $e)
-        <div class="flex items-center justify-between
-                    bg-white shadow-md rounded-lg p-4 border border-gray-200
-                    hover:bg-indigo-50 transition">
-
-            <!-- Name -->
-            <div class="text-blue-700 font-medium">
-                {{ $e->title }}
-            </div>
-
-            <!-- Date -->
-            <div class="text-blue-700 font-medium">
-                {{ $e->election_date }}
-            </div>
-
-            <!-- Action -->
-            <div>
-                <a href="{{ route('elections.result', $e->id) }}"
-                   class="bg-blue-500 text-white px-3 py-1 font-medium rounded-md hover:bg-blue-600 transition whitespace-nowrap">
-                    नतिजा हेर्नुहोस्
-                </a>
-            </div>
-
+                    <button
+                        type="submit"
+                        class="px-6 py-3 bg-indigo-600 text-white rounded-xl
+                            hover:bg-indigo-700 shadow-md transition">
+                        Search
+                    </button>
+                </form>
         </div>
-    @endforeach
-</div>
+
+        <div class="mt-5 space-y-4">
+            @foreach ($election as $e)
+                <div class="flex items-center justify-between
+                            bg-white shadow-md rounded-lg p-4 border border-gray-200
+                            hover:bg-indigo-50 transition">
+
+                    <!-- Name -->
+                    <div class="text-blue-700 font-medium">
+                        {{ $e->title }}
+                    </div>
+
+                    <!-- Date -->
+                    <div class="text-blue-700 font-medium">
+                        {{ $e->election_date }}
+                    </div>
+
+                    <!-- Action -->
+                    <div>
+                        <a href="{{ route('elections.result', $e->id) }}"
+                        class="bg-blue-500 text-white px-3 py-1 font-medium rounded-md hover:bg-blue-600 transition whitespace-nowrap">
+                            नतिजा हेर्नुहोस्
+                        </a>
+                    </div>
+
+                </div>
+            @endforeach
+        </div>
     @else
         <!-- Empty State -->
         <div class="flex flex-col items-center justify-center mt-10 mb-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200 text-center">

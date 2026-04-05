@@ -3,17 +3,6 @@
     <!-- ================= Election Section ================= -->
     @if ($election)
     <section >
-
-        <!-- Election Info -->
-        {{-- <div class="mt-4 mb-8 border rounded-lg p-4 sm:p-6 bg-white">
-            <h2 class="text-xl sm:text-2xl font-semibold text-gray-800">
-                {{ $election->title }}
-            </h2>
-            <p class="mt-1 text-sm text-gray-500">
-                {{ Auth::user()->citizen->ward->palika->district->name_nepali }}, {{ Auth::user()->citizen->ward->palika->name}}, {{ Auth::user()->citizen->ward->name }}
-            </p>
-            <a href="{{ Route('elections.vote') }}">VOte</a>
-        </div> --}}
         <!-- Election Info -->
         <div class="mt-6 mb-8 bg-white border rounded-lg p-5">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -134,7 +123,6 @@
 
     </section>
     @else
-        <p class="text-center mt-10 text-gray-500">No Election available.</p>
         <div class="relative mt-5 mb-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200">
             <h2 class="text-2xl font-extrabold text-gray-800 tracking-tight">निर्वाचन कार्यक्रम हालसम्म दर्ता गरिएको छैन।</h2>
             <p class="mt-2 text-gray-500">निर्वाचन कार्यक्रम हालसम्म दर्ता गरिएको छैन। तपाईं उम्मेदवारहरूलाई निर्वाचन दर्ता भएपछि मात्र हेर्न सक्नुहुन्छ।</p>
