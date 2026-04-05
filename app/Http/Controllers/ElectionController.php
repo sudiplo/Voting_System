@@ -166,6 +166,14 @@ class ElectionController extends Controller
         $districts = district::with('palika.wards')->get();
         return view('User.candidate.index',compact('districts','election'));
     }
+
+    //==========================Election result view user side==============================================================================
+    public function result(){
+        $election = Election::where('status','end')->orderBy('election_date', 'desc')->get();
+        // $election = Election::all();
+        return view('User.result',compact('election'));
+    }
+
     //==========================search districh inside Election==============================================================================
     public function districtSearch(Request $request,$id){
         $election = Election::find($id);

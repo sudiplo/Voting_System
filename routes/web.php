@@ -74,6 +74,7 @@ Route::middleware('auth')->group(function () {
         // =====================user side=========================
     Route::get('/userElections-view',[ElectionController::class,'ElectionDistrict'])->name('elections.userIndex');
     Route::get('/userElection-district-search{id}',[ElectionController::class,'districtSearch'])->name('elections.userDistrict'); //search district
+    Route::get('/userElection-result',[ElectionController::class,'result'])->name('elections.result');
 
 
 // ==========================CandidateController======================================================================

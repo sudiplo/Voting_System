@@ -135,5 +135,9 @@
     </section>
     @else
         <p class="text-center mt-10 text-gray-500">No Election available.</p>
+        <div class="relative mt-5 mb-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200">
+            <h2 class="text-2xl font-extrabold text-gray-800 tracking-tight">निर्वाचन कार्यक्रम हालसम्म दर्ता गरिएको छैन।</h2>
+            <p class="mt-2 text-gray-500">निर्वाचन कार्यक्रम हालसम्म दर्ता गरिएको छैन। तपाईं उम्मेदवारहरूलाई निर्वाचन दर्ता भएपछि मात्र हेर्न सक्नुहुन्छ।</p>
+        </div>
     @endif
 </x-top-layout>

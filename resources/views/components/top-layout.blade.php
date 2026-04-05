@@ -63,6 +63,12 @@
                     Candidate
                 </a>
             </li>
+
+            <li>
+                <a href="{{ route('elections.result') }}" class="hover:text-yellow-300 transition">
+                    Results
+                </a>
+            </li>
         </ul>
 
         <!-- Right User Dropdown -->
