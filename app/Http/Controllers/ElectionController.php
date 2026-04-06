@@ -6,6 +6,7 @@ use App\Models\Election;
 use App\Models\district;
 use App\Models\citizenship;
 use App\Models\wardCandidate;
+use App\View\Components\candidates;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -167,25 +168,30 @@ class ElectionController extends Controller
         return view('User.candidate.index',compact('districts','election'));
     }
 
-    //==========================Election result view user side==============================================================================
+    //==========================Elections list to view result user side==============================================================================
     public function result(){
         $election = Election::where('status','end')->orderBy('election_date', 'desc')->get();
-        // $election = Election::all();
-        return view('User.result',compact('election'));
+        return view('User.result.index',compact('election'));
     }
 
+    //==========================View result of election user side==============================================================================
+    public function viewResult($e){
+        $mayor = wardCandidate::where('election',$e)->where('post','Mayor')->get();
+        $deputyMayor = wardCandidate::where('election',$e)->where('post','Deputy Mayor')->get();
+        $wardChairperson = wardCandidate::where('election',$e)->where('post','Ward Chairperson')->get();
+        $wardMember = wardCandidate::where('election',$e)->where('post','Ward Member')->get();
+        $wardMember = wardCandidate::where('election',$e)->where('post','Ward Member')->get();
+        $wardMemberWomen = wardCandidate::where('election',$e)->where('post','Ward Member(Women)')->get();
+        $wardMemberDalit = wardCandidate::where('election',$e)->where('post','Ward Member(Dalit)')->get();
+        $election = Election::find($e);
+        $districts = district::with('palika.wards')->get();
+        return view('User.result.result',compact('election','mayor','deputyMayor','wardChairperson','wardMember','wardMemberWomen','wardMemberDalit','districts'));
+    }
     //==========================search election inside Election==============================================================================
     public function userElectionSearch(Request $request){
-        // $search = $request->get('search');
-        // $election = Election::where('status','process')
-        //     ->where('title','like',"%$search%")
-        //     ->orderBy('election_date', 'asc')
-        //     ->first();
-        // $districts = district::with('palika.wards')->get();
-        // return view('User.result', compact('districts', 'search','election'));
         $search = $request->get('search');
         $election = Election::where('title','like',"%$search%")->where('status','end')->get();
-        return view('User.result', compact('election'));
+        return view('User.result.index', compact('election'));
     }
 
     //==========================search districh inside Election==============================================================================
@@ -209,5 +215,28 @@ class ElectionController extends Controller
             ->pluck('name');
 
         return view('User.candidate.index', compact('districts', 'suggestions', 'search','districts','election'));
+    }
+
+    //==========================search districh inside Election==============================================================================
+    public function districtSearchresult(Request $request,$id){
+        $election = Election::find($id);
+        $districts = district::with('palika.wards')->get();
+        $search = $request->get('search');
+
+        $districts = district::with('palika')
+            ->when($search, function ($query) use ($search) {
+                $query->where('name', 'like', "%$search%")
+                      ->orWhere('name_nepali', 'like', "%$search%")
+                      ->orWhereHas('palika', function ($q) use ($search) {
+                          $q->where('name', 'like', "%$search%");
+                      });
+            })
+            ->get();
+
+        // For autocomplete suggestions
+        $suggestions = district::where('name', 'like', "%$search%")
+            ->pluck('name');
+
+        return view('User.result.result', compact('districts', 'suggestions', 'search','districts','election'));
     }
 }

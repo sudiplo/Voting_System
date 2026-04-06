@@ -1,5 +1,4 @@
 <x-top-layout>
-
     @if($election && $election->count())
             <div class="relative mt-5 mb-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200">
             <h2 class="text-2xl font-extrabold text-gray-800 tracking-tight"> निर्वाचन परिणाम हेर्नुहोस्।</h2>
@@ -11,7 +10,7 @@
                             type="text"
                             name="search"
                             value="{{ request('search') }}"
-                            placeholder="Search Election"
+                            placeholder="निर्वाचन खोज्नुहोस्..."
                             class="w-full pl-5 pr-10 py-3 rounded-xl border border-gray-300
                                 shadow-sm focus:ring-2 focus:ring-indigo-500
                                 focus:border-indigo-500 outline-none transition"
@@ -46,7 +45,7 @@
 
                     <!-- Action -->
                     <div>
-                        <a href="{{ route('elections.result', $e->id) }}"
+                        <a href="{{ route('elections.ViewResult', $e->id) }}"
                         class="bg-blue-500 text-white px-3 py-1 font-medium rounded-md hover:bg-blue-600 transition whitespace-nowrap">
                             नतिजा हेर्नुहोस्
                         </a>
