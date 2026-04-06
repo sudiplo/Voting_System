@@ -45,8 +45,12 @@
 
                     <!-- Action -->
                     <div>
+                        <a href="{{ route('elections.winner', $e->id) }}"
+                        class="inline-flex mt-1 bg-yellow-400 text-white px-3 py-1 font-medium rounded-md hover:bg-yellow-500 transition whitespace-nowrap">
+                            Winner
+                        </a>
                         <a href="{{ route('elections.ViewResult', $e->id) }}"
-                        class="bg-blue-500 text-white px-3 py-1 font-medium rounded-md hover:bg-blue-600 transition whitespace-nowrap">
+                        class="inline-flex mt-1 bg-blue-500 text-white px-3 py-1 font-medium rounded-md hover:bg-blue-600 transition whitespace-nowrap">
                             नतिजा हेर्नुहोस्
                         </a>
                     </div>

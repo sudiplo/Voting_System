@@ -4,7 +4,7 @@
     <div class="relative mt-6 mb-12 bg-gradient-to-br from-white to-gray-50 shadow-xl rounded-2xl p-8 border border-gray-200">
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
             <div>
-                <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight">
+                <h1 class="text-2xl font-extrabold text-gray-800 tracking-tight">
                     <span class="text-indigo-600">नगर प्रमुख</span>
                 </h1>
 
@@ -14,7 +14,6 @@
                     </span>
                 </p>
             </div>
-
         </div>
     </div>
     <!-- Dropdown Button -->

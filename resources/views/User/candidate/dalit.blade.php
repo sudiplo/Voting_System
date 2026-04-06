@@ -85,10 +85,10 @@
 
    <!-- ================= show data ================= -->
     <div class="mt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        @foreach ($candidate as $mayor)
+        @foreach ($candidate as $c)
         <div class="relative bg-black rounded-xl overflow-hidden shadow-lg aspect-[3/4]">
 
-            <img src="{{ $mayor->photo }}" alt="Profile" class="absolute inset-0 w-full h-full object-cover">
+            <img src="{{ $c->photo }}" alt="Profile" class="absolute inset-0 w-full h-full object-cover">
 
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
 
@@ -96,20 +96,20 @@
             <div class="absolute bottom-0 w-full p-3 text-white">
 
                 <h3 class="text-sm font-semibold truncate">
-                    {{ $mayor->citizen->name_nepali }}
+                    {{ $c->citizen->name_nepali }}
                 </h3>
 
                 <p class="text-[11px] text-gray-300 truncate">
-                    {{ $mayor->party }}
+                    {{ $c->party }}
                 </p>
 
                 <!-- Footer -->
                 <div class="mt-2 flex items-center justify-between text-[11px]">
                     <span class="flex items-center gap-1">
-                        {{ $mayor->post }}
+                        {{ $c->post }}
                     </span>
 
-                    <a href="{{ Route('UsercandidateProfile',['id'=>$mayor->id,'e_id'=>$e->id]) }}"
+                    <a href="{{ Route('UsercandidateProfile',['id'=>$c->id,'e_id'=>$e->id]) }}"
                     class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-white text-[10px] font-semibold">
                         view
                     </a>

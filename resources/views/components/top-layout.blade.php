@@ -154,7 +154,7 @@
                     <ul class="space-y-2 text-sm">
                         <li><a href="{{ route('dashboard') }}" class="hover:text-blue-600">Home</a></li>
                         <li><a href="{{ route('elections.userIndex') }}" class="hover:text-blue-600">Candidates</a></li>
-                        <li><a href="/profile" class="hover:text-blue-600">Profile</a></li>
+                        <li><a href="{{ Route('user.profile') }}" class="hover:text-blue-600">Profile</a></li>
                     </ul>
                 </div>
 

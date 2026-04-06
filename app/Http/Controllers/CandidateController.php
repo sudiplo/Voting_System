@@ -525,4 +525,36 @@ class CandidateController extends Controller
         $candidate = wardCandidate::where('election',$e_id)->where('post', 'Deputy Mayor')->where('palika_id',$id)->orderBy('vote', 'asc')->get();
         return view('User.result.deputy_mayor',compact('candidate','palika','e'));
     }
+
+    // ==========================Ward Chairperson result==============================================================================    public function UserChairperson($id,$e_id){
+    public function UserChairpersonResult($id,$e_id){
+        $e = Election::find($e_id);
+        $ward = ward::find($id);
+        $candidate = wardCandidate::where('election',$e_id)->where('post', 'Ward Chairperson')->where('ward_id',$id)->orderBy('vote', 'asc')->get();
+        return view('User.result.chairperson',compact('candidate','ward','e'));
+    }
+
+    // ==========================ward Member result==============================================================================
+        public function UserMemberResult($id,$e_id){
+        $e = Election::find($e_id);
+        $ward = ward::find($id);
+        $candidate = wardCandidate::where('election',$e_id)->where('post', 'Ward Member')->where('ward_id',$id)->orderBy('vote','asc')->get();
+        return view('User.result.member',compact('candidate','ward','e'));
+    }
+
+    // ==========================ward candidate ward Member(women) result==============================================================================
+    public function UserWomenResult($id,$e_id){
+        $e = Election::find($e_id);
+        $ward = ward::find($id);
+        $candidate = wardCandidate::where('election',$e_id)->where('post', 'Ward Member(Women)')->where('ward_id',$id)->orderBy('vote','asc')->get();
+        return view('User.result.women',compact('candidate','ward','e'));
+    }
+
+    // ==========================ward candidate ward Member(dalit) result==============================================================================
+    public function UserDalitResult($id,$e_id){
+        $e = Election::find($e_id);
+        $ward = ward::find($id);
+        $candidate = wardCandidate::where('election',$e_id)->where('post', 'Ward Member(Dalit)')->where('ward_id',$id)->orderBy('vote','asc')->get();
+        return view('User.result.dalit',compact('candidate','ward','e'));
+    }
 }

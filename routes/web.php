@@ -78,6 +78,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/userElection-search',[ElectionController::class,'userElectionSearch'])->name('elections.search');
     Route::get('/userElection-view-result{e}',[electionController::class,'viewResult'])->name('elections.ViewResult');
         Route::get('/userElection-view-result{id}',[ElectionController::class,'districtSearchresult'])->name('elections.ResultDistrict'); //search district inside result
+    Route::get('/userElection-view-winner{id}',[ElectionController::class,'winner'])->name('elections.winner');
+    Route::post('/userElection-view-winner{id}',[ElectionController::class,'winnerSearch'])->name('elections.winnerSearch');
 
 
 // ==========================CandidateController======================================================================
@@ -112,6 +114,10 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/user-result-mayor{id}{e_id}',[CandidateController::class,'UserMayorResult'])->name('Usermayor.result');
         Route::get('/user-result-deputy-mayor{id}{e_id}',[CandidateController::class,'UserDeputyMayorResult'])->name('UserDeputymayor.result');
+        Route::get('/user-result-chairperson{id}{e_id}',[CandidateController::class,'UserChairpersonResult'])->name('UserChairperson.result');
+        Route::get('/user-result-ward-member{id}{e_id}',[CandidateController::class,'UserMemberResult'])->name('UserMember.result');
+        Route::get('/user-result-candidate-Women{id}{e_id}',[CandidateController::class,'UserWomenResult'])->name('UserWomen.result');
+        Route::get('/user-result-candidate-Dalit{id}{e_id}',[CandidateController::class,'UserDalitResult'])->name('UserDalit.result');
 
         Route::get('/user-mayor-search{id}{e_id}',[CandidateController::class,'UserMayorSearch'])->name('UserMayor_search');
         Route::get('/user-depatyMayor-search{id}{e_id}',[CandidateController::class,'UserDepatyMayorSearch'])->name('UserDepatymayor_search');
