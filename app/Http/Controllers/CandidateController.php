@@ -401,7 +401,6 @@ class CandidateController extends Controller
 
     }
 
-
     //=======================mayor search=====================
     public function UserMayorSearch(Request $request,$id,$e_id)
     {
@@ -508,5 +507,22 @@ class CandidateController extends Controller
             ->get();
 
         return view('User.candidate.dalit', compact('candidate', 'search','ward','e'));
+    }
+
+    //==========================Candidate Result user side==============================================================================
+    //=======================mayor result=====================
+    public function UserMayorResult($id, $e_id){
+        $e = Election::find($e_id);
+        $palika = palika::find($id);
+        $candidate = wardCandidate::where('election',$e_id)->where('post', 'Mayor')->orderBy('vote', 'asc')->where('palika_id',$id)->get();//asc or desc
+        return view('User.result.mayor',compact('candidate','palika','e'));
+    }
+
+    // ==========================Deputy Mayors result==============================================================================
+        public function UserDeputyMayorResult($id, $e_id){
+        $e = Election::find($e_id);
+        $palika = palika::find($id);
+        $candidate = wardCandidate::where('election',$e_id)->where('post', 'Deputy Mayor')->where('palika_id',$id)->orderBy('vote', 'asc')->get();
+        return view('User.result.deputy_mayor',compact('candidate','palika','e'));
     }
 }

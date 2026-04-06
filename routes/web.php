@@ -110,6 +110,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/user-candidate-Women-view{id}{e_id}',[CandidateController::class,'UserWomenView'])->name('UserWomen.view');
         Route::get('/user-candidate-Dalit-view{id}{e_id}',[CandidateController::class,'UserDalitView'])->name('UserDalit.view');
 
+        Route::get('/user-result-mayor{id}{e_id}',[CandidateController::class,'UserMayorResult'])->name('Usermayor.result');
+        Route::get('/user-result-deputy-mayor{id}{e_id}',[CandidateController::class,'UserDeputyMayorResult'])->name('UserDeputymayor.result');
+
         Route::get('/user-mayor-search{id}{e_id}',[CandidateController::class,'UserMayorSearch'])->name('UserMayor_search');
         Route::get('/user-depatyMayor-search{id}{e_id}',[CandidateController::class,'UserDepatyMayorSearch'])->name('UserDepatymayor_search');
         Route::get('/user-chairperson-search{id}{e_id}',[CandidateController::class,'UserChairpersonSearch'])->name('UserChairperson_search');

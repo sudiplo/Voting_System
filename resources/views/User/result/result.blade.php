@@ -62,7 +62,7 @@
                                 </label>
                             </td>
                             <td class="p-4 text-right space-x-2">
-                                <a href="{{ Route('Usermayor.view', ['id' => $p->id, 'e_id' => $election->id]) }}"
+                                <a href="{{ Route('Usermayor.result', ['id' => $p->id, 'e_id' => $election->id]) }}"
                                     class="px-3 py-1 bg-blue-400 hover:bg-blue-500 text-white rounded text-xs">
                                     View
                                 </a>
