@@ -71,6 +71,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/elections-view-{id}',[ElectionController::class,'view'])->name('elections.view');
     Route::get('/district-search{id}',[ElectionController::class,'district'])->name('elections.district');
     Route::get('/voting-page',[ElectionController::class,'vote'])->name('elections.vote');
+    Route::get('/election-result',[ElectionController::class,'electionResult'])->name('election.resultAdmin');
+        Route::get('/election-search',[ElectionController::class,'electionSearch'])->name('elections.searchAdmin');
+    Route::get('/election-view-result{e}',[electionController::class,'ElectionResultView'])->name('elections.winnerAdmin');
+        Route::post('/election-view-result{id}',[ElectionController::class,'ElectionResultSearch'])->name('elections.winnerSearchAdmin'); //search district inside result
         // =====================user side=========================
     Route::get('/userElections-view',[ElectionController::class,'ElectionDistrict'])->name('elections.userIndex');
     Route::get('/userElection-district-search{id}',[ElectionController::class,'districtSearch'])->name('elections.userDistrict'); //search district

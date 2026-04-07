@@ -145,8 +145,50 @@ class ElectionController extends Controller
         return view('elections.register', compact('districts', 'suggestions', 'search','districts','election'));
     }
 
+    // ==========================search election inside Election==============================================================================
+    public function electionResult(){
+        $election = Election::where('status','end')->orderBy('election_date', 'desc')->get();
+        return view('result.index',compact('election'));
+    }
 
+    // ==========================search election inside Election==============================================================================
+    public function electionSearch(Request $request){
+        $search = $request->get('search');
+        $election = Election::where('title','like',"%$search%")->where('status','end')->get();
+        return view('result.index', compact('election'));
 
+    }
+
+    // ==========================view result of election==============================================================================
+    public function ElectionResultView($id){
+        $e = election::find($id);
+        $districts = district::with('palika.wards')->get();
+
+        return view('result.select',compact('e','districts'));
+    }
+
+    // ==========================search districh inside Election==============================================================================
+    public function ElectionResultSearch(Request $request,$id){
+        $e = election::find($id);
+        $w = $request->ward_id;
+
+        $d = district::find($request->district_id);
+        $p = palika::find($request->palika_id);
+        $wa = ward::find($w);
+        $districts = district::with('palika.wards')->get();
+
+        $mayor = wardCandidate::where('election',$id)->
+            where('post','Mayor')->
+            where('ward_id', $w)->orderBy('vote','asc')->first();
+
+        $deputyMayor = wardCandidate::where('election',$id)->where('post','Deputy Mayor')->where('ward_id',$w)->orderBy('vote','asc')->first();
+        $wardChairperson = wardCandidate::where('election',$id)->where('post','Ward Chairperson')->where('ward_id',$w)->orderBy('vote','asc')->first();
+        $wardMember = wardCandidate::where('election',$id)->where('post','Ward Member')->where('ward_id',$w)->orderBy('vote','asc')->first();
+        $wardMember = wardCandidate::where('election',$id)->where('post','Ward Member')->where('ward_id',$w)->orderBy('vote','asc')->first();
+        $wardMemberWomen = wardCandidate::where('election',$id)->where('post','Ward Member(Women)')->where('ward_id',$w)->orderBy('vote','asc')->first();
+        $wardMemberDalit = wardCandidate::where('election',$id)->where('post','Ward Member(Dalit)')->where('ward_id',$w)->orderBy('vote','asc')->first();
+        return view('result.winner',compact('e','districts','mayor','deputyMayor','wardChairperson','wardMember','wardMemberWomen','wardMemberDalit','d','p','wa'));
+    }
 //=======================================>User Side<=====================================================================================================================
     //==========================View vote page==============================================================================
     // public function vote(){
