@@ -142,7 +142,7 @@
                     <tr class="group hover:bg-gray-100 transition">
                     @if ($mayor)
                         <td class="px-6 py-4 font-semibold text-gray-800">
-                            <a href="{{ Route('UsercandidateProfile',['id'=>$mayor->id,'e_id'=>$e->id]) }}">{{ $mayor->citizen->name_nepali }}</a>
+                            <a href="{{ Route('candidateProfile',['id'=>$mayor->id,'e_id'=>$e->id]) }}">{{ $mayor->citizen->name_nepali }}</a>
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             {{ $mayor->post }}
@@ -168,7 +168,7 @@
                     <tr class="group hover:bg-gray-100 transition">
                     @if ($deputyMayor)
                         <td class="px-6 py-4 font-semibold text-gray-800">
-                            <a href="{{ Route('UsercandidateProfile',['id'=>$deputyMayor->id,'e_id'=>$e->id]) }}">{{ $deputyMayor->citizen->name_nepali }}</a>
+                            <a href="{{ Route('candidateProfile',['id'=>$deputyMayor->id,'e_id'=>$e->id]) }}">{{ $deputyMayor->citizen->name_nepali }}</a>
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             {{ $deputyMayor->post }}
@@ -194,7 +194,7 @@
                     <tr class="group hover:bg-gray-100 transition">
                     @if ($wardChairperson)
                         <td class="px-6 py-4 font-semibold text-gray-800">
-                            <a href="{{ Route('UsercandidateProfile',['id'=>$wardChairperson->id,'e_id'=>$e->id]) }}">{{ $wardChairperson->citizen->name_nepali }}</a>
+                            <a href="{{ Route('candidateProfile',['id'=>$wardChairperson->id,'e_id'=>$e->id]) }}">{{ $wardChairperson->citizen->name_nepali }}</a>
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             {{ $wardChairperson->post }}
@@ -220,7 +220,7 @@
                     <tr class="group hover:bg-gray-100 transition">
                     @if ($wardMember)
                         <td class="px-6 py-4 font-semibold text-gray-800">
-                            <a href="{{ Route('UsercandidateProfile',['id'=>$wardMember->id,'e_id'=>$e->id]) }}">{{ $wardMember->citizen->name_nepali }}</a>
+                            <a href="{{ Route('candidateProfile',['id'=>$wardMember->id,'e_id'=>$e->id]) }}">{{ $wardMember->citizen->name_nepali }}</a>
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             {{ $wardMember->post }}
@@ -246,7 +246,7 @@
                     <tr class="group hover:bg-gray-100 transition">
                     @if ($wardMemberWomen)
                         <td class="px-6 py-4 font-semibold text-gray-800">
-                            <a href="{{ Route('UsercandidateProfile',['id'=>$wardMemberWomen->id,'e_id'=>$e->id]) }}">{{ $wardMemberWomen->citizen->name_nepali }}</a>
+                            <a href="{{ Route('candidateProfile',['id'=>$wardMemberWomen->id,'e_id'=>$e->id]) }}">{{ $wardMemberWomen->citizen->name_nepali }}</a>
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             {{ $wardMemberWomen->post }}
@@ -272,7 +272,7 @@
                     <tr class="group hover:bg-gray-100 transition">
                     @if ($wardMemberDalit)
                         <td class="px-6 py-4 font-semibold text-gray-800">
-                            <a href="{{ Route('UsercandidateProfile',['id'=>$wardMemberDalit->id,'e_id'=>$e->id]) }}">{{ $wardMemberDalit->citizen->name_nepali }}</a>
+                            <a href="{{ Route('candidateProfile',['id'=>$wardMemberDalit->id,'e_id'=>$e->id]) }}">{{ $wardMemberDalit->citizen->name_nepali }}</a>
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             {{ $wardMemberDalit->post }}
