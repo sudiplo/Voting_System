@@ -46,6 +46,15 @@ class AddController extends Controller
         'name_nepali' => ['required','string','max:255'],
         ]);
 
+        if (district::where('name_nepali', $request->name_nepali)->exists() && $request->name_nepali != district::find($id)->name_nepali) {
+            toast("Nepali Name already exist","error");
+            return back();
+        }
+        if (district::where('name', $request->name)->exists() && $request->name != district::find($id)->name) {
+            toast("Name already exist","error");
+            return back();
+        }
+
         $district = district::find($id);
         $district->name_nepali = $request->name_nepali;
         $district->name = $request->name;
@@ -85,7 +94,7 @@ class AddController extends Controller
             'district_id'=>['required', 'string', 'max:255'],
         ]);
 
-        if (palika::where('name', $request->name)->exists()) {
+        if (palika::where('name', $request->name)->exists() && $request->name != palika::find($id)->name) {
             toast("Name already exist","error");
             return back();
         }

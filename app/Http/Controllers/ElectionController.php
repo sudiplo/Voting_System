@@ -75,10 +75,10 @@ class ElectionController extends Controller
             'status' => 'required|in:process,end',
         ]);
 
-        // if (Election::where('title', $request->name)->exists()) {
-        //     toast("Election Title already Register","error");
-        //     return redirect()->back();
-        // }
+        if (Election::where('title', $request->name)->exists() && $request->name != Election::find($id)->title) {
+            toast("Election Title already Register","error");
+            return redirect()->back();
+        }
         // if (Election::whereDate('election_date', $request->date)->exists()) {
         //     toast('Election schedule is full for this date. Please choose another date.', 'error');
         //     return redirect()->back()->withInput();
