@@ -95,6 +95,10 @@ class ElectionController extends Controller
                 return redirect()->back();
             }
         }
+        // save the election winner
+        if($request->status == 'end' && Election::find($id)->status != 'end'){
+
+        }
 
 
         $election = Election::find($id);
@@ -110,6 +114,10 @@ class ElectionController extends Controller
     //==========================Election Delete==============================================================================
     public function electionDelete($id){
         $election = Election::find($id);
+        $candidates = wardCandidate::where('election', $id)->get();
+        foreach ($candidates as $candidate) {
+            $candidate->delete();
+        }
         $election->delete();
         toast("Election Record Delete successfully","success");
         return redirect()->back();
@@ -295,7 +303,7 @@ class ElectionController extends Controller
         $p = palika::find(Auth::user()->citizen->palika_id);
         $wa = ward::find($w);
 
-        $mayor = wardCandidate::where('election',$id)->where('post','Mayor')->where('ward_id',$w)->orderBy('vote','asc')->first();
+        $mayor = wardCandidate::where('election',$id)->where('post','Mayor')->where('ward_id',$w)->orderBy('vote','desc')->first();
         $deputyMayor = wardCandidate::where('election',$id)->where('post','Deputy Mayor')->where('ward_id',$w)->orderBy('vote','asc')->first();
         $wardChairperson = wardCandidate::where('election',$id)->where('post','Ward Chairperson')->where('ward_id',$w)->orderBy('vote','asc')->first();
         $wardMember = wardCandidate::where('election',$id)->where('post','Ward Member')->where('ward_id',$w)->orderBy('vote','asc')->first();

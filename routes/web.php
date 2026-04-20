@@ -114,7 +114,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/user-chairperson-view{id} {e_id}',[CandidateController::class,'UserChairperson'])->name('UserChairperson.view');
         Route::get('/user-ward-member-view{id} {e_id}',[CandidateController::class,'UserMember'])->name('UserMember.view');
         Route::get('/user-candidate-Women-view{id} {e_id}',[CandidateController::class,'UserWomenView'])->name('UserWomen.view');
-        Route::get('/user-candidate-Dalit-view{id}{e_id}',[CandidateController::class,'UserDalitView'])->name('UserDalit.view');
+        Route::get('/user-candidate-Dalit-view{id} {e_id}',[CandidateController::class,'UserDalitView'])->name('UserDalit.view');
 
         Route::get('/user-result-mayor{id} {e_id}',[CandidateController::class,'UserMayorResult'])->name('Usermayor.result');
         Route::get('/user-result-deputy-mayor{id} {e_id}',[CandidateController::class,'UserDeputyMayorResult'])->name('UserDeputymayor.result');
@@ -153,4 +153,4 @@ Route::middleware('auth')->group(function () {
 });
 
 
-require __DIR__.'/auth.php'
+require __DIR__.'/auth.php';

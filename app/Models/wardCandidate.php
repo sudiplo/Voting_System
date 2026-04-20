@@ -57,4 +57,5 @@ class wardCandidate extends Model
     {
         return $this->hasMany(vote::class);
     }
+    
 }

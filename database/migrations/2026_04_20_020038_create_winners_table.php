@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('votes', function (Blueprint $table) {
+        Schema::create('winners', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('election_id')->constrained();
             $table->foreignId('candidate_id')->constrained('ward_candidates');
-            $table->foreignId('election_id')->constrained('elections');
-            $table->string('post');
+            $table->string('post'); // e.g., 'Mayor', 'Ward Member'
+            $table->foreignId('palika_id')->nullable()->constrained();
+            $table->foreignId('ward_id')->nullable()->constrained();
+            $table->integer('vote_count');
+            $table->boolean('is_tie')->default(false);
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('votes');
+        Schema::dropIfExists('winners');
     }
 };

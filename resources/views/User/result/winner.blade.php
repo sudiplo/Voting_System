@@ -126,6 +126,7 @@
                         <th class="text-left px-6 py-3">Name</th>
                         <th class="text-left px-6 py-3">post</th>
                         <th class="text-left px-6 py-3">gender</th>
+                        <th class="text-left px-6 py-3">Vote</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y">
@@ -137,9 +138,10 @@
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             {{ $mayor->post }}
                         </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
+                        <td class="class="px-6 py-4 font-semibold text-gray-800">
                             {{ $mayor->citizen->gender}}
                         </td>
+                        <td class="class="px-6 py-4 font-semibold text-gray-800">{{ $mayor->vote }}</td>
                     @else
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             not found
@@ -157,6 +159,7 @@
                         <td class="class="px-6 py-4 font-semibold text-gray-800"">
                             {{ $deputyMayor->citizen->gender}}
                         </td>
+                        <td class="class="px-6 py-4 font-semibold text-gray-800">{{ $deputyMayor->vote }}</td>
                     @else
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             not found
@@ -174,6 +177,7 @@
                         <td class="class="px-6 py-4 font-semibold text-gray-800"">
                             {{ $wardChairperson->citizen->gender}}
                         </td>
+                        <td class="class="px-6 py-4 font-semibold text-gray-800">{{ $wardChairperson->vote }}</td>
                     @else
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             not found
@@ -191,6 +195,7 @@
                         <td class="class="px-6 py-4 font-semibold text-gray-800"">
                             {{ $wardMember->citizen->gender}}
                         </td>
+                        <td class="class="px-6 py-4 font-semibold text-gray-800">{{ $wardMember->vote }}</td>
                     @else
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             not found
@@ -208,6 +213,7 @@
                         <td class="class="px-6 py-4 font-semibold text-gray-800"">
                             {{ $wardMemberWomen->citizen->gender}}
                         </td>
+                        <td class="class="px-6 py-4 font-semibold text-gray-800">{{ $wardMemberWomen->vote }}</td>
                     @else
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             not found
@@ -225,6 +231,7 @@
                         <td class="class="px-6 py-4 font-semibold text-gray-800"">
                             {{ $wardMemberDalit->citizen->gender}}
                         </td>
+                        <td class="class="px-6 py-4 font-semibold text-gray-800">{{ $wardMemberDalit->vote }}</td>
                     @else
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             not found
