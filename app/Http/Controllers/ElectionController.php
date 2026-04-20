@@ -12,6 +12,9 @@ use App\View\Components\candidates;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Winner;
+use Illuminate\Support\Facades\Crypt;
+
 
 class ElectionController extends Controller
 {
@@ -68,49 +71,102 @@ class ElectionController extends Controller
     }
 
     //==========================Election Update==============================================================================
-    public function electionUpdate(Request $request, $id){
+    public function electionUpdate(Request $request, $id)
+    {
         $request->validate([
             'name' => 'required|string|max:255',
             'date' => 'required|date',
             'status' => 'required|in:process,end',
         ]);
 
+        // Check unique title (excluding current election)
         if (Election::where('title', $request->name)->exists() && $request->name != Election::find($id)->title) {
-            toast("Election Title already Register","error");
+            toast("Election Title already Register", "error");
             return redirect()->back();
         }
-        // if (Election::whereDate('election_date', $request->date)->exists()) {
-        //     toast('Election schedule is full for this date. Please choose another date.', 'error');
-        //     return redirect()->back()->withInput();
-        // }
-        if($request->date != Election::find($id)->election_date){
-                    if (Election::whereDate('election_date', $request->date)->exists()) {
-            toast('Election schedule is full for this date. Please choose another date.', 'error');
-            return redirect()->back()->withInput();
+
+        // Check unique date if changed
+        if ($request->date != Election::find($id)->election_date) {
+            if (Election::whereDate('election_date', $request->date)->exists()) {
+                toast('Election schedule is full for this date. Please choose another date.', 'error');
+                return redirect()->back()->withInput();
+            }
         }
-        }
-        if($request->status=='process'){
+
+        // Future date validation for 'process' status
+        if ($request->status == 'process') {
             if (Carbon::parse($request->date)->lessThanOrEqualTo(Carbon::today())) {
                 toast("Election date must be a future date", "error");
                 return redirect()->back();
             }
         }
-        // save the election winner
-        if($request->status == 'end' && Election::find($id)->status != 'end'){
-
-        }
-
 
         $election = Election::find($id);
+
+        // ==================== SAVE WINNERS WHEN ELECTION ENDS ====================
+        if ($request->status == 'end' && $election->status != 'end') {
+            // 1. Get all candidates for this election
+            $candidates = wardCandidate::where('election', $election->id)->get();
+
+            // 2. Group candidates by post and location
+            $groups = $candidates->groupBy(function ($candidate) {
+                if (in_array($candidate->post, ['Mayor', 'Deputy Mayor'])) {
+                    return $candidate->post . '|palika|' . $candidate->palika_id;
+                }
+                return $candidate->post . '|ward|' . $candidate->ward_id;
+            });
+
+            // 3. Process each group
+            foreach ($groups as $group) {
+                $first = $group->first();
+                $post = $first->post;
+
+                // Decrypt vote values (if encrypted)
+                $votes = $group->map(function ($candidate) {
+                    try {
+                        return (int) Crypt::decryptString($candidate->vote);
+                    } catch (\Exception $e) {
+                        return (int) $candidate->vote;
+                    }
+                });
+
+                $maxVote = $votes->max();
+                $winners = $group->filter(function ($candidate, $index) use ($votes, $maxVote) {
+                    return $votes[$index] == $maxVote;
+                });
+
+                $palikaId = in_array($post, ['Mayor', 'Deputy Mayor']) ? $first->palika_id : null;
+                $wardId = !in_array($post, ['Mayor', 'Deputy Mayor']) ? $first->ward_id : null;
+
+                foreach ($winners as $winner) {
+                    Winner::updateOrCreate(
+                        [
+                            'election_id' => $election->id,
+                            'post' => $post,
+                            'palika_id' => $palikaId,
+                            'ward_id' => $wardId,
+                        ],
+                        [
+                            'candidate_id' => $winner->id,
+                            'vote_count' => $maxVote,
+                            'is_tie' => ($winners->count() > 1),
+                        ]
+                    );
+                }
+            }
+        }
+        // =========================================================================
+
+        // Update election details
         $election->title = $request->input('name');
         $election->election_date = $request->input('date');
         $election->status = $request->input('status');
-
         $election->save();
-        toast("Election update successfully","success");
+
+        toast("Election updated successfully", "success");
         return redirect()->back();
     }
-
+    
     //==========================Election Delete==============================================================================
     public function electionDelete($id){
         $election = Election::find($id);
