@@ -114,7 +114,7 @@
     </form>
 
     {{-- result --}}
-    <div class="mt-5 lg:col-span-2 bg-white rounded-2xl shadow">
+    {{-- <div class="mt-5 lg:col-span-2 bg-white rounded-2xl shadow">
         <div class="border-b px-6 py-4 font-semibold">
             {{ $p->name }}, {{ $wa->name }}
         </div>
@@ -138,10 +138,10 @@
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             {{ $mayor->post }}
                         </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800">
+                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
                             {{ $mayor->citizen->gender}}
                         </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800">{{ $mayor->vote }}</td>
+                        <td>{{ $mayor->vote }}</td>
                     @else
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             not found
@@ -159,7 +159,6 @@
                         <td class="class="px-6 py-4 font-semibold text-gray-800"">
                             {{ $deputyMayor->citizen->gender}}
                         </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800">{{ $deputyMayor->vote }}</td>
                     @else
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             not found
@@ -177,7 +176,6 @@
                         <td class="class="px-6 py-4 font-semibold text-gray-800"">
                             {{ $wardChairperson->citizen->gender}}
                         </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800">{{ $wardChairperson->vote }}</td>
                     @else
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             not found
@@ -195,7 +193,6 @@
                         <td class="class="px-6 py-4 font-semibold text-gray-800"">
                             {{ $wardMember->citizen->gender}}
                         </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800">{{ $wardMember->vote }}</td>
                     @else
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             not found
@@ -213,7 +210,6 @@
                         <td class="class="px-6 py-4 font-semibold text-gray-800"">
                             {{ $wardMemberWomen->citizen->gender}}
                         </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800">{{ $wardMemberWomen->vote }}</td>
                     @else
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             not found
@@ -231,12 +227,127 @@
                         <td class="class="px-6 py-4 font-semibold text-gray-800"">
                             {{ $wardMemberDalit->citizen->gender}}
                         </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800">{{ $wardMemberDalit->vote }}</td>
                     @else
                         <td class="px-6 py-4 font-semibold text-gray-800">
                             not found
                         </td>
                     @endif
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div> --}}
+
+    {{--  --}}
+     <div class="mt-5 lg:col-span-2 bg-white rounded-2xl shadow">
+        <div class="border-b px-6 py-4 font-semibold text-lg">
+            🏆 Election Winners – {{ $p->name }}, {{ $wa->name }}
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead class="bg-gradient-to-r from-indigo-600 to-blue-500 text-white">
+                    <tr>
+                        <th class="text-left px-6 py-3">Position</th>
+                        <th class="text-left px-6 py-3">Winner Name</th>
+                        <th class="text-left px-6 py-3">Gender</th>
+                        <th class="text-left px-6 py-3">Votes</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y">
+                    {{-- Mayor --}}
+                    <tr class="hover:bg-gray-100 transition">
+                        <td class="px-6 py-4 font-semibold">Mayor</td>
+                        <td class="px-6 py-4">
+                            @if($mayor)
+                                <a href="{{ route('UsercandidateProfile', ['id' => $mayor->candidate_id, 'e_id' => $e->id]) }}" class="text-blue-600 hover:underline">
+                                    {{ $mayor->candidate->citizen->name_nepali ?? 'Unknown' }}
+                                </a>
+                            @else
+                                <span class="text-gray-400">Not declared</span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4">{{ $mayor->candidate->citizen->gender ?? '-' }}</td>
+                        <td class="px-6 py-4 font-bold text-green-600">{{ $mayor->vote_count ?? 0 }}</td>
+                    </tr>
+
+                    {{-- Deputy Mayor --}}
+                    <tr class="hover:bg-gray-100 transition">
+                        <td class="px-6 py-4 font-semibold">Deputy Mayor</td>
+                        <td class="px-6 py-4">
+                            @if($deputyMayor)
+                                <a href="{{ route('UsercandidateProfile', ['id' => $deputyMayor->candidate_id, 'e_id' => $e->id]) }}" class="text-blue-600 hover:underline">
+                                    {{ $deputyMayor->candidate->citizen->name_nepali ?? 'Unknown' }}
+                                </a>
+                            @else
+                                <span class="text-gray-400">Not declared</span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4">{{ $deputyMayor->candidate->citizen->gender ?? '-' }}</td>
+                        <td class="px-6 py-4 font-bold text-green-600">{{ $deputyMayor->vote_count ?? 0 }}</td>
+                    </tr>
+
+                    {{-- Ward Chairperson --}}
+                    <tr class="hover:bg-gray-100 transition">
+                        <td class="px-6 py-4 font-semibold">Ward Chairperson</td>
+                        <td class="px-6 py-4">
+                            @if($wardChairperson)
+                                <a href="{{ route('UsercandidateProfile', ['id' => $wardChairperson->candidate_id, 'e_id' => $e->id]) }}" class="text-blue-600 hover:underline">
+                                    {{ $wardChairperson->candidate->citizen->name_nepali ?? 'Unknown' }}
+                                </a>
+                            @else
+                                <span class="text-gray-400">Not declared</span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4">{{ $wardChairperson->candidate->citizen->gender ?? '-' }}</td>
+                        <td class="px-6 py-4 font-bold text-green-600">{{ $wardChairperson->vote_count ?? 0 }}</td>
+                    </tr>
+
+                    {{-- Ward Member --}}
+                    <tr class="hover:bg-gray-100 transition">
+                        <td class="px-6 py-4 font-semibold">Ward Member</td>
+                        <td class="px-6 py-4">
+                            @if($wardMember)
+                                <a href="{{ route('UsercandidateProfile', ['id' => $wardMember->candidate_id, 'e_id' => $e->id]) }}" class="text-blue-600 hover:underline">
+                                    {{ $wardMember->candidate->citizen->name_nepali ?? 'Unknown' }}
+                                </a>
+                            @else
+                                <span class="text-gray-400">Not declared</span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4">{{ $wardMember->candidate->citizen->gender ?? '-' }}</td>
+                        <td class="px-6 py-4 font-bold text-green-600">{{ $wardMember->vote_count ?? 0 }}</td>
+                    </tr>
+
+                    {{-- Ward Member (Women) --}}
+                    <tr class="hover:bg-gray-100 transition">
+                        <td class="px-6 py-4 font-semibold">Ward Member (Women)</td>
+                        <td class="px-6 py-4">
+                            @if($wardMemberWomen)
+                                <a href="{{ route('UsercandidateProfile', ['id' => $wardMemberWomen->candidate_id, 'e_id' => $e->id]) }}" class="text-blue-600 hover:underline">
+                                    {{ $wardMemberWomen->candidate->citizen->name_nepali ?? 'Unknown' }}
+                                </a>
+                            @else
+                                <span class="text-gray-400">Not declared</span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4">{{ $wardMemberWomen->candidate->citizen->gender ?? '-' }}</td>
+                        <td class="px-6 py-4 font-bold text-green-600">{{ $wardMemberWomen->vote_count ?? 0 }}</td>
+                    </tr>
+
+                    {{-- Ward Member (Dalit) --}}
+                    <tr class="hover:bg-gray-100 transition">
+                        <td class="px-6 py-4 font-semibold">Ward Member (Dalit)</td>
+                        <td class="px-6 py-4">
+                            @if($wardMemberDalit)
+                                <a href="{{ route('UsercandidateProfile', ['id' => $wardMemberDalit->candidate_id, 'e_id' => $e->id]) }}" class="text-blue-600 hover:underline">
+                                    {{ $wardMemberDalit->candidate->citizen->name_nepali ?? 'Unknown' }}
+                                </a>
+                            @else
+                                <span class="text-gray-400">Not declared</span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4">{{ $wardMemberDalit->candidate->citizen->gender ?? '-' }}</td>
+                        <td class="px-6 py-4 font-bold text-green-600">{{ $wardMemberDalit->vote_count ?? 0 }}</td>
                     </tr>
                 </tbody>
             </table>

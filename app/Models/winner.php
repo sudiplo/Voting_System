@@ -16,4 +16,8 @@ class winner extends Model
         'vote_count',
         'is_tie',
     ];
+    public function candidate()
+{
+    return $this->belongsTo(wardCandidate::class, 'candidate_id');
+}
 }
