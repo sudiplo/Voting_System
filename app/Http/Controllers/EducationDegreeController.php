@@ -38,30 +38,40 @@ class EducationDegreeController extends Controller
         return back();
     }
 
+    // Show edit form
+        public function edit($id)
+    {
+        $edu = education_degrees::findOrFail($id);
+        return view('elections.candidats.education.update', compact('edu'));
+    }
+
     // Update degree
     public function update(Request $request, $id)
     {
-        $degree = education_degrees::findOrFail($id);
         $request->validate([
-            'name' => 'required|string|max:255|unique:education_degrees,name,' . $id,
-            'level' => 'nullable|string|max:100',
+            'level' => 'nullable|string|max:255',
         ]);
-
-        $degree->update($request->only('name', 'level'));
-
-        return redirect()->route('education.index')
-                         ->with('success', 'Degree updated successfully.');
+        if($request->level) {
+            $existing = education_degrees::where('level', $request->level)->first();
+            if ($existing && $existing->id != $id) {
+                toast('Education degree already exists.', 'error');
+                return back();
+            }
+        }
+        $degree = education_degrees::find($id);
+        $degree->level = $request->level;
+        $degree->save();
+        
+        toast('Education degree updated successfully.', 'success');
+        return back();
     }
 
     // Delete degree
     public function destroy($id)
     {
         $degree = education_degrees::findOrFail($id);
-        // Optional: prevent deletion if used in candidate_educations
-        // if ($degree->candidateEducations()->exists()) { ... }
         $degree->delete();
-
-        return redirect()->route('education.index')
-                         ->with('success', 'Degree deleted successfully.');
+        toast('Education degree deleted successfully.', 'success');
+        return back();
     }
 }

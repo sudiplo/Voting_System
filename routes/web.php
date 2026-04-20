@@ -133,9 +133,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/user-candidate-profile{id} {e_id}',[CandidateController::class,'UserCandidateProfile'])->name('UsercandidateProfile');
 
     //======================================EducationDegreeController==============================
-    Route::get('/education-degrees-create', [EducationDegreeController::class, 'create'])->name('education-degrees.create');
+    Route::get('/education-degrees-create', [EducationDegreeController::class, 'create'])->name('education-degrees.index');
     Route::post('/education-degrees', [EducationDegreeController::class, 'store'])->name('education-degrees.store');
-    Route::get('/{id}edit', [EducationDegreeController::class, 'update'])->name('education.edit');
+    Route::get('/education-degrees-edit{id}', [EducationDegreeController::class, 'edit'])->name('education.edit');
+    Route::patch('/education-degrees-update{id}', [EducationDegreeController::class, 'update'])->name('education.update');
     Route::delete('/{id}', [EducationDegreeController::class, 'destroy'])->name('education.destroy');
 
         // ===============================Voting OTP=====================================
