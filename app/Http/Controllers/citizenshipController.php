@@ -134,7 +134,8 @@ class citizenshipController extends Controller
         //     return back();
         // }
 
-        $citizen = Citizenship::find($id);
+        $citizen = citizenship::find($id);
+        $photo = $citizen->photo;
         $citizen->name_nepali = $request->nepaliName;
         $citizen->name_english = $request->nameEnglish;
         $citizen->citizenship_number = $request->citizenshipNumber;
@@ -154,7 +155,7 @@ class citizenshipController extends Controller
             $photo->move(public_path('images'), $filename);
             $citizen->photo = 'images/' . $filename;
         } else {
-            $citizen->photo = $citizen->photo;
+            $citizen->photo = $photo ?? 'images/default.png';
         }
 
 
