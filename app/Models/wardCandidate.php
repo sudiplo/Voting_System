@@ -57,5 +57,11 @@ class wardCandidate extends Model
     {
         return $this->hasMany(vote::class);
     }
+
+    // relation between ward Candidate and education degree
+    public function education(): BelongsTo
+    {
+        return $this->belongsTo(education_degrees::class,'education_id');
+    }
     
 }

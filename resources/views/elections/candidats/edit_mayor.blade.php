@@ -88,6 +88,17 @@
                 {{ $candidate->goal }}
                 </textarea>
             </div>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700">Educational Qualification</label>
+                <select name="education_id"
+                    class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 hover:border-indigo-500 transition"
+                    required>
+                    <option value="{{ $candidate->education_id}}">{{ $candidate->education->level}}</option>
+                    @foreach($educationDegrees as $degree)
+                        <option value="{{ $degree->id }}">{{ $degree->level }}</option>
+                    @endforeach
+                </select>
+            </div>
 
             <div>
                 <label class="block text-sm font-semibold text-gray-700">Photo Upload</label>

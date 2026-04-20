@@ -157,14 +157,13 @@
 
             <div>
                 <label class="block text-sm font-semibold text-gray-700">Educational Qualification</label>
-                <select name="post"
+                <select name="education_id"
                     class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 hover:border-indigo-500 transition"
                     required>
-                    <option value="">Select Post</option>
-                    <option value="SEE">SEE</option>
-                    <option value="+2">+2</option>
-                    <option value="CTEVT Diploma">CTEVT Diploma</option>
-                   
+                    <option value="">Select Educational Qualification</option>
+                    @foreach($educationDegrees as $degree)
+                        <option value="{{ $degree->id }}">{{ $degree->level }}</option>
+                    @endforeach
                 </select>
             </div>
             <div>

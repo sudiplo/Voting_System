@@ -43,10 +43,19 @@
                 <h1 class="text-4xl font-black text-gray-900 tracking-tight leading-tight">{{$candidate->citizen->name_nepali}}</h1>
                     <span class="mt-2 text-lg font-semibold text-gray-700">{{$candidate->district->name_nepali}}, {{$candidate->palika->name}}</span>
 
+                <div class="flex items-center gap-2 mt-4 text-sm text-gray-600">
+                    <span class="font-medium">Gender</span>
+                    <span class="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium"> {{$candidate->citizen->gender}}</span>
+                </div>
 
                 <div class="flex items-center gap-2 mt-4 text-sm text-gray-600">
                     <span class="font-medium">Political Party</span>
                     <span class="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium"> {{$candidate->party}}</span>
+                </div>
+
+                <div class="flex items-center gap-2 mt-4 text-sm text-gray-600">
+                    <span class="font-medium">Educational Qualification</span>
+                    <span class="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-1.5 rounded-full text-sm font-medium"> {{$candidate->education->level}}</span>
                 </div>
 
                 <div class="flex items-center gap-2 mt-4 text-sm text-gray-600">

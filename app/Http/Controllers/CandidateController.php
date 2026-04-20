@@ -9,6 +9,7 @@ use App\Models\Election;
 use App\Models\palika;
 use App\Models\wardCandidate;
 use App\Models\ward;
+use App\Models\education_degrees;
 
 class CandidateController extends Controller
 {
@@ -40,7 +41,8 @@ class CandidateController extends Controller
         }
         $id = $request->input('election_id');
         $election = Election::find($id);
-        return view('elections.register_candidate', compact('citizen', 'citizenships', 'search','election'));
+        $educationDegrees = education_degrees::all();
+        return view('elections.register_candidate', compact('citizen', 'citizenships', 'search','election','educationDegrees'));
     }
 
 
@@ -54,6 +56,7 @@ class CandidateController extends Controller
             'palika_id' => ['required', 'string', 'max:255'],
             'ward_id' => ['required', 'string', 'max:255'],
             'election_id' => ['required', 'string', 'max:255'],
+            'education_id' => ['required', 'string', 'max:255'],
             'post' => ['required', 'string', 'max:255'],
             'party' => ['required', 'string', 'max:255'],
             'goal' => ['required', 'string', 'max:10000'],
@@ -85,6 +88,7 @@ class CandidateController extends Controller
             $candidate->palika_id = $request->palika_id;
             $candidate->ward_id = $request->ward_id;
             $candidate->election = $request->election_id;
+            $candidate->education_id = $request->education_id;
             $candidate->post = $request->post;
             $candidate->party = $request->party;
             $candidate->goal = $request->goal;
@@ -161,10 +165,11 @@ class CandidateController extends Controller
     //==========================Edit Candidate view==============================================================================
     public function candidateEditView($id,$e_id){
         $candidate = wardCandidate::find($id);
+        $educationDegrees = education_degrees::all();
         if ($candidate) {
             $e  = $candidate->election;
             $id = $candidate->ward_id;
-            return view('elections.candidats.edit_mayor', compact('candidate', 'e', 'id'));
+            return view('elections.candidats.edit_mayor', compact('candidate', 'e', 'id','educationDegrees'));
         }else{
             $e = $e_id;
             return view('elections.candidats.edit_mayor',compact('candidate','e'));
@@ -182,6 +187,7 @@ class CandidateController extends Controller
             'palika_id' => ['required', 'string', 'max:255'],
             'ward_id' => ['required', 'string', 'max:255'],
             'election_id' => ['required', 'string', 'max:255'],
+            'education_id' => ['required', 'string', 'max:255'],
             'post' => ['required', 'string', 'max:255'],
             'party' => ['required', 'string', 'max:255'],
             'goal' => ['required', 'string', 'max:10000'],
@@ -202,6 +208,7 @@ class CandidateController extends Controller
             $candidate->palika_id = $request->palika_id;
             $candidate->ward_id = $request->ward_id;
             $candidate->election = $request->election_id;
+            $candidate->education_id = $request->education_id;
             $candidate->post = $request->post;
             $candidate->party = $request->party;
             $candidate->goal = $request->goal;
