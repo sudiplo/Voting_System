@@ -19,50 +19,111 @@ class VotingOtpController extends Controller
 {
 
     //==========================Send OTP==========================
+    // public function sendOtp(Request $request)
+    // {
+    //     // Rate limiting algo (sliding window)
+    //     $limit = 5;
+    //     $window = 60;
+    //     $blockTime = 60;
+
+    //     $ip = $request->ip();
+    //     $rateKey = 'rate_limit:otp:' . $ip;
+    //     $blockKey = 'rate_limit:block:' . $ip;
+
+    //     // Check if blocked
+    //     if (Cache::has($blockKey)) {
+    //         toast('You are blocked for 1 minute due to too many OTP requests.', 'error');
+    //         return redirect()->back();
+    //     }
+
+    //     //Get request count
+    //     $count = Cache::get($rateKey, 0);
+
+    //     //If limit exceeded → block
+    //     if ($count >= $limit) {
+
+    //         Cache::put($blockKey, true, $blockTime); // block user
+    //         Cache::forget($rateKey); // reset counter
+
+    //         toast('Too many OTP requests. Blocked for 1 minute.', 'error');
+    //         return redirect()->back();
+    //     }
+
+    //     //Increase request count
+    //     Cache::put($rateKey, $count + 1, $window);
+
+    //     //===========================OTP=====================
+    //     $user = Auth::user();
+
+    //     // Delete previous unused OTP
+    //     otps::where('user_id', $user->id)
+    //         ->where('is_used', false)
+    //         ->delete();
+
+    //     $plainOtp = rand(100000, 999999);
+
+    //     otps::create([
+    //         'user_id' => $user->id,
+    //         'otp' => Hash::make($plainOtp),
+    //         'expires_at' => Carbon::now()->addMinutes(5),
+    //     ]);
+
+    //     Mail::to($user->email)->send(new VotingOtpMail($plainOtp));
+
+    //     toast('OTP sent to your email.', 'success');
+    //     return back();
+    //     // return redirect()->route('otp.verify.form');
+    // }
     public function sendOtp(Request $request)
     {
-        // Rate limiting algo (sliding window)
-        $limit = 5;
-        $window = 60;
-        $blockTime = 60;
+        // Sliding window settings
+        $limit = 5;      // max requests per window
+        $window = 60;    // window size in seconds
+        $blockTime = 60; // block duration (seconds) if limit exceeded
 
         $ip = $request->ip();
-        $rateKey = 'rate_limit:otp:' . $ip;
+        $rateKey = 'rate_limit:otp:sliding:' . $ip;
         $blockKey = 'rate_limit:block:' . $ip;
 
-        // Check if blocked
+        // Check if currently blocked
         if (Cache::has($blockKey)) {
             toast('You are blocked for 1 minute due to too many OTP requests.', 'error');
             return redirect()->back();
         }
 
-        //Get request count
-        $count = Cache::get($rateKey, 0);
+        // Retrieve stored timestamps (decoded from cache)
+        $timestamps = Cache::get($rateKey, []);
+        $now = now()->timestamp;
 
-        //If limit exceeded → block
-        if ($count >= $limit) {
+        // Keep only timestamps that are still inside the current window
+        $timestamps = array_filter($timestamps, function ($timestamp) use ($now, $window) {
+            return ($now - $timestamp) < $window;
+        });
 
-            Cache::put($blockKey, true, $blockTime); // block user
-            Cache::forget($rateKey); // reset counter
+        // Count requests in the current sliding window
+        $requestCount = count($timestamps);
+
+        if ($requestCount >= $limit) {
+            // Block this IP for $blockTime seconds
+            Cache::put($blockKey, true, $blockTime);
+            Cache::forget($rateKey); // clean up rate key
 
             toast('Too many OTP requests. Blocked for 1 minute.', 'error');
             return redirect()->back();
         }
 
-        //Increase request count
-        Cache::put($rateKey, $count + 1, $window);
+        // Add current request timestamp
+        $timestamps[] = $now;
+        Cache::put($rateKey, $timestamps, $window);
 
-        //===========================OTP=====================
+        // ========== OTP generation (unchanged) ==========
         $user = Auth::user();
 
         // Delete previous unused OTP
-        otps::where('user_id', $user->id)
-            ->where('is_used', false)
-            ->delete();
+        Otps::where('user_id', $user->id)->where('is_used', false)->delete();
 
         $plainOtp = rand(100000, 999999);
-
-        otps::create([
+        Otps::create([
             'user_id' => $user->id,
             'otp' => Hash::make($plainOtp),
             'expires_at' => Carbon::now()->addMinutes(5),
@@ -72,7 +133,6 @@ class VotingOtpController extends Controller
 
         toast('OTP sent to your email.', 'success');
         return back();
-        // return redirect()->route('otp.verify.form');
     }
 
     //==========================Show OTP form==========================

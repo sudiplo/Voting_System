@@ -9,6 +9,7 @@ use App\Http\Controllers\CandidateController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\VotingOtpController;
+use App\Http\Controllers\EducationDegreeController;
 
 Route::get('/', [viewController::class,'welcome'])->name('welcome');
 
@@ -130,6 +131,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/user-candidate-Women-search{id} {e_id}',[CandidateController::class,'UserWomenSearch'])->name('UserWomen_search');
         Route::get('/user-candidate-Dalit-search{id} {e_id}',[CandidateController::class,'UserDalitSearch'])->name('UsercandidateDalit_search');
         Route::get('/user-candidate-profile{id} {e_id}',[CandidateController::class,'UserCandidateProfile'])->name('UsercandidateProfile');
+
+    //======================================EducationDegreeController==============================
+    Route::get('/education-degrees-create', [EducationDegreeController::class, 'create'])->name('education-degrees.create');
+    Route::post('/education-degrees', [EducationDegreeController::class, 'store'])->name('education-degrees.store');
+    Route::get('/{id}edit', [EducationDegreeController::class, 'update'])->name('education.edit');
+    Route::delete('/{id}', [EducationDegreeController::class, 'destroy'])->name('education.destroy');
 
         // ===============================Voting OTP=====================================
         // User clicks "Cast Vote"

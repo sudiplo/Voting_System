@@ -156,6 +156,18 @@
             </div>
 
             <div>
+                <label class="block text-sm font-semibold text-gray-700">Educational Qualification</label>
+                <select name="post"
+                    class="w-full mt-2 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 hover:border-indigo-500 transition"
+                    required>
+                    <option value="">Select Post</option>
+                    <option value="SEE">SEE</option>
+                    <option value="+2">+2</option>
+                    <option value="CTEVT Diploma">CTEVT Diploma</option>
+                   
+                </select>
+            </div>
+            <div>
                 <label class="block text-sm font-semibold text-gray-700">Photo Upload</label>
                 <input type="file" name="photo"
                 class="w-full mt-2 p-3 border rounded-lg hover:border-blue-500 transition"

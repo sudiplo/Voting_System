@@ -55,6 +55,9 @@
             <a href="{{ Route('districts.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
                 🏛️ Districts & Regions
             </a>
+            <a href="{{ Route('education-degrees.create') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
+                📜 Education
+            </a>
 
             {{-- <a href="" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
                 👮 Officials & Roles
@@ -78,7 +81,7 @@
                 🔐 Security & Permissions
             </a>
 
-            <a href="{{ Route('about') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
+            <a href="{{ Route('education-degrees.create') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100">
                 📜 About
             </a>
         </nav>
