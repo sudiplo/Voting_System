@@ -123,177 +123,136 @@
     {{-- result --}}
     <div class="mt-5 lg:col-span-2 bg-white rounded-2xl shadow">
         <div class="border-b px-6 py-4 font-semibold">
-            {{ $e->title }}, Election Result of {{ $p->name }}, {{ $wa->name }}
+            {{ $e->title }} – Election Result of {{ $p->name }}, {{ $wa->name }}
         </div>
 
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
-                <thead class="bg-gradient-to-r from-indigo-600 to-blue-500   text-white">
+                <thead class="bg-gradient-to-r from-indigo-600 to-blue-500 text-white">
                     <tr>
                         <th class="text-left px-6 py-3">Name</th>
-                        <th class="text-left px-6 py-3">post</th>
-                        <th class="text-left px-6 py-3">gender</th>
+                        <th class="text-left px-6 py-3">Post</th>
+                        <th class="text-left px-6 py-3">Gender</th>
                         <th class="text-left px-6 py-3">District</th>
                         <th class="text-left px-6 py-3">Palika</th>
                         <th class="text-left px-6 py-3">Ward</th>
+                        <th class="text-left px-6 py-3">Votes</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y">
+
+                    {{-- Mayor --}}
                     <tr class="group hover:bg-gray-100 transition">
-                    @if ($mayor)
-                        <td class="px-6 py-4 font-semibold text-gray-800">
-                            <a href="{{ Route('candidateProfile',['id'=>$mayor->id,'e_id'=>$e->id]) }}">{{ $mayor->citizen->name_nepali }}</a>
-                        </td>
-                        <td class="px-6 py-4 font-semibold text-gray-800">
-                            {{ $mayor->post }}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $mayor->citizen->gender}}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $mayor->district->name_nepali }}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $mayor->palika->name }}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $mayor->ward->name }}
-                        </td>
-                    @else
-                        <td class="px-6 py-4 font-semibold text-gray-800">
-                            not found
-                        </td>
-                    @endif
+                        @if($mayor && $mayor->candidate)
+                            <td class="px-6 py-4 font-semibold text-gray-800">
+                                <a href="{{ route('candidateProfile', ['id' => $mayor->candidate_id, 'e_id' => $e->id]) }}">
+                                    {{ $mayor->candidate->citizen->name_nepali ?? 'N/A' }}
+                                </a>
+                            </td>
+                            <td class="px-6 py-4">{{ $mayor->post }}</td>
+                            <td class="px-6 py-4">{{ $mayor->candidate->citizen->gender ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">{{ $mayor->candidate->district->name_nepali ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">{{ $mayor->candidate->palika->name ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">{{ $mayor->candidate->ward->name ?? 'N/A' }}</td>
+                            <td class="px-6 py-4 font-bold text-green-600">{{ $mayor->vote_count }}</td>
+                        @else
+                            <td colspan="7" class="px-6 py-4 text-gray-500">Not found</td>
+                        @endif
                     </tr>
+
+                    {{-- Deputy Mayor --}}
                     <tr class="group hover:bg-gray-100 transition">
-                    @if ($deputyMayor)
-                        <td class="px-6 py-4 font-semibold text-gray-800">
-                            <a href="{{ Route('candidateProfile',['id'=>$deputyMayor->id,'e_id'=>$e->id]) }}">{{ $deputyMayor->citizen->name_nepali }}</a>
-                        </td>
-                        <td class="px-6 py-4 font-semibold text-gray-800">
-                            {{ $deputyMayor->post }}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $deputyMayor->citizen->gender}}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $deputyMayor->district->name_nepali }}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $deputyMayor->palika->name }}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $deputyMayor->ward->name }}
-                        </td>
-                    @else
-                        <td class="px-6 py-4 font-semibold text-gray-800">
-                            not found
-                        </td>
-                    @endif
+                        @if($deputyMayor && $deputyMayor->candidate)
+                            <td class="px-6 py-4 font-semibold text-gray-800">
+                                <a href="{{ route('candidateProfile', ['id' => $deputyMayor->candidate_id, 'e_id' => $e->id]) }}">
+                                    {{ $deputyMayor->candidate->citizen->name_nepali ?? 'N/A' }}
+                                </a>
+                            </td>
+                            <td class="px-6 py-4">{{ $deputyMayor->post }}</td>
+                            <td class="px-6 py-4">{{ $deputyMayor->candidate->citizen->gender ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">{{ $deputyMayor->candidate->district->name_nepali ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">{{ $deputyMayor->candidate->palika->name ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">{{ $deputyMayor->candidate->ward->name ?? 'N/A' }}</td>
+                            <td class="px-6 py-4 font-bold text-green-600">{{ $deputyMayor->vote_count }}</td>
+                        @else
+                            <td colspan="7" class="px-6 py-4 text-gray-500">Not found</td>
+                        @endif
                     </tr>
+
+                    {{-- Ward Chairperson --}}
                     <tr class="group hover:bg-gray-100 transition">
-                    @if ($wardChairperson)
-                        <td class="px-6 py-4 font-semibold text-gray-800">
-                            <a href="{{ Route('candidateProfile',['id'=>$wardChairperson->id,'e_id'=>$e->id]) }}">{{ $wardChairperson->citizen->name_nepali }}</a>
-                        </td>
-                        <td class="px-6 py-4 font-semibold text-gray-800">
-                            {{ $wardChairperson->post }}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $wardChairperson->citizen->gender}}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $wardChairperson->district->name_nepali }}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $wardChairperson->palika->name }}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $wardChairperson->ward->name }}
-                        </td>
-                    @else
-                        <td class="px-6 py-4 font-semibold text-gray-800">
-                            not found
-                        </td>
-                    @endif
+                        @if($wardChairperson && $wardChairperson->candidate)
+                            <td class="px-6 py-4 font-semibold text-gray-800">
+                                <a href="{{ route('candidateProfile', ['id' => $wardChairperson->candidate_id, 'e_id' => $e->id]) }}">
+                                    {{ $wardChairperson->candidate->citizen->name_nepali ?? 'N/A' }}
+                                </a>
+                            </td>
+                            <td class="px-6 py-4">{{ $wardChairperson->post }}</td>
+                            <td class="px-6 py-4">{{ $wardChairperson->candidate->citizen->gender ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">{{ $wardChairperson->candidate->district->name_nepali ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">{{ $wardChairperson->candidate->palika->name ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">{{ $wardChairperson->candidate->ward->name ?? 'N/A' }}</td>
+                            <td class="px-6 py-4 font-bold text-green-600">{{ $wardChairperson->vote_count }}</td>
+                        @else
+                            <td colspan="7" class="px-6 py-4 text-gray-500">Not found</td>
+                        @endif
                     </tr>
+
+                    {{-- Ward Member --}}
                     <tr class="group hover:bg-gray-100 transition">
-                    @if ($wardMember)
-                        <td class="px-6 py-4 font-semibold text-gray-800">
-                            <a href="{{ Route('candidateProfile',['id'=>$wardMember->id,'e_id'=>$e->id]) }}">{{ $wardMember->citizen->name_nepali }}</a>
-                        </td>
-                        <td class="px-6 py-4 font-semibold text-gray-800">
-                            {{ $wardMember->post }}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $wardMember->citizen->gender}}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $wardMember->district->name_nepali }}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $wardMember->palika->name }}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $wardMember->ward->name }}
-                        </td>
-                    @else
-                        <td class="px-6 py-4 font-semibold text-gray-800">
-                            not found
-                        </td>
-                    @endif
+                        @if($wardMember && $wardMember->candidate)
+                            <td class="px-6 py-4 font-semibold text-gray-800">
+                                <a href="{{ route('candidateProfile', ['id' => $wardMember->candidate_id, 'e_id' => $e->id]) }}">
+                                    {{ $wardMember->candidate->citizen->name_nepali ?? 'N/A' }}
+                                </a>
+                            </td>
+                            <td class="px-6 py-4">{{ $wardMember->post }}</td>
+                            <td class="px-6 py-4">{{ $wardMember->candidate->citizen->gender ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">{{ $wardMember->candidate->district->name_nepali ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">{{ $wardMember->candidate->palika->name ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">{{ $wardMember->candidate->ward->name ?? 'N/A' }}</td>
+                            <td class="px-6 py-4 font-bold text-green-600">{{ $wardMember->vote_count }}</td>
+                        @else
+                            <td colspan="7" class="px-6 py-4 text-gray-500">Not found</td>
+                        @endif
                     </tr>
+
+                    {{-- Ward Member (Women) --}}
                     <tr class="group hover:bg-gray-100 transition">
-                    @if ($wardMemberWomen)
-                        <td class="px-6 py-4 font-semibold text-gray-800">
-                            <a href="{{ Route('candidateProfile',['id'=>$wardMemberWomen->id,'e_id'=>$e->id]) }}">{{ $wardMemberWomen->citizen->name_nepali }}</a>
-                        </td>
-                        <td class="px-6 py-4 font-semibold text-gray-800">
-                            {{ $wardMemberWomen->post }}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $wardMemberWomen->citizen->gender}}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $wardMemberWomen->district->name_nepali }}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $wardMemberWomen->palika->name }}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $wardMemberWomen->ward->name }}
-                        </td>
-                    @else
-                        <td class="px-6 py-4 font-semibold text-gray-800">
-                            not found
-                        </td>
-                    @endif
+                        @if($wardMemberWomen && $wardMemberWomen->candidate)
+                            <td class="px-6 py-4 font-semibold text-gray-800">
+                                <a href="{{ route('candidateProfile', ['id' => $wardMemberWomen->candidate_id, 'e_id' => $e->id]) }}">
+                                    {{ $wardMemberWomen->candidate->citizen->name_nepali ?? 'N/A' }}
+                                </a>
+                            </td>
+                            <td class="px-6 py-4">{{ $wardMemberWomen->post }}</td>
+                            <td class="px-6 py-4">{{ $wardMemberWomen->candidate->citizen->gender ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">{{ $wardMemberWomen->candidate->district->name_nepali ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">{{ $wardMemberWomen->candidate->palika->name ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">{{ $wardMemberWomen->candidate->ward->name ?? 'N/A' }}</td>
+                            <td class="px-6 py-4 font-bold text-green-600">{{ $wardMemberWomen->vote_count }}</td>
+                        @else
+                            <td colspan="7" class="px-6 py-4 text-gray-500">Not found</td>
+                        @endif
                     </tr>
+
+                    {{-- Ward Member (Dalit) --}}
                     <tr class="group hover:bg-gray-100 transition">
-                    @if ($wardMemberDalit)
-                        <td class="px-6 py-4 font-semibold text-gray-800">
-                            <a href="{{ Route('candidateProfile',['id'=>$wardMemberDalit->id,'e_id'=>$e->id]) }}">{{ $wardMemberDalit->citizen->name_nepali }}</a>
-                        </td>
-                        <td class="px-6 py-4 font-semibold text-gray-800">
-                            {{ $wardMemberDalit->post }}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $wardMemberDalit->citizen->gender}}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $wardMemberDalit->district->name_nepali }}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $wardMemberDalit->palika->name }}
-                        </td>
-                        <td class="class="px-6 py-4 font-semibold text-gray-800"">
-                            {{ $wardMemberDalit->ward->name }}
-                        </td>
-                    @else
-                        <td class="px-6 py-4 font-semibold text-gray-800">
-                            not found
-                        </td>
-                    @endif
+                        @if($wardMemberDalit && $wardMemberDalit->candidate)
+                            <td class="px-6 py-4 font-semibold text-gray-800">
+                                <a href="{{ route('candidateProfile', ['id' => $wardMemberDalit->candidate_id, 'e_id' => $e->id]) }}">
+                                    {{ $wardMemberDalit->candidate->citizen->name_nepali ?? 'N/A' }}
+                                </a>
+                            </td>
+                            <td class="px-6 py-4">{{ $wardMemberDalit->post }}</td>
+                            <td class="px-6 py-4">{{ $wardMemberDalit->candidate->citizen->gender ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">{{ $wardMemberDalit->candidate->district->name_nepali ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">{{ $wardMemberDalit->candidate->palika->name ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">{{ $wardMemberDalit->candidate->ward->name ?? 'N/A' }}</td>
+                            <td class="px-6 py-4 font-bold text-green-600">{{ $wardMemberDalit->vote_count }}</td>
+                        @else
+                            <td colspan="7" class="px-6 py-4 text-gray-500">Not found</td>
+                        @endif
                     </tr>
                 </tbody>
             </table>

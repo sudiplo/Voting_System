@@ -44,6 +44,16 @@
                     {{ $candidate->palika->name }}
                 </p>
 
+                <!-- Gender -->
+                <div class="flex flex-wrap items-center gap-3 mt-5 text-sm">
+                    <span class="font-medium text-gray-600">Gender</span>
+                    <span class="inline-flex items-center gap-2
+                                 bg-blue-100 text-blue-700
+                                 px-4 py-1.5 rounded-full font-semibold">
+                        {{ $candidate->citizen->gender }}
+                    </span>
+                </div>
+
                 <!-- Party -->
                 <div class="flex flex-wrap items-center gap-3 mt-5 text-sm">
                     <span class="font-medium text-gray-600">Political Party</span>

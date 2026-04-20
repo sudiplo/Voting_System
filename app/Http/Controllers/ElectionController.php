@@ -232,26 +232,61 @@ class ElectionController extends Controller
     }
 
     // ==========================search districh inside Election==============================================================================
-    public function ElectionResultSearch(Request $request,$id){
-        $e = election::find($id);
-        $w = $request->ward_id;
+   public function ElectionResultSearch(Request $request, $id)
+    {
+        $e = Election::find($id);
+        $districtId = $request->district_id;
+        $palikaId = $request->palika_id;
+        $wardId = $request->ward_id;
 
-        $d = district::find($request->district_id);
-        $p = palika::find($request->palika_id);
-        $wa = ward::find($w);
-        $districts = district::with('palika.wards')->get();
+        $d = District::find($districtId);
+        $p = Palika::find($palikaId);
+        $wa = Ward::find($wardId);
+        $districts = District::with('palika.wards')->get();
 
-        $mayor = wardCandidate::where('election',$id)->
-            where('post','Mayor')->
-            where('ward_id', $w)->orderBy('vote','asc')->first();
+        // Mayor & Deputy Mayor – municipality level (palika_id)
+        $mayor = Winner::with('candidate.citizen')
+            ->where('election_id', $id)
+            ->where('post', 'Mayor')
+            ->where('palika_id', $palikaId)
+            ->first();
 
-        $deputyMayor = wardCandidate::where('election',$id)->where('post','Deputy Mayor')->where('ward_id',$w)->orderBy('vote','asc')->first();
-        $wardChairperson = wardCandidate::where('election',$id)->where('post','Ward Chairperson')->where('ward_id',$w)->orderBy('vote','asc')->first();
-        $wardMember = wardCandidate::where('election',$id)->where('post','Ward Member')->where('ward_id',$w)->orderBy('vote','asc')->first();
-        $wardMember = wardCandidate::where('election',$id)->where('post','Ward Member')->where('ward_id',$w)->orderBy('vote','asc')->first();
-        $wardMemberWomen = wardCandidate::where('election',$id)->where('post','Ward Member(Women)')->where('ward_id',$w)->orderBy('vote','asc')->first();
-        $wardMemberDalit = wardCandidate::where('election',$id)->where('post','Ward Member(Dalit)')->where('ward_id',$w)->orderBy('vote','asc')->first();
-        return view('result.winner',compact('e','districts','mayor','deputyMayor','wardChairperson','wardMember','wardMemberWomen','wardMemberDalit','d','p','wa'));
+        $deputyMayor = Winner::with('candidate.citizen')
+            ->where('election_id', $id)
+            ->where('post', 'Deputy Mayor')
+            ->where('palika_id', $palikaId)
+            ->first();
+
+        // Ward‑level posts – filter by ward_id
+        $wardChairperson = Winner::with('candidate.citizen')
+            ->where('election_id', $id)
+            ->where('post', 'Ward Chairperson')
+            ->where('ward_id', $wardId)
+            ->first();
+
+        $wardMember = Winner::with('candidate.citizen')
+            ->where('election_id', $id)
+            ->where('post', 'Ward Member')
+            ->where('ward_id', $wardId)
+            ->first();
+
+        $wardMemberWomen = Winner::with('candidate.citizen')
+            ->where('election_id', $id)
+            ->where('post', 'Ward Member(Women)')
+            ->where('ward_id', $wardId)
+            ->first();
+
+        $wardMemberDalit = Winner::with('candidate.citizen')
+            ->where('election_id', $id)
+            ->where('post', 'Ward Member(Dalit)')
+            ->where('ward_id', $wardId)
+            ->first();
+
+        return view('result.winner', compact(
+            'e', 'districts', 'd', 'p', 'wa',
+            'mayor', 'deputyMayor', 'wardChairperson',
+            'wardMember', 'wardMemberWomen', 'wardMemberDalit'
+        ));
     }
 //=======================================>User Side<=====================================================================================================================
     //==========================View vote page==============================================================================
