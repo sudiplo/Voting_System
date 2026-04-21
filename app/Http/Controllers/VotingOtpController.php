@@ -77,7 +77,7 @@ class VotingOtpController extends Controller
     public function sendOtp(Request $request)
     {
         // Sliding window settings
-        $limit = 5;      // max requests per window
+        $limit = 5;      // max requests                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 per window
         $window = 60;    // window size in seconds
         $blockTime = 60; // block duration (seconds) if limit exceeded
 

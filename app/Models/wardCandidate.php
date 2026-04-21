@@ -63,5 +63,5 @@ class wardCandidate extends Model
     {
         return $this->belongsTo(education_degrees::class,'education_id');
     }
-    
+
 }
