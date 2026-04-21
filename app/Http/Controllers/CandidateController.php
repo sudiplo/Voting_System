@@ -93,14 +93,17 @@ class CandidateController extends Controller
             $candidate->post         = $request->post;
             $candidate->party        = $request->party;
             $candidate->goal         = $request->goal;
-            $candidate->vote = 0;
+            // Use Paillier to encrypt 0 votes
+            $paillier = new Paillier();
+            $candidate->vote         = $paillier->encrypt(0);
             $candidate->photo        = 'images/' . $filename;
 
-            $candidate->save();
+    $candidate->save();
             toast("Data saved successfully", "success");
             return redirect()->back();
         // }
     }
+
 
 
 //<--===================================================PAGE VISIT SECTION===========================================================-->

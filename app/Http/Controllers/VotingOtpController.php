@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Cache;
 use App\Models\Election;
 use App\Models\wardCandidate;
 use App\Models\vote;
-// use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
-
+use App\Services\Paillier;
 
 class VotingOtpController extends Controller
 {
@@ -23,59 +21,45 @@ class VotingOtpController extends Controller
     //==========================Send OTP==========================
     public function sendOtp(Request $request)
     {
-        // 1. Configurable limits (put these in config/rate_limiting.php or .env)
-        $limit = config('rate_limiting.otp.max_requests', 5);      // max 5 requests
-        $window = config('rate_limiting.otp.window_seconds', 60);  // per 60 seconds
-        $blockTime = config('rate_limiting.otp.block_seconds', 60); // block for 60 seconds
+        // Sliding window settings
+        $limit = 5;      // max requests                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 per window
+        $window = 60;    // window size in seconds
+        $blockTime = 60; // block duration (seconds) if limit exceeded
 
         $ip = $request->ip();
         $rateKey = 'rate_limit:otp:sliding:' . $ip;
         $blockKey = 'rate_limit:block:' . $ip;
 
-        // 2. Check if already blocked
+        // Check if currently blocked
         if (Cache::has($blockKey)) {
-            $remainingBlock = Cache::ttl($blockKey); // seconds left
-            toast("Too many OTP requests. Please try again in {$remainingBlock} seconds.", 'error');
+            toast('You are blocked for 1 minute due to too many OTP requests.', 'error');
             return redirect()->back();
         }
 
-        // 3. Atomic sliding window using cache lock (prevents race conditions)
-        $lock = Cache::lock($rateKey . '_lock', 2); // 2 seconds timeout
+        // Retrieve stored timestamps (decoded from cache)
+        $timestamps = Cache::get($rateKey, []);
+        $now = now()->timestamp;
 
-        try {
-            $lock->block(2); // Wait up to 2 seconds for lock
+        // Keep only timestamps that are still inside the current window
+        $timestamps = array_filter($timestamps, function ($timestamp) use ($now, $window) {
+            return ($now - $timestamp) < $window;
+        });
 
-            // Retrieve and filter timestamps
-            $timestamps = Cache::get($rateKey, []);
-            $now = now()->timestamp;
+        // Count requests in the current sliding window
+        $requestCount = count($timestamps);
 
-            $timestamps = array_filter($timestamps, function ($timestamp) use ($now, $window) {
-                return ($now - $timestamp) < $window;
-            });
+        if ($requestCount >= $limit) {
+            // Block this IP for $blockTime seconds
+            Cache::put($blockKey, true, $blockTime);
+            Cache::forget($rateKey); // clean up rate key
 
-            $requestCount = count($timestamps);
-
-            if ($requestCount >= $limit) {
-                // Block this IP
-                Cache::put($blockKey, true, $blockTime);
-                Cache::forget($rateKey); // Clear the sliding window
-                $lock->release();
-
-                Log::warning("OTP rate limit exceeded", ['ip' => $ip, 'count' => $requestCount]);
-                toast("Too many OTP requests. Blocked for {$blockTime} seconds.", 'error');
-                return redirect()->back();
-            }
-
-            // Add current request timestamp
-            $timestamps[] = $now;
-            Cache::put($rateKey, $timestamps, $window);
-            $lock->release();
-
-        } catch (\Illuminate\Contracts\Cache\LockTimeoutException $e) {
-            // Lock timeout – another request is processing, wait and retry or fail gracefully
-            toast('System busy, please try again.', 'error');
+            toast('Too many OTP requests. Blocked for 1 minute.', 'error');
             return redirect()->back();
         }
+
+        // Add current request timestamp
+        $timestamps[] = $now;
+        Cache::put($rateKey, $timestamps, $window);
 
         // ========== OTP generation (unchanged) ==========
         $user = Auth::user();
@@ -83,7 +67,7 @@ class VotingOtpController extends Controller
         // Delete previous unused OTP
         Otps::where('user_id', $user->id)->where('is_used', false)->delete();
 
-        $plainOtp = random_int(100000, 999999); // more secure than rand()
+        $plainOtp = rand(100000, 999999);
         Otps::create([
             'user_id' => $user->id,
             'otp' => Hash::make($plainOtp),
@@ -159,37 +143,88 @@ class VotingOtpController extends Controller
     }
 
     // ==========================Submit Vote==========================
+    // public function submitVote(Request $request)
+    // {
+    //     $request->validate([
+    //         'vote' => 'required|array',
+    //     ]);
+
+    //     $election = Election::where('status','process')->orderBy('election_date', 'asc')->first();
+
+    //     $alreadyVoted = vote::where('user_id', Auth::user()->id)->where('election_id', $election->id)->exists();
+    //     if ($alreadyVoted) {
+    //         toast('You have already cast your vote for this election!', 'error');
+    //         return back();
+    //     }
+
+    //     foreach ($request->vote as $post => $candidateId) {
+    //         $candidate = wardCandidate::find($candidateId);
+    //         if ($candidate) {
+    //             $candidate->vote = $candidate->vote ? intval($candidate->vote) + 1 : 1;
+    //             $candidate->save();
+    //         }
+
+    //         vote::create([
+    //             'user_id' => Auth::user()->id,
+    //             'candidate_id' => $candidate->id,
+    //             'election_id' => $candidate->election,
+    //             'post' => $post,
+    //         ]);
+    //     }
+
+    //     toast('Your vote has been submitted!', 'success');
+    //     return back();
+    // }
+
     public function submitVote(Request $request)
-    {
-        $request->validate([
-            'vote' => 'required|array',
-        ]);
+{
+    $request->validate(['vote' => 'required|array']);
 
-        $election = Election::where('status','process')->orderBy('election_date', 'asc')->first();
+    $election = Election::where('status', 'process')
+                ->orderBy('election_date', 'asc')
+                ->first();
 
-        $alreadyVoted = vote::where('user_id', Auth::user()->id)->where('election_id', $election->id)->exists();
-        if ($alreadyVoted) {
-            toast('You have already cast your vote for this election!', 'error');
-            return back();
-        }
-
-        foreach ($request->vote as $post => $candidateId) {
-            $candidate = wardCandidate::find($candidateId);
-            if ($candidate) {
-                $candidate->vote = $candidate->vote ? intval($candidate->vote) + 1 : 1;
-                $candidate->save();
-            }
-
-            vote::create([
-                'user_id' => Auth::user()->id,
-                'candidate_id' => $candidate->id,
-                'election_id' => $candidate->election,
-                'post' => $post,
-            ]);
-        }
-
-        toast('Your vote has been submitted!', 'success');
+    // Prevent double voting (keep this for production)
+    $alreadyVoted = vote::where('user_id', Auth::id())
+                    ->where('election_id', $election->id)
+                    ->exists();
+    if ($alreadyVoted) {
+        toast('You have already cast your vote for this election!', 'error');
         return back();
     }
 
+    $paillier = new Paillier();
+
+    foreach ($request->vote as $post => $candidateId) {
+        $candidate = wardCandidate::find($candidateId);
+         if (!$candidate) continue;
+
+        // Get the raw database value (bypass any model accessor)
+        $currentRaw = $candidate->getRawOriginal('vote'); // uses getOriginal
+
+        // Decrypt to get current plain vote
+        $currentPlain = $currentRaw ? (int) $paillier->decrypt($currentRaw) : 0;
+
+        // Increment
+        $newPlain = $currentPlain + 1;
+
+        // Encrypt the new value
+        $newCipher = $paillier->encrypt($newPlain);
+
+        // Force update the raw attribute without any casting
+        $candidate->setRawAttributes(array_merge($candidate->getAttributes(), ['vote' => $newCipher]));
+        $candidate->save();
+
+        // 4. Record metadata for double-vote prevention
+        vote::create([
+            'user_id'      => Auth::id(),
+            'candidate_id' => $candidate->id,
+            'election_id'  => $candidate->election,
+            'post'         => $post,
+        ]);
+    }
+
+    toast('Your vote has been submitted!', 'success');
+    return back();
+}
 }

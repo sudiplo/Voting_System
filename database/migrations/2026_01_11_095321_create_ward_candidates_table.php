@@ -22,7 +22,7 @@ return new class extends Migration
             $table->enum('post', ['Mayor', 'Deputy Mayor','Ward Chairperson', 'Ward Member','Ward Member(Women)','Ward Member(Dalit)']);
             $table->text('party');
             $table->longText('goal');
-            $table->text('vote')->nullable();
+            $table->longText('vote')->nullable();
             $table->text('photo');
             $table->timestamps();
         });

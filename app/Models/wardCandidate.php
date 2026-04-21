@@ -18,10 +18,10 @@ class wardCandidate extends Model
     ];
 
     protected $casts = [
-        // 'party' => 'encrypted',
-        // 'goal' => 'encrypted',
-        'vote' => 'encrypted',
-        // 'photo'=> 'encrypted',
+        'party' => 'encrypted',
+        'goal' => 'encrypted',
+        // 'vote' => 'encrypted',
+        'photo'=> 'encrypted',
     ];
 
     // relation between ward Candidate and citizen
@@ -65,82 +65,53 @@ class wardCandidate extends Model
     {
         return $this->belongsTo(education_degrees::class,'education_id');
     }
+// Cache for the decrypted value (per instance)
+    // private $decryptedVoteCache = null;
 
-    // ---------- Paillier Helpers for string ↔ integer ----------
-    private function stringToInt($string)
-    {
-        $hex = bin2hex($string);
-        return gmp_strval(gmp_init($hex, 16));
-    }
+    // /**
+    //  * Accessor: automatically decrypts the vote when you read $candidate->vote
+    //  */
+    // public function getVoteAttribute($value)
+    // {
+    //     // If we already decrypted and cached, return it
+    //     if ($this->decryptedVoteCache !== null) {
+    //         return $this->decryptedVoteCache;
+    //     }
 
-    private function intToString($int)
-    {
-        $hex = gmp_strval(gmp_init($int), 16);
-        if (strlen($hex) % 2) $hex = '0' . $hex;
-        return hex2bin($hex);
-    }
+    //     // $value is the raw ciphertext from DB (or null)
+    //     if (is_null($value)) {
+    //         return $this->decryptedVoteCache = 0;
+    //     }
 
-    // ---------- Mutators (encrypt on set) ----------
-    public function setPartyAttribute($value)
+    //     try {
+    //         $paillier = app(Paillier::class);
+    //         $decrypted = $paillier->decrypt($value);
+    //         $this->decryptedVoteCache = (int) $decrypted;
+    //         return $this->decryptedVoteCache;
+    //     } catch (\Exception $e) {
+    //         Log::error("Decryption failed for candidate {$this->id}: " . $e->getMessage());
+    //         return $this->decryptedVoteCache = -1;
+    //     }
+    // }
+  // Vote accessor: decrypt on the fly for display
+    public function getVoteAttribute($value)
     {
-        $paillier = app(Paillier::class);
-        $intVal = $this->stringToInt($value);
-        $this->attributes['party'] = $paillier->encrypt($intVal);
-    }
-
-    public function setGoalAttribute($value)
-    {
-        $paillier = app(Paillier::class);
-        $intVal = $this->stringToInt($value);
-        $this->attributes['goal'] = $paillier->encrypt($intVal);
-    }
-
-    public function setPhotoAttribute($value)
-    {
-        $paillier = app(Paillier::class);
-        $intVal = $this->stringToInt($value);
-        $this->attributes['photo'] = $paillier->encrypt($intVal);
-    }
-
-    // ---------- Accessors (decrypt on get) ----------
-    public function getPartyAttribute($value)
-    {
-        if (empty($value)) return '';
+        if (empty($value)) return 0;
         try {
             $paillier = app(Paillier::class);
-            $decryptedInt = $paillier->decrypt($value);
-            return $this->intToString($decryptedInt);
+            return (int) $paillier->decrypt($value);
         } catch (\Exception $e) {
-            Log::error("Party decrypt failed: " . $e->getMessage());
-            return '';
+            Log::error("Vote decrypt failed: " . $e->getMessage());
+            return -1;
         }
     }
-
-    public function getGoalAttribute($value)
-    {
-        if (empty($value)) return '';
-        try {
-            $paillier = app(Paillier::class);
-            $decryptedInt = $paillier->decrypt($value);
-            return $this->intToString($decryptedInt);
-        } catch (\Exception $e) {
-            Log::error("Goal decrypt failed: " . $e->getMessage());
-            return '';
-        }
-    }
-
-    public function getPhotoAttribute($value)
-    {
-        if (empty($value)) return '';
-        try {
-            $paillier = app(Paillier::class);
-            $decryptedInt = $paillier->decrypt($value);
-            return $this->intToString($decryptedInt);
-        } catch (\Exception $e) {
-            Log::error("Photo decrypt failed: " . $e->getMessage());
-            return '';
-        }
-    }
-
+    /**
+     * Optional: If you ever need to set the raw ciphertext manually,
+     * you can keep the default mutator. This method is not required.
+     */
+    // public function setVoteAttribute($value)
+    // {
+    //     $this->attributes['vote'] = $value;
+    // }
 
 }
