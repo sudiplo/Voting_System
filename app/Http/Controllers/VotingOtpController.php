@@ -143,88 +143,55 @@ class VotingOtpController extends Controller
     }
 
     // ==========================Submit Vote==========================
-    // public function submitVote(Request $request)
-    // {
-    //     $request->validate([
-    //         'vote' => 'required|array',
-    //     ]);
-
-    //     $election = Election::where('status','process')->orderBy('election_date', 'asc')->first();
-
-    //     $alreadyVoted = vote::where('user_id', Auth::user()->id)->where('election_id', $election->id)->exists();
-    //     if ($alreadyVoted) {
-    //         toast('You have already cast your vote for this election!', 'error');
-    //         return back();
-    //     }
-
-    //     foreach ($request->vote as $post => $candidateId) {
-    //         $candidate = wardCandidate::find($candidateId);
-    //         if ($candidate) {
-    //             $candidate->vote = $candidate->vote ? intval($candidate->vote) + 1 : 1;
-    //             $candidate->save();
-    //         }
-
-    //         vote::create([
-    //             'user_id' => Auth::user()->id,
-    //             'candidate_id' => $candidate->id,
-    //             'election_id' => $candidate->election,
-    //             'post' => $post,
-    //         ]);
-    //     }
-
-    //     toast('Your vote has been submitted!', 'success');
-    //     return back();
-    // }
-
     public function submitVote(Request $request)
-{
-    $request->validate(['vote' => 'required|array']);
+    {
+        $request->validate(['vote' => 'required|array']);
 
-    $election = Election::where('status', 'process')
-                ->orderBy('election_date', 'asc')
-                ->first();
+        $election = Election::where('status', 'process')
+                    ->orderBy('election_date', 'asc')
+                    ->first();
 
-    // Prevent double voting (keep this for production)
-    $alreadyVoted = vote::where('user_id', Auth::id())
-                    ->where('election_id', $election->id)
-                    ->exists();
-    if ($alreadyVoted) {
-        toast('You have already cast your vote for this election!', 'error');
+        // Prevent double voting (keep this for production)
+        $alreadyVoted = vote::where('user_id', Auth::id())
+                        ->where('election_id', $election->id)
+                        ->exists();
+        if ($alreadyVoted) {
+            toast('You have already cast your vote for this election!', 'error');
+            return back();
+        }
+
+        $paillier = new Paillier();
+
+        foreach ($request->vote as $post => $candidateId) {
+            $candidate = wardCandidate::find($candidateId);
+            if (!$candidate) continue;
+
+            // Get the raw database value (bypass any model accessor)
+            $currentRaw = $candidate->getRawOriginal('vote'); // uses getOriginal
+
+            // Decrypt to get current plain vote
+            $currentPlain = $currentRaw ? (int) $paillier->decrypt($currentRaw) : 0;
+
+            // Increment
+            $newPlain = $currentPlain + 1;
+
+            // Encrypt the new value
+            $newCipher = $paillier->encrypt($newPlain);
+
+            // Force update the raw attribute without any casting
+            $candidate->setRawAttributes(array_merge($candidate->getAttributes(), ['vote' => $newCipher]));
+            $candidate->save();
+
+            // 4. Record metadata for double-vote prevention
+            vote::create([
+                'user_id'      => Auth::id(),
+                'candidate_id' => $candidate->id,
+                'election_id'  => $candidate->election,
+                'post'         => $post,
+            ]);
+        }
+
+        toast('Your vote has been submitted!', 'success');
         return back();
     }
-
-    $paillier = new Paillier();
-
-    foreach ($request->vote as $post => $candidateId) {
-        $candidate = wardCandidate::find($candidateId);
-         if (!$candidate) continue;
-
-        // Get the raw database value (bypass any model accessor)
-        $currentRaw = $candidate->getRawOriginal('vote'); // uses getOriginal
-
-        // Decrypt to get current plain vote
-        $currentPlain = $currentRaw ? (int) $paillier->decrypt($currentRaw) : 0;
-
-        // Increment
-        $newPlain = $currentPlain + 1;
-
-        // Encrypt the new value
-        $newCipher = $paillier->encrypt($newPlain);
-
-        // Force update the raw attribute without any casting
-        $candidate->setRawAttributes(array_merge($candidate->getAttributes(), ['vote' => $newCipher]));
-        $candidate->save();
-
-        // 4. Record metadata for double-vote prevention
-        vote::create([
-            'user_id'      => Auth::id(),
-            'candidate_id' => $candidate->id,
-            'election_id'  => $candidate->election,
-            'post'         => $post,
-        ]);
-    }
-
-    toast('Your vote has been submitted!', 'success');
-    return back();
-}
 }

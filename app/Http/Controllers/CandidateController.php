@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\c_mayor;
 use App\Models\citizenship;
 use App\Models\Election;
 use App\Models\palika;
@@ -30,10 +29,10 @@ class CandidateController extends Controller
         $citizenships = collect();
         $citizen = null;
         if ($search) {
-            $citizenships = Citizenship::where('citizenship_number', 'like', "%{$search}%")
+            $citizenships = citizenship::where('citizenship_number', 'like', "%{$search}%")
                 ->latest()
                 ->get();
-            $citizen = Citizenship::where('citizenship_number', $search)->first();
+            $citizen = citizenship::where('citizenship_number', $search)->first();
 
             if (!$citizen) {
                 toast('Citizenship number not found', 'error');
