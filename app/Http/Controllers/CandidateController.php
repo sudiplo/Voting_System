@@ -10,6 +10,7 @@ use App\Models\palika;
 use App\Models\wardCandidate;
 use App\Models\ward;
 use App\Models\education_degrees;
+use App\Services\Paillier;
 
 class CandidateController extends Controller
 {
@@ -81,21 +82,23 @@ class CandidateController extends Controller
             toast("Candidates already Register.","error");
             return redirect()-> back();
         }
-
+            // $candidate->save();
             $candidate = new wardCandidate();
-            $candidate->citizen_id = $request->citizen_id;
-            $candidate->district_id = $request->district_id;
-            $candidate->palika_id = $request->palika_id;
-            $candidate->ward_id = $request->ward_id;
-            $candidate->election = $request->election_id;
+            $candidate->citizen_id   = $request->citizen_id;
+            $candidate->district_id  = $request->district_id;
+            $candidate->palika_id    = $request->palika_id;
+            $candidate->ward_id      = $request->ward_id;
+            $candidate->election     = $request->election_id;
             $candidate->education_id = $request->education_id;
-            $candidate->post = $request->post;
-            $candidate->party = $request->party;
-            $candidate->goal = $request->goal;
-            $candidate->vote = 0;
-            $candidate->photo = 'images/' . $filename;
+            $candidate->post         = $request->post;
+            $candidate->party        = $request->party;
+            $candidate->goal         = $request->goal;
+            // Use Paillier to encrypt 0 votes
+            $paillier = new Paillier();
+            $candidate->vote         = $paillier->encrypt(0);
+            $candidate->photo        = 'images/' . $filename;
 
-            $candidate->save();
+    $candidate->save();
             toast("Data saved successfully", "success");
             return redirect()->back();
         // }
