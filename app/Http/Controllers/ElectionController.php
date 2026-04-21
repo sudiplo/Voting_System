@@ -14,7 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Winner;
 use Illuminate\Support\Facades\Crypt;
-
+use App\Models\vote;
 
 class ElectionController extends Controller
 {
@@ -171,8 +171,22 @@ class ElectionController extends Controller
     public function electionDelete($id){
         $election = Election::find($id);
         $candidates = wardCandidate::where('election', $id)->get();
+        $votes = vote::where('election_id', $id)->get();
+        $winners = Winner::where('election_id', $id)->get();
+        foreach ($votes as $vote) {
+            $vote->delete();
+        }
+        foreach ($winners as $winner) {
+            $winner->delete();
+        }
         foreach ($candidates as $candidate) {
             $candidate->delete();
+        }
+        foreach ($votes as $vote) {
+            $vote->delete();
+        }
+        foreach ($winners as $winner) {
+            $winner->delete();
         }
         $election->delete();
         toast("Election Record Delete successfully","success");
