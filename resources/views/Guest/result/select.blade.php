@@ -1,9 +1,9 @@
 <x-guest>
     <div class="relative mb-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200">
-        <h2 class="text-2xl font-extrabold text-gray-800 tracking-tight">Registerd Voters</h2>
+        <h2 class="text-2xl font-extrabold text-gray-800 tracking-tight">{{ $e->title }} Winner</h2>
         {{-- <p class="mt-2 text-gray-500">You can view the candidates profile click on view</p> --}}
-    </div> 
-    <form action="{{ Route('guest.voter.search') }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6" enctype="multipart/form-data">
+    </div>
+   <form action="{{ route('guest.election.result.search',$e->id) }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6" enctype="multipart/form-data">
         @csrf
         <!-- Address -->
             <div class="md:col-span-2 mt-4">
@@ -114,59 +114,4 @@
             </script>
     </form>
 
-     {{-- =========================voter list==================================================================================== --}}
-    <div class="mt-5 bg-white shadow-xl rounded-2xl border border-gray-200 overflow-hidden">
-        <div class="border-b px-6 py-4 font-semibold">
-            @if(isset($d, $p, $w))
-                Voter List of {{ $d->name_nepali }}, {{ $p->name }}, Ward {{ $w->number }}
-            @else
-                Voter List
-            @endif
-        </div>
-
-        <div class="overflow-x-auto">
-            <table class="min-w-full text-sm">
-                <thead class="sticky top-0 z-10
-                              bg-gradient-to-r from-indigo-600 to-blue-500
-                              text-white uppercase text-xs tracking-wider">
-                    <tr>
-                        <th class="px-6 py-4 text-left">Voter</th>
-                        <th class="px-6 py-4 text-left">id</th>
-                        <th class="px-6 py-4 text-left">Name </th>
-                    </tr>
-                </thead>
-
-                <tbody class="divide-y divide-gray-100">
-                    @forelse ($voter as $v)
-                        <tr class="group hover:bg-indigo-50 transition">
-                            <td class="px-6 py-4">
-                                <img
-                                    src="{{ $v->photo }}"
-                                    alt="photo"
-                                    class="w-11 h-11 rounded-full object-cover
-                                           ring-2 ring-white shadow-md"
-                                >
-                            </td>
-
-                            <td class="px-6 py-4 font-semibold text-gray-800">
-                                {{ $v->id }}
-                            </td>
-
-                            <td class="px-6 py-4 font-semibold text-gray-800">
-                                {{ $v->name }}
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="5" class="px-6 py-16 text-center">
-                                <p class="text-gray-400 text-lg">
-                                    🚫 No voter records found
-                                </p>
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-    </div>
 </x-guest>

@@ -16,6 +16,10 @@ Route::get('/guest-voter-view',[viewController::class,'guestVoterView'])->name('
 Route::post('/guest-voter-search',[viewController::class,'guestVoterSearch'])->name('guest.voter.search');
 Route::get('/guest-candidate-index{id}',[viewController::class,'guestCandidateindex'])->name('guest.candidate.index');
 Route::post('/guest-candidate-search{id}',[viewController::class,'guestCandidateSearch'])->name('guest.candidate.search');
+Route::get('/guest-winner-index',[viewController::class,'guestWinnerIndex'])->name('guest.winner.index');
+Route::get('/guest-winner-search',[viewController::class,'guestWinnerSearch'])->name('guest.search.election');
+Route::get('/guest-election-result/{id}',[viewController::class,'guestElectionResult'])->name('guest.election.result');
+Route::post('/guest-election-result-search/{id}',[viewController::class,'guestElectionResultSearch'])->name('guest.election.result.search');
 
 
 // only registered user can route this route's

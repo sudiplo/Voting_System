@@ -13,6 +13,7 @@ use App\Models\wardCandidate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use App\Models\ward;
+use App\Models\Winner;
 
 class viewController extends Controller
 {
@@ -107,5 +108,84 @@ class viewController extends Controller
             ->where('ward_id', $wardId)
             ->get();
        return view('Guest.candidates.index',compact('candidates','election','districts'));
+    }
+
+    // ==========================winner view for guest======================================================================
+    public function guestWinnerIndex(){
+       $election = Election::where('status','end')->orderBy('election_date', 'desc')->get();
+        return view('Guest.result.index',compact('election')); 
+    }
+
+    // ==========================winner search for guest======================================================================
+    public function guestWinnerSearch(Request $request){
+        $search = $request->get('search');
+        $election = Election::where('title','like',"%$search%")->where('status','end')->get();
+        return view('Guest.result.index', compact('election'));
+
+    }
+    // ==========================result view for guest======================================================================
+      public function guestElectionResult($id){
+        $e = election::find($id);
+        $districts = district::with('palika.wards')->get();
+
+        return view('Guest.result.select',compact('e','districts'));
+    }
+
+    // ==========================result search for guest======================================================================
+      public function guestElectionResultSearch(Request $request, $id)
+    {
+        $e = Election::find($id);
+        $districtId = $request->district_id;
+        $palikaId = $request->palika_id;
+        $wardId = $request->ward_id;
+
+        $d = District::find($districtId);
+        $p = Palika::find($palikaId);
+        $wa = Ward::find($wardId);
+        $districts = District::with('palika.wards')->get();
+
+        // Mayor & Deputy Mayor – municipality level (palika_id)
+        $mayor = Winner::with('candidate.citizen')
+            ->where('election_id', $id)
+            ->where('post', 'Mayor')
+            ->where('palika_id', $palikaId)
+            ->first();
+
+        $deputyMayor = Winner::with('candidate.citizen')
+            ->where('election_id', $id)
+            ->where('post', 'Deputy Mayor')
+            ->where('palika_id', $palikaId)
+            ->first();
+
+        // Ward‑level posts – filter by ward_id
+        $wardChairperson = Winner::with('candidate.citizen')
+            ->where('election_id', $id)
+            ->where('post', 'Ward Chairperson')
+            ->where('ward_id', $wardId)
+            ->first();
+
+        $wardMember = Winner::with('candidate.citizen')
+            ->where('election_id', $id)
+            ->where('post', 'Ward Member')
+            ->where('ward_id', $wardId)
+            ->first();
+
+        $wardMemberWomen = Winner::with('candidate.citizen')
+            ->where('election_id', $id)
+            ->where('post', 'Ward Member(Women)')
+            ->where('ward_id', $wardId)
+            ->first();
+
+        $wardMemberDalit = Winner::with('candidate.citizen')
+            ->where('election_id', $id)
+            ->where('post', 'Ward Member(Dalit)')
+            ->where('ward_id', $wardId)
+            ->first();
+
+        return view('Guest.result.winner', compact(
+            'e', 'districts', 'd', 'p', 'wa',
+            'mayor', 'deputyMayor', 'wardChairperson',
+            'wardMember', 'wardMemberWomen', 'wardMemberDalit'
+        ));
     }
 }

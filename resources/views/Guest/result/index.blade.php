@@ -1,16 +1,17 @@
-<x-top-layout>
+<x-guest>
+
     @if($election && $election->count())
-        <div class="relative mt-5 mb-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200">
-            <h2 class="text-2xl font-extrabold text-gray-800 tracking-tight"> निर्वाचन परिणाम हेर्नुहोस्।</h2>
-            <p class="mt-2 text-gray-500">तलको सूचीबाट निर्वाचन छनोट गरी ‘नतिजा हेर्नुहोस्’ मा क्लिक गरेर विस्तृत परिणाम हेर्न सक्नुहुन्छ।</p>
+        <div class="relative mb-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200">
+            <h2 class="text-2xl font-extrabold text-gray-800 tracking-tight"> Election Result</h2>
+            <p class="mt-2 text-gray-500">Select the election to see result</p>
                 <!-- Search -->
-                <form method="GET" action="{{ Route('elections.search') }}" class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto mt-2">
+                <form method="GET" action="{{ Route('guest.search.election') }}" class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto mt-2">
                     <div class="relative w-full sm:w-96">
                         <input
                             type="text"
                             name="search"
                             value="{{ request('search') }}"
-                            placeholder="निर्वाचन खोज्नुहोस्..."
+                            placeholder="Search election..."
                             class="w-full pl-5 pr-10 py-3 rounded-xl border border-gray-300
                                 shadow-sm focus:ring-2 focus:ring-indigo-500
                                 focus:border-indigo-500 outline-none transition"
@@ -45,13 +46,9 @@
 
                     <!-- Action -->
                     <div>
-                        <a href="{{ route('elections.winner', $e->id) }}"
+                        <a href="{{ route('guest.election.result', $e->id) }}"
                         class="inline-flex mt-1 bg-yellow-400 text-white px-3 py-1 font-medium rounded-md hover:bg-yellow-500 transition whitespace-nowrap">
                             Winner
-                        </a>
-                        <a href="{{ route('elections.ViewResult', $e->id) }}"
-                        class="inline-flex mt-1 bg-blue-500 text-white px-3 py-1 font-medium rounded-md hover:bg-blue-600 transition whitespace-nowrap">
-                            नतिजा हेर्नुहोस्
                         </a>
                     </div>
 
@@ -59,17 +56,17 @@
             @endforeach
         </div>
     @else
-        <div class="relative mt-5 mb-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200">
-            <h2 class="text-2xl font-extrabold text-gray-800 tracking-tight"> निर्वाचन परिणाम हेर्नुहोस्।</h2>
-            <p class="mt-2 text-gray-500">तलको सूचीबाट निर्वाचन छनोट गरी ‘नतिजा हेर्नुहोस्’ मा क्लिक गरेर विस्तृत परिणाम हेर्न सक्नुहुन्छ।</p>
+        <div class="relative mb-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200">
+            <h2 class="text-2xl font-extrabold text-gray-800 tracking-tight"> Election Result</h2>
+            <p class="mt-2 text-gray-500">Select the election to see result</p>
                 <!-- Search -->
-                <form method="GET" action="{{ Route('elections.search') }}" class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto mt-2">
+                <form method="GET" action="{{ Route('guest.search.election') }}" class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto mt-2">
                     <div class="relative w-full sm:w-96">
                         <input
                             type="text"
                             name="search"
                             value="{{ request('search') }}"
-                            placeholder="निर्वाचन खोज्नुहोस्..."
+                            placeholder="Search election..."
                             class="w-full pl-5 pr-10 py-3 rounded-xl border border-gray-300
                                 shadow-sm focus:ring-2 focus:ring-indigo-500
                                 focus:border-indigo-500 outline-none transition"
@@ -88,12 +85,12 @@
         <!-- Empty State -->
         <div class="flex flex-col items-center justify-center mt-10 mb-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200 text-center">
             <h2 class="text-xl md:text-2xl font-bold text-gray-800">
-                यहाँ कुनै डाटा भेटिएन।
+                No election data found yet!
             </h2>
             <p class="mt-2 text-gray-500 text-sm md:text-base">
-                हालसम्म कुनै परिणाम फेला परेको छैन। तपाईंले खोजेको विवरण उपलब्ध भएपछि मात्र यहाँ देखाइनेछ।
+                Please check back later or create a new election to see results.
             </p>
         </div>
     @endif
 
-</x-top-layout>
+</x-guest>

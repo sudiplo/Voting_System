@@ -8,7 +8,7 @@
         </div>
     </header>
     @if($election && $election->count())
-            <div class="relative mt-5 mb-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200">
+        <div class="relative mt-5 mb-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200">
             <h2 class="text-2xl font-extrabold text-gray-800 tracking-tight"> Election Result</h2>
             <p class="mt-2 text-gray-500">Select the election to see result</p>
                 <!-- Search -->
@@ -63,6 +63,32 @@
             @endforeach
         </div>
     @else
+        <div class="relative mt-5 mb-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200">
+            <h2 class="text-2xl font-extrabold text-gray-800 tracking-tight"> Election Result</h2>
+            <p class="mt-2 text-gray-500">Select the election to see result</p>
+                <!-- Search -->
+                <form method="GET" action="{{ Route('elections.searchAdmin') }}" class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto mt-2">
+                    <div class="relative w-full sm:w-96">
+                        <input
+                            type="text"
+                            name="search"
+                            value="{{ request('search') }}"
+                            placeholder="Search election..."
+                            class="w-full pl-5 pr-10 py-3 rounded-xl border border-gray-300
+                                shadow-sm focus:ring-2 focus:ring-indigo-500
+                                focus:border-indigo-500 outline-none transition"
+                        />
+                        <span class="absolute right-4 top-3 text-gray-400">🔍</span>
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="px-6 py-3 bg-indigo-600 text-white rounded-xl
+                            hover:bg-indigo-700 shadow-md transition">
+                        Search
+                    </button>
+                </form>
+        </div>
         <!-- Empty State -->
         <div class="flex flex-col items-center justify-center mt-10 mb-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200 text-center">
             <h2 class="text-xl md:text-2xl font-bold text-gray-800">

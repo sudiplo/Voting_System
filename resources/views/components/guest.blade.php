@@ -42,17 +42,17 @@
   </nav>
 
   <!-- Hero Section -->
-  <div class="px-10 mt-20 flex flex-col items-center text-center fade-in">
+  {{-- <div class="px-10 mt-20 flex flex-col items-center text-center fade-in">
     <h1 class="text-5xl font-bold text-gray-800 leading-tight">
       Digital <span class="text-blue-600">Voting</span> System
     </h1>
     <p class="mt-4 text-gray-600 max-w-2xl">
       Secure, transparent, and accessible digital elections for the modern era.
-    </p>
+    </p> --}}
 
   </div>
 
-  <div class="mt-5 py-5 px-10">
+  <div class="mt-2 py-5 px-10">
     {{ $slot }}
   </div>
   <!-- ========== NEW CONTENT SECTIONS (making page full) ========== -->
