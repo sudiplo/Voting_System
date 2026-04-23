@@ -108,7 +108,7 @@
                                     <p class="text-[11px] text-gray-300 truncate">{{ $candidate->party }}</p>
                                     <div class="mt-2 flex items-center justify-between text-[11px]">
                                         <span class="flex items-center gap-1">{{ $candidate->post }}</span>
-                                        <a href="{{ Route('UsercandidateProfile', ['id' => $candidate->id, 'e_id' => $candidate->election]) }}"
+                                        <a href="{{ Route('guest.profile', ['id' => $candidate->id, 'e_id' => $candidate->election]) }}"
                                            class="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-white text-[10px] font-semibold">
                                             view
                                         </a>

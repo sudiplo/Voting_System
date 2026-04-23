@@ -20,7 +20,7 @@ Route::get('/guest-winner-index',[viewController::class,'guestWinnerIndex'])->na
 Route::get('/guest-winner-search',[viewController::class,'guestWinnerSearch'])->name('guest.search.election');
 Route::get('/guest-election-result/{id}',[viewController::class,'guestElectionResult'])->name('guest.election.result');
 Route::post('/guest-election-result-search/{id}',[viewController::class,'guestElectionResultSearch'])->name('guest.election.result.search');
-
+Route::get('/guest-candidate-profile{id} {e_id}',[viewController::class,'guestCandidateProfile'])->name('guest.profile');
 
 // only registered user can route this route's
 Route::middleware('auth')->group(function () {

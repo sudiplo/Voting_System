@@ -113,7 +113,7 @@ class viewController extends Controller
     // ==========================winner view for guest======================================================================
     public function guestWinnerIndex(){
        $election = Election::where('status','end')->orderBy('election_date', 'desc')->get();
-        return view('Guest.result.index',compact('election')); 
+        return view('Guest.result.index',compact('election'));
     }
 
     // ==========================winner search for guest======================================================================
@@ -187,5 +187,13 @@ class viewController extends Controller
             'mayor', 'deputyMayor', 'wardChairperson',
             'wardMember', 'wardMemberWomen', 'wardMemberDalit'
         ));
+    }
+
+    // ==========================candidate profile view for guest======================================================================
+        public function guestCandidateProfile($id,$e_id){
+            $candidate = wardCandidate::find($id);
+            $e = $candidate->election;
+            $id = $candidate->ward_id;
+            return view('Guest.candidates.profile',compact('candidate','id','e'));
     }
 }

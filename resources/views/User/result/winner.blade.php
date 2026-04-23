@@ -1,4 +1,9 @@
 <x-top-layout>
+    <div class="relative mb-10 bg-white shadow-lg rounded-xl p-8 border border-gray-200">
+        <h2 class="text-2xl font-extrabold text-gray-800 tracking-tight">{{ $e->title }} विजेता</h2>
+        {{-- <p class="mt-2 text-gray-500">You can view the candidates profile click on view</p> --}}
+    </div>
+
    <form action="{{ route('elections.winnerSearch',$e->id) }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6" enctype="multipart/form-data">
         @csrf
         <!-- Address -->

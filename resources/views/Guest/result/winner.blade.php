@@ -139,7 +139,7 @@
                     <tr class="group hover:bg-gray-100 transition">
                         @if($mayor && $mayor->candidate)
                             <td class="px-6 py-4 font-semibold text-gray-800">
-                                <a href="{{ route('candidateProfile', ['id' => $mayor->candidate_id, 'e_id' => $e->id]) }}">
+                                <a href="{{ route('guest.profile', ['id' => $mayor->candidate_id, 'e_id' => $e->id]) }}">
                                     {{ $mayor->candidate->citizen->name_nepali ?? 'N/A' }}
                                 </a>
                             </td>
@@ -158,7 +158,7 @@
                     <tr class="group hover:bg-gray-100 transition">
                         @if($deputyMayor && $deputyMayor->candidate)
                             <td class="px-6 py-4 font-semibold text-gray-800">
-                                <a href="{{ route('candidateProfile', ['id' => $deputyMayor->candidate_id, 'e_id' => $e->id]) }}">
+                                <a href="{{ route('guest.profile', ['id' => $deputyMayor->candidate_id, 'e_id' => $e->id]) }}">
                                     {{ $deputyMayor->candidate->citizen->name_nepali ?? 'N/A' }}
                                 </a>
                             </td>
@@ -177,7 +177,7 @@
                     <tr class="group hover:bg-gray-100 transition">
                         @if($wardChairperson && $wardChairperson->candidate)
                             <td class="px-6 py-4 font-semibold text-gray-800">
-                                <a href="{{ route('candidateProfile', ['id' => $wardChairperson->candidate_id, 'e_id' => $e->id]) }}">
+                                <a href="{{ route('guest.profile', ['id' => $wardChairperson->candidate_id, 'e_id' => $e->id]) }}">
                                     {{ $wardChairperson->candidate->citizen->name_nepali ?? 'N/A' }}
                                 </a>
                             </td>
@@ -196,7 +196,7 @@
                     <tr class="group hover:bg-gray-100 transition">
                         @if($wardMember && $wardMember->candidate)
                             <td class="px-6 py-4 font-semibold text-gray-800">
-                                <a href="{{ route('candidateProfile', ['id' => $wardMember->candidate_id, 'e_id' => $e->id]) }}">
+                                <a href="{{ route('guest.profile', ['id' => $wardMember->candidate_id, 'e_id' => $e->id]) }}">
                                     {{ $wardMember->candidate->citizen->name_nepali ?? 'N/A' }}
                                 </a>
                             </td>
@@ -215,7 +215,7 @@
                     <tr class="group hover:bg-gray-100 transition">
                         @if($wardMemberWomen && $wardMemberWomen->candidate)
                             <td class="px-6 py-4 font-semibold text-gray-800">
-                                <a href="{{ route('candidateProfile', ['id' => $wardMemberWomen->candidate_id, 'e_id' => $e->id]) }}">
+                                <a href="{{ route('guest.profile', ['id' => $wardMemberWomen->candidate_id, 'e_id' => $e->id]) }}">
                                     {{ $wardMemberWomen->candidate->citizen->name_nepali ?? 'N/A' }}
                                 </a>
                             </td>
@@ -234,7 +234,7 @@
                     <tr class="group hover:bg-gray-100 transition">
                         @if($wardMemberDalit && $wardMemberDalit->candidate)
                             <td class="px-6 py-4 font-semibold text-gray-800">
-                                <a href="{{ route('candidateProfile', ['id' => $wardMemberDalit->candidate_id, 'e_id' => $e->id]) }}">
+                                <a href="{{ route('guest.profile', ['id' => $wardMemberDalit->candidate_id, 'e_id' => $e->id]) }}">
                                     {{ $wardMemberDalit->candidate->citizen->name_nepali ?? 'N/A' }}
                                 </a>
                             </td>
