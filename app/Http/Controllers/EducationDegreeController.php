@@ -8,20 +8,20 @@ use Illuminate\Http\Request;
 
 class EducationDegreeController extends Controller
 {
-    // Show the form
+    //===============================Show the form=================================================================
     public function create()
     {
         $edu = education_degrees::all();
         return view('elections.candidats.education.index',compact('edu')); // adjust path as needed
     }
 
-    // Save data
+    //===============================Save data====================================================================================
     public function store(Request $request)
     {
         $request->validate([
             'level' => 'nullable|string|max:255',
         ]);
-        
+
         if($request->level) {
             $existing = education_degrees::where('level', $request->level)->first();
             if ($existing) {
@@ -38,14 +38,14 @@ class EducationDegreeController extends Controller
         return back();
     }
 
-    // Show edit form
-        public function edit($id)
+    //=======================================Show edit form===================================================================
+    public function edit($id)
     {
         $edu = education_degrees::findOrFail($id);
         return view('elections.candidats.education.update', compact('edu'));
     }
 
-    // Update degree
+    //=========================================Update degree=================================================================
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -61,12 +61,28 @@ class EducationDegreeController extends Controller
         $degree = education_degrees::find($id);
         $degree->level = $request->level;
         $degree->save();
-        
+
         toast('Education degree updated successfully.', 'success');
         return back();
     }
 
-    // Delete degree
+    //==========================================Search degree=================================================================
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+
+        $edu = collect();
+
+        if ($search) {
+            $edu = education_degrees::where('level', 'like', "%{$search}%")
+                ->latest()
+                ->get();
+        }
+
+        return view('elections.candidats.education.index', compact('edu', 'search'));
+    }
+
+    //=============================================Delete degree===============================================================
     public function destroy($id)
     {
         $degree = education_degrees::findOrFail($id);

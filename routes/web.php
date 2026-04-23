@@ -139,6 +139,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/education-degrees-edit{id}', [EducationDegreeController::class, 'edit'])->name('education.edit');
     Route::patch('/education-degrees-update{id}', [EducationDegreeController::class, 'update'])->name('education.update');
     Route::delete('/{id}', [EducationDegreeController::class, 'destroy'])->name('education.destroy');
+    Route::get('/education-degrees-search', [EducationDegreeController::class, 'search'])->name('education.search');
 
         // ===============================Voting OTP=====================================
         // User clicks "Cast Vote"
