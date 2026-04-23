@@ -70,19 +70,21 @@
 
         <!-- REGISTERED VOTERS -->
         <div class="group bg-white rounded-2xl shadow-sm p-6 transition-all duration-300 ease-out hover:shadow-xl hover:-translate-y-1 border border-gray-100">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-semibold text-gray-500 group-hover:text-blue-600 transition">
-                        Registered Voters
-                    </p>
-                    <p class="text-3xl font-bold text-blue-600">
-                        {{ $totalUsers }}
-                    </p>
+            <a href="{{ Route(name: 'voters.view') }}">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-semibold text-gray-500 group-hover:text-blue-600 transition">
+                            Registered Voters
+                        </p>
+                        <p class="text-3xl font-bold text-blue-600">
+                            {{ $totalUsers }}
+                        </p>
+                    </div>
+                    <div class="text-4xl transform transition duration-300 group-hover:scale-110">
+                        📥
+                    </div>
                 </div>
-                <div class="text-4xl transform transition duration-300 group-hover:scale-110">
-                    📥
-                </div>
-            </div>
+            </a>
         </div>
 
     </div>

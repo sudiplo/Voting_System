@@ -60,7 +60,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/citizen-edit{id}', [citizenshipController::class, 'edit'])->name('citizen.edit');
     Route::patch('/citizen-update{id}', [citizenshipController::class, 'citizenUpdate'])->name('citizen.update');
     Route::delete('/citizen-delete{id}', [citizenshipController::class, 'citizenDelete'])->name('citizen.delete');
-
+    Route::get('/voter-view',[citizenshipController::class,'voterView'])->name('voters.view');
+    Route::post('/voter-search',[citizenshipController::class,'voterSearch'])->name('voter.search');
 // ==========================ElectionController======================================================================
     // Route::resource('elections', ElectionController::class);
     Route::get('/elections', [ElectionController::class, 'index'])->name('elections.index');

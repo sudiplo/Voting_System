@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\district;
 use App\Models\palika;
 use App\Models\ward;
+use App\Models\user;
 
 
 class citizenshipController extends Controller
@@ -172,6 +173,33 @@ class citizenshipController extends Controller
         $citizen->delete();
         toast("$citizen->name Record Delete successfully","success");
         return redirect()->back();
+    }
+
+    //==========================voter view====================================================================================
+    public function voterView(){
+        $districts = district::with('palika.wards')->get();
+        $voter = user::where('usertype','user')->get();
+        return view('citizenship.voter',compact('voter','districts'));
+    }
+
+    // ==========================voter profile view==============================================================================
+    public function voterSearch(Request $request){
+        $districts = district::with('palika.wards')->get();
+        $districtId = $request->district_id;
+        $palikaId = $request->palika_id;
+        $wardId = $request->ward_id;
+        $d = district::find($districtId);
+        $p = palika::find($palikaId);
+        $w = ward::find($wardId);
+        $citizens = citizenship::where('district_id', $districtId)
+            ->where('palika_id', $palikaId)
+            ->where('ward_id', $wardId)
+            ->get();
+
+        $ids = $citizens->pluck('id');
+
+        $voter = user::whereIn('citizen_id', $ids)->get();
+        return view('citizenship.voter',compact('voter','districts','d','p','w'));
     }
 
 
