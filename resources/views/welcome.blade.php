@@ -65,10 +65,25 @@
             <p class="text-4xl font-black text-blue-600">Voters</p>
             <p class="text-gray-600 mt-1">Registered Voters: {{ $totalUsers }}</p>
         </a>
-        <a href class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 shadow-sm">
+
+        @if ($election)
+        <a href="{{ route('guest.candidate.index', $election->id) }}" class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 shadow-sm">
             <p class="text-4xl font-black text-green-600">{{ $election->title}}</p>
             <p class="text-gray-600 mt-1">Active Elections: {{ $ActiveElections }}</p>
         </a>
+        @else
+        <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 shadow-sm">
+            <p class="text-2xl font-black text-green-600">No Active Election</p>
+            <p class="text-gray-600 mt-1">Active Elections: 0</p>
+        </div>
+
+        @endif
+
+        {{-- <a href="{{ route('guest.candidate.index', $election->id) }}" class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 shadow-sm">
+            <p class="text-4xl font-black text-green-600">{{ $election->title}}</p>
+            <p class="text-gray-600 mt-1">Active Elections: {{ $ActiveElections }}</p>
+        </a> --}}
+
         <a href class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 shadow-sm">
             <p class="text-4xl font-black text-purple-600">Result</p>
             <p class="text-gray-600 mt-1">Registered Elections: {{ $totalElections }}</p>

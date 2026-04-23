@@ -14,6 +14,9 @@ use App\Http\Controllers\EducationDegreeController;
 Route::get('/', [viewController::class,'welcome'])->name('welcome');
 Route::get('/guest-voter-view',[viewController::class,'guestVoterView'])->name('guest.voter.view');
 Route::post('/guest-voter-search',[viewController::class,'guestVoterSearch'])->name('guest.voter.search');
+Route::get('/guest-candidate-index{id}',[viewController::class,'guestCandidateindex'])->name('guest.candidate.index');
+Route::post('/guest-candidate-search{id}',[viewController::class,'guestCandidateSearch'])->name('guest.candidate.search');
+
 
 // only registered user can route this route's
 Route::middleware('auth')->group(function () {

@@ -83,5 +83,29 @@ class viewController extends Controller
         return view('Guest.voter',compact('voter','districts','d','p','w'));
     }
 
+    // ==========================candidate view for guest======================================================================
+    public function guestCandidateindex($id){
+        $election = Election::find($id);
+        $districts = district::with('palika.wards')->get();
+        $candidates = wardCandidate::where('election', $id)->get();
+        return view('Guest.candidates.index',compact('candidates','election','districts'));
+    }
 
+    // ==========================candidate search for guest======================================================================
+    public function guestCandidateSearch(Request $request,$id){
+        $election = Election::find($id);
+        $districts = district::with('palika.wards')->get();
+        $districtId = $request->district_id;
+        $palikaId = $request->palika_id;
+        $wardId = $request->ward_id;
+        $d = district::find($districtId);
+        $p = palika::find($palikaId);
+        $w = ward::find($wardId);
+        $candidates = wardCandidate::where('election', $id)
+            ->where('district_id', $districtId)
+            ->where('palika_id', $palikaId)
+            ->where('ward_id', $wardId)
+            ->get();
+       return view('Guest.candidates.index',compact('candidates','election','districts'));
+    }
 }
