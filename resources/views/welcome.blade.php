@@ -230,14 +230,14 @@
       <div>
         <h4 class="text-white font-semibold mb-3">Follow Us</h4>
         <div class="flex space-x-4">
-          <a href="#" class="hover:text-white transition">Twitter</a>
-          <a href="#" class="hover:text-white transition">Facebook</a>
-          <a href="#" class="hover:text-white transition">LinkedIn</a>
+          <a href="https://www.instagram.com/lo_sudip/?hl=en" class="hover:text-white transition">Instagram</a>
+          <a href="https://www.facebook.com/sudip.lo.bon" class="hover:text-white transition">Facebook</a>
+          <a href="https://www.linkedin.com/in/sudip-lo-467bba382/" class="hover:text-white transition">LinkedIn</a>
         </div>
       </div>
     </div>
     <div class="text-center text-sm text-gray-500 mt-8 pt-6 border-t border-gray-800">
-      © 2025 Digital Voting System. All rights reserved.
+      Digital Voting System • Sudip Lo
     </div>
   </footer>
 

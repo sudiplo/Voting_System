@@ -162,7 +162,7 @@
                 <div>
                     <h3 class="text-md font-semibold mb-4">Support</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="hover:text-blue-600">Help Center</a></li>
+                        {{-- <li><a href="#" class="hover:text-blue-600">Help Center</a></li> --}}
                         <li><a href="#" class="hover:text-blue-600">Privacy Policy</a></li>
                         <li><a href="#" class="hover:text-blue-600">Terms & Conditions</a></li>
                     </ul>
@@ -198,7 +198,7 @@
 
         <!-- Bottom bar -->
         <div class="border-t border-gray-300 text-center text-sm text-gray-600 py-4">
-            © {{ date('Y') }} Digital Voting System. All rights reserved.
+            © {{ date('Y') }} Digital Voting System • Sudip Lo
         </div>
     </footer>
 

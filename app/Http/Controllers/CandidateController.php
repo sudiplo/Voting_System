@@ -201,10 +201,8 @@ class CandidateController extends Controller
             toast("Candidates already Register.","error");
             return redirect()-> back();
         }
+            $candidate = wardCandidate::findOrFail($id);
 
-            $candidate = wardCandidate::find($id);
-            $vote = $candidate ? $candidate->vote: 0;
-            $photo = $candidate->photo;
             $candidate->citizen_id = $request->citizen_id;
             $candidate->district_id = $request->district_id;
             $candidate->palika_id = $request->palika_id;
@@ -214,17 +212,42 @@ class CandidateController extends Controller
             $candidate->post = $request->post;
             $candidate->party = $request->party;
             $candidate->goal = $request->goal;
-            $candidate->vote = $vote;
+
+            // DO NOT TOUCH vote here
+
             if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
                 $photo = $request->file('photo');
                 $filename = time() . '_' . $photo->getClientOriginalName();
                 $photo->move(public_path('images'), $filename);
                 $candidate->photo = 'images/' . $filename;
             } else {
-
-                $candidate->photo = $photo ?? 'images/default.png';
+                $candidate->photo = $candidate->photo ?? 'images/default.png';
             }
+
             $candidate->save();
+            // $candidate = wardCandidate::find($id);
+            // $vote = $candidate ? $candidate->vote: 0;
+            // $photo = $candidate->photo;
+            // $candidate->citizen_id = $request->citizen_id;
+            // $candidate->district_id = $request->district_id;
+            // $candidate->palika_id = $request->palika_id;
+            // $candidate->ward_id = $request->ward_id;
+            // $candidate->election = $request->election_id;
+            // $candidate->education_id = $request->education_id;
+            // $candidate->post = $request->post;
+            // $candidate->party = $request->party;
+            // // $candidate->goal = $request->goal;
+            // $candidate->vote = $vote;
+            // if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
+            //     $photo = $request->file('photo');
+            //     $filename = time() . '_' . $photo->getClientOriginalName();
+            //     $photo->move(public_path('images'), $filename);
+            //     $candidate->photo = 'images/' . $filename;
+            // } else {
+
+            //     $candidate->photo = $photo ?? 'images/default.png';
+            // }
+            // $candidate->save();
             toast("Data saved successfully", "success");
             return redirect()->back();
     }

@@ -126,10 +126,6 @@
                     <tr>
                         <th class="text-left px-6 py-3">Name</th>
                         <th class="text-left px-6 py-3">Post</th>
-                        <th class="text-left px-6 py-3">Gender</th>
-                        <th class="text-left px-6 py-3">District</th>
-                        <th class="text-left px-6 py-3">Palika</th>
-                        <th class="text-left px-6 py-3">Ward</th>
                         <th class="text-left px-6 py-3">Votes</th>
                     </tr>
                 </thead>
@@ -144,10 +140,6 @@
                                 </a>
                             </td>
                             <td class="px-6 py-4">{{ $mayor->post }}</td>
-                            <td class="px-6 py-4">{{ $mayor->candidate->citizen->gender ?? 'N/A' }}</td>
-                            <td class="px-6 py-4">{{ $mayor->candidate->district->name_nepali ?? 'N/A' }}</td>
-                            <td class="px-6 py-4">{{ $mayor->candidate->palika->name ?? 'N/A' }}</td>
-                            <td class="px-6 py-4">{{ $mayor->candidate->ward->name ?? 'N/A' }}</td>
                             <td class="px-6 py-4 font-bold text-green-600">{{ $mayor->vote_count }}</td>
                         @else
                             <td colspan="7" class="px-6 py-4 text-gray-500">Not found</td>
@@ -163,10 +155,6 @@
                                 </a>
                             </td>
                             <td class="px-6 py-4">{{ $deputyMayor->post }}</td>
-                            <td class="px-6 py-4">{{ $deputyMayor->candidate->citizen->gender ?? 'N/A' }}</td>
-                            <td class="px-6 py-4">{{ $deputyMayor->candidate->district->name_nepali ?? 'N/A' }}</td>
-                            <td class="px-6 py-4">{{ $deputyMayor->candidate->palika->name ?? 'N/A' }}</td>
-                            <td class="px-6 py-4">{{ $deputyMayor->candidate->ward->name ?? 'N/A' }}</td>
                             <td class="px-6 py-4 font-bold text-green-600">{{ $deputyMayor->vote_count }}</td>
                         @else
                             <td colspan="7" class="px-6 py-4 text-gray-500">Not found</td>
@@ -182,10 +170,6 @@
                                 </a>
                             </td>
                             <td class="px-6 py-4">{{ $wardChairperson->post }}</td>
-                            <td class="px-6 py-4">{{ $wardChairperson->candidate->citizen->gender ?? 'N/A' }}</td>
-                            <td class="px-6 py-4">{{ $wardChairperson->candidate->district->name_nepali ?? 'N/A' }}</td>
-                            <td class="px-6 py-4">{{ $wardChairperson->candidate->palika->name ?? 'N/A' }}</td>
-                            <td class="px-6 py-4">{{ $wardChairperson->candidate->ward->name ?? 'N/A' }}</td>
                             <td class="px-6 py-4 font-bold text-green-600">{{ $wardChairperson->vote_count }}</td>
                         @else
                             <td colspan="7" class="px-6 py-4 text-gray-500">Not found</td>
@@ -201,10 +185,6 @@
                                 </a>
                             </td>
                             <td class="px-6 py-4">{{ $wardMember->post }}</td>
-                            <td class="px-6 py-4">{{ $wardMember->candidate->citizen->gender ?? 'N/A' }}</td>
-                            <td class="px-6 py-4">{{ $wardMember->candidate->district->name_nepali ?? 'N/A' }}</td>
-                            <td class="px-6 py-4">{{ $wardMember->candidate->palika->name ?? 'N/A' }}</td>
-                            <td class="px-6 py-4">{{ $wardMember->candidate->ward->name ?? 'N/A' }}</td>
                             <td class="px-6 py-4 font-bold text-green-600">{{ $wardMember->vote_count }}</td>
                         @else
                             <td colspan="7" class="px-6 py-4 text-gray-500">Not found</td>
@@ -220,10 +200,6 @@
                                 </a>
                             </td>
                             <td class="px-6 py-4">{{ $wardMemberWomen->post }}</td>
-                            <td class="px-6 py-4">{{ $wardMemberWomen->candidate->citizen->gender ?? 'N/A' }}</td>
-                            <td class="px-6 py-4">{{ $wardMemberWomen->candidate->district->name_nepali ?? 'N/A' }}</td>
-                            <td class="px-6 py-4">{{ $wardMemberWomen->candidate->palika->name ?? 'N/A' }}</td>
-                            <td class="px-6 py-4">{{ $wardMemberWomen->candidate->ward->name ?? 'N/A' }}</td>
                             <td class="px-6 py-4 font-bold text-green-600">{{ $wardMemberWomen->vote_count }}</td>
                         @else
                             <td colspan="7" class="px-6 py-4 text-gray-500">Not found</td>
@@ -239,10 +215,6 @@
                                 </a>
                             </td>
                             <td class="px-6 py-4">{{ $wardMemberDalit->post }}</td>
-                            <td class="px-6 py-4">{{ $wardMemberDalit->candidate->citizen->gender ?? 'N/A' }}</td>
-                            <td class="px-6 py-4">{{ $wardMemberDalit->candidate->district->name_nepali ?? 'N/A' }}</td>
-                            <td class="px-6 py-4">{{ $wardMemberDalit->candidate->palika->name ?? 'N/A' }}</td>
-                            <td class="px-6 py-4">{{ $wardMemberDalit->candidate->ward->name ?? 'N/A' }}</td>
                             <td class="px-6 py-4 font-bold text-green-600">{{ $wardMemberDalit->vote_count }}</td>
                         @else
                             <td colspan="7" class="px-6 py-4 text-gray-500">Not found</td>
