@@ -21,7 +21,7 @@
                     <label for="dob" class="block text-sm font-medium text-gray-700">Date of birth</label>
                     <input type="date" id="dob" name="dob" class="w-full px-4 py-3 mt-2 bg-neutral-100 border border-gray-300 rounded-md text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" required />
                 </div>
-                
+
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                     <input type="email" id="email" name="email" class="w-full px-4 py-3 mt-2 bg-neutral-100 border border-gray-300 rounded-md text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" placeholder="name@flowbite.com" required />

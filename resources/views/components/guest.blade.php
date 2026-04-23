@@ -50,35 +50,11 @@
       Secure, transparent, and accessible digital elections for the modern era.
     </p>
 
-    <!-- Voter Register Button -->
-    <div class="flex justify-center mt-8">
-        <a href="{{ route('register') }}"
-        class="bg-blue-600 text-white px-10 py-4 md:px-12 md:py-4 rounded-full shadow-lg hover:bg-blue-700 transition flex items-center space-x-3 text-lg md:text-xl font-semibold hover:scale-105 transform duration-200">
-            <span>Voter Register Now</span>
-        </a>
-    </div>
-
-    <!-- Statistics Section -->
-    <section class="max-w-6xl mx-auto px-6 py-16 fade-in">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-        <a href="{{ route('guest.voter.view') }}" class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 shadow-sm">
-            <p class="text-4xl font-black text-blue-600">Voters</p>
-            <p class="text-gray-600 mt-1">Registered Voters: {{ $totalUsers }}</p>
-        </a>
-        <a href class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 shadow-sm">
-            <p class="text-4xl font-black text-green-600">{{ $election->title}}</p>
-            <p class="text-gray-600 mt-1">Active Elections: {{ $ActiveElections }}</p>
-        </a>
-        <a href class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 shadow-sm">
-            <p class="text-4xl font-black text-purple-600">Result</p>
-            <p class="text-gray-600 mt-1">Registered Elections: {{ $totalElections }}</p>
-        </a>
-        </div>
-    </section>
-
   </div>
 
-
+  <div class="mt-5 py-5 px-10">
+    {{ $slot }}
+  </div>
   <!-- ========== NEW CONTENT SECTIONS (making page full) ========== -->
 
   <!-- Features Section -->
@@ -138,24 +114,6 @@
       </div>
     </div>
   </section>
-
-  {{-- <!-- Statistics Section -->
-  <section class="max-w-6xl mx-auto px-6 py-16 fade-in">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-      <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 shadow-sm">
-        <p class="text-4xl font-black text-blue-600">{{ $totalUsers }}</p>
-        <p class="text-gray-600 mt-1">Registered Voters</p>
-      </div>
-      <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 shadow-sm">
-        <p class="text-4xl font-black text-green-600">{{ $ActiveElections }}</p>
-        <p class="text-gray-600 mt-1">Active Elections</p>
-      </div>
-      <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 shadow-sm">
-        <p class="text-4xl font-black text-purple-600">{{ $totalElections }}</p>
-        <p class="text-gray-600 mt-1">Elections Completed</p>
-      </div>
-    </div>
-  </section> --}}
 
   <!-- Call to Action -->
   <section class="bg-blue-600 py-16 fade-in">

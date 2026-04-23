@@ -12,6 +12,8 @@ use App\Http\Controllers\VotingOtpController;
 use App\Http\Controllers\EducationDegreeController;
 
 Route::get('/', [viewController::class,'welcome'])->name('welcome');
+Route::get('/guest-voter-view',[viewController::class,'guestVoterView'])->name('guest.voter.view');
+Route::post('/guest-voter-search',[viewController::class,'guestVoterSearch'])->name('guest.voter.search');
 
 // only registered user can route this route's
 Route::middleware('auth')->group(function () {
