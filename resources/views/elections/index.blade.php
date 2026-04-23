@@ -2,7 +2,7 @@
     <!-- ================= current location ================= -->
     <header class="w-full glass px-6 py-4 flex justify-between items-center shadow-xl">
         <div class="flex items-center gap-4">
-            <a href="" class="text-2xs text-gray-500 hover:text-blue-500">
+            <a href="{{ Route('elections.index') }}" class="text-2xs text-gray-500 hover:text-blue-500">
                 🗳️ Elections Management
             </a>
         </div>
